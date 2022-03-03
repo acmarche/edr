@@ -1,0 +1,11 @@
+AcMarche\Edr\Entity\Sante\SanteQuestion:
+  question_1:
+    nom: 'A-t-il été vacciné contre le tétanos?'
+    complement: true
+    complement_label: 'Date du dernier rappel'
+  question_2:
+    nom: 'Est-il somnambule?'
+    complement: false
+  question_3:
+    nom: 'Porte-t-il des lunettes ?'
+    complement: false

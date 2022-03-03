@@ -1,0 +1,48 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Payer la facture n° {{ facture.id }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">
+                Une fois la date de paiement encodée, la facture sera considée comme <strong>totalement</strong>
+                payée.<br/>
+                Pour payer une facture partiellement,
+                <a href="{{ path('edr_admin_facture_decompte_new', {'id': facture.id}) }}">
+                    utilise le décompte
+                </a>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Communication</th>
+                    <td>{{ facture.communication }}</td>
+                </tr>
+                <tr>
+                    <th>Au nom de</th>
+                    <td>
+                        {{ facture.nom }} {{ facture.prenom }}<br>
+                        {{ facture.rue }} {{ facture.localite }}
+                    </td>
+                </tr>
+                </thead>
+            </table>
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+                Sauvegarder
+            </button>
+            {{ form_end(form) }}
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_admin_facture_show',{'id':facture.id}) }}" class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+            </a>
+        </div>
+    </div>
+{% endblock %}
+

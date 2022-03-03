@@ -1,0 +1,29 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Parent et enfant créé</h3>
+        </div>
+        <div class="card-body">
+
+            <a href="{{ path('edr_admin_enfant_new', { 'id' : tuteur.id }) }}" class="btn btn-primary"
+               role="button">
+                <i class="fas fa-plus"></i> Ajouter un autre enfant </a>
+            <br><br>
+            <strong>La fiche parent</strong> <a
+                    href="{{ path('edr_admin_tuteur_show', {'id': tuteur.id}) }}">{{ tuteur }}</a> bien été ajoutée
+            <br><br>
+            <strong>La fiche enfant</strong> <a
+                    href="{{ path('edr_admin_enfant_show',{'id': enfant.id}) }}">{{ enfant }}</a> a bien été
+            ajoutée
+            <br><br>
+            {% if user %}
+                <strong>Le compte {{ user }} {% if password %} a été créé {% else %} a été associé {% endif %}</strong>
+                <br><br>
+                Adresse mail pour se connecter: {{ user.email }}<br>
+                {% if password %} Mot de passe: {{ password }}    {% endif %}    <br>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

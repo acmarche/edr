@@ -1,0 +1,32 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Enfant</th>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Parent</th>
+        <th>Ecole</th>
+        <th>Remarque</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for accueil in accueils %}
+        <tr>
+            <td>
+                <a href="{{ path('edr_admin_enfant_show', {'id': accueil.enfant.id}) }}">
+                    {{ accueil.enfant }}
+                </a>
+            </td>
+            <td>{{ accueil.dateJour| format_date('full') }}</td>
+            <td>{{ accueil.heure }}</td>
+            <td>{{ accueil.tuteur }}</td>
+            <td>{{ accueil.enfant ? accueil.enfant.ecole : '' }}</td>
+            <td>{{ accueil.remarque }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">Rien trouvé</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

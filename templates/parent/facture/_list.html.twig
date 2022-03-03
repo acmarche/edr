@@ -1,0 +1,32 @@
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Numéro</th>
+        <th>Facturé le</th>
+        <th>Payé le</th>
+        <th>Détails</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for facture in factures %}
+        <tr>
+            <td>
+                  N° {{ facture.id }}
+            </td>
+            <td>
+                {{ facture.factureLe | format_date('full') | title }}
+            </td>
+            <td>{{ facture.payeLe ? facture.payeLe | format_date('full','full') : '<span class="text-danger">Non payé</span>' }}</td>
+            <td>
+                <a href="{{ path('edr_parent_facture_show', {'uuid': facture.uuid}) }}">
+                    Détails
+                </a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">Aucune</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

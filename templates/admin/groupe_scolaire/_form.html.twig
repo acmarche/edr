@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+{{ form_row(form.nom) }}
+<div class="row">
+    <div class="col-4">
+        {{ form_row(form.age_minimum) }}
+    </div>
+    <div class="col-4">
+        {{ form_row(form.age_maximum) }}
+    </div>
+    <div class="col-4">
+        {{ form_row(form.isPlaine) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        {{ form_row(form.annees_scolaires) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.remarque) }}
+        {{ form_row(form.ordre) }}
+    </div>
+</div>
+<button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+    Sauvegarder
+</button>
+{{ form_end(form) }}

@@ -1,0 +1,7 @@
+{% for tuteur in tuteurs %}
+    <li class="list-group-item" role="option" data-autocomplete-valu22e="{{ tuteur.id }}">
+        <a href="{{ path('edr_admin_tuteur_show', {'id': tuteur.id}) }}">
+            {{ tuteur.prenom }} {{ tuteur.nom }}
+        </a>
+    </li>
+{% endfor %}

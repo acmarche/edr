@@ -1,0 +1,16 @@
+<div class="card">
+
+    <h5 class="card-header">Ses plaines</h5>
+    <div class="card-body">
+
+
+            <ul class="list-group">
+                {% for plaine in plaines %}
+                    <li class="list-group-item">
+                        <a href="{{ path('edr_parent_plaine_show', {'id': plaine.id}) }}">{{ plaine }}</a>
+                    </li>
+                {% endfor %}
+
+            </ul>
+    </div>
+</div>

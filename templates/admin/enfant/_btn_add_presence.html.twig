@@ -1,0 +1,29 @@
+{% if relations | length == 0 %}
+    <button disabled="disabled" type="button" role="button" title="Aucun tuteur"
+            class="btn btn-primary"><i
+                class="fas fa-plus"></i> Ajouter une présence
+    </button>
+{% elseif relations | length == 1 %}
+    {% set tuteur = relations|first.tuteur %}
+    <a href="{{ path('edr_admin_presence_new', { 'enfant': enfant.id, 'tuteur': tuteur.id }) }}" role="button"
+       class="btn btn-primary"><i
+                class="fas fa-plus"></i> Ajouter une présence</a>
+{% else %}
+    <span class="dropdown">
+        <a class="btn btn-primary dropdown-toggle"
+           href="#"
+           role="button" id="dropdownMenuLink"
+           data-bs-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-plus"></i> Ajouter une présence
+        </a>
+        <span class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            {% for relation in relations %}
+                {% set tuteur = relation.tuteur %}
+                <a class="dropdown-item"
+                   href="{{ path('edr_admin_presence_new', { 'enfant': enfant.id, 'tuteur': tuteur.id }) }}">
+                    Sous la garde de <i>{{ tuteur }}</i></a>
+            {% endfor %}
+        </span>
+    </span>
+{% endif %}

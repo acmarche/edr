@@ -1,0 +1,18 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Détails du décompte {{ factureDecompte.payeLe|format_date('full') }}</h3>
+
+        <div class="card-body">
+            {% include '@AcMarcheEdrAdmin/facture_decompte/_actions.html.twig' %}
+            <table class="table table-bordered">
+                <tr>
+                    <th>Montant</th>
+                    <th>{{ factureDecompte.montant|format_currency('eur') }}</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% include '@AcMarcheEdrAdmin/facture_decompte/_delete_form.html.twig' %}
+{% endblock %}

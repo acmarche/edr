@@ -1,0 +1,33 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div {{ stimulus_controller('plaine', {url: path('edr_admin_ajax_plaine_new_date')}) }}>
+    <div
+            class="mb-2" id="email-fields-list"
+            data-plaine-target="list">
+        {% for jour in form.jours %}
+            <div id="el{{ loop.index0 }}" class="row">
+                <div class="col-6">
+                    {{ form_row(jour) }}
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-danger remove-tag" data-elementid="{{ loop.index0 }}"><i
+                                class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <button
+            type="button"
+            id="add-another-accompagnateur"
+            class="mt-2 btn btn-primary float-end"
+            data-action="plaine#selectX">
+        <i class="fas fa-plus"></i> Ajouter une date
+    </button>
+</div>
+<button class="btn btn-primary" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+    Sauvegarder
+</button>
+
+{{ form_end(form) }}

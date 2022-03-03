@@ -1,0 +1,37 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Les parents sans enfants</h3>
+        </div>
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Localité</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for tuteur in tuteurs %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_tuteur_show', { 'id': tuteur.id }) }}">
+                                {{ tuteur.nom }}
+                            </a>
+                        </td>
+                        <td>{{ tuteur.prenom }}</td>
+                        <td>{{ tuteur.localite }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends '@AcMarcheEdr/front/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+
+        <h3 class="card-header">{{ user }}</h3>
+
+        <div class="card-body">
+
+            {% include '@AcMarcheEdr/front/user/_actions.html.twig' %}
+
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>
+                        {{ user.nom }} {{ user.prenom }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>
+                        {{ user.email }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            {% include '@AcMarcheEdr/front/user/_list_link_profile.html.twig' %}
+
+        </div>
+        <div class="card-footer text-muted mt-3">
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <h3 class="card-header">Liste des notes de {{ enfant }}</h3>
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Num</th>
+                    <th>Contenu</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for note in notes %}
+                    <tr>
+                        <td>
+                            Num: {{ note.id }}
+                        </td>
+                        <td>
+                            <a href="{{ path('edr_admin_note_show', { 'id': note.id }) }}">
+                                {{ note.remarque | u.truncate(80) }}  </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

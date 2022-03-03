@@ -1,0 +1,27 @@
+<h4 class="text-success">Présences à la plaine</h4>
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Enfant</th>
+        <th>Date</th>
+        <th>Ordre</th>
+        <th>Coût</th>
+    </tr>
+    </thead>
+    {% for facturePlaine in facturePlaines %}
+        <tr>
+            <td>{{ facturePlaine.nom }} {{ facturePlaine.prenom }}</td>
+            <td>
+                {% if is_granted('ROLE_MERCREDI_ADMIN') %}
+                    <a href="{{ path('edr_admin_facture_presence_show', {'id': facturePlaine.id}) }}">
+                        {{ facturePlaine.presenceDate | format_date('full') }}
+                    </a>
+                {% else %}
+                    {{ facturePlaine.presenceDate | format_date('full') }}
+                {% endif %}
+            </td>
+            <td>{{ facturePlaine.ordre }}</td>
+            <td>{{ facturePlaine.coutCalculated|format_currency('eur') }}</td>
+        </tr>
+    {% endfor %}
+</table>

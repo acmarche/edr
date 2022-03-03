@@ -1,0 +1,30 @@
+Cher animateur, chère animatrice,
+
+Un compte vient d'être ouvert à votre nom sur le site internet {{ absolute_url(path('homepage')) }}
+
+Voici les informations nécessaires pour vous connecter sur le site :
+
+Nom d'utilisateur: {{ user.email }}
+{% if password %}
+Votre mot de passe: {{ password }}
+{% else %}
+Le mot de passe que vous avez choisi lors de votre inscription
+{% endif %}
+
+Vous pouvez désormais avoir un accès aux listings de présences, aux fiches de santé des enfants et aux coordonnées des parents.
+
+Attention, toutes ces informations sont confidentielles.
+
+Il est strictement interdit de transmettre votre identifiant et votre mot de passe à autrui.
+
+Nous restons à votre disposition pour toutes questions.
+
+L'équipe de l’asbl « Espaces Parents-Enfants »
+
+Complexe Saint François
+
+Rue Victor Libert, 36E
+
+6900 Marche-en-Famenne
+
+Tél : 084 32 69 90 ou 084 32 69 85

@@ -1,0 +1,53 @@
+{% extends '@AcMarcheEdrParent/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="page-header">
+        <h3>
+            Paiements effectués
+        </h3>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Payé le</th>
+            <th>Montant</th>
+            <th>Pour</th>
+            <th>Type</th>
+            <th>Mode</th>
+            <th>Nombre de présences payés</th>
+        </tr>
+        {% for paiement in paiements %}
+            {% set totalpresences = paiement.plainepresences | length + paiement.presences | length %}
+            <tr>
+                <td>
+                    {% if paiement.datepaiement %}
+                        Du {{ paiement.datepaiement | date('d-m-Y') }}
+                    {% endif %}
+                </td>
+                <td>
+                    {{ paiement.montant }} €
+                </td>
+                <td>
+                    {{ paiement.enfant }}
+                </td>
+                <td>
+                    {{ paiement.typepaiement }}
+                </td>
+                <td>
+                    {{ paiement.modepaiement }}
+                </td>
+                <td>
+                    {{ totalpresences }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-warning">
+                    Aucun paiement effectué
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

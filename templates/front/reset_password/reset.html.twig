@@ -1,0 +1,26 @@
+{% extends '@AcMarcheEdr/front/layout.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Changez votre mot de passe</h3>
+        </div>
+
+        <div class="card-body">
+            {{ form_start(resetForm) }}
+            {{ form_row(resetForm.plainPassword) }}
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+                Valider
+            </button>
+            {{ form_end(resetForm) }}
+
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,33 @@
+<h4 class="text-success">Les groupes</h4>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Maximum inscrits par groupe</th>
+        <th>Courrier</th>
+        <th>Modifier</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for plaineGroupe in plaine.plaineGroupes %}
+        {% set inscrits = 0 %}
+        {% if datas[plaineGroupe.groupeScolaire.id] is defined %}
+            {% set inscrits = datas[plaineGroupe.groupeScolaire.id]['enfants']|length %}
+        {% endif %}
+        <tr>
+            <td>{{ plaineGroupe.groupeScolaire.nom }}</td>
+            <td>{{ inscrits }} /{{ plaineGroupe.inscriptionMaximum }}</td>
+            <td>
+                {% if plaineGroupe.fileName %}
+                    <a href="{{ vich_uploader_asset(plaineGroupe,'file') }}" target="_blank">Télécharger</a>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ path('edr_admin_plaine_groupe_edit', {'id': plaineGroupe.id}) }}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-pen-alt"></i> Modifier
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

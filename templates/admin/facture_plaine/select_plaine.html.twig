@@ -1,0 +1,28 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>
+                Pour quelle plaine souhaitez vous facturer ?
+            </h3>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for plaine in plaines %}
+                    <li class="list-group-item">
+                        <a href="{{ path('edr_admin_facture_new_plaine', {'tuteur': tuteur.id, 'plaine': plaine.id}) }}">
+                            {{ plaine }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="list-group-item">
+                        Aucun de vos enfants n'est inscrits à une plaine
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

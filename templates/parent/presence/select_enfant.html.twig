@@ -1,0 +1,22 @@
+{% extends '@AcMarcheEdrParent/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Sélectionnez un enfant</h3>
+        </div>
+        <div class="card-body">
+
+            <ul class="list-group">
+                {% for enfant in enfants %}
+                    <li class="list-group-item">
+                        <a href="{{ path('edr_parent_presence_select_jours', {'uuid': enfant.uuid}) }}">{{ enfant }}</a>
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

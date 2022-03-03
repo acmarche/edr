@@ -1,0 +1,68 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block container_class %}container-fluid{% endblock %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ plaine }} le {{ jour.dateJour|format_date('full') }}</h3>
+        </div>
+        <div class="card-body">
+            {% include '@AcMarcheEdrAdmin/plaine_jour/_actions.html.twig' %}
+            {% for data in datas %}
+                {% set groupe = data.groupe %}
+                {% set enfants = data.enfants %}
+                <h3>{{ groupe.nom | title }}</h3>
+
+                {% if enfants | length > 0 %}
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Age</th>
+                            <th>Année scolaire</th>
+                            <th>Ecole</th>
+                            <th style='width: 40%;'>Remarques</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for enfant in enfants %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('edr_admin_enfant_show', { 'id': enfant.id }) }}">
+                                        {{ enfant.nom | upper }}
+                                    </a>
+                                </td>
+                                <td>{{ enfant.prenom }}</td>
+                                <td style="text-align: center">{{ enfant.age(jour.dateJour) }} ans</td>
+                                <td>{{ enfant.anneescolaire }}</td>
+                                <td>{{ enfant.ecole }}</td>
+                                <td class='text-muted' style="font-size: smaller;">
+                                    {{ enfant.remarque | nl2br }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr class="active">
+                            <td class='text-center' colspan="4">
+                                <strong>Nombre d'enfants</strong>
+                            </td>
+                            <td class='text-center'>
+                                {{ enfants | length }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Personne</p>
+                {% endif %}
+
+                <div class="saut_page"></div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste des jours d'accueil
+                <a class="btn btn-primary float-end" role="button"
+                   href="{{ path('edr_admin_jour_new') }}"><i class="fas fa-plus"></i> Ajouter une date</a>
+            </h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/jour/_search.html.twig' %}
+
+            <div class="alert alert-info">
+                Jours d'accueils des edrs récréatifs et journées pédagogiques
+            </div>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Journée pédagogique</th>
+                    <th>Archivé</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for jour in jours %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_jour_show', { 'id': jour.id }) }}">
+                                {{ (jour.dateJour|format_date('full'))|title }}
+                            </a>
+                        </td>
+                        <td>
+                            {% if jour.pedagogique %}
+                                {{ jour.pedagogique ? '<i class="fas fa-check" title="Oui"></i>' }}
+                                {{ jour.ecoles | join(', ') }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ jour.archived ? '<i class="fas fa-check" title="Oui"></i>' }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

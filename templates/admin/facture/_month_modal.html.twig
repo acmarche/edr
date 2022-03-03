@@ -1,0 +1,22 @@
+<div class="modal fade" id="monthModal" tabindex="-1" aria-labelledby="monthModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="monthModalLabel">Quel mois ?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-primary" type="submit">Créer la facture</button>
+                {{ form_end(form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

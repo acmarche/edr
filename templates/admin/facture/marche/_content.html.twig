@@ -1,0 +1,93 @@
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <td>
+                        <img height="90px"
+                             src="{{ absolute_url(asset('bundles/acmarcheedr/images/logo-epe.png')) }}"
+                             alt="logo hotton" class="float-start me-3">
+                        Asbl Espaces Parents Enfants<br/>
+                        rue Victor Libert, 36E<br/>
+                        6900 Marche-en-Famenne.<br/>
+                        Tél: 084/32 69 90<br/>
+                        Mail: cee@marche.be<br/>
+                        <br clear="all">
+                        Facture numéro {{ facture.id }}<br/>
+                        Communication: {{ facture.communication }}
+                    </td>
+                    <td class="me-4 float-end">
+                        Hotton, le {{ facture.createdAt|format_date('full') }}
+                        <br><br>
+                        {{ facture.nom }} {{ facture.prenom }}<br>
+                        {{ facture.rue }} <br/>
+                        {{ facture.codepostal }} {{ facture.localite }}
+                    </td>
+                </tr>
+            </table>
+            <div class="text-center">
+                <div>
+                    Accueils extra-scolaires organisés par l’ASBL Espaces Parents Enfants
+                    <strong> Période: Mois {{ facture.mois }}</strong>
+                </div>
+                <br/>
+            </div>
+            <p class="mt-5">
+                Nous vous invitons à verser le montant mentionné ci-dessous dans les 15 jours.
+                <br/><br/>
+                Le détail est consultable, en ligne, via votre compte (edr.marche.be).
+                <br/><br/>
+                Veuillez ne pas tenir compte des rappels si entretemps vous vous êtes acquitté du montant.<br/>
+                En cas de difficultés liées au règlement de la facture, <br/>
+                veuillez contacter la cheffe d’équipe, Madame Wigny, au 084/32 69 90
+                <br>
+            </p>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Enfant(s)</th>
+                    {% for row in data.enfants %}
+                        <th>{{ row.enfant }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        Edrs récréatifs<br/>
+                        5 €, 3 €, 1 € (selon le nbre d'enfants)
+                    </td>
+                    {% for row in data.enfants %}
+                        <td>{{ row.edr }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th>
+                        Total période
+                    </th>
+                    {% for row in data.enfants %}
+                        <td>{{ row.cout | format_currency('eur') }}</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Total à payer</th>
+                    <td class="text-right" colspan="{{ data.enfants|length }}">
+                        <strong>{{ data.cout | format_currency('eur') }}</strong>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+            <p class="text-center">
+                Recevez nos salutations distinguées,
+            </p>
+        </div>
+        <div class="card-footer text-success mt-3">
+            A payer: {{ data.cout | format_currency('eur') }}<br>
+            IBAN: BE27 0016 3639 7373<br>
+            Communication: {{ facture.communication }}
+        </div>
+    </div>
+    <div class="page-breaker"></div>
+</div>

@@ -1,0 +1,8 @@
+
+.saut_page { page-break-before: always; }
+
+/*Empeche l'impiression des liens */
+
+a[href]:after {
+    content: none;
+  }

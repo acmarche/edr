@@ -1,0 +1,31 @@
+{% if factureAccueils | length > 0 %}
+    <h4 class="text-success">Accueils</h4>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Enfant</th>
+            <th>Date</th>
+            <th>Coût</th>
+        </tr>
+        </thead>
+        {% for accueil in factureAccueils %}
+            <tr>
+                <td>{{ accueil.nom }} {{ accueil.prenom }}</td>
+                <td>
+                    {% if is_granted('ROLE_MERCREDI_ADMIN') %}
+                    <a href="{{ path('edr_admin_facture_presence_show', {'id': accueil.id}) }}">
+                        {{ accueil.presenceDate | format_date('full') }}
+                    </a>
+                    {% else %}
+                        {{ accueil.presenceDate | format_date('full') }}
+                    {% endif %}
+                </td>
+                <td>{{ accueil.coutCalculated|format_currency('eur') }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2"><strong>Total</strong></td>
+            <td><strong>{{ dto.totalAccueils|format_currency('eur') }}</strong></td>
+        </tr>
+    </table>
+{% endif %}

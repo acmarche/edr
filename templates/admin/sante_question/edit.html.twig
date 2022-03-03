@@ -1,0 +1,16 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ sante_question }}</h3>
+        </div>
+        <div class="card-body">
+
+            {{ include('@AcMarcheEdrAdmin/sante_question/_form.html.twig') }}
+
+        </div>
+    </div>
+
+{% endblock %}

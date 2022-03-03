@@ -1,0 +1,21 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Nouveau décompte pour la facture du {{ facture.factureLe | format_date('full') }} de {{ tuteur }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdr/admin/facture_decompte/_form.html.twig' %}
+
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_admin_facture_show',{'id':facture.id}) }}" class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

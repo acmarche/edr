@@ -1,0 +1,71 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+
+        <h3 class="card-header">Accueil de {{ enfant }} le {{ accueil.dateJour|format_date('full') }}</h3>
+
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/accueil/_actions.html.twig' %}
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Facturé</th>
+                    <td>
+                        {% if facturePresence %}
+                            <a href="{{ path('edr_admin_facture_show', {'id': facturePresence.facture.id}) }}">
+                                {{ facturePresence.facture }}
+                            </a>
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Sous la garde de</th>
+                    <td>
+                        <a href="{{ path('edr_admin_tuteur_show', {'id': accueil.tuteur.id}) }}">
+                            {{ accueil.tuteur }}
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Nombre de demi-heure</th>
+                    <td>{{ accueil.duree }}</td>
+                </tr>
+                <tr>
+                    <th>Quand</th>
+                    <td>{{ accueil.heure }}</td>
+                </tr>
+                <tr>
+                    <th>Retard</th>
+                    <td>{{ accueil.heureRetard ? accueil.heureRetard|format_datetime('none', 'short') : 'Non' }}</td>
+                </tr>
+                <tr>
+                    <th>Coût</th>
+                    <td>
+                        {{ cout|format_currency('eur') }}
+                        {% if coutRetard > 0 %}
+                            + retard: {{ coutRetard|format_currency('eur') }}
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            {% if accueil.remarque %}
+                <p class="text-muted">
+                    {{ accueil.remarque | nl2br }}
+                </p>
+            {% endif %}
+
+        </div>
+        <div class="card-footer text-muted mt-3">
+            Crée le {{ accueil.createdAt | format_date('full') }} par {{ accueil.userAdd }}. Mis à jour
+            le {{ accueil.updatedAt | format_date('full') }}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/accueil/_delete_form.html.twig' %}
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <h3>Factures payées en {{ year }} ({{ total }})</h3>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Nbre factures</th>
+                    <th>Montant</th>
+                </tr>
+                </thead>
+                {% for row in data %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_tuteur_show', {'id': row.tuteur.id}) }}">{{ row.tuteur }}</a>
+                        </td>
+                        <td>
+                            {{ row.factures|length }}
+                        </td>
+                        <td>
+                            {{ row.total|format_currency('euros') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

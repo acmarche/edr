@@ -1,0 +1,25 @@
+{{ form_start(form, { 'attr': {'class': 'row row-cols-lg-auto g-3 align-items-center d-print-none'}}) }}
+{{ form_errors(form) }}
+
+{{ form_row(form.mois, {label_attr: {class: 's2r-only'}, attr:{'class': ' '} }) }}
+
+<button class="btn btn-primary " type="submit"><i class="fas fa-search"></i> Rechercher</button>
+
+<div class="btn-group">
+    <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+            <i class="far fa-file-excel"></i> Exporter
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <li><a class="dropdown-item" href="{{ path('edr_admin_export_presence_mois_xls', {'one': '0'}) }}">
+                    Par défaut</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_export_presence_mois_xls', {'one': '1'}) }}">
+                    Pour l'One</a></li>
+        </ul>
+    </div>
+</div>
+
+{{ form_rest(form) }}
+{{ form_end(form) }}
+<br/>

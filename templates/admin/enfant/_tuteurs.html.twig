@@ -1,0 +1,41 @@
+<h4 class="text-success">{% if relations | length > 1 %}Parents {% else %}Parent{% endif %}</h4>
+<hr/>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Conjoint</th>
+        <th title="Papa, maman, premier enfant, deuxième...">Relation/ordre</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for relation in relations %}
+
+        {% set tuteur= relation.tuteur %}
+
+        <tr>
+            <td>
+                <a href="{{ path('edr_admin_tuteur_show', { 'id': tuteur.id }) }}" class="card-link">
+                    {{ tuteur }}
+                </a>
+            </td>
+            <td>
+                {{ tuteur.nomConjoint|upper }} {{ tuteur.prenomConjoint }}
+            </td>
+            <td>
+                {% if relation.type %}
+                    <span class="text-muted">{{ relation.type }}</span>
+                {% endif %}
+                <i class="fas fa-link"></i> <a
+                        href="{{ path('edr_admin_relation_edit', {'id': relation.id}) }}" class="card-link">
+                    Relation et ordre
+                </a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">Aucun parent</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

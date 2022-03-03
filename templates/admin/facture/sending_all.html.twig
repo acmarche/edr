@@ -1,0 +1,29 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block head %}
+    {% if pause %}
+        <meta http-equiv="refresh"
+              content="3; url={{ absolute_url(path('edr_admin_facture_sending_all', {'month': month, 'pause':0})) }}">
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Envoie des mails pour {{ month }}. Reste {{ count }} a envoyer</h3>
+
+        <div class="card-body">
+            {% if finish == false %}
+                Les factures sont envoyées par lot de 30 <br/>
+                <p class="text-warning">Merci de ne pas fermer cette fenêtre</p>
+                Veuillez patienter<br><br>
+                Merci
+            {% else %}
+                Toutes les factures ont bien été envoyées.<br/>
+                Vous pouvez quitter cette fenêtre
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+
+

@@ -1,0 +1,41 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste des animateurs
+                {% if search %}
+                    <span class="badge badge-info">{{ animateurs|length }}</span>
+                {% endif %}
+            </h3>
+        </div>
+        <div class="card-body">
+            {% include '@AcMarcheEdrAdmin/animateur/_search.html.twig' %}
+
+            {% if search and animateurs | length > 0 %}
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Localité</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for animateur in animateurs %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('edr_admin_animateur_show', { 'id': animateur.id }) }}">
+                                    {{ animateur.nom }}
+                                </a>
+                            </td>
+                            <td>{{ animateur.prenom }}</td>
+                            <td>{{ animateur.localite }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

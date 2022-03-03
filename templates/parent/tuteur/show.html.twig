@@ -1,0 +1,17 @@
+{% extends '@AcMarcheEdrParent/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="w-50 d-inline">{{ tuteur }}</h3>
+            <a href="{{ path('edr_parent_tuteur_edit') }}" class="float-end" role="button">
+                <i class="far fa-edit"></i>
+                Modifier
+            </a>
+        </div>
+        <div class="card-body">
+            {% include '@AcMarcheEdrParent/tuteur/_coordonnees.html.twig' %}
+        </div>
+
+    </div>
+{% endblock %}

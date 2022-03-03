@@ -1,0 +1,61 @@
+{% extends '@AcMarcheEdrParent/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Fiche santé de {{ enfant }} | Etape 2/3</h3>
+        </div>
+        <div class="card-body">
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.medecin_nom) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.medecin_telephone) }}
+                </div>
+            </div>
+            {{ form_row(form.personne_urgence) }}
+
+            {{ form_label(form.accompagnateurs, null, {'label_attr': {'class': 'required'}}) }}
+            {{ form_help(form.accompagnateurs) }}
+            <ul class="list-group" id="email-fields-list"
+                data-prototype="{{ form_widget(form.accompagnateurs.vars.prototype)|e }}"
+                data-widgetTags="{{ '<li class="list-group-item"></li>'|e }}"
+                data-widgetCounter="{{ form.accompagnateurs|length }}">
+                {% for accompagnateurField in form.accompagnateurs %}
+                    <li class="list-group-item">
+                        {{ form_errors(accompagnateurField) }}
+                        {{ form_widget(accompagnateurField) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="button"
+                    id="add-another-accompagnateur"
+                    class="my-2 add-another-collection-widget btn btn-primary btn-sm"
+                    data-list-selector="#email-fields-list">
+                <i class="fas fa-plus"></i> Ajouter un personne
+            </button>
+
+            {{ form_row(form.remarque) }}
+
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+                Sauvegarder
+            </button>
+            {{ form_end(form) }}
+        </div>
+        <div class="card-footer">
+            <a class="float-end" href="{{ path('edr_parent_enfant_show', {'uuid': enfant.uuid}) }}"><i
+                        class="fas fa-arrow-left"></i> Annuler</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {% include '@AcMarcheEdr/commun/_js_add_field.html.twig' %}
+{% endblock %}

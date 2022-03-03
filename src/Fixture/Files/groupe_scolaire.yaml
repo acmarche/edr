@@ -1,0 +1,16 @@
+AcMarche\Edr\Entity\Scolaire\GroupeScolaire:
+  groupe_Petits:
+    nom: 'Petits'
+  groupe_Moyens:
+    nom: 'Moyens'
+  groupe_Grands:
+    nom: 'Grands'
+  groupe_Petits_plaine:
+    nom: 'Petits plaine'
+    is_plaine: true
+  groupe_Moyens_plaine:
+    nom: 'Moyens plaine'
+    is_plaine: true
+  groupe_Grands_plaine:
+    nom: 'Grands plaine'
+    is_plaine: true

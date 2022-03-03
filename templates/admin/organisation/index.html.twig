@@ -1,0 +1,11 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <h3>Mon organisation</h3>
+
+    {% if organisation is null %}
+        <a class="btn btn-primary m-2" role="button"
+           href="{{ path('edr_admin_organisation_new') }}"><i class="fas fa-plus"></i> Ajouter une organisation</a>
+    {% endif %}
+
+{% endblock %}

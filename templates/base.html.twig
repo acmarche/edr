@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Edr{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/acmarcheedr/favicon.ico') }}"/>
+    <meta name="description" content="">
+    <meta name="author" content="Cst">
+
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
+
+    {% block stylesheets %}{% endblock %}
+
+    <link href="{{ asset('bundles/acmarcheedr/css/print.css') }}" rel="stylesheet" media="print">
+    <meta name="theme-color" content="#563d7c">
+    {% block head %}{% endblock %}
+</head>
+<body class="d-flex flex-column h-100 {% block body_class %}{% endblock %}">
+<!-- Top nav bar -->
+<nav class="navbar navbar-expand-lg {% if is_granted('IS_IMPERSONATOR') %}
+    navbar-dark bg-dark
+    {% else %}navbar-light bg-light
+{% endif %} fixed-to2p shadow-sm border-bottom d-print-none">
+    <div class="container">
+        {% block brand %}
+            <a class="navbar-brand" href="{{ path('edr_front_home') }}">
+                <i class="fas fa-frog icon-rose d-inline-block align-text-top"></i>
+                <span class="ms-2 fs-4 navbar-text">Edr</span>
+            </a>
+        {% endblock %}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% block menu_top %}
+
+                {% endblock %}
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item">
+                        <a href="{{ path('app_login') }}" class="nav-link"><i class="fas fa-sign-in-alt"></i>
+                            Se connecter</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{{ path('edr_front_user_show') }}" class="nav-link"><i
+                                    class="fas fa-user"></i>
+                            Compte</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Begin page content -->
+<main role="main" class="flex-shrink-0">
+    <div class="{% block container_class %}container{% endblock %} pt-3">
+
+        {% include '@AcMarcheEdr/_flash_messages.html.twig' %}
+
+        {% block notifications %}
+
+        {% endblock %}
+
+        {% block body %}
+
+        {% endblock %}
+
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        {% block footer %}
+            <span class="text-muted">
+
+            </span>
+        {% endblock %}
+    </div>
+</footer>
+{% block javascripts %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends '@AcMarcheEdrEcole/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-2">
+        <h3 class="card-header">{{ enfant }}</h3>
+        <div class="card-body">
+            {% include '@AcMarcheEdrEcole/enfant/_actions.html.twig' %}
+            <div class="d-flex">
+                <div class="flex-shrink-0">
+                    {% include '@AcMarcheEdr/commun/enfant/_photo.html.twig' %}
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    {% include '@AcMarcheEdr/commun/enfant/_identite.html.twig' %}
+                    <br/>
+                    Inscris aux accueil du matin et soir:
+                    {% if enfant.isAccueilEcole %}
+                        Oui
+                    {% else %}
+                        Non
+                    {% endif %}
+                    <br/>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdr/ecole/enfant/_accueils.html.twig' %}
+
+{% endblock %}

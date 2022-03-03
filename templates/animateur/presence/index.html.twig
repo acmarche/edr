@@ -1,0 +1,42 @@
+{% extends '@AcMarcheEdrAnimateur/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Listing des présences</h3>
+        </div>
+        <div class="card-body">
+
+            <div class="alert alert-info">La liste reprend les jours où vous travaillez</div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Date</th>
+                    <th>Ecoles (Journée pédagogique)</th>
+                    <th>Enfants</th>
+                </tr>
+                {% for jour in jours %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_animateur_presence_show', {'id': jour.id}) }}">
+                                {{ jour.dateJour|format_date('full')|title }}
+                            </a>
+                        </td>
+                        <td>{{ jour.ecoles|join(', ') }}</td>
+                        <td>
+                            {{ jour.presences|length }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="2">Aucun jour trouvé</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
+
+{% endblock %}
+

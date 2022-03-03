@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Raz search</source>
+                <target>Réinitialiser la recherche</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>jour1</source>
+                <target>Lundi</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>jour2</source>
+                <target>Mardi</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>jour3</source>
+                <target>Edr</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>jour4</source>
+                <target>Jeudi</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>jour5</source>
+                <target>Vendredi</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>jour6</source>
+                <target>Samedi</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>jour7</source>
+                <target>Dimanche</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

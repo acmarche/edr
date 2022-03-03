@@ -1,0 +1,7 @@
+{% if enfant.notes | length  > 0 %}
+    <br/>
+    <a href="{{ path('edr_admin_note_enfant_show', {'id': enfant.id}) }}" id="enfant_notes">
+        <i class="far fa-clipboard" title="Notes de l'enfant"></i>
+        <span class='badge'>{{ enfant.notes | length }}</span>
+    </a>
+{% endif %}

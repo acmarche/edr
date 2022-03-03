@@ -1,0 +1,50 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ plaine }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/plaine/_actions.html.twig' %}
+
+            {% if plaine.inscriptionOpen %}
+                <div class="alert alert-warning">Les inscriptions sont ouvertes aux parents</div>
+            {% endif %}
+
+            <h4 class="text-success">Tarifs</h4>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Prix premier enfant</th>
+                    <td>{{ plaine.prix1 }} €</td>
+                </tr>
+                <tr>
+                    <th>Prix deuxième enfants</th>
+                    <td>{{ plaine.prix2 }} €</td>
+                </tr>
+                <tr>
+                    <th>Prix enfants suivants</th>
+                    <td>{{ plaine.prix3 }} €</td>
+                </tr>
+            </table>
+
+            {% if plaine.remarque != '' %}
+                <p class="text-muted">
+                    {{ plaine.remarque | nl2br }}
+                </p>
+            {% endif %}
+
+            <p>Communication bancaire : {{ plaine.communication }}</p>
+
+            {% include '@AcMarcheEdrAdmin/plaine/_list_jours.html.twig' %}
+            {% include '@AcMarcheEdrAdmin/plaine/_list_groupes.html.twig' %}
+            {% include '@AcMarcheEdrAdmin/plaine/_enfants.html.twig' %}
+
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/plaine/_delete_form.html.twig' %}
+
+{% endblock %}

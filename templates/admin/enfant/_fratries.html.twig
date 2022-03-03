@@ -1,0 +1,11 @@
+<br/>
+<strong>Frateries: </strong>
+{% if fratries|length > 0 %}
+    {% for fratrie in fratries %}
+        <a href="{{ path('edr_admin_enfant_show', {'id': fratrie.id}) }}">
+            {{ fratrie }}
+        </a>&nbsp;
+    {% endfor %}
+{% else %}
+    Aucune
+{% endif %}

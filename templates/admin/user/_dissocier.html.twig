@@ -1,0 +1,28 @@
+<!-- Modal candidat -->
+<div class="modal fade" id="dissocierModal" tabindex="-1" role="dialog" aria-labelledby="dissocierModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dissocierModalLabel">Dissocier</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                Dissocier du compte ?
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{{ path('edr_user_dissociate_parent', {'id': user.id}) }}">
+
+                    <input type="hidden" name="_token" value="{{ csrf_token('dissociate' ~ user.id) }}">
+                    <input type="hidden" name="tuteur" id="modal-tuteur" value="">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Annuler
+                    </button>
+                    <button type="submit" class="btn btn-danger">Dissocier le parent</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

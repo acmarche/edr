@@ -1,0 +1,71 @@
+<tr>
+    <td>
+        {{ enfant }}
+        <br>
+        <span class="text-muted">({{ enfant.anneeScolaire }})</span>
+    </td>
+    <td>
+        {% set tuteurSelected = data[enfant.id]['tuteurSelected'] %}
+        {% if enfant.relations|length > 1 %}
+            <select name="tuteurs[{{ enfant.id }}][]" class="form-select" required="required">
+                <option value="0" {% if tuteurSelected ==0 %}selected="selected" {% endif %}>
+                    Sous la garde de
+                </option>
+                {% for relation in enfant.relations %}
+                    <option value="{{ relation.tuteur.id }}"{% if tuteurSelected == relation.tuteur.id %} selected="selected" {% endif %}>
+                        {{ relation.tuteur }}
+                    </option>
+                {% endfor %}
+            </select>
+        {% else %}
+            <input type="hidden" name="tuteurs[{{ enfant.id }}][]"
+                   value="{{ enfant.relations[0].tuteur.id }}">
+        {% endif %}
+    </td>
+    {% for day in week.days %}
+        {% if day|date('N') < 6 %}
+            {% set dateFormate =  day|date('Y-m-d') %}
+            {% set accueilData = false %}
+            {% if data[enfant.id]['accueils'][dateFormate] is defined %}
+                {% set accueilData = data[enfant.id]['accueils'][dateFormate] %}
+                {% set value = accueilData.duree %}
+            {% else %}
+                {% set value = 0 %}
+            {% endif %}
+            <td>
+                <div class="row" {{ stimulus_controller('btns', {
+                    updateUrl: path('edr_ecole_ajax_duree'),
+                    heure: heure,
+                    enfant: enfant.id,
+                    date: dateFormate
+                }) }} >
+                    <div class="col mt-sm-1 text-center">
+                        <span class="text-muted text-center">{{ day|date('D')|trans }}</span>
+                        <br/>
+                        <label for="accueilsaccueils[{{ enfant.id }}][]">
+                            <input type="number" min="0" max="6"
+                                   name="accueils[{{ enfant.id }}][{{ dateFormate }}]"
+                                   value="{{ value }}"
+                                   data-btns-target="duree"
+                                   class="form-control" style="width: 70px;">
+                        </label>
+                    </div>
+                    <div class="col mt-1">
+                        <div class="d-sm-flex d-xl-block justify-content-between ">
+                            <button type="button"
+                                    data-action="btns#up"
+                                    class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-plus-square"></i>
+                            </button>
+                            <button type="button"
+                                    data-action="btns#down"
+                                    class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-minus-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        {% endif %}
+    {% endfor %}
+</tr>

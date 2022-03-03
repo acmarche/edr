@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="row">
+    <div class="col-6">
+        {{ form_row(form.from) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.sujet) }}
+    </div>
+</div>
+{{ form_row(form.texte) }}
+{% if form.attachCourriers is defined %}
+    {{ form_row(form.attachCourriers) }}
+{% endif %}
+{{ form_row(form.file) }}
+<button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-paper-plane"></i>
+    Envoyer le message
+</button>
+{{ form_end(form) }}

@@ -1,0 +1,15 @@
+<a href="{{ path('edr_admin_creance_edit', { 'id': creance.id }) }}" role="button"
+   class="btn btn-primary"><i
+            class="far fa-edit"></i> Modifier</a>
+
+<a href="{{ path('edr_commun_export_creance_pdf', {'uuid': creance.uuid}) }}" class="btn btn-primary"
+           role='button'> <i class="fas fa-file-pdf"></i> Exporter en pdf</a>
+
+<a href="{{ path('edr_admin_tuteur_show', {'id': tuteur.id}) }}" class="btn btn-primary" role='button'><i class="fas fa-list"></i>
+    Retour au tuteur</a>
+
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+    <i class="fas fa-trash"></i> Supprimer
+</button>
+
+<br /><br />

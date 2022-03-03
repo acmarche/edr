@@ -1,0 +1,35 @@
+{% if organisation %}
+    {% if organisation.photoName %}
+        <img class="img-thumbnail"
+             src="{{ vich_uploader_asset(organisation, 'photo') | imagine_filter('edr_thumb') }}" alt="img"/>
+        <br/>
+    {% endif %}
+
+    <i class="fas fa-map-marked-alt"></i>
+    {{ organisation.rue }} <br/>
+    {{ organisation.codePostal }}
+    {{ organisation.localite }}<br/>
+
+    {% if organisation.email %}
+        <i class="far fa-envelope"></i> {{ organisation.email }}<br/>
+    {% endif %}
+
+    {% if organisation.siteWeb %}
+        <i class="fas fa-globe-europe"></i> <a href="{{ organisation.siteWeb }}">
+        {{ organisation.siteWeb }}</a>
+        <br/>
+    {% endif %}
+
+    {% if organisation.gsm %}
+        <i class="fas fa-mobile-alt"></i> {{ organisation.gsm }}<br/>
+    {% endif %}
+
+    {% if organisation.telephone or organisation.telephoneBureau %}
+        <i class="fas fa-phone-alt"></i> {{ organisation.telephone }} {{ organisation.telephoneBureau }}<br/>
+    {% endif %}
+
+    {% if organisation.remarque %}
+        <br/><br/>
+        <span class="text-muted">{{ organisation.remarque | nl2br }}</span>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,29 @@
+{% if factureReductions | length > 0 %}
+    <h4 class="text-success">Réductions</h4>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Raison</th>
+            <th>Pourcentage ou forfait</th>
+        </tr>
+        </thead>
+        {% for reduction in factureReductions %}
+            <tr>
+                <td>
+                    <a href="{{ path('edr_admin_facture_reduction_show', {'id': reduction.id}) }}">
+                        {{ reduction.nom }}
+                    </a>
+                </td>
+                <td>
+                    {% if reduction.pourcentage %}
+                        {{ reduction.pourcentage|format_number }} %
+                    {% endif %}
+
+                    {% if reduction.forfait %}
+                        {{ reduction.forfait|format_currency('eur') }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

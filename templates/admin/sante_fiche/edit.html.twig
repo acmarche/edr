@@ -1,0 +1,20 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Fiche santé de {{ sante_fiche.enfant }}</h3>
+        </div>
+        <div class="card-body">
+
+            {{ include('@AcMarcheEdrAdmin/sante_fiche/_form.html.twig') }}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+  {% include '@AcMarcheEdr/commun/_js_add_field.html.twig' %}
+{% endblock %}

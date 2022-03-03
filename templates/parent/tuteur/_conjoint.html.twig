@@ -1,0 +1,18 @@
+<div class="card">
+
+    <h5 class="card-header">
+        <i class="fas fa-heart" style="color:hotpink;"></i> Conjoint
+        {{ tuteur.nomconjoint }} {{ tuteur.prenomconjoint }}
+    </h5>
+
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                Téléphone: {{ tuteur.telephoneconjoint }}</li>
+            <li class="list-group-item">Téléphone bureau: {{ tuteur.telephonebureauconjoint }}</li>
+            <li class="list-group-item">Gsm: {{ tuteur.gsmconjoint }}</li>
+            <li class="list-group-item">Email: <a
+                        href="mailto:{{ tuteur.emailConjoint }}">{{ tuteur.emailConjoint }}</a></li>
+        </ul>
+    </div>
+</div>

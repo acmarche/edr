@@ -1,0 +1,47 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Liste des présences
+            {% if jour %} {{ jour.dateJour | format_date('full') }}
+                <a href="{{ path('edr_message_new_jour', {'id': jour.id}) }}"
+                   title="Envoyer un message aux parents" id="new_message_from_jour">
+                    <i class="far fa-envelope"></i></a>
+
+                <a href="{{ path('edr_admin_export_presence_xls') }}"
+                   title="Exporter en xls" id="export_xls_presence">
+                    <i class="fas fa-file-excel"></i> </a>
+            {% endif %}
+        </h3>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/presence/_search.html.twig' %}
+
+            {% if jour %}
+
+                {% for data in datas %}
+
+                    {% set groupe = data.groupe %}
+                    {% set enfants = data.enfants %}
+                    <div class="page-header">
+                        <h3>Listing des présences {{ jour.dateJour | format_date('full') }}</h3>
+                    </div>
+
+                    <h3>
+                        {{ groupe.nom | title }} <a
+                                href="{{ path('edr_message_new_groupescolaire', {'id': groupe.id}) }}"
+                                title="Envoyer un message aux parents" class="d-print-none"
+                                id="new_message_from_groupe_{{ groupe.nom }}">
+                            <i class="far fa-envelope"></i></a>
+                    </h3>
+
+                    {% include '@AcMarcheEdrAdmin/presence/_line_by_groupe.html.twig' %}
+
+                    <div class="saut_page"></div>
+
+                {% endfor %}
+
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

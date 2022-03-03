@@ -1,0 +1,25 @@
+<table class="table table-bordered">
+    <tr>
+        <th>Nom</th>
+        <th>Ecole</th>
+        <th>Inscrit accueil ?</th>
+        <th>Modifier</th>
+    </tr>
+    {% for enfant in enfants %}
+        <tr>
+            <td>
+                <a href="{{ path('edr_ecole_enfant_show', {'uuid': enfant.uuid}) }}">
+                    {{ enfant }}
+                </a>
+            </td>
+            <td>{{ enfant.ecole }}</td>
+            <td>{{ enfant.isAccueilEcole ? 'Oui' : 'Non' }}</td>
+            <td><a class="btn btn-warning btn-sm" role="button"
+                   href="{{ path('edr_ecole_enfant_edit', {'uuid': enfant.uuid}) }}">Modifier</a></td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">Aucun enfant trouvé</td>
+        </tr>
+    {% endfor %}
+</table>

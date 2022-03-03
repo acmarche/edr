@@ -1,0 +1,43 @@
+{% extends '@AcMarcheEdr/front/layout.html.twig' %}
+
+{% block title %}Me connecter{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bundles/acmarcheedr/css/signin.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="text-center">
+        <main class="form-signin">
+
+            {% if error %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+
+            <form method="post" action="{{ path('app_login') }}">
+                <img class="mb-4" src="{{ asset('bundles/acmarcheedr/images/favicon/favicon-96x96.png') }}"
+                     alt="Adl" width="72"
+                     height="57">
+                <h1 class="h3 mb-3 fw-normal">Authentifiez-vous</h1>
+
+                <div class="form-floating">
+                    <input type="text" value="{{ last_username }}" name="username" class="form-control"
+                           id="floatingInput" placeholder="jdupont" autofocus>
+                    <label for="floatingInput">Nom d'utilisateur</label>
+                </div>
+                <div class="form-floating mt-3">
+                    <input type="password" name="password" class="form-control" id="floatingPassword"
+                           placeholder="Mot de passe">
+                    <label for="floatingPassword">Mot de passe</label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Me connecter</button>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            </form>
+            <a href="{{ path('edr_front_forgot_password_request') }}" class="float-end mt-3">Mot de passe
+                perdu?</a>
+        </main>
+    </div>
+{% endblock %}

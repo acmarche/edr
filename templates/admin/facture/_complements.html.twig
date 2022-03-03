@@ -1,0 +1,29 @@
+{% if factureComplements | length > 0 %}
+    <h4 class="text-success">Compléments</h4>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Raison</th>
+            <th>Pourcentage ou forfait</th>
+        </tr>
+        </thead>
+        {% for complement in factureComplements %}
+            <tr>
+                <td>
+                    <a href="{{ path('edr_admin_facture_complement_show', {'id': complement.id}) }}">
+                        {{ complement.nom }}
+                    </a>
+                </td>
+                <td>
+                    {% if complement.pourcentage %}
+                        {{ complement.pourcentage| format_number }} %
+                    {% endif %}
+
+                    {% if complement.forfait %}
+                        {{ complement.forfait|format_currency('eur') }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

@@ -1,0 +1,21 @@
+{% set action = app.request.attributes.get("_route") %}
+
+<li class="nav-item{% if action == 'edr_parent_presence_select_enfant' %} active {% endif %}">
+    <a class="nav-link"
+       href="{{ path('edr_parent_presence_select_enfant') }}"><i class="fas fa-plus"></i> Inscription Mer-rec/Péda</a>
+</li>
+
+<li class="nav-item{% if action == 'edr_parent_enfant_index' %} active {% endif %}">
+    <a class="nav-link"
+       href="{{ path('edr_parent_enfant_index') }}"><i class="fas fa-list"></i> Mes enfants</a>
+</li>
+
+<li class="nav-item{% if action == 'edr_parent_tuteur_show' %} active {% endif %}">
+    <a class="nav-link"
+       href="{{ path('edr_parent_facture_index') }}"><i class="fas fa-list-alt"></i> Mes factures</a>
+</li>
+
+<li class="nav-item{% if action == 'edr_parent_tuteur_show' %} active {% endif %}">
+    <a class="nav-link"
+       href="{{ path('edr_parent_tuteur_show') }}"><i class="fas fa-list-alt"></i> Mes coordonnées</a>
+</li>

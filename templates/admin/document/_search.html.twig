@@ -1,0 +1,12 @@
+{{ form_start(form, { 'attr': {'class': 'row row-cols-lg-auto g-3 align-items-center hidden-print'}}) }}
+{{ form_errors(form) }}
+
+{{ form_row(form.nom, {label_attr: {class: 'sr-only'}, attr:{'class': ' my-1 mr-sm-2'} }) }}
+
+<div class="col-12">
+    <button class="btn btn-primary mr-1" type="submit"><i class="fas fa-search"></i> Rechercher</button>
+</div>
+
+{{ form_rest(form) }}
+{{ form_end(form) }}
+<br />

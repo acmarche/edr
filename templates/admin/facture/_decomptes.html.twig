@@ -1,0 +1,23 @@
+{% if factureDecomptes | length > 0 %}
+    <h4 class="text-success">Décomptes</h4>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Montant</th>
+        </tr>
+        </thead>
+        {% for decompte in factureDecomptes %}
+            <tr>
+                <td>
+                    <a href="{{ path('edr_admin_facture_decompte_show', {'id': decompte.id}) }}">
+                        {{ decompte.payeLe|format_date('full') }}
+                    </a>
+                </td>
+                <td>
+                    {{ decompte.montant|format_currency('eur') }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

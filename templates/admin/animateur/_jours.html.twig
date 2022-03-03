@@ -1,0 +1,6 @@
+<h4 class="text-success">Travail les jours d'accueils</h4>
+<ul class="list-group">
+    {% for jour in animateur.jours %}
+        <li class="list-group-item">{{ jour.dateJour|format_date('full') }}</li>
+    {% endfor %}
+</ul>

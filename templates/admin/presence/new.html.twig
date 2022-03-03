@@ -1,0 +1,30 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Nouvelle présence pour {{ enfant }}</h3>
+        </div>
+        <div class="card-body">
+
+            <div class="alert alert-info">
+                Maintenez la touche "CTRL" pour sélectionner plusieurs dates en même temps
+            </div>
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.jours) }}
+            <button class="btn btn-primary mr-1 mb-2" type="submit">
+                <i class="far fa-save" aria-hidden="true"></i>
+                Sauvegarder
+            </button>
+            {{ form_end(form) }}
+
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_admin_enfant_show',{'id':enfant.id}) }}" class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+            </a>
+        </div>
+    </div>
+{% endblock %}

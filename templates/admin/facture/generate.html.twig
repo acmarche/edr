@@ -1,0 +1,29 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Générer les factures</h3>
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-warning" role="alert">
+                Avant de générer les factures,
+                vérifiez que les présences sont bien encodées pour chaque enfant
+            </div>
+
+            <h4 class="text-success">Pour le mois de</h4>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.mois) }}
+
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+                Générer les factures
+            </button>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}

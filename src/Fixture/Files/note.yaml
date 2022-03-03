@@ -1,0 +1,5 @@
+AcMarche\Edr\Entity\Note:
+  note_merlin:
+    __construct: ['@enfant_merlin']
+    remarque: 'A oublié son sac de gym'
+    userAdd: administrator

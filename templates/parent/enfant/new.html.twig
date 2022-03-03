@@ -1,0 +1,17 @@
+{% extends '@AcMarcheEdrParent/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Nouvel enfant</h3>
+        </div>
+        <div class="card-body">
+            {{ include('@AcMarcheEdrParent/enfant/_form.html.twig') }}
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_parent_enfant_index') }}">
+                <span class="fas fa-list"></span> Annuler
+            </a>
+        </div>
+    </div>
+{% endblock %}

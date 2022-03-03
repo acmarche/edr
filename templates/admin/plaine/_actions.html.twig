@@ -1,0 +1,48 @@
+<div class="row gy-2 gx-1 align-items-center d-print-none mb-3">
+    <div class="col-auto">
+        <a href="{{ path('edr_admin_plaine_edit', { 'id': plaine.id }) }}" role="button"
+           class="btn btn-primary"><i
+                    class="far fa-edit"></i> Modifier</a>
+    </div>
+
+    <div class="col-auto">
+        <a href="{{ path('edr_admin_plaine_jour_edit', { 'id': plaine.id }) }}" role="button"
+           class="btn btn-primary"><i
+                    class="far fa-edit"></i> Jours</a>
+    </div>
+
+    <div class="col-auto">
+        <a href="{{ path('edr_admin_plaine_pdf', { 'id': plaine.id } ) }}" class="btn btn-primary" role="button">
+            <span class="far fa-file-pdf"></span> Exporter en pdf
+        </a>
+    </div>
+
+    <div class="col-auto">
+        <a href="{{ path('edr_message_new_plaine', { 'id': plaine.id } ) }}" class="btn btn-primary" role="button">
+            <span class="far fa-file-pdf"></span> Envoyer un message
+        </a>
+    </div>
+
+    <div class="col-auto">
+        <a href="{{ path('edr_admin_plaine_presence_new', { 'id': plaine.id }) }}" role="button"
+           class="btn btn-primary"><i
+                    class="fas fa-plus"></i> Inscrire un enfant</a>
+    </div>
+
+    <div class="col-auto">
+        <a href="{{ path('edr_admin_plaine_open', { 'id': plaine.id }) }}" role="button"
+           class="btn btn-primary"><i class="fas fa-user-edit"></i> Ouvrir les inscriptions</a>
+    </div>
+
+    <div class="col-auto">
+        <a href="{{ path('edr_admin_plaine_index') }}" class="btn btn-primary" role='button'><i
+                    class="fas fa-list"></i>
+            Retour à la Liste</a>
+    </div>
+
+    <div class="col-auto">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <i class="fas fa-trash"></i> Supprimer
+        </button>
+    </div>
+</div>

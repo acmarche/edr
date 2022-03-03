@@ -1,0 +1,115 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <table class="table table-borderless">
+            <tr>
+                <td style="width: 160px;">
+                    <img height="90px"
+                         src="{{ absolute_url(asset('bundles/acmarcheedr/images/logo_epe_marche.png')) }}"
+                         alt="logo hotton" class="">
+                </td>
+                <td>
+                    Asbl Espaces Parents Enfants<br>
+                    rue Victor Libert, 36E<br>
+                    6900 Marche-en-Famenne.<br>
+                    084/32 69 90<br>
+                    cee@marche.be
+                </td>
+                <td class="me-4 float-end">
+                    Marche, le {{ facture.createdAt|format_date('full') }}
+                    <br><br>
+                    {{ facture.nom }} {{ facture.prenom }}<br>
+                    {{ facture.rue }} <br/>
+                    {{ facture.codepostal }} {{ facture.localite }}
+                </td>
+            </tr>
+        </table>
+
+        <strong>Facture numéro {{ facture.id }}</strong><br/>
+        <strong>Communication: {{ facture.communication }}</strong>
+        <br clear="all">
+        <br clear="all">
+
+        <div class="text-center">
+            <div>
+                Accueils extra-scolaires organisés par l’ASBL Espaces Parents Enfants<br>
+                <strong>Période {{ facture.mois }}</strong>
+            </div>
+        </div>
+        <p class="mt-5">
+            Veuillez ne pas tenir compte des rappels si entre-temps vous vous êtes acquitté du montant.<br>
+            En cas de difficultés liées au règlement de la facture, <br>
+            veuillez contacter la cheffe d’équipe, Madame Wigny, au 084/32 69 90
+        </p>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Enfant(s)</th>
+                {% for row in data.enfants %}
+                    <th>{{ row.enfant }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% if countPresences > 0 %}
+                <tr>
+                    <td>
+                        Edrs récréatifs<br/>
+                        5 €, 3 €, 1 € (selon le nbre d'enfants)
+                    </td>
+                    {% for row in data.enfants %}
+                        <td>{{ row.edr }}</td>
+                    {% endfor %}
+                </tr>
+            {% endif %}
+            <tr>
+                <th>
+                    Total par enfant
+                </th>
+                {% for row in data.enfants %}
+                    <td class="text-end">{{ row.cout | format_currency('eur') }}</td>
+                {% endfor %}
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Total à payer</th>
+                <td class="text-end" colspan="{{ data.enfants|length }}">
+                    <strong>{{ data.cout | format_currency('eur') }}</strong>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+
+        <p class="text-center">
+            Pour l’ASBL Espaces Parents Enfants,
+        </p>
+        <table class="table table-bordered text-center">
+            <tr>
+                <td>
+                    La Directrice Générale,<br>
+                    Isabelle GIRARD
+                </td>
+                <td>
+                    Chef d'équipe,<br>
+                    Sylvie WIGNY
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="{{ absolute_url(asset('bundles/acmarcheedr/images/signatures/dewez.jpg')) }}"
+                         height="70" alt="signature"/>
+                </td>
+                <td>
+                    <img src="{{ absolute_url(asset('bundles/acmarcheedr/images/signatures/chaplier.jpg')) }}"
+                         height="70" alt="signature"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-footer text-success mt-3">
+        A payer: {{ data.cout | format_currency('eur') }}<br>
+        IBAN: B E 2 3 0 9 1 0 1 9 6 1 9 6 9 1<br>
+        BIC: G K C C B E B B<br>
+        Communication: {{ facture.communication }}
+    </div>
+</div>

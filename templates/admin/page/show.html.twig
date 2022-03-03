@@ -1,0 +1,26 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block title %}Enfant{% endblock %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ page }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/page/_actions.html.twig' %}
+
+            <br/>
+
+            {{ page.content|raw }}
+            <br/>
+            <br/>
+            {% include '@AcMarcheEdrAdmin/page/_documents.html.twig' %}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/page/_delete_form.html.twig' %}
+
+{% endblock %}

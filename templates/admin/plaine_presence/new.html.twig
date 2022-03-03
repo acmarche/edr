@@ -1,0 +1,52 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Nouvelle inscription à {{ plaine }}</h3>
+        </div>
+        <div class="card-body">
+
+            {{ form_start(form, { 'attr': {'class': 'row row-cols-lg-auto g-2 align-items-center hidden-print'}}) }}
+            {{ form_errors(form) }}
+
+            {{ form_row(form.nom, {label_attr: {class: 'sr-only'}, attr:{'class': 'my-1 mr-sm-2'} }) }}
+
+            <button class="btn btn-primary mr-1" type="submit"><i class="fas fa-search"></i> Rechercher</button>
+
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+            <br/>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Né le</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for enfant in enfants %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_plaine_presence_select_tuteur', { 'plaine': plaine.id,'enfant': enfant.id }) }}">
+                                {{ enfant.nom }}
+                            </a>
+                        </td>
+                        <td>{{ enfant.prenom }}</td>
+                        <td>{{ enfant.birthday ? enfant.birthday|format_datetime('short', 'none') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_admin_plaine_show',{'id':plaine.id}) }}" class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

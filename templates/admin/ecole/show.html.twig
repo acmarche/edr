@@ -1,0 +1,74 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ ecole }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/ecole/_actions.html.twig' %}
+            <i class="fas fa-map-marked-alt"></i>
+            {{ ecole.rue }} <br/>
+            {{ ecole.codepostal }} {{ ecole.localite }}
+            <br/>
+            {% if ecole.remarque %}
+                <p class="text-muted">
+                    {{ ecole.remarque | nl2br }}
+                </p>
+            {% endif %}
+            <br/>
+            <table class='table table-bordered table-hover table-condensed'>
+                <tbody>
+                <tr>
+                    <th><span class="fas fa-phone"></span> Téléphone</th>
+                    <td>{{ ecole.telephone }}</td>
+                </tr>
+                <tr>
+                    <th><span class="fas fa-mobile-alt"></span> Gsm</th>
+                    <td>{{ ecole.gsm }}</td>
+                </tr>
+                <tr>
+                    <th><span class="far fa-envelope"></span> Email</th>
+                    <td><a href='mailto:{{ ecole.email }}'>{{ ecole.email }}</a></td>
+                </tr>
+                <tr>
+                    <th><span class="far fa-envelope"></span> Abréviation</th>
+                    <td>{{ ecole.abreviation }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4>Liste des enfants ({{ enfants|length }})</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Année scolaire</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for enfant in enfants %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_enfant_show', { 'id': enfant.id }) }}">
+                                {{ enfant.nom }}
+                            </a>
+                        </td>
+                        <td>{{ enfant.prenom }}</td>
+                        <td>{{ enfant.anneeScolaire }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% include '@AcMarcheEdrAdmin/ecole/_delete_form.html.twig' %}
+
+{% endblock %}

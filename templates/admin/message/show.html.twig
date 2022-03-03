@@ -1,0 +1,26 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Message du {{ message.createdAt | format_date('full') }}</h3>
+        </div>
+        <div class="card-body">
+
+            <h4 class="text-warning">{{ message.sujet }}</h4>
+
+            {{ message.texte | nl2br }}
+
+            <h4 class="text-warning">Destinataires</h4>
+
+            <ul class="list-group">
+                {% for destinataire in  message.destinataires %}
+                    <li class="list-group-item">{{ destinataire }}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+
+{% endblock %}

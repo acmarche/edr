@@ -1,0 +1,112 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <td>
+                    <img height="90px"
+                         src="{{ absolute_url(asset('bundles/acmarcheedr/images/logo-hotton.png')) }}"
+                         alt="logo hotton" class="float-start me-3">
+                    Administration communale de Hotton<br>
+                    Rue des Ecoles, 50
+                    6990 Hotton<br>
+                    Contact: Samantha Herman<br>
+                    Mail: cartourba@hotton.be<br>
+                    <br clear="all">
+                    Facture numéro {{ facture.id }}<br/>
+                    Communication: {{ facture.communication }}
+                </td>
+                <td class="me-4 float-end">
+                    Hotton, le {{ facture.createdAt|format_date('full') }}
+                    <br><br>
+                    {{ facture.nom }} {{ facture.prenom }}<br>
+                    {{ facture.rue }} <br/>
+                    {{ facture.codepostal }} {{ facture.localite }}
+                </td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <div>
+                {{ organisation.nom }}
+                <strong>{{ plaine }}</strong>
+            </div>
+        </div>
+        <p class="mt-5">
+            Nous vous invitons à verser le montant mentionné ci-dessous.
+            <br/><br/>
+            Le détail est consultable, en ligne, via votre compte ATL (www.atl-hotton.be).
+            <br/><br/>
+            Toute réclamation à l’encontre de cette facture doit être adressée par écrit, <br/>à l’attention du
+            Collège
+            Communal (rue des Ecoles 50 à 6990 HOTTON ou cartourba@hotton.be) <br/>dans les 15 jours calendrier qui
+            suivent la date d’expiration de la facture.
+            <br/><br/>
+            <span class="text-muted">
+                    Texte de référence : « Règlement redevance sur les accueils extrascolaire » adopté par le conseil en sa
+                séance du 27.08.2021
+                </span>
+            <br>
+        </p>
+        <table class="table table-bordered">
+            <tr>
+                <th>Nom</th>
+                <th>Inscrits aux dates</th>
+            </tr>
+            {% for enfant in enfants %}
+                <tr>
+                    <td>{{ enfant }}</td>
+                    <td>
+                        {% for inscription in inscriptions %}
+                            {% if inscription.enfant.id == enfant.id %}
+                                {{ inscription.jour.dateJour| date('d/m') }},
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">Aucun</td>
+                </tr>
+            {% endfor %}
+            <tfoot>
+            <tr>
+                <th>Total à payer</th>
+                <td class="text-end">
+                    <strong>{{ dto.total | format_currency('eur') }}</strong>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+
+        <p class="text-center">
+            Recevez nos salutations distinguées,
+        </p>
+        <table class="table table-bordered text-center">
+            <tr>
+                <td>
+                    La Directrice Générale,<br>
+                    Marie-France DEWEZ
+                </td>
+                <td>
+                    Le Bourgmestre,<br>
+                    Jacques CHAPLIER
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="{{ absolute_url(asset('bundles/acmarcheedr/images/signatures/dewez.jpg')) }}"
+                         height="70" alt="signature"/>
+                </td>
+                <td>
+                    <img src="{{ absolute_url(asset('bundles/acmarcheedr/images/signatures/chaplier.jpg')) }}"
+                         height="70" alt="signature"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-footer text-success mt-3">
+        A payer: {{ dto.total | format_currency('eur') }}<br>
+        IBAN: B E 2 3 0 9 1 0 1 9 6 1 9 6 9 1<br>
+        BIC: G K C C B E B B<br>
+        Communication: {{ facture.communication }}
+    </div>
+</div>

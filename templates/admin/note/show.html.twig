@@ -1,0 +1,20 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Note {{ note.id }} de {{ enfant }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/note/_actions.html.twig' %}
+
+            {{ note.remarque | nl2br }}
+
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/note/_delete_form.html.twig' %}
+
+{% endblock %}

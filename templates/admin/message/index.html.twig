@@ -1,0 +1,32 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Envoie d'un message aux parents</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/message/_search.html.twig' %}
+
+            <a href="{{ path('edr_message_new') }}" class="btn btn-primary" role="button"><i
+                        class="far fa-envelope"></i> Ecrire le message</a>
+
+            <br/><br/>
+            <p>Le message sera envoyé à {{ emails | length }} emails (conjoints compris)</p>
+
+            <br/>
+
+            {% if tuteurs | length > 0 %}
+                <div class="alert alert-warning">
+                    Les {{ tuteurs | length }} tuteurs suivants n'ont pas d' adresse mail, ni leur conjoint
+                </div>
+
+                {% include '@AcMarcheEdrAdmin/message/_tuteurs.html.twig' %}
+
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

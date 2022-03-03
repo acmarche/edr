@@ -1,0 +1,26 @@
+<h4 class="text-success">Présences</h4>
+<hr/>
+{% if prensencesGrouped|length > 0 %}
+    <ul class="nav nav-tabs" id="tabPresences" role="tablist">
+        {% for year in prensencesGrouped|keys %}
+            <li class="nav-item" role="presentation">
+                <button class="nav-link{% if year == currentYear %} active{% endif %}" id="tab-{{ year }}"
+                        data-bs-target="#content-{{ year }}" data-bs-toggle="tab" role="tab"
+                        aria-controls="home" aria-selected="false">{{ year }}</button>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="tab-content" id="presencesContent">
+        {% for year, monthData in prensencesGrouped %}
+            <div class="tab-pane fade {% if year == currentYear %}show active{% endif %}" id="content-{{ year }}" role="tabpanel"
+                 aria-labelledby="tab-{{ year }}">
+                {% for numMonth, presences in monthData %}
+                    <h5 class="text-warning">{{ numMonth | edr_month_fr }}</h5>
+                    {% include '@AcMarcheEdr/admin/presence/_list.html.twig' %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Aucune</p>
+{% endif %}

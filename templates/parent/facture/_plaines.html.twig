@@ -1,0 +1,21 @@
+{% if facturePlaines | length > 0 %}
+    <h4 class="text-success">Plaine</h4>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Enfant</th>
+            <th>Date</th>
+            <th>Coût</th>
+        </tr>
+        </thead>
+        {% for accueil in facturePlaines %}
+            <tr>
+                <td>{{ accueil.nom }} {{ accueil.prenom }}</td>
+                <td>
+                    {{ accueil.presenceDate | format_date('full') }}
+                </td>
+                <td>{{ accueil.coutCalculated }} €</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

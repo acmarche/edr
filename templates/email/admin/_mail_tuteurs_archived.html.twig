@@ -1,0 +1,19 @@
+{% extends '@email/default/notification/body.html.twig' %}
+{% block lead %}
+    <p class="lead">
+        {{ email.subject }}
+    </p>
+{% endblock %}
+
+{% block content %}
+    Les tuteurs suivant on été archivés car ils n'ont plus d'enfants actifs
+<br /><br />
+    {% for tuteur in tuteurs %}
+        {{ tuteur }}<br />
+        {{ absolute_url(path('edr_admin_tuteur_show', {'id': tuteur.id})) }}
+    {% endfor %}
+{% endblock %}
+
+{% block footer_content %}
+    {% include '@AcMarcheEdrAdmin/organisation/_signature.html.twig' %}
+{% endblock %}

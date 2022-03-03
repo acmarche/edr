@@ -1,0 +1,40 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ annee_scolaire }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/annee_scolaire/_actions.html.twig' %}
+
+            <br/>
+            {% if annee_scolaire.remarque %}
+                <p class="text-muted">
+                    {{ annee_scolaire.remarque | nl2br }}
+                </p>
+            {% endif %}
+            <br/>
+            <table class='table table-bordered table-hover table-condensed'>
+                <tbody>
+                <tr>
+                    <th><span class="fas fa-magic"></span> Ordre</th>
+                    <td>{{ annee_scolaire.ordre }}</td>
+                </tr>
+                <tr>
+                    <th><span class="fas fa-magic"></span> Année suivante</th>
+                    <td>{{ annee_scolaire.anneeSuivante }}</td>
+                </tr>
+                <tr>
+                    <th><span class="fas fa-magic"></span> Groupe scolaire</th>
+                    <td>{{ annee_scolaire.groupeScolaire }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/annee_scolaire/_delete_form.html.twig' %}
+
+{% endblock %}

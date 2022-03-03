@@ -1,0 +1,25 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{% if search %} {{ count }} {% endif %} Accueils des écoles</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdr/admin/accueil/_search.html.twig' %}
+
+            {% if search %}
+                {% if grouped %}
+                    {% include '@AcMarcheEdrAdmin/accueil/_index_grouped.html.twig' %}
+                {% else %}
+                    {% include '@AcMarcheEdrAdmin/accueil/_index.html.twig' %}
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+{% endblock %}
+

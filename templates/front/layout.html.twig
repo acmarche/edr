@@ -1,0 +1,16 @@
+{% extends '@AcMarcheEdr/base.html.twig' %}
+
+{% block title %}
+    {{ render(path('edr_organisation_title')) }}
+{% endblock %}
+
+{% block brand %}
+    <a class="navbar-brand" href="{{ path('edr_front_home') }}">
+        <i class="fas fa-frog icon-rose d-inline-block align-text-top"></i>
+        <span class="ms-2 fs-4 navbar-text">Edr</span>
+    </a>
+{% endblock %}
+
+{% block menu_top %}
+    {{ render(path('edr_front_menu_page')) }}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% if facturePresences | length > 0 %}
+    <h4 class="text-success">Présences</h4>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Enfant</th>
+            <th>Date</th>
+            <th>Coût</th>
+        </tr>
+        </thead>
+        {% for presence in facturePresences %}
+            <tr>
+                <td>{{ presence.nom }} {{ presence.prenom }}</td>
+                <td>
+                    {% if is_granted('ROLE_MERCREDI_ADMIN') %}
+                        <a href="{{ path('edr_admin_facture_presence_show', {'id': presence.id}) }}">
+                            {{ presence.presenceDate | format_date('full') }}
+                        </a>
+                    {% else %}
+                        {{ presence.presenceDate | format_date('full') }}
+                    {% endif %}
+                </td>
+                <td>{{ presence.coutCalculated|format_currency('eur') }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2"><strong>Total</strong></td>
+            <td><strong>{{ dto.totalPresences|format_currency('eur') }}</strong></td>
+        </tr>
+    </table>
+{% endif %}

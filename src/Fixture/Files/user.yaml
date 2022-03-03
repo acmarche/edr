@@ -1,0 +1,52 @@
+AcMarche\Edr\Entity\Security\User:
+  user0:
+    email: jf@marche.be
+    username: jf@marche.be
+    nom: Simpson
+    prenom: Jf
+    password: homer
+    roles: ["ROLE_MERCREDI_ADMIN"]
+  user_{alice, bob, fred, raoul, charle, brenda, jules, lisa}:
+    email: '<current()>\@domain.be'
+    username: '<current()>\@domain.be'
+    nom: '<lastName()>'
+    prenom: '<current()>'
+    password: homer
+  user1:
+    email: albert@marche.be
+    username: albert@marche.be
+    nom: Cohen
+    prenom: Albert
+    password: homer
+    roles: ["ROLE_MERCREDI_PARENT"]
+    tuteurs: ["@tuteur_Simpson"]
+  user2:
+    email: leonard@marche.be
+    username: leonard@marche.be
+    nom: Cohen
+    prenom: Leonard
+    password: homer
+  user_ecole_aye:
+    email: joseph@marche.be
+    username: joseph@marche.be
+    nom: Jacob
+    prenom: Joseph
+    password: homer
+    roles: ["ROLE_MERCREDI_ECOLE"]
+    ecoles: ["@ecole_Aye"]
+  user_ecole_champlon:
+    email: champlon@marche.be
+    username: champlon@marche.be
+    nom: Bolt
+    prenom: Usain
+    password: homer
+    roles: ["ROLE_MERCREDI_ECOLE"]
+    ecoles: ["@ecole_Champlon"]
+  user_animateur:
+    email: kevin@marche.be
+    username: kevin@marche.be
+    nom: Malice
+    prenom: Kevin
+    password: homer
+    roles: ["ROLE_MERCREDI_ANIMATEUR"]
+    animateurs: ['@animateur_Szyslak']

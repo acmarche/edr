@@ -1,0 +1,19 @@
+{% extends '@AcMarcheEdrParent/layout.html.twig' %}
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Fiche santé de {{ enfant }} | Etape 1/3</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdr/parent/enfant/_form.html.twig' %}
+
+        </div>
+        <div class="card-footer">
+            <a class="float-end" href="{{ path('edr_parent_enfant_show', {'uuid': enfant.uuid}) }}"><i
+                        class="fas fa-arrow-left"></i> Annuler</a>
+        </div>
+    </div>
+
+{% endblock %}

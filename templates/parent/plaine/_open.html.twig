@@ -1,0 +1,6 @@
+{% if plaine %}
+    <div class="alert alert-info">
+        <a href="{{ path('edr_parent_plaine_show', {'id': plaine.id}) }}" class="alert-link">{{ plaine }} est ouverte aux
+            inscriptions</a>
+    </div>
+{% endif %}

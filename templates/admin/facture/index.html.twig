@@ -1,0 +1,83 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Liste des factures de
+                <a href="{{ path('edr_admin_tuteur_show',{'id':tuteur.id}) }}">{{ tuteur }}</a>
+            </h3>
+        </div>
+
+        <div class="card-body">
+
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-plus"></i> Créer une facture
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <li>
+                        <a role="button" data-bs-toggle="modal" data-bs-target="#monthModal" class="dropdown-item"
+                           href="#">
+                            Pour le mois de...
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                           href="{{ path('edr_admin_facture_new_manual', {'id': tuteur.id}) }}">
+                            Manuellement
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                           href="{{ path('edr_admin_facture_select_plaine', {'id': tuteur.id}) }}">
+                            Pour la plaine...
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <table class="table table-bordered table-hover mt-3">
+                <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Mois</th>
+                    <th>Envoyé le</th>
+                    <th>Payé le</th>
+                    <th>Communication</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for facture in factures %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_facture_show', { 'id': facture.id }) }}">
+                                N° {{ facture.id }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ path('edr_admin_facture_show', { 'id': facture.id }) }}">
+                                {{ facture.mois }}
+                            </a>
+                        </td>
+                        <td>
+                            {% if facture.envoyeLe %}
+                                {{ facture.envoyeLe | format_date('full') | title }}
+                            {% endif %}
+                        </td>
+                        <td>{{ facture.payeLe ? facture.payeLe | format_date('full','full') }}</td>
+                        <td>{{ facture.communication }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucune</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    {% include '@AcMarcheEdrAdmin/facture/_month_modal.html.twig' %}
+{% endblock %}

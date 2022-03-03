@@ -1,0 +1,103 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Détails de la présence du {{ facturePresence.presenceDate | format_date('full') }} facturée</h3>
+        </div>
+        <div class="card-body">
+            <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#deleteModal">
+                <i class="fas fa-trash"></i> Détacher de la facture
+            </button>
+            <button type="button" class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#editModal">
+                <i class="fas fa-edit"></i> Modifier la présence
+            </button>
+
+            <table class="table table-bordered table-hover mt-3">
+                <tr>
+                    <th>Enfant</th>
+                    <td>{{ facturePresence.nom }} {{ facturePresence.prenom }}</td>
+                </tr>
+                <tr>
+                    <th>Coût après calcul</th>
+                    <td>
+                        {{ facturePresence.coutCalculated }} €<br/>
+                        <span class="text-muted"></span>
+                    </td>
+                </tr>
+            </table>
+            <h5 class="text-success">Informations utiles</h5>
+            <p class="text-muted">Le coût a été calculé suivant les données ci-dessous</p>
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>Ordre</th>
+                    <td>
+                        {{ facturePresence.ordre }}<br/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Coût brut de la journée</th>
+                    <td>
+                        {{ facturePresence.coutBrut }} €<br/>
+                        <span class="text-muted">Coût suivant l'ordre</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Absent</th>
+                    <td>
+                        {{ facturePresence.absent|edr_absence_text }}<br/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Réduction</th>
+                    <td>
+                        {{ facturePresence.reduction ? facturePresence.reduction : 'Aucune' }}<br/>
+                        <span class="text-muted"><a href="{{ path('edr_admin_reduction_index') }}">Liste des réductions</a></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Pédagogique</th>
+                    <td>{{ facturePresence.pedagogique ? 'Oui' : 'Non' }}</td>
+                </tr>
+                {% if presence %}
+                    <tr>
+                        <th>Présence liée</th>
+                        <td>
+                            <a href="{{ path('edr_admin_presence_show', {'id': presence.id}) }}">
+                                {{ presence.jour.dateJour | format_date('full') }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if accueil %}
+                    <tr>
+                        <th>Accueil lié</th>
+                        <td>
+                            <a href="{{ path('edr_admin_accueil_show', {'id': accueil.id}) }}">
+                                {{ accueil.dateJour | format_date('full') }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <th>Type</th>
+                    <td>
+                        {{ facturePresence.objectType }}<br>
+                        <span class="text-muted">présence, plaine ou accueil</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_admin_facture_show',{'id':facture.id}) }}" class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i> Retour à la facture
+            </a>
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/facture_presence/_delete_form.html.twig' %}
+    {% include '@AcMarcheEdrAdmin/facture_presence/_edit_form.html.twig' %}
+
+
+{% endblock %}

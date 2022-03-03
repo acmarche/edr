@@ -1,0 +1,38 @@
+<h4 class="text-success">Les présences suivantes n'ont pas été facturées</h4>
+<hr>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Date</th>
+        <th>Enfant</th>
+        <th>Remarque</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for presence in presences %}
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" value="{{ presence.id }}" name="presences[]" checked="checked">
+                </label>
+            </td>
+            <td>
+                <a href="{{ path('edr_admin_presence_show', {'id': presence.id}) }}">
+                    {{ (presence.jour.dateJour | format_date('full'))|capitalize }}
+                </a>
+            </td>
+            <td>
+                {{ presence.enfant }}
+            </td>
+            <td class="text-muted">
+                {{ presence.remarque }}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">Aucune</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

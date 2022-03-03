@@ -1,0 +1,35 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Santé du site</h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">
+                Test pour l'intégrité des données
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a class="" href="{{ path('edr_admin_checkup_orphelin') }}">
+                        Les orphelins</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="" href="{{ path('edr_admin_checkup_sansenfant') }}">
+                        Parents sans enfant
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a class="" href="{{ path('edr_admin_checkup_accounts') }}">
+                        Etat des comptes
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a class="" href="{{ path('edr_admin_checkup_doublons') }}">
+                        Doublons
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

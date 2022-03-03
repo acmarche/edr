@@ -1,0 +1,32 @@
+{% extends '@email/default/notification/body.html.twig' %}
+{% block lead %}
+    <p class="lead">
+        {{ email.subject }}
+    </p>
+{% endblock %}
+
+{% block content %}
+    Cher(s) parent(s),
+    <br>
+    <br>
+    Votre compte a bien été créé sur le site internet.
+    <br>
+    <br>
+    <strong>Un administrateur va valider votre compte.</strong>
+    <br>
+    <strong>Vous recevrez un autre mail indiquant la procédure à suivre</strong>
+    <br>
+    <br>
+    Bien à vous,
+    <br>
+    <br>
+
+{% endblock %}
+
+{% block action %}
+
+{% endblock %}
+
+{% block footer_content %}
+    {% include '@AcMarcheEdrAdmin/organisation/_signature.html.twig' %}
+{% endblock %}

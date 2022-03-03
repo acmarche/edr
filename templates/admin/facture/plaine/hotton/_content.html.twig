@@ -1,0 +1,124 @@
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <td>
+                        <img height="90px"
+                             src="{{ absolute_url(asset('bundles/acmarcheedr/images/logo-hotton.png')) }}"
+                             alt="logo hotton" class="float-left mr-3">
+                        Administration communale de Hotton<br>
+                        Rue des Ecoles, 50
+                        6990 Hotton<br>
+                        Contact: Samantha Herman<br>
+                        Mail: cartourba@hotton.be<br>
+                    </td>
+                    <td class="text-right">
+                        Hotton, le {{ facture.createdAt|format_date('full') }}
+                        <br><br>
+                        {{ facture.nom }} {{ facture.prenom }}<br>
+                        {{ facture.rue }} <br/>
+                        {{ facture.codepostal }} {{ facture.localite }}
+                    </td>
+                </tr>
+            </table>
+            <div class="text-center">
+                <div>
+                    {{ organisation.nom }}
+                    <strong>Plaine {{ plaine.nom }}</strong>
+                </div>
+                <br/>
+            </div>
+            <p class="mt-5 text-muted">
+                Nous vous invitons à verser le montant total mentionné ci-dessous.
+                <br/><strong>Le paiement fera office de validation d'inscription à la plaine.</strong>
+            </p>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Enfant(s)</th>
+                    {% for row in data.enfants %}
+                        <th>{{ row.enfant }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <tr>
+                    <td>
+                        Accueils matin<br/>
+                        ≤ 7h29=0,50€ &7h30 -
+                        8h = 0,50€
+                    </td>
+                    {% for row in data.enfants %}
+                        <td>{{ row.accueils.Matin.nb }} demi-heure(s)</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>
+                        Accueils soir <br/>
+                        ≤ 17h = 0,50€ & Après
+                        17h = 0,50 €/demi-heure
+                    </td>
+                    {% for row in data.enfants %}
+                        <td>{{ row.accueils.Soir.nb }} demi-heure(s)</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>
+                        Journée pédagogique<br/>
+                        1 journée = 5,00 € & 1/2 journée = 2,50 €
+                    </td>
+                    {% for row in data.enfants %}
+                        <td>{{ row.peda }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>
+                        Edrs récréatifs<br/>
+                        5 €, 3 €, 1 € (selon le nbre d'enfants)
+                    </td>
+                    {% for row in data.enfants %}
+                        <td>{{ row.edr }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th>
+                        Total période
+                    </th>
+                    {% for row in data.enfants %}
+                        <td>{{ row.cout | format_currency('eur') }}</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Total à payer</th>
+                    <td class="text-right" colspan="{{ data.enfants|length }}">
+                        <strong>{{ data.cout | format_currency('eur') }}</strong>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+
+            <p class="text-center">
+                Recevez nos salutations distinguées,
+            </p>
+            <span class="text-left">
+                    La Directrice Générale,<br>
+                    Marie-France DEWEZ
+                </span>
+            <span class="float-end">
+                    Le Bourgmestre,<br>
+                    Jacques CHAPLIER
+                </span>
+        </div>
+        <div class="card-footer text-success mt-3">
+            A payer: {{ data.cout | format_currency('eur') }}<br>
+            IBAN: B E 2 3 0 9 1 0 1 9 6 1 9 6 9 1<br>
+            BIC: G K C C B E B B<br>
+            Communication: {{ facture.communication }}
+        </div>
+    </div>
+    <div class="page-breaker"></div>
+</div>

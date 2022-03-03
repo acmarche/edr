@@ -1,0 +1,28 @@
+AcMarche\Edr\Entity\Presence\Presence:
+  presence_merlin_16_09:
+    __construct: [ '@tuteur_Peret','@enfant_merlin', '@jour_2024_09_19' ]
+    userAdd: 'administrateur'
+  presence_divorce_16_09:
+    __construct: [ '@tuteur_Fernandel','@enfant_divorce', '@jour_2024_09_19' ]
+    userAdd: 'administrateur'
+  presence_gaspard_09_09:
+    __construct: [ '@tuteur_Gaspard','@enfant_divorce', '@jour_2024_09_11' ]
+    userAdd: 'administrateur'
+  presence_lisa_02_09:
+    __construct: [ '@tuteur_Simpson','@enfant_lisa', '@jour_2024_09_04' ]
+    userAdd: 'administrateur'
+  presence_bart_06_05:
+    __construct: [ '@tuteur_Simpson','@enfant_bart', '@jour_2020_05_06' ]
+    userAdd: 'administrateur'
+  presence_bart_24_03:
+    __construct: [ '@tuteur_Simpson','@enfant_bart', '@jour_2024_03_06' ]
+    userAdd: 'administrateur'
+  presence_plaine_bart_21_12:
+    __construct: [ '@tuteur_Simpson','@enfant_bart', '@jour_2024_12_16' ]
+    userAdd: 'administrateur'
+  presence_plaine_bart_22_12:
+    __construct: [ '@tuteur_Simpson','@enfant_bart', '@jour_2024_12_17' ]
+    userAdd: 'administrateur'
+  presence_plaine_bart_23_12:
+    __construct: [ '@tuteur_Simpson','@enfant_bart', '@jour_2024_12_18' ]
+    userAdd: 'administrateur'

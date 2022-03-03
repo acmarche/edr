@@ -1,0 +1,12 @@
+AcMarche\Edr\Entity\Sante\SanteFiche:
+  sante_merlin:
+    __construct: ['@enfant_merlin']
+    personne_urgence: 'Papa et maman'
+    medecin_nom: 'Docteur Ledoux'
+    medecin_telephone: '084 44 55 66'
+  sante_bart:
+    __construct: ['@enfant_bart']
+    personne_urgence: 'Papa et maman'
+    medecin_nom: 'Docteur Ledoux'
+    medecin_telephone: '084 44 55 66'
+    accompagnateurs: ['papa', 'maman', 'soeur']

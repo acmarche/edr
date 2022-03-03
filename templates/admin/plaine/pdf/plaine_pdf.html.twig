@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="{{ absolute_url(asset('bundles/acmarcheedr/css/pdf.css')) }}" rel="stylesheet">
+    <link href="{{ bootcdn }}" rel="stylesheet">
+    <link href="{{ absolute_url(asset('bundles/acmarcheedr/css/print.css')) }}" rel="stylesheet" media="print">
+    <title>Plaine</title>
+    <style>
+        table {
+            page-break-inside: auto
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
+
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-footer-group
+        }
+    </style>
+</head>
+<body>
+{% for data in datas %}
+    {% set groupe = data.groupe %}
+    {% set enfants = data.enfants %}
+    <h2 class="text-success">{{ plaine }} {{ groupe.nom | title }}</h2>
+
+    {% if plaine.remarque %}
+        <p class="text-muted">
+            {{ plaine.remarque | nl2br }}
+        </p>
+    {% endif %}
+
+    <table class="table table-bordered table-hover" autosize="1">
+        <thead>
+        <tr>
+            <th style="width: 20%;">Enfants</th>
+            {% for datep in dates %}
+                <th style="text-align: center;">{{ datep.datejour | date('d-m') }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in enfants %}
+            {% set enfant = row.enfant %}
+            {% set tuteur = row.tuteur %}
+            {% set jours = row.jours %}
+            <tr>
+                {% set absent = '' %}
+                {% set age = enfant.age(firstDay, true) %}
+                <td style="width: 45%;">
+                    <strong>{{ enfant }}</strong> ({{ age }})
+                    <br/>
+                    {% include 'plaine/pdf/_coordonnees.html.twig' %}
+                </td>
+                {% for datep in dates %}
+                    {% set dateId = datep.id %}
+                    <td class="text-center">
+                        {% if inIds(dateId, jours) %}
+                            <img src="data:image/jpg;base64,{{ images.ok }}"
+                                 alt='oui'/>
+                        {% else %}
+                            <img src="data:image/jpg;base64,{{ images.ko }}"
+                                 alt='non'/>
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td><strong>Nombre d'enfants par jour (moins6/total)</strong></td>
+            {% for date in dates %}
+                <td class='text-center'>
+                    {{ stats[groupe.id][date.id]['moins6'] }} /
+                    {{ stats[groupe.id][date.id]['total'] }}
+                </td>
+            {% endfor %}
+        </tr>
+        </tfoot>
+    </table>
+    <div class="page-breaker"></div>
+{% endfor %}
+</body>
+</html>

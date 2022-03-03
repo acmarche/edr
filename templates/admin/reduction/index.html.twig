@@ -1,0 +1,32 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <h3 class="card-header">Liste des réductions</h3>
+        <div class="card-body">
+            <a class="btn btn-primary m-2" role="button"
+               href="{{ path('edr_admin_reduction_new') }}"><i class="fas fa-plus"></i> Ajouter une réduction</a>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Pourcentage</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for reduction in reductions %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_reduction_show', { 'id': reduction.id }) }}">
+                                {{ reduction.nom }}
+                            </a>
+                        </td>
+                        <td>{{ reduction.pourcentage }} %</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Inscription de {{ enfant }} à {{ plaine }}</h3>
+        </div>
+        <div class="card-body">
+
+            <h4 class="text-success">Sélectionnez le tuteur</h4>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for tuteur in tuteurs %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_plaine_presence_confirmation', { 'plaine': plaine.id,'tuteur': tuteur.id,'enfant': enfant.id }) }}">
+                                {{ tuteur }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_admin_plaine_show',{'id':plaine.id}) }}" class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

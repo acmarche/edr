@@ -1,0 +1,41 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Présences ordre</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Date</th>
+                    <th>Enfant</th>
+                    <th>Ordre</th>
+                    <th>Frateries ce jour là</th>
+                </tr>
+                {% for presence in presences %}
+                    <tr>
+                        <td>
+                         <a href="{{ path('edr_admin_presence_show', {'id': presence.id}) }}">
+                             {{ presence.jour.dateJour|date('d-m-Y') }}
+                         </a>
+                        </td>
+                        <td>
+                            {{ presence.enfant }}<br/>
+                            {{ presence.enfant.birthday ? presence.enfant.birthday|date('d-m-Y') }}
+                        </td>
+                        <td>{{ presence.ordreTmp }}</td>
+                        <td>
+                            {% for fratrie in presence.fratries %}
+                                {{ fratrie }}  {{ fratrie.birthday ? fratrie.birthday|date('d-m-Y') }}<br/>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+

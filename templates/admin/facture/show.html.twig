@@ -1,0 +1,32 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>
+                Détails de la facture {{ facture.id }}
+                {% if facture.tuteur %}
+                    de <a
+                        href="{{ path('edr_admin_tuteur_show', {'id': facture.tuteur.id}) }}">{{ facture.tuteur }}</a>
+                {% endif %}
+            </h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/facture/_actions.html.twig' %}
+
+            {{ content|raw }}
+
+
+        </div>
+        <div class="card-footer text-muted mt-3">
+            Crée le {{ facture.createdAt | format_date('full') }} par {{ facture.userAdd }}. Mis à jour
+            le {{ facture.updatedAt | format_date('full') }}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/facture/_delete_form.html.twig' %}
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+<a href="{{ path('edr_admin_user_edit', { 'id': user.id }) }}" role="button"
+   class="btn btn-primary"><i
+            class="far fa-edit"></i> Modifier</a>
+
+<a href="{{ path('edr_front_user_show', { '_switch_user': user.email }) }}" role="button"
+   class="btn btn-primary"><i class="fas fa-user-ninja"></i> Voir en tant que</a>
+
+<a href="{{ path('edr_admin_user_roles', { 'id': user.id }) }}" role="button"
+   class="btn btn-primary"><i class="fas fa-user-shield"></i> Rôles</a>
+
+<div class="btn-group">
+    <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+            <i class="fas fa-link"></i> Associer au compte...
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <li><a class="dropdown-item" href="{{ path('edr_user_associate_tuteur', { 'id': user.id }) }}"
+                   role="button" {% if not user.isParent == true %} disabled title="Donnez le droit de parent"{% endif %}>
+                    Associer un parent</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_user_associate_ecole', { 'id': user.id }) }}"
+                   role="button" {% if not user.isEcole == true %} disabled title="Donnez le droit d'école" {% endif %}>
+                    Associer une école</a></li>
+            <li><a class="dropdown-item"
+                   href="{{ path('edr_user_associate_animateur', {'id': user.id}) }}" {% if not user.isAnimateur == true %} disabled title="Donnez le droit de animateur" {% endif %}>
+                    Associer un animateur</a></li>
+        </ul>
+    </div>
+</div>
+
+<a href="{{ path('edr_admin_user_password', { 'id': user.id }) }}" role="button"
+   class="btn btn-primary"><i
+            class="fas fa-lock"></i> Changer le mot de passe</a>
+
+<a href="{{ path('edr_admin_user_index') }}" class="btn btn-primary" role='button'><i class="fas fa-list"></i>
+    Retour à la Liste</a>
+
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+    <i class="fas fa-trash"></i> Supprimer
+</button>
+
+<br/><br/>

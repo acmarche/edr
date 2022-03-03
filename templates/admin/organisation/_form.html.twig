@@ -1,0 +1,44 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="row">
+    <div class="col-6">
+        {{ form_row(form.nom) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.initiale) }}
+    </div>
+    <div class="col-4">
+        {{ form_row(form.rue) }}
+    </div>
+    <div class="col-4">
+        {{ form_row(form.code_postal) }}
+    </div>
+    <div class="col-4">
+        {{ form_row(form.localite) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.email) }}
+    </div>
+     <div class="col-6">
+        {{ form_row(form.site_web) }}
+    </div>
+       <div class="col-6">
+        {{ form_row(form.telephone) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.telephone_bureau) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.gsm) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.photo) }}
+    </div>
+      <div class="col-6">
+        {{ form_row(form.remarque) }}
+    </div>
+</div>
+<button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+    Sauvegarder
+</button>
+{{ form_end(form) }}

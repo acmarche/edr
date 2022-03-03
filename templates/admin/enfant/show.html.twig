@@ -1,0 +1,53 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+
+        <h3 class="card-header">{{ enfant }}
+            <div class="float-end">
+                {% include '@AcMarcheEdr/commun/_archive.html.twig' with {'entity':enfant} %}
+            </div>
+        </h3>
+        <div class="card-body">
+            {% include '@AcMarcheEdrAdmin/enfant/_actions.html.twig' %}
+
+            <div class="d-flex">
+                <div class="flex-shrink-0">
+                    {% include '@AcMarcheEdr/commun/enfant/_photo.html.twig' %}
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    {% include '@AcMarcheEdr/commun/enfant/_identite.html.twig' %}
+                    <br/>
+                    <i class="fas fa-list-ol"></i>
+                    Ordre par défaut: {{ enfant.ordre }}
+                    {% if enfant.remarque %}
+                        <p class="card-text text-muted pt-2">
+                            {{ enfant.remarque | nl2br }}
+                        </p>
+                    {% endif %}
+                    {% include '@AcMarcheEdrAdmin/enfant/_fratries.html.twig' %}
+                    {% if enfant.accueilEcole %}
+                        <br/>
+                        Participe aux accueils des écoles
+                    {% endif %}
+                    {% include '@AcMarcheEdrAdmin/enfant/_notes.html.twig' %}
+                </div>
+            </div>
+
+            <br/>
+
+            {% include '@AcMarcheEdrAdmin/enfant/_tuteurs.html.twig' %}
+            {% include '@AcMarcheEdrAdmin/enfant/_presences.html.twig' %}
+            {% include '@AcMarcheEdrAdmin/enfant/_plaines.html.twig' %}
+
+        </div>
+        <div class="card-footer text-muted mt-3">
+            Crée le {{ enfant.createdAt | format_date('full') }} par {{ enfant.userAdd }}. Mis à jour
+            le {{ enfant.updatedAt | format_date('full') }}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/enfant/_delete_form.html.twig' %}
+
+{% endblock %}

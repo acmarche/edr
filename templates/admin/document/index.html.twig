@@ -1,0 +1,32 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste des documents</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Télécharger</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for document in documents %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_document_show', { 'id': document.id }) }}">
+                                {{ document.nom }}
+                            </a>
+                        </td>
+                        <td><a href="{{ vich_uploader_asset(document, 'file') }}">Télécharger</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

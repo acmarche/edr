@@ -1,0 +1,67 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Doublons</h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">
+                Les parents et enfants ci-dessous sont susceptibles d'être en encodés plusieurs fois.<br/>
+                Vérifier en faisant une recherche
+            </div>
+            <h4>Enfants</h4>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Nombre de fois</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for enfant in enfants %}
+                    {% if enfant.lignes > 1 %}
+                        <tr>
+                            <td>
+                                {{ enfant.nom }}  {{ enfant.prenom }}
+                            </td>
+                            <td>{{ enfant.lignes }}</td>
+                        </tr>
+                    {% endif %}
+                    {% else %}
+                    <tr>
+                        <td colspan="2">Aucun doublon trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <h4>Parents</h4>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Nombre de fois</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for tuteur in tuteurs %}
+                    {% if tuteur.lignes > 1 %}
+                        <tr>
+                            <td>
+                                    {{ tuteur.nom }}  {{ tuteur.prenom }}
+                            </td>
+                            <td>{{ tuteur.lignes }}</td>
+                        </tr>
+                    {% endif %}
+                    {% else %}
+                    <tr>
+                        <td colspan="2">Aucun doublon trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

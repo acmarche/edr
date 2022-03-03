@@ -1,0 +1,38 @@
+<h4 class="text-success">Les accueils suivants n'ont pas été facturés</h4>
+<hr>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Date</th>
+        <th>Enfant</th>
+        <th>Nb demi-heure</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for accueil in accueils %}
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" value="{{ accueil.id }}" name="accueils[]" checked="checked">
+                </label>
+            </td>
+            <td>
+                <a href="{{ path('edr_admin_accueil_show', {'id': accueil.id}) }}">
+                    {{ (accueil.dateJour | format_date('full'))|capitalize }}
+                </a>
+            </td>
+            <td>
+                {{ accueil.enfant }}
+            </td>
+            <td class="text-muted">
+                {{ accueil.heure }}
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">Aucun</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

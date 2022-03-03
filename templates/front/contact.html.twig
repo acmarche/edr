@@ -1,0 +1,45 @@
+{% extends '@AcMarcheEdr/front/layout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} -
+    {{ page.nom }}
+{% endblock %}
+
+{% block body_class %}homeBg{% endblock %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ page.nom }}</h3>
+        </div>
+
+        <div class="card-body">
+            {{ page.content|raw }}
+            <br/><br/>
+
+            {% include '@AcMarcheEdr/admin/organisation/_identite.html.twig' %}
+
+            <br/>
+            <h4 class="text-success">Envoyer nous un message</h4>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.nom) }}
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.texte) }}
+                </div>
+            </div>
+
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+                Envoyer
+            </button>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}

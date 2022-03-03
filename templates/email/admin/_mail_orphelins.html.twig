@@ -1,0 +1,20 @@
+{% extends '@email/default/notification/body.html.twig' %}
+{% block lead %}
+    <p class="lead">
+        {{ email.subject }}
+    </p>
+{% endblock %}
+
+{% block content %}
+    Les enfants suivants n'ont pas de parent attribué à leur fiche
+    <br/><br/>
+    {% for enfant in enfants %}
+        {{ enfant }}
+        <br/>
+        {{ absolute_url(path('edr_admin_enfant_show', {'id': enfant.id})) }}
+    {% endfor %}
+{% endblock %}
+
+{% block footer_content %}
+    {% include '@AcMarcheEdrAdmin/organisation/_signature.html.twig' %}
+{% endblock %}

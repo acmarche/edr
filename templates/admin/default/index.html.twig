@@ -1,0 +1,28 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Accès rapide</h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">Ecrivez le nom de l'enfant pour un accès rapide</div>
+
+            <div {{ stimulus_controller('autocomplete', {url: path('edr_admin_ajax_enfants')}) }}>
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                {{ form_row(form.nom) }}
+                <input type='hidden' name='enfant_id' data-autocomplete-target="hidden">
+                <ul class="list-group" data-autocomplete-target="results"></ul>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_front_home') }}">
+                <i class="fas fa-arrow-left"></i>
+                Retour au site public
+            </a>
+        </div>
+    </div>
+{% endblock %}

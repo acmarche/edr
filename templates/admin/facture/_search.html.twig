@@ -1,0 +1,19 @@
+{{ form_start(form, { 'attr': {'class': 'row row-cols-lg-auto g-1 align-items-center hidden-print'}}) }}
+{{ form_errors(form) }}
+
+{{ form_row(form.numero, {label_attr: {class: 'sr-only'} }) }}
+{{ form_row(form.tuteur, {label_attr: {class: 'sr-only'} }) }}
+{{ form_row(form.enfant, {label_attr: {class: 'sr-only'} }) }}
+{{ form_row(form.mois, {label_attr: {class: 'sr-only'} }) }}
+{{ form_row(form.communication, {label_attr: {class: 'sr-only'} }) }}
+<div class="col-12"></div>
+{{ form_row(form.ecole, {label_attr: {class: 'sr-only'} }) }}
+{{ form_row(form.plaine, {label_attr: {class: 'sr-only'} }) }}
+{{ form_row(form.paye, {label_attr: {class: 'sr-only'} }) }}
+{{ form_row(form.datePaiement, {label_attr: {class: 'sr-only'} }) }}
+<div class="col-12">
+    <button class="btn btn-primary ml-2 mb-3" type="submit"><i class="fas fa-search"></i> Rechercher</button>
+</div>
+{{ form_rest(form) }}
+{{ form_end(form) }}
+<br/>

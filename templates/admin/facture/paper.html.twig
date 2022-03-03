@@ -1,0 +1,51 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Télécharger les factures papier pour le mois de {{ month }}</h3>
+        </div>
+
+        <div class="card-body">
+            <p>
+                <a href="{{ path('edr_admin_facture_send_download_by_paper', {'month': month}) }}">
+                    <i class="fas fa-download"></i> Télécharger le pdf
+                </a>
+            </p>
+
+            <h4 class="text-success">Factures trouvées</h4>
+            <table class="table table-bordered table-hover mt-3">
+                <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Facturé le</th>
+                    <th>Payé le</th>
+                    <th>Communication</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for facture in factures %}
+                    <tr>
+                        <td>
+                            N° {{ facture.id }}
+                        </td>
+                        <td>
+                            <a href="{{ path('edr_admin_facture_show', { 'id': facture.id }) }}">
+                                {{ facture.factureLe | format_date('full') | title }}
+                            </a>
+                        </td>
+                        <td>{{ facture.payeLe ? facture.payeLe | format_date('full','full') }}</td>
+                        <td>{{ facture.communication }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">Aucune</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+<table class='table table-bordered table-hover'>
+    <tbody>
+    {% if is_granted('ROLE_MERCREDI_ADMIN') %}
+        <tr>
+            <th>Compte utilisateur</th>
+            <td>
+                {% for user in tuteur.users %}
+                    <a href="{{ path('edr_admin_user_show', {'id': user.id}) }}">{{ user }}</a>
+                {% else %}
+                    <a href="{{ path('edr_admin_user_new_from_tuteur', {'id': tuteur.id}) }}">Créer un compte</a>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+    <tr>
+        <th><span class="fas fa-phone"></span> Téléphone</th>
+        <td>{{ tuteur.telephone }}</td>
+    </tr>
+    <tr>
+        <th><span class="fas fa-phone"></span> Téléphone bureau</th>
+        <td>{{ tuteur.telephonebureau }}</td>
+    </tr>
+    <tr>
+        <th><span class="fas fa-mobile-alt"></span> Gsm</th>
+        <td>{{ tuteur.gsm }}</td>
+    </tr>
+    <tr>
+        <th><span class="far fa-envelope"></span> Email</th>
+        <td><a href='mailto:{{ tuteur.email }}'>{{ tuteur.email }}</a></td>
+    </tr>
+    <tr>
+        <th><span class="far fa-envelope"></span> Facture papier</th>
+        <td>{{ tuteur.facturePapier ? 'oui' : 'non' }}</td>
+    </tr>
+</table>

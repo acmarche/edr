@@ -1,0 +1,34 @@
+<h4 class="text-success">Les plaines suivantes n'ont pas été facturées</h4>
+<hr>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Date</th>
+        <th>Enfant</th>
+        <th>Nb demi-heure</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for plaine in plaines %}
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" value="{{ plaine.id }}" name="acceuils[]" checked="checked">
+                </label>
+            </td>
+            <td>
+                <a href="{{ path('edr_admin_accueil_show', {'uuid': accueil.uuid}) }}">
+                    {{ (accueil.dateJour | format_date('full'))|capitalize }}
+                </a>
+            </td>
+            <td>
+                {{ accueil.enfant }}
+            </td>
+            <td class="text-muted">
+                {{ accueil.matinSoir|join(',') }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

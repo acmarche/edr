@@ -1,0 +1,35 @@
+<div class="row gy-2 gx-1 align-items-center d-print-none mb-3">
+    <div class="col-auto">
+        {% include '@AcMarcheEdrAdmin/enfant/_btn_add_presence.html.twig' %}</div>
+    {% if edr_accueil == 'true' %}
+        <div class="col-auto">
+            <a href="{{ path('edr_admin_accueil_show_enfant', { 'id': enfant.id }) }}" role="button"
+               class="btn btn-primary"><i
+                        class="fas fa-list"></i> Ses accueils</a>
+        </div>
+    {% endif %}
+    <div class="col-auto"><a href="{{ path('edr_admin_enfant_edit', { 'id': enfant.id }) }}" role="button"
+                             class="btn btn-primary"><i
+                    class="far fa-edit"></i> Modifier</a>
+    </div>
+    <div class="col-auto"><a href="{{ path('edr_admin_sante_fiche_show', { 'id': enfant.id }) }}" role="button"
+                             class="btn btn-primary">
+            <i class="fas fa-heartbeat"></i> Fiche santé</a>
+    </div>
+    <div class="col-auto"><a id="add_presence"
+                             href="{{ path('edr_admin_note_new_enfant', { 'id' : enfant.id } ) }}"
+                             class="btn btn-primary" role="button">
+            <i class="fas fa-plus"></i> Ajouter une note
+        </a>
+    </div>
+    <div class="col-auto"><a href="{{ path('edr_admin_enfant_index') }}" class="btn btn-primary" role='button'><i
+                    class="fas fa-list"></i>
+            Retour à la Liste</a>
+    </div>
+    <div class="col-auto">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <i class="fas fa-trash"></i> Supprimer
+        </button>
+    </div>
+</div>
+<br/><br/>

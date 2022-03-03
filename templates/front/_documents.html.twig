@@ -1,0 +1,10 @@
+<br />
+<ul class="list-group">
+    {% for document in page.documents %}
+        <li class="list-group-item">
+            <a href="{{ path('edr_font_document_download', {'id': document.id}) }}">
+                {{ document }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

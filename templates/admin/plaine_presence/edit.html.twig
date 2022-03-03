@@ -1,0 +1,21 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Présence de {{ enfant}} à {{ plaine }} le {{ presence.jour.dateJour | format_date('full') }}</h3>
+        </div>
+        <div class="card-body">
+
+            {{ include('@AcMarcheEdrAdmin/plaine_presence/_form.html.twig') }}
+
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_admin_plaine_presence_show',{'plaine':plaine.id, 'enfant': enfant.id}) }}" class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

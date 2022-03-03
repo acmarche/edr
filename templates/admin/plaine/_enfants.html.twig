@@ -1,0 +1,29 @@
+<h4 class="text-success">Enfants inscrits</h4>
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Détails</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for enfant in enfants %}
+        <tr>
+            <td>
+                <a href="{{ path('edr_admin_enfant_show', { 'id': enfant.id }) }}">
+                    {{ enfant.nom }}
+                </a>
+            </td>
+            <td>{{ enfant.prenom }}</td>
+            <td>
+                <a href="{{ path('edr_admin_plaine_presence_show', {'plaine': plaine.id, 'enfant': enfant.id}) }}">Détails</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">Aucun</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

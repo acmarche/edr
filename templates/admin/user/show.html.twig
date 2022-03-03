@@ -1,0 +1,140 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ user }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/user/_actions.html.twig' %}
+
+            <br/>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Email</th>
+                    <td>
+                        <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Téléphone</th>
+                    <td>
+                        {{ user.telephone }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Rôles</th>
+                    <td>
+                        {{ user.niceRoles|join(', ') }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Parent(s) associé(s)</th>
+                    <td>
+                        <table class="table table-hover">
+
+                            {% for tuteur in user.tuteurs %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('edr_admin_tuteur_show', {'id': tuteur.id}) }}">{{ tuteur }}</a>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning btn-sm mb-2" data-bs-toggle="modal"
+                                                data-id="{{ tuteur.id }}" data-bs-target="#dissocierModalTuteur">
+                                            <i class="fas fa-unlink"></i> Dissocier
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Ecole(s) associée(s)</th>
+                    <td>
+                        <table class="table table-hover">
+
+                            {% for ecole in user.ecoles %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('edr_admin_ecole_show', {'id': ecole.id}) }}">{{ ecole }}</a>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning btn-sm mb-2" data-bs-toggle="modal"
+                                                data-id="{{ ecole.id }}" data-bs-target="#dissocierModalEcole">
+                                            <i class="fas fa-unlink"></i> Dissocier
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Animateur associé</th>
+                    <td>
+                        <table class="table table-hover">
+
+                            {% for animateur in user.animateurs %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('edr_admin_animateur_show', {'id': animateur.id}) }}">{{ animateur }}</a>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning btn-sm mb-2" data-bs-toggle="modal"
+                                                data-id="{{ animateur.id }}" data-bs-target="#dissocierModalAnimateur">
+                                            <i class="fas fa-unlink"></i> Dissocier
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <span class="text-muted">{{ user.roles|join(', ') }}</span>
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/user/_delete.html.twig' %}
+    {% include '@AcMarcheEdrAdmin/user/_dissocier_tuteur.html.twig' %}
+    {% include '@AcMarcheEdrAdmin/user/_dissocier_ecole.html.twig' %}
+    {% include '@AcMarcheEdrAdmin/user/_dissocier_animateur.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        document.querySelector('#dissocierModalTuteur').addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const tuteurId = button.dataset.id;
+            let modal = document.querySelector('#dissocierModalTuteur');
+            modal.querySelector('#modal-tuteur').value = tuteurId;
+        })
+    </script>
+    <script type="text/javascript">
+        document.querySelector('#dissocierModalEcole').addEventListener('show.bs.modal', function (event) {
+            let button = event.relatedTarget;
+            let ecoleId = button.dataset.id;
+            let modal = document.querySelector('#dissocierModalEcole');
+            modal.querySelector('#modal-ecole').val(ecoleId)
+        })
+    </script>
+    <script type="text/javascript">
+        document.querySelector('#dissocierModalAnimateur').addEventListener('show.bs.modal', function (event) {
+            let button = event.relatedTarget;
+            let animateurId = button.dataset.id;
+            let modal = document.querySelector('#dissocierModalAnimateur');
+            modal.querySelector('#modal-animateur').val(animateurId)
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Liste des plaines
+                <a class="btn btn-primary float-end" role="button"
+                   href="{{ path('edr_admin_plaine_new') }}"><i class="fas fa-plus"></i> Ajouter une plaine</a>
+            </h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/plaine/_search.html.twig' %}
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Nbre de jours</th>
+                    <th>Nbre d'enfants</th>
+                    <th>Inscription ouverte</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for plaine in plaines %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_plaine_show', { 'id': plaine.id }) }}">
+                                {{ plaine.nom }}
+                            </a>
+                        </td>
+                        <td>{{ plaine.jours|length }}</td>
+                        <td>{{ plaine.enfants|length }}</td>
+                        <td>{{ plaine.inscriptionOpen ? 'Oui' }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

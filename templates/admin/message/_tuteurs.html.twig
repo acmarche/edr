@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Gsm</th>
+        <th>Téléphone</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for tuteur in tuteurs %}
+        <tr>
+            <td>
+                <a href="{{ path('edr_admin_tuteur_show', {'id': tuteur.id}) }}">{{ tuteur }}</a>
+            </td>
+            <td>{{ tuteur.gsm }}</td>
+            <td>{{ tuteur.telephone }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

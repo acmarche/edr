@@ -1,0 +1,83 @@
+{% set action = app.request.attributes.get("_route") %}
+
+{% if is_granted('ROLE_MERCREDI_ADMIN') %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-plus"></i> Ajouter...</a>
+        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+            <li><a class="dropdown-item" href="{{ path('edr_admin_parent_enfant_new') }}">Un parent et
+                    enfant(s)</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_jour_new') }}">Un jour d'accueil</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_tuteur_new') }}">Un parent</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_animateur_new') }}">Un animateur</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_message_index') }}">Envoyer un message</a></li>
+        </ul>
+    </li>
+{% endif %}
+
+<li class="nav-item{% if action == 'edr_tuteur_index' %} active {% endif %}">
+    <a class="nav-link"
+       href="{{ path('edr_admin_tuteur_index') }}">Les parents</a>
+</li>
+
+<li class="nav-item{% if action == 'edr_enfant_index' %} active {% endif %}">
+    <a class="nav-link"
+       href="{{ path('edr_admin_enfant_index') }}">Les enfants</a>
+</li>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-bs-toggle="dropdown" aria-expanded="false">Présences...</a>
+    <ul class="dropdown-menu" aria-labelledby="dropdown02">
+        <li><a class="dropdown-item" href="{{ path('edr_admin_presence_index') }}">Listing</a></li>
+        <li><a class="dropdown-item" href="{{ path('edr_admin_presence_by_month') }}">Par mois</a></li>
+        {% if edr_accueil == 'true' %}
+            <li>
+                <a class="dropdown-item" href="{{ path('edr_admin_accueil_index') }}">Accueils des écoles</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{ path('edr_admin_presence_by_quarter') }}">Par trimestre</a>
+            </li>
+        {% endif %}
+    </ul>
+</li>
+
+<li class="nav-item{% if action == 'edr_admin_plaine_index' %} active {% endif %}">
+    <a class="nav-link"
+       href="{{ path('edr_admin_plaine_index') }}">Les plaines</a>
+</li>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-euro-sign"></i> Les factures</a>
+    <ul class="dropdown-menu" aria-labelledby="dropdown03">
+        <li><a class="dropdown-item" href="{{ path('edr_admin_facture_index') }}">Rechercher</a></li>
+        <li><a class="dropdown-item" href="{{ path('edr_admin_facture_new_month_all') }}">Générer</a></li>
+        <li><a class="dropdown-item" href="{{ path('edr_admin_facture_send_select_month') }}">Envoyer</a></li>
+        <li><a class="dropdown-item" href="{{ path('edr_admin_attestation') }}">Payés</a></li>
+    </ul>
+</li>
+
+{% if is_granted('ROLE_MERCREDI_ADMIN') %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-cog"></i> Paramètres...</a>
+        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+            <li><a class="dropdown-item" href="{{ path('edr_admin_jour_index') }}">Les jours d'accueil</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_user_index') }}">Les utilisateurs</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_page_index') }}">Les pages</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_note_index') }}">Les notes</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_animateur_index') }}">Les animateurs</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_ecole_index') }}">Les écoles</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_sante_question_index') }}">Questionnaire
+                    santé</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_reduction_index') }}">Les réductions</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_annee_scolaire_index') }}">Les années
+                    scolaires</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_groupe_scolaire_index') }}">Les groupes
+                    scolaires</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_organisation_index') }}">L'organisation</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_message_archive') }}">Messages envoyés</a></li>
+            <li><a class="dropdown-item" href="{{ path('edr_admin_checkup_index') }}">Checkup</a></li>
+        </ul>
+    </li>
+{% endif %}

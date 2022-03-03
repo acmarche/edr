@@ -1,0 +1,34 @@
+<table class="table table-bordered">
+    <tr>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Fiche santé</th>
+    </tr>
+    {% for enfant in enfants %}
+        <tr>
+            <td>
+                <a href="{{ path('edr_parent_enfant_show', {'uuid': enfant.uuid}) }}">
+                    {{ enfant }}
+                </a>
+            </td>
+            <td>
+                {% if enfant.isFicheSanteIsComplete == false %}
+                    <i class="fas fa-exclamation-triangle"
+                       title="Données non complètes"></i> <span class="text-danger">Non complète</span>
+                    <a href="{{ path('edr_parent_sante_fiche_edit', {'uuid': enfant.uuid}) }}"
+                       style="margin-left: 0.9em;">
+                        <i class="fas fa-edit" title="Modifier"></i> Remplir
+                    </a>
+                {% else %}
+                    <i class="fas fa-check" title="Complète"></i> <span class="text-success">Complète</span>
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">
+                Aucun enfant trouvé<br />
+                <a href="{{ path('edr_parent_enfant_new') }}">Ajouter un enfant</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>

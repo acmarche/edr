@@ -1,0 +1,14 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Nouveau groupe</h3>
+        </div>
+        <div class="card-body">
+
+           {{ include('@AcMarcheEdrAdmin/groupe_scolaire/_form.html.twig') }}
+
+        </div>
+    </div>
+{% endblock %}

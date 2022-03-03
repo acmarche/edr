@@ -1,0 +1,51 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>
+                Nouvelle facture pour <a
+                        href="{{ path('edr_admin_plaine_show', {'id': plaine.id}) }}">{{ plaine }}</a>
+                à <a href="{{ path('edr_admin_tuteur_show', {'id': tuteur.id}) }}">
+                    {{ tuteur }}</a>
+            </h3>
+        </div>
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Enfant</th>
+                    <th>Remarque</th>
+                    <th>Absent</th>
+                    <th>Réduction</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for presence in presences %}
+                    <tr>
+                        <td>
+                            {{ presence.jour.dateJour | format_date('full') }}
+                        </td>
+                        <td>{{ presence.enfant }}</td>
+                        <td>{{ presence.remarque }}</td>
+                        <td>{{ presence.absent|edr_absence_text }}</td>
+                        <td>{{ presence.reduction }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+                Générer la facture
+            </button>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}

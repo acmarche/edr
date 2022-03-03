@@ -1,0 +1,38 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="row">
+    <div class="col-6 col-md-4">
+        {{ form_row(form.nom) }}
+    </div>
+    <div class="col-6 col-md-4">
+        {{ form_row(form.prenom) }}
+    </div>
+    <div class="col-6 col-md-4">
+        {{ form_row(form.birthday) }}
+    </div>
+    <div class="col-6 col-md-4">
+        {{ form_row(form.sexe) }}
+    </div>
+    <div class="col-6 col-md-4">
+        {{ form_row(form.animateur) }}
+    </div>
+    <div class="col-6 col-md-4">
+        {{ form_row(form.annee_scolaire) }}
+    </div>
+    <div class="col-12 col-md-12">
+        {{ form_row(form.photoAutorisation) }}
+    </div>
+    <div class="col-12 col-md-12">
+        {{ form_row(form.remarque) }}
+    </div>
+    <div class="col-12 col-md-12">
+        {{ form_row(form.photo) }}
+    </div>
+</div>
+<br/>
+
+<button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+    Sauvegarder
+</button>
+
+{{ form_end(form) }}

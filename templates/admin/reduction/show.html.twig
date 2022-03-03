@@ -1,0 +1,32 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block title %}Enfant{% endblock %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ reduction }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/reduction/_actions.html.twig' %}
+
+            {% if reduction.pourcentage %}
+                {{ reduction.pourcentage| format_number }} %
+            {% endif %}
+
+            {% if reduction.forfait %}
+                {{ reduction.forfait | format_number }} €
+            {% endif %}
+
+            <br/>
+            <br/>
+
+            {{ reduction.remarque|nl2br }}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/reduction/_delete_form.html.twig' %}
+
+{% endblock %}

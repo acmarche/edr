@@ -1,0 +1,46 @@
+<table class="table table-bordered ">
+    <thead>
+    <tr>
+        <th>
+            <a href="{{ path('edr_ecole_accueil_inscriptions',
+                { 'id': ecole.id, 'year': previous.year, 'month': previous.month, 'heure': heure }) }}"
+               title="{{ previous.monthName|upper }} {{ previous.year }}">
+                <i class="fas fa-angle-double-left"></i>
+            </a>
+        </th>
+        <th colspan="5" class="text-center text-success text-capitalize">{{ date.monthName|upper }} {{ date.year }}</th>
+        <th>
+            <a href="{{ path('edr_ecole_accueil_inscriptions',
+                { 'id': ecole.id, 'year': next.year, 'month': next.month, 'heure': heure }) }}"
+               title="{{ next.monthName|upper }} {{ next.year }}">
+                <i class="fas fa-angle-double-right"></i>
+            </a>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for week in weeks %}
+        {% if week.startDate.weekOfYear == weekSelected %}
+            {% set class = "table-info" %}
+        {% else %}
+            {% set class = "" %}
+        {% endif %}
+        <tr class="{{ class }}">
+            <td>
+                <a href="{{ path('edr_ecole_accueil_inscriptions',
+                    { 'id': ecole.id, 'year':date.year, 'month': date.month, 'week': week.startDate.weekOfYear , 'heure': heure }) }}">
+                    S {{ week.startDate.weekOfYear }}
+                </a>
+            </td>
+            {% for day in week.day %}
+                {% if day|date('N') != 7 and day|date('N') != 6 %}
+                    <td>
+                        {{ day|date('d') }}
+                    </td>
+                {% endif %}
+            {% endfor %}
+            <td></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

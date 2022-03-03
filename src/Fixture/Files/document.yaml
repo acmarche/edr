@@ -1,0 +1,4 @@
+AcMarche\Edr\Entity\Document:
+  document_1:
+    nom: 'Règlement'
+    fileName: 'x.pdf'

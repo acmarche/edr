@@ -1,0 +1,29 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+
+        <h3 class="card-header">{{ document }}</h3>
+
+        <div class="card-body">
+
+
+            {% include '@AcMarcheEdrAdmin/document/_actions.html.twig' %}
+
+            {% if document.mimeType|u.containsAny('image') %}
+                <img src="{{ vich_uploader_asset(document, 'file') }}" alt="img"/>
+            {% else %}
+                <a href="{{ vich_uploader_asset(document,'file') }}">Télécharger</a>
+            {% endif %}
+
+        </div>
+        <div class="card-footer text-muted mt-3">
+            Crée le {{ document.createdAt | format_date('full') }}. Mis à jour
+            le {{ document.updatedAt | format_date('full') }}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/document/_delete_form.html.twig' %}
+
+{% endblock %}

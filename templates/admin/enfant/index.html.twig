@@ -1,0 +1,48 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste des enfants
+                {% if search %}
+                    <span class="badge bg-info">{{ enfants|length }}</span>
+                {% endif %}
+            </h3>
+        </div>
+
+        <div class="card-body">
+            {% include '@AcMarcheEdrAdmin/enfant/_search.html.twig' %}
+
+            {% if search and enfants|length > 0 %}
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Né le</th>
+                        <th>Ecole</th>
+                        <th>Année scolaire</th>
+                        <th>Parent(s)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for enfant in enfants %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('edr_admin_enfant_show', { 'id': enfant.id }) }}">
+                                    {{ enfant.nom }}
+                                </a>
+                            </td>
+                            <td>{{ enfant.prenom }}</td>
+                            <td>{{ enfant.birthday ? enfant.birthday|format_datetime('short', 'none') }}</td>
+                            <td>{{ enfant.ecole }}</td>
+                            <td>{{ enfant.anneeScolaire }}</td>
+                            <td>{{ enfant.relations|length }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

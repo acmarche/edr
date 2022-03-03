@@ -1,0 +1,59 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Attacher des présences à la facture du {{ facture.factureLe | format_date('full') }} de {{ tuteur }}</h3>
+        </div>
+        <div class="card-body">
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>Enfant</th>
+                    <th>Remarque</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for presence in presences %}
+                    <tr>
+                        <td>
+                            <label>
+                                <input type="checkbox" value="{{ presence.id }}" name="presences[]">
+                            </label>
+                        </td>
+                        <td>
+                            <a href="{{ path('edr_admin_presence_show', {'id': presence.id}) }}">
+                                {{ (presence.jour.dateJour | format_date('full'))|capitalize }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ presence.enfant }}
+                        </td>
+                        <td class="text-muted">
+                            {{ presence.remarque }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+                Attacher à la facture
+            </button>
+            {{ form_end(form) }}
+
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_admin_facture_show',{'id':facture.id}) }}" class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

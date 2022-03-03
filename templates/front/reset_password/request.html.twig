@@ -1,0 +1,32 @@
+{% extends '@AcMarcheEdr/front/layout.html.twig' %}
+
+{% block title %}Demande de nouveau mot de passe{% endblock %}
+
+{% block body %}
+
+    {% for flashError in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Rappel du mot de passe</h3>
+        </div>
+
+        <div class="alert alert-info m-2">
+            Indiquez votre adresse email et un mail vous sera envoyé pour changer votre mot de passe
+        </div>
+
+        <div class="card-body">
+            {{ form_start(requestForm) }}
+            {{ form_errors(requestForm) }}
+            {{ form_row(requestForm.email) }}
+
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+                Envoyer
+            </button>
+
+            {{ form_end(requestForm) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+<h4 class="text-success">Documents joints</h4>
+<ul class="list-group">
+    {% for document in page.documents %}
+        <li class="list-group-item">
+            <a href="{{ path('edr_admin_document_show', {'id': document.id}) }}">
+                {{ document }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

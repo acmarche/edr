@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="{{ absolute_url(asset('bundles/acmarcheedr/css/pdf.css')) }}" rel="stylesheet">
+    <link href="{{ bootcdn }}" rel="stylesheet">
+    <link href="{{ absolute_url(asset('bundles/acmarcheedr/css/print.css')) }}" rel="stylesheet" media="print">
+    <title>Fiche santé</title>
+    <style>
+        table {
+            page-break-inside: auto
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
+
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-footer-group
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+            {% include '@AcMarcheEdrParent/tuteur/_coordonnees.html.twig' %}
+
+            Toutes les factures de l'année
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+

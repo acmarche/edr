@@ -1,0 +1,10 @@
+<h4 class="text-success">Les jours</h4>
+<ul class="list-group list-group-horizontal mb-3">
+    {% for jour in plaine.jours %}
+    <li class="list-group-item">
+        <a href="{{ path('edr_admin_plaine_jour_show', {'id': jour.id}) }}">
+            {{ jour.dateJour|format_date('long') }}
+        </a>
+        {% endfor %}
+    </li>
+</ul>

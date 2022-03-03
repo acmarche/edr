@@ -1,0 +1,13 @@
+<a href="{{ path('edr_admin_plaine_presence_jours', { 'plaine': plaine.id,'enfant': enfant.id }) }}" role="button"
+   class="btn btn-primary"><i
+            class="far fa-calendar"></i> Changer ses dates</a>
+
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+    <i class="fas fa-trash"></i> Retirer l'enfant de la plaine
+</button>
+
+<a href="{{ path('edr_admin_plaine_show', {'id': plaine.id}) }}" class="btn btn-primary" role='button'><i
+            class="fas fa-list"></i>
+    Retour à la plaine</a>
+
+<br/><br/>

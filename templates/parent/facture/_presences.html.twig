@@ -1,0 +1,21 @@
+{% if facturePresences | length > 0 %}
+    <h4 class="text-success">Présences</h4>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Enfant</th>
+            <th>Date</th>
+            <th>Coût</th>
+        </tr>
+        </thead>
+        {% for presence in facturePresences %}
+            <tr>
+                <td>{{ presence.nom }} {{ presence.prenom }}</td>
+                <td>
+                    {{ presence.presenceDate | format_date('full') }}
+                </td>
+                <td>{{ presence.coutCalculated }} €</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

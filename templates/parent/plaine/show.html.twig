@@ -1,0 +1,73 @@
+{% extends '@AcMarcheEdrParent/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ plaine }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% if plaine.inscriptionOpen and resteEnfants == true %}
+                <br/>
+                <a href="{{ path('edr_parent_plaine_select_enfant') }}" role="button" class="btn btn-primary mb-3"><i
+                            class="fas fa-user-plus"></i> Inscrire mes enfants</a>
+
+            {% endif %}
+
+            {% if enfants|length > 0 %}
+                <h4 class="text-success">Vos enfants inscrits</h4>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Inscrits aux dates</th>
+                    </tr>
+                    {% for enfant in enfants %}
+                        <tr>
+                            <td>{{ enfant }}</td>
+                            <td>
+                                {% for inscription in inscriptions %}
+                                    {% if inscription.enfant.id == enfant.id %}
+                                        {{ inscription.jour.dateJour| date('d/m') }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="2">Aucun</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                {% if facture %}
+                    <a href="{{ path('edr_parent_facture_show', {'uuid': facture.uuid}) }}"
+                       class="btn btn-primary my-3">
+                        <i class="fas fa-arrow-up"></i> Consulter la facture
+                    </a>
+                {% else %}
+                    <div class="alert alert-warning" role="alert">
+                        <strong>
+                            La réception du paiment de la facture fera preuve de confirmation des inscriptions !
+                        </strong>
+                        <br/>
+                        <a href="{{ path('edr_parent_plaine_presence_confirmation') }}"
+                           class="btn btn-primary my-3">
+                            <i class="fas fa-arrow-right"></i> Procéder au paiement
+                        </a>
+                    </div>
+                {% endif %}
+
+            {% endif %}
+
+            <hr>
+            <h5 class="text-success">Dates de la plaine</h5>
+            <div class="text-muted">
+                {% for jour in plaine.jours %}
+                    {{ jour.dateJour|format_date('full')|title }},
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+

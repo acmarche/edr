@@ -1,0 +1,26 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+{% block head %}
+    {% if pause %}
+        <meta http-equiv="refresh"
+              content="3; url={{ absolute_url(path('edr_admin_facture_create_pdf_all', {'month': month, 'pause':0})) }}">
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Création des pdfs pour {{ month }}</h3>
+
+        <div class="card-body">
+            {% if finish == false %}
+                Les factures sont crées par lot de 30 <br/>
+                <p class="text-warning">Merci de ne pas fermer cette fenêtre</p>
+                Veuillez patienter<br><br>
+                Merci
+            {% else %}
+                Tous les pdf ont été créés.<br/>
+                <a href="{{ path('edr_admin_facture_sending_all', {'month': month, 'pause': 0}) }}">Cliquez ici pour envoyer les mails</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

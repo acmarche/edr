@@ -1,0 +1,27 @@
+<!-- Modal candidat -->
+<div class="modal fade" id="unlinkModal" tabindex="-1" role="dialog" aria-labelledby="unlinkModal"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="unlinkModal">Détacher l'enfant</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                Détacher du parent ?
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{{ path('edr_admin_relation_delete') }}">
+                    <input type="hidden" name="relationid" id="relationid">
+                    <input type="hidden" name="_token" id="relationtoken">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Annuler
+                    </button>
+                    <button type="submit" class="btn btn-danger">Détacher</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

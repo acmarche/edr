@@ -1,0 +1,30 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <h3 class="card-header">Détails du complément {{ factureComplement.dateLe|format_date('full') }}</h3>
+
+        <div class="card-body">
+            {% include '@AcMarcheEdrAdmin/facture_complement/_actions.html.twig' %}
+            <table class="table table-bordered">
+                <tr>
+                    <th>Raison</th>
+                    <td>{{ factureComplement.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Montant</th>
+                    <td>
+                        {% if factureComplement.pourcentage %}
+                            {{ factureComplement.pourcentage|format_number }} %
+                        {% endif %}
+
+                        {% if factureComplement.forfait %}
+                            {{ factureComplement.forfait|format_currency('eur') }}
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% include '@AcMarcheEdrAdmin/facture_complement/_delete_form.html.twig' %}
+{% endblock %}

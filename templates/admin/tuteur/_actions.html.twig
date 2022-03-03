@@ -1,0 +1,32 @@
+<a class="btn btn-primary" role="button" href="#"
+   data-bs-toggle="modal"
+   data-bs-target="#addEnfantModal">
+    <i class="fas fa-plus"></i> Ajouter un enfant
+</a>
+
+<a href="{{ path('edr_admin_tuteur_edit', { 'id': tuteur.id }) }}" role="button"
+   class="btn btn-primary"><i
+            class="far fa-edit"></i> Modifier</a>
+
+<a href="{{ path('edr_admin_facture_index_by_tuteur', {'id': tuteur.id}) }}" class="btn btn-primary" role='button'>
+    <i class="fas fa-euro-sign"></i>
+    Ses factures</a>
+
+<a href="{{ path('edr_admin_creance_index', {'id': tuteur.id}) }}" class="btn btn-primary" role='button'>
+    <i class="fas fa-hand-holding-usd"></i>
+    Ses créances</a>
+
+{% if edr_paiement %}
+    <a href="{{ path('edr_admin_paiement_index', {'id': tuteur.id}) }}" class="btn btn-primary" role='button'>
+        <i class="fas fa-dollar-sign"></i>
+        Ses paiements</a>
+{% endif %}
+
+<a href="{{ path('edr_admin_tuteur_index') }}" class="btn btn-primary" role='button'><i class="fas fa-list"></i>
+    Retour à la Liste</a>
+
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+    <i class="fas fa-trash"></i> Supprimer
+</button>
+
+<br/><br/>

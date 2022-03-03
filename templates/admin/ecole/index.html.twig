@@ -1,0 +1,38 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste des écoles</h3>
+        </div>
+        <div class="card-body">
+            <a class="btn btn-primary m-2" role="button"
+               href="{{ path('edr_admin_ecole_new') }}"><i class="fas fa-plus"></i> Ajouter une école</a>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Localité</th>
+                    <th>Téléphone</th>
+                    <th>Enfants</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ecole in ecoles %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_ecole_show', { 'id': ecole.id }) }}">
+                                {{ ecole.nom }}
+                            </a>
+                        </td>
+                        <td>{{ ecole.localite }}</td>
+                        <td>{{ ecole.telephone }}</td>
+                        <td>{{ ecole.enfants|length }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

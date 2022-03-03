@@ -1,0 +1,64 @@
+{% extends '@AcMarcheEdrParent/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Détail de la présence de {{ enfant }} du {{ presence.jour.dateJour | format_date('full') }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrParent/presence/_actions.html.twig' %}
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Facturé</th>
+                    <td>
+                        {% if facturePresence %}
+                            <a href="{{ path('edr_parent_facture_show', {'uuid': facturePresence.facture.uuid}) }}">
+                                {{ facturePresence.facture }}
+                            </a>
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Sous la garde de</th>
+                    <td>
+                        <a href="{{ path('edr_parent_tuteur_show', {'id': presence.tuteur.id}) }}">
+                            {{ presence.tuteur }}
+                        </a>
+                    </td>
+                </tr>
+                {% if presence.absent %}
+                <tr>
+                    <th>Absent</th>
+                    <td>{{ presence.absent|edr_absence_text }}</td>
+                </tr>
+                {% endif %}
+                {% if presence.reduction %}
+                <tr>
+                    <th>Réduction</th>
+                    <td>{{ presence.reduction }} </td>
+                </tr>
+                {% endif %}
+            </table>
+
+            {% if presence.remarque %}
+                <p class="text-muted">
+                    {{ presence.remarque | nl2br }}
+                </p>
+            {% endif %}
+            <br/>
+
+        </div>
+        <div class="card-footer text-muted mt-3">
+            Crée le {{ presence.createdAt | format_date('full') }} par {{ presence.userAdd }}. Mis à jour
+            le {{ presence.updatedAt | format_date('full') }}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrParent/presence/_delete_form.html.twig' %}
+
+{% endblock %}

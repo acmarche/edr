@@ -1,0 +1,56 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Détails de l'inscription de {{ enfant }} à {{ plaine }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/plaine_presence/_actions.html.twig' %}
+
+            <p>Coût: {{ cout|format_currency('euro') }}</p>
+
+            <h4 class="text-success">Inscrits aux dates</h4>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Tuteur</th>
+                    <th>Remarque</th>
+                    <th>Absent</th>
+                    <th>Réduction</th>
+                    <th>Editer</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for presence in presences %}
+                    <tr>
+                        <td>
+                            {{ presence.jour.dateJour | format_date('full') }}
+                        </td>
+                        <td>
+                            <a href="{{ path('edr_admin_tuteur_show', {'id': presence.tuteur.id}) }}">
+                                {{ presence.tuteur }}
+                            </a>
+                        </td>
+                        <td>{{ presence.remarque }}</td>
+                        <td>{{ presence.absent|edr_absence_text }}</td>
+                        <td>{{ presence.reduction }}</td>
+                        <td>
+                            <a href="{{ path('edr_admin_plaine_presence_edit', {'plaine': plaine.id,'presence': presence.id}) }}"
+                               title="Modifier">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/plaine_presence/_delete_form.html.twig' %}
+
+{% endblock %}

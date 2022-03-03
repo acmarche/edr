@@ -1,0 +1,54 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste des présences par trimestre</h3>
+        </div>
+
+        <div class="card-body">
+            {% include '@AcMarcheEdrAdmin/accueil/_search_quarter.html.twig' %}
+
+            <div class="alert alert-info">
+                Ne sont repris que les accueils des écoles, le soir
+            </div>
+
+            {% if search %}
+                <h4>Par age</h4>
+                Nombre d'enfants différents qui ont été présents dans le lieu d'accueil au moins un jour durant le trimestre
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Maternelle</th>
+                        <th>Primaire</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td>{{ ages.mat }}</td>
+                        <td>{{ ages.prim }}</td>
+                        <td>{{ ages.all }}</td>
+                    </tr>
+                </table>
+
+                {% for month, row in data %}
+                    <h4>{{ month|date('m-Y') }}</h4>
+                    <table class="table table-bordered">
+                        <tr>
+                            {% for day, total in row.days %}
+                                <td>
+                                    {{ day|date('d D') }}<br>
+                                    <strong>{{ total }}</strong>
+                                </td>
+                            {% endfor %}
+                            <td>
+                                <strong>Total du mois</strong><br>
+                                {{ row.total }}
+                            </td>
+                        </tr>
+                    </table>
+
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

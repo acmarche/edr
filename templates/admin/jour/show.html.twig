@@ -1,0 +1,32 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3>{{ (jour.dateJour|format_date('full'))|title }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/jour/_actions.html.twig' %}
+
+            {% if jour.pedagogique %}
+                <div class="alert alert-info">
+                    Journée pédagogique
+                    <br />
+                    {{ jour.ecoles | join(', ') }}
+                </div>
+            {% endif %}
+
+            <br/>
+            {{ tarifs|raw }}
+
+            {{ jour.remarque|nl2br }}
+
+            {% include '@AcMarcheEdrAdmin/jour/_presences.html.twig' %}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/jour/_delete_form.html.twig' %}
+
+{% endblock %}

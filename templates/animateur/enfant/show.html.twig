@@ -1,0 +1,22 @@
+{% extends '@AcMarcheEdrAnimateur/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-2">
+        <h3 class="card-header">{{ enfant }}</h3>
+        <div class="card-body">
+            {% include '@AcMarcheEdrAnimateur/enfant/_actions.html.twig' %}
+            <div class="d-flex">
+                <div class="flex-shrink-0">
+                    {% include '@AcMarcheEdr/commun/enfant/_photo.html.twig' %}
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    {% include '@AcMarcheEdr/commun/enfant/_identite.html.twig' %}
+                </div>
+            </div>
+            <br/>
+            {% include '@AcMarcheEdr/animateur/tuteur/_list.html.twig' %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,158 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <td>
+                    <img height="90px"
+                         src="{{ absolute_url(asset('bundles/acmarcheedr/images/logo-hotton.png')) }}"
+                         alt="logo hotton" class="float-start me-3">
+                    Administration communale de Hotton<br>
+                    Rue des Ecoles, 50
+                    6990 Hotton<br>
+                    Contact: Samantha Herman<br>
+                    Mail: cartourba@hotton.be<br>
+                    <br clear="all">
+                    Facture numéro {{ facture.id }}<br/>
+                    Communication: {{ facture.communication }}
+                </td>
+                <td class="me-4 float-end">
+                    Hotton, le {{ facture.createdAt|format_date('full') }}
+                    <br><br>
+                    {{ facture.nom }} {{ facture.prenom }}<br>
+                    {{ facture.rue }} <br/>
+                    {{ facture.codepostal }} {{ facture.localite }}
+                </td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <div>
+                {{ organisation.nom }}
+                <strong>Mois {{ facture.mois }}</strong>
+            </div>
+            <br/>
+            <div>Implantation scolaire {{ facture.ecoles }}</div>
+        </div>
+        <p class="mt-5">
+            Nous vous invitons à verser le montant mentionné ci-dessous dans les 30 jours.
+            <br/><br/>
+            Le détail est consultable, en ligne, via votre compte ATL (www.atl-hotton.be).
+            <br/><br/>
+            Toute réclamation à l’encontre de cette facture doit être adressée par écrit, <br/>à l’attention du
+            Collège
+            Communal (rue des Ecoles 50 à 6990 HOTTON ou cartourba@hotton.be) <br/>dans les 15 jours calendrier qui
+            suivent la date d’expiration de la facture.
+            <br/><br/>
+            En cas de non-paiement, les frais de rappel s’élèveront à 1,00€ par facture mensuelle de retard et
+            10,00€
+            en cas de rappel par voie recommandée.
+            <br/><br/>
+            <span class="text-muted">
+                    Texte de référence : « Règlement redevance sur les accueils extrascolaire » adopté par le conseil en sa
+                séance du 27.08.2021
+                </span>
+            <br>
+        </p>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Enfant(s)</th>
+                {% for row in data.enfants %}
+                    <th>{{ row.enfant }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% if countAccueils > 0 %}
+                <tr>
+                    <td>
+                        Accueils matin<br/>
+                        ≤ 7h29=0,50 € &7h30 -
+                        8h = 0,50€
+                    </td>
+                    {% for row in data.enfants %}
+                        <td>{{ row.accueils.Matin.nb }} demi-heure(s)</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>
+                        Accueils soir <br/>
+                        ≤ 17h = 0,50 € & Après
+                        17h = 0,50 €/demi-heure
+                    </td>
+                    {% for row in data.enfants %}
+                        <td>{{ row.accueils.Soir.nb }} demi-heure(s)</td>
+                    {% endfor %}
+                </tr>
+            {% endif %}
+            {% if countPresences > 0 %}
+                <tr>
+                    <td>
+                        Journée pédagogique<br/>
+                        1 journée = 5,00 € & 1/2 journée = 2,50 €
+                    </td>
+                    {% for row in data.enfants %}
+                        <td>{{ row.peda }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>
+                        Edrs récréatifs<br/>
+                        5 €, 3 €, 1 € (selon le nbre d'enfants)
+                    </td>
+                    {% for row in data.enfants %}
+                        <td>{{ row.edr }}</td>
+                    {% endfor %}
+                </tr>
+            {% endif %}
+            <tr>
+                <th>
+                    Total par enfant
+                </th>
+                {% for row in data.enfants %}
+                    <td class="text-end">{{ row.cout | format_currency('eur') }}</td>
+                {% endfor %}
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Total à payer</th>
+                <td class="text-end" colspan="{{ data.enfants|length }}">
+                    <strong>{{ data.cout | format_currency('eur') }}</strong>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+
+        <p class="text-center">
+            Recevez nos salutations distinguées,
+        </p>
+        <table class="table table-bordered text-center">
+            <tr>
+                <td>
+                    La Directrice Générale,<br>
+                    Marie-France DEWEZ
+                </td>
+                <td>
+                    Le Bourgmestre,<br>
+                    Jacques CHAPLIER
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="{{ absolute_url(asset('bundles/acmarcheedr/images/signatures/dewez.jpg')) }}"
+                         height="70" alt="signature"/>
+                </td>
+                <td>
+                    <img src="{{ absolute_url(asset('bundles/acmarcheedr/images/signatures/chaplier.jpg')) }}"
+                         height="70" alt="signature"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-footer text-success mt-3">
+        A payer: {{ data.cout | format_currency('eur') }}<br>
+        IBAN: B E 2 3 0 9 1 0 1 9 6 1 9 6 9 1<br>
+        BIC: G K C C B E B B<br>
+        Communication: {{ facture.communication }}
+    </div>
+</div>

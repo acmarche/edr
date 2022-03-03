@@ -1,0 +1,20 @@
+{% extends '@AcMarcheEdr/front/layout.html.twig' %}
+
+{% block title %}Error Edr{% endblock %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>L'application a rencontré un problème technique</h3>
+        </div>
+        <div class="card-body">
+            Nous allons résoudre ce problème dès que possible
+            <br/> <br/> <a href="{{ path('edr_front_home') }}">Retour à l'accueil</a>
+        </div>
+        <div class="card-footer">
+            {{ status_code }}: {{ status_text }} {{ exception.getMessage }}
+        </div>
+    </div>
+
+{% endblock %}

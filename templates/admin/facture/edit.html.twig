@@ -1,0 +1,19 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Facture n° {{ facture.id }}</h3>
+        </div>
+        <div class="card-body">
+            {% include '@AcMarcheEdrAdmin/facture/_form.html.twig' %}
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_admin_facture_show',{'id':facture.id}) }}" class="mt-4">
+                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

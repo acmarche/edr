@@ -1,0 +1,55 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Factures</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Parent</th>
+                    <th>Présences
+                        <br/>
+                        <table class="table">
+                            <tr>
+                                <th>Date</th>
+                                <th>Ordre</th>
+                                <th>Prix</th>
+                            </tr>
+                        </table>
+                    </th>
+                    <th>Montant</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in data %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_facture_show', {'id': row.facture.id}) }}">{{ row.tuteur }}</a>
+                        </td>
+                        <td>
+                            <table class="table">
+                                {% for presence in row.presences %}
+                                    <tr>
+                                        <td>{{ presence.object.jour }}</td>
+                                        <td>{{ presence.ordre }}</td>
+                                        <td>{{ presence.prix }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                        <td>
+                            {% if row.montant is defined %}
+                                {{ row.montant }} €
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

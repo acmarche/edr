@@ -1,0 +1,7 @@
+{% for enfant in enfants %}
+    <li class="list-group-item" role="option" data-autocomplete-valu22e="{{ enfant.id }}">
+        <a href="{{ path('edr_admin_enfant_show', {'id': enfant.id}) }}">
+            {{ enfant.prenom }} {{ enfant.nom }} <span class="text-muted">({{ enfant.birthday | date('m-Y') }})</span>
+        </a>
+    </li>
+{% endfor %}

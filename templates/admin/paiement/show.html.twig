@@ -1,0 +1,44 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+
+        <h3 class="card-header">
+            Paiements de <a href="{{ path('edr_admin_tuteur_show', {'id': tuteur.id}) }}">{{ tuteur }}</a>
+        </h3>
+
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Date du paiement</th>
+                    <th>Montant</th>
+                    <th>Enfant</th>
+                    <th>Mode</th>
+                    <th>Type</th>
+                    <th>Remarque</th>
+                    <th>Cloturé</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for paiement in paiements %}
+                    <tr>
+                        <td>{{ paiement.datePaiement ? paiement.datePaiement|format_date('full') }}</td>
+                        <td>{{ paiement.montant|format_currency('euro') }}</td>
+                        <td>{{ paiement.enfant }}</td>
+                        <td>{{ paiement.modePaiement }}</td>
+                        <td>{{ paiement.typePaiement }}</td>
+                        <td>{{ paiement.remarques }}</td>
+                        <td>{{ paiement.cloture }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer text-muted mt-3">
+
+        </div>
+    </div>
+
+{% endblock %}

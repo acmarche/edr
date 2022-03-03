@@ -1,0 +1,62 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste des présences par mois {{ month ? month }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/presence/_search_by_month.html.twig' %}
+
+            {# https://fullcalendar.io/ ?? #}
+
+            {% if search %}
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Né le</th>
+                        {% for jourListing in listingPresences.joursListing %}
+                            <th class="text-center">{{ jourListing.jour|format_date('short') }}</th>
+                        {% endfor %}
+                        <th class="text-center">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for enfant in listingPresences.enfants %}
+                        {% set nbPresences = 0 %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('edr_admin_enfant_show', { 'id': enfant.id }) }}">
+                                    {{ enfant }}
+                                </a>
+                            </td>
+                            <td>{{ enfant.birthday ? enfant.birthday|format_datetime('short', 'none') }}</td>
+                            {% for jourListing in listingPresences.joursListing %}
+                                <td class="text-center">
+                                    {% if jourListing.hasEnfant(enfant) %}
+                                        {% set nbPresences = nbPresences + 1 %}
+                                        <img src="{{ asset('bundles/acmarcheedr/images/tick_16.png') }}" alt="ok">
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                            <td class="text-center">{{ nbPresences }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>{{ listingPresences.enfants|length }} enfants</th>
+                        <td></td>
+                        {% for jourListing in listingPresences.joursListing %}
+                            <td class="text-center">{{ jourListing.enfants|length }} </td>
+                        {% endfor %}
+                        <td class="text-center">{{ listingPresences.presences | length }}</td>
+                    </tr>
+                    </tfoot>
+                </table>
+            {% endif %} </div>
+    </div>
+{% endblock %}

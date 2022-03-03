@@ -1,0 +1,120 @@
+<table class="table table-bordered">
+    <tr>
+        <td>
+            {% if organisation and organisation.photoName %}
+                <img class="img-thumbnail"
+                     src="{{ vich_uploader_asset(organisation, 'photo') | imagine_filter('edr_thumb') }}"
+                     alt="img"/>
+            {% endif %}
+        </td>
+        <td>
+            <h2 class="text-warning">Fiche médicale individuelle</h2>
+            <span class="pull-right">Maj le {{ sante_fiche.updatedAt | date('d-m-Y') }}</span>
+            {% if is_complete == false %}
+                <i class="fas fa-ban"></i><span class="text-danger"><strong>Fiche non complète!</strong></span>
+            {% else %}
+                <i class="far fa-smile"></i><span class="text-success"> Fiche complète</span>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+<h3 class="text-warning">Identité de l'enfant</h3>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Nom</th>
+        <td>{{ enfant.nom }}</td>
+        <th>Prénom</th>
+        <td>{{ enfant.prenom }}</td>
+    </tr>
+    <tr>
+        <th>Né le</th>
+        <td>{{ enfant.birthday | date('d-m-Y') }}</td>
+        <th>Numéro national</th>
+        <td>{{ enfant.registreNational }}</td>
+    </tr>
+    <tr>
+        <th>Ecole</th>
+        <td>{{ enfant.ecole }}</td>
+        <th>Année scolaire</th>
+        <td>{{ enfant.anneescolaire }}</td>
+    </tr>
+    <tr>
+        <th></th>
+        <td></td>
+        <th>Poids</th>
+        <td>{{ enfant.poids }} kg</td>
+    </tr>
+</table>
+
+<table class="table table-bordered">
+    <tr>
+        <td>
+            <h4 class="text-warning">Personne(s) à joindre en cas d'urgence</h4>
+            {{ sante_fiche.personneUrgence | nl2br }}
+            <h4 class="text-warning">Médecin traitant</h4>
+            {{ sante_fiche.medecinNom }}
+            {{ sante_fiche.medecinTelephone }}
+        </td>
+        <td>
+            <h4 class="text-warning">Personnes autorisées à reprendre l’enfant dans les accueils</h4>
+            <ul class="list-group">
+                {% for accompagnateur in sante_fiche.accompagnateurs %}
+                    <li class="list-group-item">{{ accompagnateur }}</li>
+                {% else %}
+                    <li class="list-group-item list-group-item-danger">Aucune personne encodée !</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+</table>
+{% if sante_fiche.remarque %}
+    <br/>
+    {{ sante_fiche.remarque | nl2br }}
+    <br/>
+{% endif %}
+
+<h3 class="text-warning">Informations médicales confidentielles</h3>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Question</th>
+        <th>Non</th>
+        <th>Oui</th>
+        <th>Remarque</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for question in questions %}
+        <tr>
+            <td>{{ question.nom }}</td>
+            <td>
+                {% if question.reponseTxt is null %}
+                    -
+                {% elseif question.reponseTxt == 0 %}
+                    <span class="text-success font-weight-bolder">Non</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if question.reponseTxt is null %}
+                    -
+                {% elseif question.reponseTxt == 1 %}
+                    <span class="text-success font-weight-bolder">Oui</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if question.reponseTxt is null %}
+                    <img alt="Ko" src="{{ absolute_url(asset('bundles/acmarcheedr/images/exclamation.png')) }}"
+                         height="50px">
+                    <span class="text-danger">Non répondu</span>
+                {% endif %}
+                {{ question.remarque }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="text-center text-muted">
+    {% include '@AcMarcheEdrAdmin/organisation/_identite.html.twig' %}
+</div>

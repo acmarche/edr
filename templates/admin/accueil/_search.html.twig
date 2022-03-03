@@ -1,0 +1,22 @@
+<div class="d-print-none">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="row">
+        <div class="col-3">
+            {{ form_row(form.date_jour) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.heure) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.ecole) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.groupEcole) }}
+        </div>
+    </div>
+    <button class="btn btn-primary mt-2 mr-1 mb-2" type="submit"><i class="fas fa-search"></i>
+        Rechercher
+    </button>
+    {{ form_end(form) }}
+</div>

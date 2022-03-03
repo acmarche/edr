@@ -1,0 +1,6 @@
+<h4 class="text-success">Travails les jours suivants</h4>
+<ul class="list-group">
+    {% for jour in animateur.jours %}
+        <li class="list-group-item">{{ jour.dateJour|format_date('full') }}{% if jour.isPedagogique %}Pédagogique: {{ jour.ecoles|join(', ')}} {% endif %}</li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,60 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="row">
+    <div class="col-6">
+        {{ form_row(form.nom) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.prenom) }}
+    </div>
+
+    <div class="col-6">
+        {{ form_row(form.birthday) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.ordre) }}
+    </div>
+
+    <div class="col-6">
+        {{ form_row(form.registre_national) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.poids) }}
+    </div>
+
+    <div class="col-6">
+        {{ form_row(form.sexe) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.ecole) }}
+    </div>
+
+    <div class="col-6">
+        {{ form_row(form.annee_scolaire) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.groupe_scolaire) }}
+    </div>
+
+    <div class="col-6">
+        {{ form_row(form.photoAutorisation) }}
+        {{ form_row(form.accueilEcole) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.remarque) }}
+    </div>
+
+    <div class="col-6">
+        {{ form_row(form.photo) }}
+    </div>
+    <div class="col-6">
+        {{ form_row(form.archived) }}
+    </div>
+</div>
+<br/>
+
+<button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+    Sauvegarder
+</button>
+
+{{ form_end(form) }}

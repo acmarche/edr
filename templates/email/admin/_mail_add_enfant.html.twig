@@ -1,0 +1,25 @@
+{% extends '@email/default/notification/body.html.twig' %}
+{% block lead %}
+    <p class="lead">
+        {{ email.subject }}
+    </p>
+{% endblock %}
+
+{% block content %}
+{{ user.username }} a ajouté un enfant
+<br /><br />
+Nom: {{ enfant.nom }}<br />
+Prénom: {{ enfant.prenom }}<br />
+<br /><br />
+Vous pouvez consulter la fiche de l'enfant :{{ absolute_url(path('edr_admin_enfant_show', {'id': enfant.id})) }}
+{% endblock %}
+
+{% block action %}
+    <spacer size="16"></spacer>
+    <button href="{{ absolute_url(path('edr_admin_user_show', {'id': user.id})) }}">Gestion de l'utilisateur
+    </button>
+{% endblock %}
+
+{% block footer_content %}
+    {% include '@AcMarcheEdrAdmin/organisation/_signature.html.twig' %}
+{% endblock %}

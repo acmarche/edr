@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="{{ bootcdn }}" rel="stylesheet">
+    <link href="{{ bootcdn }}" rel="stylesheet">
+    <link href="{{ absolute_url(asset('bundles/acmarcheedr/css/print.css')) }}" rel="stylesheet" media="print">
+    <title>Facture</title>
+    <style type="text/css">
+        table {
+            page-break-inside: auto
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
+
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-footer-group
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Détails de la facture {{ facture.id }}</h3>
+        </div>
+        <div class="card-body">
+            {% include '@AcMarcheEdrAdmin/facture/_facture.html.twig' %}
+        </div>
+        <div class="card-footer text-muted mt-3">
+            Crée le {{ facture.createdAt | format_date('full') }} par {{ facture.userAdd }}. Mis à jour
+            le {{ facture.updatedAt | format_date('full') }}
+        </div>
+    </div>
+</div>
+</body>

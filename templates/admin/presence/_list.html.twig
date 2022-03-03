@@ -1,0 +1,33 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Tuteur</th>
+        <th>Remarque</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for presence in presences %}
+        <tr>
+            <td>
+                <a href="{{ path('edr_admin_presence_show', {'id': presence.id}) }}">
+                    {{ (presence.jour.dateJour | format_date('full'))|capitalize }}
+                    {% if presence.jour.pedagogique %}
+                        (P)
+                    {% endif %}
+                </a>
+            </td>
+            <td>
+                {{ presence.tuteur }}
+            </td>
+            <td class="text-muted">
+                {{ presence.remarque }}
+
+                {% if presence.jour.plaine %}
+                    {{ presence.jour.plaine }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

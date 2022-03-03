@@ -1,0 +1,18 @@
+{% extends '@AcMarcheEdrParent/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+
+        <div class="card-header">
+            <h3 class="w-50 d-inline">Liste de mes enfants</h3>
+            <a href="{{ path('edr_parent_enfant_new') }}" role="button" class="btn btn-sm btn-primary float-end mt-2">
+                <i class="fa fa-plus"></i> Ajouter un enfant
+            </a>
+        </div>
+
+        <div class="card-body">
+            {% include '@AcMarcheEdrParent/enfant/_list.html.twig' %}
+        </div>
+
+    </div>
+{% endblock %}

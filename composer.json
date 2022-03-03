@@ -1,0 +1,29 @@
+{
+  "name": "acmarche/edr",
+  "description": "Gestion des gardes des edr et jours fériés, des petites plaines(carnaval, paques...)",
+  "homepage": "https://github.com/acmarche/edr.git",
+  "license": "MIT",
+  "type": "symfony-bundle",
+  "authors": [
+    {
+      "name": "Jean-François Sénéchal",
+      "email": "informatique@marche.be",
+      "homepage": "http://cst.marche.be",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "AcMarche\\Edr\\": "src/"
+    }
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": "true",
+      "endpoint": "https://github.com/jfsenechal/recipes/edr"
+    }
+  }
+}

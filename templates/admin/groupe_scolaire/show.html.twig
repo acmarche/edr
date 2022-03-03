@@ -1,0 +1,46 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ groupe_scolaire }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/groupe_scolaire/_actions.html.twig' %}
+            <div class="alert alert-info">
+                Les âges sont utilisés pour les plaines.<br/>
+                Les années scolaires pour les accueils
+            </div>
+
+            {% if groupe_scolaire.remarque %}
+                <p class="text-muted">
+                    {{ groupe_scolaire.remarque | nl2br }}
+                </p>
+            {% endif %}
+            <br/>
+            <table class='table table-bordered table-hover table-condensed'>
+                <tbody>
+                <tr>
+                    <th><span class="fas fa-magic"></span> Age minimum</th>
+                    <td>{{ groupe_scolaire.ageMinimum }} ans</td>
+                </tr>
+                <tr>
+                    <th><span class="fas fa-mobile-alt"></span> Age maximum</th>
+                    <td>{{ groupe_scolaire.ageMaximum }} ans</td>
+                </tr>
+                <tr>
+                    <th><span class="fas fa-magic"></span> Plaine ?</th>
+                    <td>{{ groupe_scolaire.isPlaine ? 'Oui' : 'non' }}</td>
+                </tr>
+            </table>
+
+            <h4 class="text-success">Années scolaires</h4>
+            {{ groupe_scolaire.anneesScolaires  | join(',') }}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/groupe_scolaire/_delete_form.html.twig' %}
+
+{% endblock %}

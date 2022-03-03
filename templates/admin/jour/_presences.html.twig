@@ -1,0 +1,11 @@
+<h4 class="text-success mt-2">Enfants inscrits ({{ presences|length }})</h4>
+<ul class="list-group">
+    {% for presence in presences %}
+        {% set enfant = presence.enfant %}
+        <li class="list-group-item">
+            <a href="{{ path('edr_admin_enfant_show', {'id': enfant.id}) }}">{{ enfant }}</a>
+        </li>
+    {% else %}
+        <li class="list-group-item">Aucune inscription</li>
+    {% endfor %}
+</ul>

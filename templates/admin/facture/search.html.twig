@@ -1,0 +1,80 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Rechercher des factures {% if search %} <span
+                        class="badge bg-info">{{ factures|length }}</span> {% endif %}</h3>
+        </div>
+
+        <div class="card-body">
+
+            {% include '@AcMarcheEdr/admin/facture/_search.html.twig' %}
+
+            {% if search %}
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Numéro</th>
+                        <th>Mois</th>
+                        <th>Facturé à</th>
+                        <th>Enfants</th>
+                        <th>Payé le</th>
+                        <th>Envoyé le</th>
+                        <th>Communication</th>
+                        <th>Montant</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for facture in factures %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('edr_admin_facture_show', { 'id': facture.id }) }}">
+                                    N° {{ facture.id }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ facture.mois }}
+                            </td>
+                            <td>
+                                <a href="{{ path('edr_admin_tuteur_show', { 'id': facture.tuteur.id }) }}">
+                                    {{ facture.tuteur }}
+                                </a>
+                            </td>
+                            <td>{{ facture.enfants|join(',') }}</td>
+                            <td>
+                                {{ facture.payeLe ? facture.payeLe | format_date('full') }}
+                            </td>
+                            <td>
+                                {{ facture.envoyeLe ? facture.envoyeLe | format_date('medium') }}
+                            </td>
+                            <td>
+                                {{ facture.communication }}
+                            </td>
+                            <td>
+                                {% if facture.factureDetailDto %}
+                                    {{ facture.factureDetailDto.total|format_currency('euro') }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">
+                                Aucune facture trouvée
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="7"><strong>Total des factures</strong></th>
+                        <td>{{ total|format_currency('euro') }}</td>
+                    </tr>
+                    </tfoot>
+                </table>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

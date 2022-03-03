@@ -1,0 +1,61 @@
+{% extends '@AcMarcheEdrEcole/layout.html.twig' %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{% if search %} {{ accueils|length }} {% endif %} Accueils par date</h3>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.date_jour) }}
+                </div>
+                <div class="col-4">
+                    {{ form_row(form.heure) }}
+                </div>
+            </div>
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="fas fa-search"></i>
+                Rechercher
+            </button>
+            {{ form_end(form) }}
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <td>Enfant</td>
+                    <td>Date</td>
+                    <td>Heure</td>
+                    <td>Parent</td>
+                    <td>Remarque</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for accueil in accueils %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_ecole_enfant_show', {'uuid': accueil.enfant.uuid}) }}">
+                                {{ accueil.enfant }}
+                            </a>
+                        </td>
+                        <td>{{ accueil.dateJour| format_date('full') }}</td>
+                        <td>{{ accueil.heure }}</td>
+                        <td>{{ accueil.tuteur }}</td>
+                        <td>{{ accueil.remarque }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Rien trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+{% endblock %}
+

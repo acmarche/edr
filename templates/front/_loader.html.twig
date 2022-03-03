@@ -1,0 +1,14 @@
+<!--<div class="loader"></div>
+<div class="loader" style="--b: 15px;--c:blue;width:120px;--n:8"></div>
+<div class="loader" style="--b: 20px;--c:#000;width:80px;--n:15;--g:7deg"></div>
+-->
+<div class="loader d-none" id="loader" style="--b: 5px;--c:green;width:80px;--n:6;--g:20deg"></div>
+
+<script>
+    let btn = document.querySelector('#btnload');
+    btn.addEventListener('click', () => {
+        console.log('iiiii');
+        let loader = document.querySelector('#loader');
+        loader.classList.toggle('d-none');
+    });
+</script>

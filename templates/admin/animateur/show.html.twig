@@ -1,0 +1,63 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+
+        <h3 class="card-header">{{ animateur }}
+            <div class="float-end">
+                {% include '@AcMarcheEdr/commun/_sexe.html.twig' with {'entity':animateur} %}
+                {% include '@AcMarcheEdr/commun/_archive.html.twig' with {'entity':animateur} %}
+            </div>
+        </h3>
+
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/animateur/_actions.html.twig' %}
+
+            <i class="fas fa-map-marked-alt"></i>
+            {{ animateur.rue }} <br/>
+            {{ animateur.codepostal }} {{ animateur.localite }}
+
+            <br/>
+
+            <table class='table table-bordered table-hover'>
+                <tbody>
+                <tr>
+                    <th><span class="fas fa-phone"></span> Téléphone</th>
+                    <td>{{ animateur.telephone }}</td>
+                </tr>
+                <tr>
+                    <th><span class="fas fa-phone"></span> Téléphone bureau</th>
+                    <td>{{ animateur.telephonebureau }}</td>
+                </tr>
+                <tr>
+                    <th><span class="fas fa-mobile-alt"></span> Gsm</th>
+                    <td>{{ animateur.gsm }}</td>
+                </tr>
+                <tr>
+                    <th><span class="far fa-envelope"></span> Email</th>
+                    <td><a href='mailto:{{ animateur.email }}'>{{ animateur.email }}</a></td>
+                </tr>
+            </table>
+
+            {% if animateur.remarque %}
+                <p class="text-muted">
+                    {{ animateur.remarque | nl2br }}
+                </p>
+            {% endif %}
+
+            <br/>
+            {% include '@AcMarcheEdrAdmin/animateur/_presences.html.twig' %}
+            {% include '@AcMarcheEdrAdmin/animateur/_delete_form.html.twig' %}
+
+        </div>
+        <div class="card-footer text-muted mt-3">
+            Crée le {{ animateur.createdAt | format_date('full') }} par {{ animateur.userAdd }}. Mis à jour
+            le {{ animateur.updatedAt | format_date('full') }}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/animateur/_delete_form.html.twig' %}
+
+{% endblock %}

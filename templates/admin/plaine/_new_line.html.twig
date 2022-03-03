@@ -1,0 +1,17 @@
+<div id="el{{ index }}" class="row">
+    <div class="col-6">
+        <fieldset class="mb-3">
+            <div id="plaine_jours_jours_{{ index }}">
+                <div class="mb-3">
+                    <input type="date" id="plaine_jours_jours_{{ index }}_date_jour"
+                           name="plaine_jours[jours][{{ index }}][date_jour]" autocomplete="off"
+                           class="form-control" value=""/></div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-danger remove-tag" data-elementid="{{ index }}"><i
+                    class="fas fa-trash"></i>
+        </button>
+    </div>
+</div>

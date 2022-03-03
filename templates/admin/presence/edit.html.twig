@@ -1,0 +1,21 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Présence de {{ presence.enfant }} le {{ presence.jour.dateJour | format_date('full') }}</h3>
+        </div>
+        <div class="card-body">
+
+            {{ include('@AcMarcheEdrAdmin/presence/_form.html.twig') }}
+            <br/>
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('edr_admin_presence_show', {'id': presence.id}) }}">
+                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

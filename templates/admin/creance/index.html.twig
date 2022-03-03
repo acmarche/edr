@@ -1,0 +1,45 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Créances de {{ tuteur }}</h3>
+        </div>
+        <div class="card-body">
+
+            <a class="btn btn-primary mb-3" href="{{ path('edr_admin_creance_new', {'id': tuteur.id}) }}">
+              <i class="fas fa-plus"></i>  Nouvelle créance
+            </a>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Intitule</th>
+                    <th>Date</th>
+                    <th>Payé le</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for creance in creances %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_creance_show', {'id': creance.id}) }}">
+                                {{ creance }}
+                            </a>
+                        </td>
+                        <td>{{ creance.dateLe|format_date('full') }}</td>
+                        <td>{{ creance.payeLe ? creance.payeLe|format_date('full') : '' }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Aucune</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+{% endblock %}

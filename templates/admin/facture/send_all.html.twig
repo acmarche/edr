@@ -1,0 +1,34 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body -%}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Envoie des {{ factures|length }} factures pour {{ month }}</h3>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.from) }}
+                </div>
+                {% if form.to is defined %}
+                    <div class="col-6">
+                        {{ form_row(form.to) }}
+                    </div>
+                {% endif %}
+                <div class="col-6">
+                    {{ form_row(form.sujet) }}
+                </div>
+
+            </div>
+            {{ form_row(form.texte) }}
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-paper-plane"></i>
+                Envoyer les factures
+            </button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

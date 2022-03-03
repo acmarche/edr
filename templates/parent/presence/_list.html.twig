@@ -1,0 +1,26 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Remarque</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for presence in presences %}
+        <tr>
+            <td>
+                <a href="{{ path('edr_parent_presence_show', {'uuid': presence.uuid}) }}">
+                    {{ (presence.jour.dateJour | format_date('full'))|capitalize }}
+                </a>
+            </td>
+            <td class="text-muted">
+                {{ presence.remarque }}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="2">Aucune</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

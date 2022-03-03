@@ -1,0 +1,10 @@
+AcMarche\Edr\Entity\Plaine\PlaineGroupe:
+  plaine_groupe1:
+    __construct: [ '@plaine_noel', '@groupe_Petits_plaine' ]
+    inscription_maximum: 10
+  plaine_groupe2:
+    __construct: [ '@plaine_noel', '@groupe_Moyens_plaine' ]
+    inscription_maximum: 10
+  plaine_groupe3:
+    __construct: [ '@plaine_noel', '@groupe_Grands_plaine' ]
+    inscription_maximum: 10
