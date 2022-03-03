@@ -1,6 +1,9 @@
 <div class="row gy-2 gx-1 align-items-center d-print-none mb-3">
+    {#
     <div class="col-auto">
-        {% include '@AcMarcheEdrAdmin/enfant/_btn_add_presence.html.twig' %}</div>
+         % include '@AcMarcheEdrAdmin/enfant/_btn_add_presence.html.twig'
+    </div>
+    #}
     {% if edr_accueil == 'true' %}
         <div class="col-auto">
             <a href="{{ path('edr_admin_accueil_show_enfant', { 'id': enfant.id }) }}" role="button"

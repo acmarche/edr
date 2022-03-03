@@ -1,6 +1,6 @@
 {
   "name": "acmarche/edr",
-  "description": "Gestion des gardes des edr et jours fériés, des petites plaines(carnaval, paques...)",
+  "description": "Gestion des activités des edr",
   "homepage": "https://github.com/acmarche/edr.git",
   "license": "MIT",
   "type": "symfony-bundle",

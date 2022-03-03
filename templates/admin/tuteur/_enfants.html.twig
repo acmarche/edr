@@ -11,17 +11,6 @@
                 </a>
             </td>
             <td>
-                <div class="dropdown">
-                    <button class="btn btn-outline-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-download"></i> Attestations
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Non disponible</a>
-                    </div>
-                </div>
-            </td>
-            <td>
                 <button type="button" class="btn btn-outline-dark btn-sm unlinktuteur"
                         data-id="{{ relation.id }}"
                         data-token="{{ csrf_token('delete' ~ relation.id) }}"
