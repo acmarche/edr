@@ -54,7 +54,7 @@ final class EnfantQuickType extends AbstractType
                 EntityType::class,
                 [
                     'class' => Ecole::class,
-                    'required' => true,
+                    'required' => false,
                     'placeholder' => 'Choisissez son école',
                 ]
             )
@@ -63,6 +63,7 @@ final class EnfantQuickType extends AbstractType
                 EntityType::class,
                 [
                     'class' => AnneeScolaire::class,
+                    'required' => false,
                     'label' => 'Année scolaire',
                     'placeholder' => 'Choisissez son année scolaire',
                 ]

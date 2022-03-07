@@ -64,7 +64,7 @@ final class EnfantType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Numéro national',
-                    'required' => $isAdmin,
+                    'required' => false,
                 ]
             )
             ->add(
@@ -82,7 +82,7 @@ final class EnfantType extends AbstractType
                 [
                     'label' => 'Poids',
                     'help' => 'en kg',
-                    'required' => $isAdmin,
+                    'required' => false,
                 ]
             )
             ->add(
@@ -105,6 +105,7 @@ final class EnfantType extends AbstractType
                 EntityType::class,
                 [
                     'class' => AnneeScolaire::class,
+                    'required' => false,
                     'label' => 'Année scolaire',
                     'placeholder' => 'Choisissez son année scolaire',
                 ]
