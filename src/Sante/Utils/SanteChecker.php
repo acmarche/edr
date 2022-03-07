@@ -32,7 +32,7 @@ final class SanteChecker
             return false;
         }
 
-        return (bool) $enfant->getAnneeScolaire();
+        return true;
     }
 
     public function isComplete(SanteFiche $santeFiche): bool
