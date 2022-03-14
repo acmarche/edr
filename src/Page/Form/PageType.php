@@ -43,6 +43,7 @@ final class PageType extends AbstractType
                 [
                     'required' => true,
                     'label' => 'Contenu',
+                    'config_name' => 'acmarche_config',
                     'attr' => [
                         'cols' => 5,
                     ],
