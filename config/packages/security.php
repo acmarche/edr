@@ -40,6 +40,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'form_login' => [],
         'entry_point' => EdrAuthenticator::class,
         'switch_user' => true,
+        'login_throttling' => [
+            'max_attempts' => 6, //per minute...
+        ],
+        'remember_me' => [
+            'secret' => '%kernel.secret%',
+            'lifetime' => 604800,
+            'path' => '/',
+            'always_remember_me' => true,
+        ],
     ];
 
     if (interface_exists(LdapInterface::class)) {
