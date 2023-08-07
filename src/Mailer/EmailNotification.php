@@ -16,8 +16,7 @@ class EmailNotification extends Notification implements EmailNotificationInterfa
         string $subject = '',
         array $channels = [
         ]
-    )
-    {
+    ) {
         parent::__construct($subject, $channels);
     }
 

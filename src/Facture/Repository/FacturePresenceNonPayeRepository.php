@@ -26,12 +26,12 @@ class FacturePresenceNonPayeRepository
     {
         $presences = $this->presenceRepository->findByTuteurAndMonth($tuteur, $date);
         $ids = array_map(
-            static fn($presence) => $presence->getId(),
+            static fn ($presence) => $presence->getId(),
             $presences
         );
         $presencesPayes = $this->facturePresenceRepository->findByIdsAndType($ids, FactureInterface::OBJECT_PRESENCE);
         $idPayes = array_map(
-            static fn($presence) => $presence->getPresenceId(),
+            static fn ($presence) => $presence->getPresenceId(),
             $presencesPayes
         );
         $idsNonPayes = array_diff($ids, $idPayes);
@@ -48,12 +48,12 @@ class FacturePresenceNonPayeRepository
     {
         $accueils = $this->accueilRepository->findByTuteurAndMonth($tuteur, $date);
         $ids = array_map(
-            static fn($accueil) => $accueil->getId(),
+            static fn ($accueil) => $accueil->getId(),
             $accueils
         );
         $presencesPayes = $this->facturePresenceRepository->findByIdsAndType($ids, FactureInterface::OBJECT_ACCUEIL);
         $idPayes = array_map(
-            static fn($presence) => $presence->getPresenceId(),
+            static fn ($presence) => $presence->getPresenceId(),
             $presencesPayes
         );
         $idsNonPayes = array_diff($ids, $idPayes);

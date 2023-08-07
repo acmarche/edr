@@ -2,11 +2,11 @@
 
 namespace AcMarche\Edr\Accueil\Handler;
 
-use AcMarche\Edr\Entity\Tuteur;
 use AcMarche\Edr\Accueil\Repository\AccueilRepository;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
 use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Entity\Presence\Accueil;
+use AcMarche\Edr\Entity\Tuteur;
 use AcMarche\Edr\Tuteur\Repository\TuteurRepository;
 use DateTime;
 use Exception;
@@ -49,7 +49,7 @@ final class AccueilHandler
                 $duree = (int) $duree;
 
                 if (!($enfant = $this->enfantRepository->find((int) $enfantId)) instanceof Enfant) {
-                    $this->flashBag->add('danger', 'Référence pour l\enfant '.$enfantId.' non trouvé');
+                    $this->flashBag->add('danger', 'Référence pour l\enfant ' . $enfantId . ' non trouvé');
 
                     continue;
                 }
@@ -58,7 +58,7 @@ final class AccueilHandler
 
                 if (!($tuteur = $this->tuteurRepository->find($tuteurId)) instanceof Tuteur) {
                     if ($duree > 0) {
-                        $this->flashBag->add('danger', 'Spécifié sous quelle garde pour '.$enfant);
+                        $this->flashBag->add('danger', 'Spécifié sous quelle garde pour ' . $enfant);
                     }
 
                     continue;
@@ -74,7 +74,7 @@ final class AccueilHandler
                 } catch (Exception $exception) {
                     $this->flashBag->add(
                         'danger',
-                        'Impossible de convertir la date '.$dateString.' pour '.$enfant.': '.$exception->getMessage()
+                        'Impossible de convertir la date ' . $dateString . ' pour ' . $enfant . ': ' . $exception->getMessage()
                     );
 
                     continue;

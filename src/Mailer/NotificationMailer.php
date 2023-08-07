@@ -13,7 +13,7 @@ final class NotificationMailer
 
     public function sendAsEmailNotification(NotificationEmail $templatedEmail, ?string $email = null): void
     {
-        if (! $email) {
+        if (!$email) {
             $email = $this->organisation->getEmail();
         }
 

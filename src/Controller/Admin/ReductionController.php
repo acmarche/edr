@@ -101,7 +101,7 @@ final class ReductionController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_reduction_delete', methods: ['POST'])]
     public function delete(Request $request, Reduction $reduction): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$reduction->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $reduction->getId(), $request->request->get('_token'))) {
             $id = $reduction->getId();
             $this->reductionRepository->remove($reduction);
             $this->reductionRepository->flush();

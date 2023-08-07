@@ -55,7 +55,7 @@ final class PresenceVoter extends Voter
 
     protected function voteOnAttribute($attribute, $presence, TokenInterface $token): bool
     {
-        if (! $token->getUser() instanceof UserInterface) {
+        if (!$token->getUser() instanceof UserInterface) {
             return false;
         }
 
@@ -120,20 +120,20 @@ final class PresenceVoter extends Voter
 
     private function checkTuteur(): bool
     {
-        if (! $this->security->isGranted(EdrSecurityRole::ROLE_PARENT)) {
+        if (!$this->security->isGranted(EdrSecurityRole::ROLE_PARENT)) {
             return false;
         }
 
         $this->tuteurOfUser = $this->tuteurUtils->getTuteurByUser($this->user);
 
-        if (! $this->tuteurOfUser instanceof Tuteur) {
+        if (!$this->tuteurOfUser instanceof Tuteur) {
             return false;
         }
 
         $relations = $this->relationRepository->findByTuteur($this->tuteurOfUser);
 
         $enfants = array_map(
-            static fn($relation) => $relation->getEnfant()->getId(),
+            static fn ($relation) => $relation->getEnfant()->getId(),
             $relations
         );
 

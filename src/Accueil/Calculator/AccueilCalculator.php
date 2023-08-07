@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Accueil\Calculator;
 
-use DateTimeInterface;
 use AcMarche\Edr\Entity\Presence\Accueil;
 use AcMarche\Edr\Parameter\Option;
 use Carbon\Carbon;
+use DateTimeInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 final class AccueilCalculator implements AccueilCalculatorInterface

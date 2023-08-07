@@ -38,7 +38,7 @@ final class SanteFicheController extends AbstractController
     public function show(Enfant $enfant): Response
     {
         $santeFiche = $this->santeHandler->init($enfant);
-        if (! $santeFiche->getId()) {
+        if (!$santeFiche->getId()) {
             $this->addFlash('warning', 'Cette enfant n\'a pas encore de fiche santé');
 
             return $this->redirectToRoute('edr_admin_sante_fiche_edit', [
@@ -96,7 +96,7 @@ final class SanteFicheController extends AbstractController
     public function delete(Request $request, SanteFiche $santeFiche): RedirectResponse
     {
         $enfant = null;
-        if ($this->isCsrfTokenValid('delete'.$santeFiche->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $santeFiche->getId(), $request->request->get('_token'))) {
             $id = $santeFiche->getId();
             $enfant = $santeFiche->getEnfant();
             $this->santeFicheRepository->remove($santeFiche);

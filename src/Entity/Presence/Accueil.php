@@ -21,7 +21,6 @@ use Stringable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 #[ORM\Table(name: 'accueil')]
 #[ORM\UniqueConstraint(columns: ['date_jour', 'enfant_id', 'heure'])]
 #[ORM\Entity(repositoryClass: AccueilRepository::class)]

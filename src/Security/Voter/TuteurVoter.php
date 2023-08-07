@@ -40,7 +40,7 @@ final class TuteurVoter extends Voter
 
     protected function supports($attribute, $subject): bool
     {
-        if ($subject && ! $subject instanceof Tuteur) {
+        if ($subject && !$subject instanceof Tuteur) {
             return false;
         }
 
@@ -53,7 +53,7 @@ final class TuteurVoter extends Voter
 
     protected function voteOnAttribute($attribute, $tuteur, TokenInterface $token): bool
     {
-        if (! $token->getUser() instanceof UserInterface) {
+        if (!$token->getUser() instanceof UserInterface) {
             return false;
         }
 
@@ -102,15 +102,15 @@ final class TuteurVoter extends Voter
 
     private function checkOwnTuteur(): bool
     {
-        if (! $this->security->isGranted(EdrSecurityRole::ROLE_PARENT)) {
+        if (!$this->security->isGranted(EdrSecurityRole::ROLE_PARENT)) {
             return false;
         }
 
-        if (! $this->tuteurOfUser instanceof Tuteur) {
+        if (!$this->tuteurOfUser instanceof Tuteur) {
             return false;
         }
 
-        if (! $this->tuteurToCheck instanceof Tuteur) {
+        if (!$this->tuteurToCheck instanceof Tuteur) {
             return false;
         }
 

@@ -106,7 +106,7 @@ final class EcoleController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_ecole_delete', methods: ['POST'])]
     public function delete(Request $request, Ecole $ecole): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$ecole->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $ecole->getId(), $request->request->get('_token'))) {
             if ([] !== $this->enfantRepository->findByEcoles([$ecole])) {
                 $this->addFlash('danger', 'L\'école contient des enfants et ne peut être supprimée');
 

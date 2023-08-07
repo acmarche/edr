@@ -96,7 +96,7 @@ class PlaineHandlerHotton implements PlaineHandlerInterface
 
         $emails = TuteurUtils::getEmailsOfOneTuteur($tuteur);
         if (\count($emails) < 1) {
-            $error = 'Pas de mail pour la facture plaine: '.$facture->getId();
+            $error = 'Pas de mail pour la facture plaine: ' . $facture->getId();
             $message = $this->adminEmailFactory->messageAlert('Erreur envoie facture', $error);
             $this->notificationMailer->sendAsEmailNotification($message);
             throw new Exception($error);
@@ -110,7 +110,7 @@ class PlaineHandlerHotton implements PlaineHandlerInterface
         try {
             $this->notificationMailer->sendMail($message);
         } catch (TransportExceptionInterface $transportException) {
-            $error = 'Facture plaine num '.$facture->getId().' '.$transportException->getMessage();
+            $error = 'Facture plaine num ' . $facture->getId() . ' ' . $transportException->getMessage();
             $message = $this->adminEmailFactory->messageAlert('Erreur envoie facture plaine', $error);
             $this->notificationMailer->sendAsEmailNotification($message);
         }

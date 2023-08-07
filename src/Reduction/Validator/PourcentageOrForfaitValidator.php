@@ -2,7 +2,6 @@
 
 namespace AcMarche\Edr\Reduction\Validator;
 
-use AcMarche\Edr\Entity\Reduction;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

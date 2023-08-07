@@ -123,7 +123,7 @@ class SanteQuestion implements Stringable
 
     public function addReponse(SanteReponse $reponse): self
     {
-        if (! $this->reponse->contains($reponse)) {
+        if (!$this->reponse->contains($reponse)) {
             $this->reponse[] = $reponse;
             $reponse->setQuestion($this);
         }

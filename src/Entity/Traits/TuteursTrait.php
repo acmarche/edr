@@ -24,7 +24,7 @@ trait TuteursTrait
 
     public function addTuteur(Tuteur $tuteur): self
     {
-        if (! $this->tuteurs->contains($tuteur)) {
+        if (!$this->tuteurs->contains($tuteur)) {
             $this->tuteurs[] = $tuteur;
         }
 

@@ -50,7 +50,7 @@ final class FactureFactory
         $path = $this->getBasePathFacture($month);
         $i = 0;
         foreach ($factures as $facture) {
-            $fileName = $path.'facture-'.$facture->getId().'.pdf';
+            $fileName = $path . 'facture-' . $facture->getId() . '.pdf';
             if (is_readable($fileName)) {
                 continue;
             }
@@ -79,6 +79,6 @@ final class FactureFactory
 
     public function getBasePathFacture(string $month): string
     {
-        return $this->parameterBag->get('kernel.project_dir').'/var/factures/'.$month.'/';
+        return $this->parameterBag->get('kernel.project_dir') . '/var/factures/' . $month . '/';
     }
 }

@@ -36,7 +36,7 @@ final class PresenceHandler implements PresenceHandlerInterface
                 continue;
             }
 
-            if (! $this->checkConstraints($jour)) {
+            if (!$this->checkConstraints($jour)) {
                 continue;
             }
 
@@ -61,7 +61,7 @@ final class PresenceHandler implements PresenceHandlerInterface
     {
         $this->presenceConstraints->execute($jour);
         foreach ($this->presenceConstraints as $constraint) {
-            if (! $constraint->check($jour)) {
+            if (!$constraint->check($jour)) {
                 $constraint->addFlashError($jour);
 
                 return false;

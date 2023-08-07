@@ -18,7 +18,7 @@ class PourcentageOrForfaitValidator extends ConstraintValidator
                 ->addViolation();
         }
 
-        if (! $value->getPourcentage() && ! $value->getForfait()) {
+        if (!$value->getPourcentage() && !$value->getForfait()) {
             $this->context->buildViolation($constraint->message_only_one)
                 ->atPath('facture_reduction[pourcentage]')
                 ->addViolation();

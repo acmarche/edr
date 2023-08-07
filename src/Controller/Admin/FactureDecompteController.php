@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/facture_decompte')]
 final class FactureDecompteController extends AbstractController
@@ -92,7 +91,7 @@ final class FactureDecompteController extends AbstractController
     public function delete(Request $request, FactureDecompte $factureDecompte): RedirectResponse
     {
         $facture = $factureDecompte->getFacture();
-        if ($this->isCsrfTokenValid('delete'.$factureDecompte->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $factureDecompte->getId(), $request->request->get('_token'))) {
             $this->factureDecompteRepository->remove($factureDecompte);
             $this->factureDecompteRepository->flush();
 

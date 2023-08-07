@@ -30,7 +30,7 @@ final class AssocierParentController extends AbstractController
     #[Route(path: '/{id}', name: 'edr_user_associate_tuteur', methods: ['GET', 'POST'])]
     public function associate(Request $request, User $user): Response
     {
-        if (! $user->isParent()) {
+        if (!$user->isParent()) {
             $this->addFlash('danger', 'Le compte n\'a pas le rôle de parent');
 
             return $this->redirectToRoute('edr_admin_user_show', [
@@ -62,7 +62,7 @@ final class AssocierParentController extends AbstractController
     #[Route(path: '/{id}', name: 'edr_user_dissociate_tuteur', methods: ['POST'])]
     public function dissociate(Request $request, User $user): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('dissociate'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('dissociate' . $user->getId(), $request->request->get('_token'))) {
             $tuteurId = (int) $request->request->get('tuteur');
             if (0 === $tuteurId) {
                 $this->addFlash('danger', 'Le parent n\'a pas été trouvé');

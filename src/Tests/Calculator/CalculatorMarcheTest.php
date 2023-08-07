@@ -32,7 +32,7 @@ class CalculatorMarcheTest extends KernelTestCase
         $container = static::getContainer();
         $calculator = $container->get(PresenceCalculatorInterface::class);
 
-        $jour = new  Jour(new DateTime());
+        $jour = new Jour(new DateTime());
         $jour->setPrix1(3);
         $jour->setPrix2(2);
         $jour->setPrix3(1);
@@ -49,7 +49,7 @@ class CalculatorMarcheTest extends KernelTestCase
     public function testPedagogique()
     {
         $calculator = $this->getCalculator();
-        $jour = new  Jour(new DateTime());
+        $jour = new Jour(new DateTime());
         $jour->setPedagogique(true);
         $jour->setPrix1(3);
         $jour->setPrix2(2);
@@ -78,7 +78,7 @@ class CalculatorMarcheTest extends KernelTestCase
         $plaine->setPrix2(2);
         $plaine->setPrix3(1);
 
-        $jour = new  Jour(new DateTime());
+        $jour = new Jour(new DateTime());
         $jour->setPrix1(3);
         $jour->setPrix2(2);
         $jour->setPrix3(1);

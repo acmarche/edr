@@ -2,12 +2,12 @@
 
 namespace AcMarche\Edr\Presence\Calculator;
 
-use AcMarche\Edr\Entity\Plaine\Plaine;
-use AcMarche\Edr\Entity\Reduction;
 use AcMarche\Edr\Contrat\Presence\PresenceCalculatorInterface;
 use AcMarche\Edr\Contrat\Presence\PresenceInterface;
 use AcMarche\Edr\Data\EdrConstantes;
 use AcMarche\Edr\Entity\Jour;
+use AcMarche\Edr\Entity\Plaine\Plaine;
+use AcMarche\Edr\Entity\Reduction;
 use AcMarche\Edr\Reduction\Calculator\ReductionCalculator;
 use AcMarche\Edr\Relation\Utils\OrdreService;
 

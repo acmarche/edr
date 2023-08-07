@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Relation\Utils;
 
-use AcMarche\Edr\Entity\Relation;
 use AcMarche\Edr\Contrat\Presence\PresenceInterface;
 use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Entity\Presence\Presence;
+use AcMarche\Edr\Entity\Relation;
 use AcMarche\Edr\Entity\Tuteur;
 use AcMarche\Edr\Presence\Repository\PresenceRepository;
 use AcMarche\Edr\Relation\Repository\RelationRepository;

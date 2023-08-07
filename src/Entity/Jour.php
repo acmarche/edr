@@ -2,7 +2,6 @@
 
 namespace AcMarche\Edr\Entity;
 
-use DateTimeInterface;
 use AcMarche\Edr\Entity\Plaine\Plaine;
 use AcMarche\Edr\Entity\Plaine\PlaineTrait;
 use AcMarche\Edr\Entity\Presence\Presence;
@@ -17,8 +16,7 @@ use AcMarche\Edr\Entity\Traits\PedagogiqueTrait;
 use AcMarche\Edr\Entity\Traits\PrixTrait;
 use AcMarche\Edr\Entity\Traits\RemarqueTrait;
 use AcMarche\Edr\Jour\Repository\JourRepository;
-use DateTime;
-use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

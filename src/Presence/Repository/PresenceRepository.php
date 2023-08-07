@@ -106,7 +106,7 @@ final class PresenceRepository extends ServiceEntityRepository
 
         if ($date instanceof DateTimeInterface) {
             $qb->andWhere('jour.date_jour LIKE :date')
-                ->setParameter('date', $date->format('Y-m').'%');
+                ->setParameter('date', $date->format('Y-m') . '%');
         }
 
         return $qb->getQuery()->getResult();

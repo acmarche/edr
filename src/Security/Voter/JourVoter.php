@@ -47,7 +47,7 @@ final class JourVoter extends Voter
 
     protected function supports($attribute, $subject): bool
     {
-        if ($subject && ! $subject instanceof Jour) {
+        if ($subject && !$subject instanceof Jour) {
             return false;
         }
 
@@ -60,7 +60,7 @@ final class JourVoter extends Voter
 
     protected function voteOnAttribute($attribute, $jour, TokenInterface $token): bool
     {
-        if (! $token->getUser() instanceof UserInterface) {
+        if (!$token->getUser() instanceof UserInterface) {
             return false;
         }
 
@@ -72,11 +72,11 @@ final class JourVoter extends Voter
             return true;
         }
 
-        if (! $this->security->isGranted(EdrSecurityRole::ROLE_ANIMATEUR)) {
+        if (!$this->security->isGranted(EdrSecurityRole::ROLE_ANIMATEUR)) {
             return false;
         }
 
-        if (! $this->checkJoursAnimateur()) {
+        if (!$this->checkJoursAnimateur()) {
             return false;
         }
 
@@ -113,7 +113,7 @@ final class JourVoter extends Voter
     {
         $this->animateur = $this->user->getAnimateur();
 
-        if (! $this->animateur instanceof Animateur) {
+        if (!$this->animateur instanceof Animateur) {
             return false;
         }
 

@@ -29,7 +29,7 @@ final class RegistrationController extends AbstractController
     #[Route(path: '/register', name: 'edr_front_register')]
     public function register(Request $request): Response
     {
-        if (! $this->registerCreatedHandler->isOpen()) {
+        if (!$this->registerCreatedHandler->isOpen()) {
             return $this->redirectToRoute('edr_front_home');
         }
 

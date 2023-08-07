@@ -2,11 +2,11 @@
 
 namespace AcMarche\Edr\Message\Factory;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use AcMarche\Edr\Entity\Message;
 use AcMarche\Edr\Entity\Plaine\Plaine;
 use AcMarche\Edr\Mailer\NotificationEmailJf;
 use AcMarche\Edr\Organisation\Traits\OrganisationPropertyInitTrait;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Storage\StorageInterface;
 
 final class EmailFactory

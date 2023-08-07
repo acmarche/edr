@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Sante\Utils;
 
-use AcMarche\Edr\Entity\Scolaire\Ecole;
 use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Entity\Sante\SanteFiche;
 use AcMarche\Edr\Entity\Sante\SanteQuestion;
+use AcMarche\Edr\Entity\Scolaire\Ecole;
 use AcMarche\Edr\Sante\Handler\SanteHandler;
 use AcMarche\Edr\Sante\Repository\SanteQuestionRepository;
 use AcMarche\Edr\Sante\Repository\SanteReponseRepository;
@@ -21,11 +21,11 @@ final class SanteChecker
 
     public function identiteEnfantIsComplete(Enfant $enfant): bool
     {
-        if (! $enfant->getNom()) {
+        if (!$enfant->getNom()) {
             return false;
         }
 
-        if (! $enfant->getPrenom()) {
+        if (!$enfant->getPrenom()) {
             return false;
         }
         return $enfant->getEcole() instanceof Ecole;
@@ -33,7 +33,7 @@ final class SanteChecker
 
     public function isComplete(SanteFiche $santeFiche): bool
     {
-        if (! $santeFiche->getId()) {
+        if (!$santeFiche->getId()) {
             return false;
         }
 
@@ -46,7 +46,7 @@ final class SanteChecker
 
         foreach ($reponses as $reponse) {
             $question = $reponse->getQuestion();
-            if (! $this->checkQuestionOk($question)) {
+            if (!$this->checkQuestionOk($question)) {
                 return false;
             }
         }
@@ -63,7 +63,7 @@ final class SanteChecker
         $reponses = $this->santeReponseRepository->findBySanteFiche($santeFiche);
         foreach ($reponses as $reponse) {
             $question = $reponse->getQuestion();
-            if (! $this->checkQuestionOk($question)) {
+            if (!$this->checkQuestionOk($question)) {
                 $questionsnotOk[] = $question;
             }
         }

@@ -23,7 +23,7 @@ trait FacturePresencesTrait
 
     public function addFacturePresence(FacturePresence $facturePresence): self
     {
-        if (! $this->facturePresences->contains($facturePresence)) {
+        if (!$this->facturePresences->contains($facturePresence)) {
             $this->facturePresences[] = $facturePresence;
             $facturePresence->setFacture($this);
         }

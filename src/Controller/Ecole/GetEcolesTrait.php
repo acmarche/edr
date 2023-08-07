@@ -27,7 +27,7 @@ trait GetEcolesTrait
         $user = $this->getUser();
         $this->ecoles = $this->ecoleUtils->getEcolesByUser($user);
 
-        if (! $this->ecoles) {
+        if (!$this->ecoles) {
             return $this->redirectToRoute('edr_ecole_nouveau');
         }
 

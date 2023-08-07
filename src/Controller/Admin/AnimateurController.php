@@ -119,7 +119,7 @@ final class AnimateurController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_animateur_delete', methods: ['POST'])]
     public function delete(Request $request, Animateur $animateur): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$animateur->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $animateur->getId(), $request->request->get('_token'))) {
             $id = $animateur->getId();
             $this->animateurRepository->remove($animateur);
             $this->animateurRepository->flush();

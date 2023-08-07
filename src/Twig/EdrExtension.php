@@ -52,7 +52,7 @@ final class EdrExtension extends AbstractExtension
 
     private function inIds(int $number, array $objects): bool
     {
-        $ids = array_map(static fn($object) => $object->getId(), $objects);
+        $ids = array_map(static fn ($object) => $object->getId(), $objects);
 
         return \in_array($number, $ids, true);
     }

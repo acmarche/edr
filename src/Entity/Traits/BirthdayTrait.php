@@ -39,7 +39,7 @@ trait BirthdayTrait
     {
         $birthday = $this->birthday;
 
-        if (! $birthday) {
+        if (!$birthday) {
             return null;
         }
 

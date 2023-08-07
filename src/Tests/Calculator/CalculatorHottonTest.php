@@ -28,7 +28,7 @@ class CalculatorHottonTest extends KernelTestCase
     public function testOrdre(): void
     {
         $calculator = $this->getCalculator();
-        $jour = new  Jour(new DateTime());
+        $jour = new Jour(new DateTime());
         $jour->setPrix1(3);
         $jour->setPrix2(2);
         $jour->setPrix3(1);
@@ -45,7 +45,7 @@ class CalculatorHottonTest extends KernelTestCase
     public function testPedagogique()
     {
         $calculator = $this->getCalculator();
-        $jour = new  Jour(new DateTime());
+        $jour = new Jour(new DateTime());
         $jour->setPedagogique(true);
         $jour->setPrix1(3);
         $jour->setPrix2(2);

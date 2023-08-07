@@ -30,7 +30,7 @@ final class AssocierAnimateurController extends AbstractController
     #[Route(path: '/{id}', name: 'edr_user_associate_animateur', methods: ['GET', 'POST'])]
     public function associate(Request $request, User $user): Response
     {
-        if (! $user->isAnimateur()) {
+        if (!$user->isAnimateur()) {
             $this->addFlash('danger', 'Le compte n\'a pas le rôle de animateur');
 
             return $this->redirectToRoute('edr_admin_user_show', [
@@ -61,7 +61,7 @@ final class AssocierAnimateurController extends AbstractController
     #[Route(path: '/{id}', name: 'edr_user_dissociate_animateur', methods: ['POST'])]
     public function dissociate(Request $request, User $user): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('dissociate'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('dissociate' . $user->getId(), $request->request->get('_token'))) {
             $animateurId = (int) $request->request->get('animateur');
             if (0 === $animateurId) {
                 $this->addFlash('danger', 'L\'animateur n\'a pas été trouvé');

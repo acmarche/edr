@@ -23,11 +23,11 @@ class Relation
 
     #[ORM\ManyToOne(targetEntity: Tuteur::class, inversedBy: 'relations', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Tuteur $tuteur=null;
+    private ?Tuteur $tuteur = null;
 
     #[ORM\ManyToOne(targetEntity: Enfant::class, inversedBy: 'relations', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Enfant $enfant=null;
+    private ?Enfant $enfant = null;
 
     #[ORM\Column(type: 'string', length: 200, nullable: true, options: [
         'comment' => 'pere,mere,beau pere..',

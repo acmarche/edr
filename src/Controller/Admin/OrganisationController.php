@@ -115,7 +115,7 @@ final class OrganisationController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_organisation_delete', methods: ['POST'])]
     public function delete(Request $request, Organisation $organisation): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$organisation->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $organisation->getId(), $request->request->get('_token'))) {
             $id = $organisation->getId();
             $this->organisationRepository->remove($organisation);
             $this->organisationRepository->flush();

@@ -77,7 +77,7 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, S
 
     public function __toString(): string
     {
-        return mb_strtoupper($this->nom, 'UTF-8').' '.$this->prenom;
+        return mb_strtoupper($this->nom, 'UTF-8') . ' ' . $this->prenom;
     }
 
     /**

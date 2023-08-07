@@ -24,7 +24,7 @@ trait GetAnimateurTrait
         $user = $this->getUser();
         $this->animateur = $user->getAnimateur();
 
-        if (! $this->animateur) {
+        if (!$this->animateur) {
             return $this->redirectToRoute('edr_animateur_nouveau');
         }
 

@@ -61,7 +61,7 @@ final class AccueilRepository extends ServiceEntityRepository
      */
     public function findByEnfantAndDaysAndHeure(Enfant $enfant, CarbonPeriod $weekPeriod, string $heure): array
     {
-        $days = array_map(static fn($date) => $date->toDateString(), $weekPeriod->toArray());
+        $days = array_map(static fn ($date) => $date->toDateString(), $weekPeriod->toArray());
 
         return $this->createQbl()
             ->andWhere('accueil.enfant = :enfant')
@@ -79,7 +79,7 @@ final class AccueilRepository extends ServiceEntityRepository
             ->andWhere('accueil.enfant = :enfant')
             ->setParameter('enfant', $enfant)
             ->andWhere('accueil.date_jour LIKE :date')
-            ->setParameter('date', $date->format('Y-m-d').'%')
+            ->setParameter('date', $date->format('Y-m-d') . '%')
             ->andWhere('accueil.heure = :heure')
             ->setParameter('heure', $heure)
             ->getQuery()->getOneOrNullResult();
@@ -169,7 +169,7 @@ final class AccueilRepository extends ServiceEntityRepository
 
         if ($date instanceof DateTimeInterface) {
             $qb->andWhere('accueil.date_jour LIKE :date')
-                ->setParameter('date', $date->format('Y-m').'%');
+                ->setParameter('date', $date->format('Y-m') . '%');
         }
 
         return $qb->getQuery()->getResult();

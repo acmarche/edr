@@ -27,7 +27,7 @@ final class FixtureLoader
 
     public function getPath(): string
     {
-        return $this->parameterBag->get('kernel.project_dir').'/src/AcMarche/Edr/src/Fixture/Files/';
+        return $this->parameterBag->get('kernel.project_dir') . '/src/AcMarche/Edr/src/Fixture/Files/';
     }
 
     public function load(): void
@@ -35,21 +35,21 @@ final class FixtureLoader
         $path = $this->getPath();
 
         $files = [
-            $path.'groupe_scolaire.yaml',
-            $path.'annee_scolaire.yaml',
-            $path.'document.yaml',
-            $path.'ecole.yaml',
-            $path.'tuteur.yaml',
-            $path.'animateur.yaml',
-            $path.'enfant.yaml',
-            $path.'relation.yaml',
-            $path.'user.yaml',
-            $path.'question.yaml',
-            $path.'reponse.yaml',
-            $path.'sante_fiche.yaml',
-            $path.'sante_reponse.yaml',
-            $path.'organisation.yaml',
-            $path.'page.yaml',
+            $path . 'groupe_scolaire.yaml',
+            $path . 'annee_scolaire.yaml',
+            $path . 'document.yaml',
+            $path . 'ecole.yaml',
+            $path . 'tuteur.yaml',
+            $path . 'animateur.yaml',
+            $path . 'enfant.yaml',
+            $path . 'relation.yaml',
+            $path . 'user.yaml',
+            $path . 'question.yaml',
+            $path . 'reponse.yaml',
+            $path . 'sante_fiche.yaml',
+            $path . 'sante_reponse.yaml',
+            $path . 'organisation.yaml',
+            $path . 'page.yaml',
         /*    $path.'jour.yaml',
             $path.'presence.yaml',
             $path.'reduction.yaml',
@@ -82,7 +82,7 @@ final class FixtureLoader
 
         $this->loader->load(
             [
-                $path.'facture.yaml',
+                $path . 'facture.yaml',
             ],
             [],
             [

@@ -61,7 +61,7 @@ final class PresenceUtils
     public static function extractTuteurs(array $presences): array
     {
         $tuteurs = array_map(
-            static fn($presence) => $presence->getTuteur(),
+            static fn ($presence) => $presence->getTuteur(),
             $presences
         );
         $data = [];
@@ -87,7 +87,7 @@ final class PresenceUtils
                     if ($registerRemarques) {
                         $remarques = $enfant->getRemarque();
                         if ($presence->getRemarque()) {
-                            $remarques .= ' (Parent=>) '.$presence->getRemarque();
+                            $remarques .= ' (Parent=>) ' . $presence->getRemarque();
                         }
 
                         $enfant->setRemarque($remarques);
@@ -115,7 +115,7 @@ final class PresenceUtils
     {
         $jours =
             array_map(
-                static fn($presence) => $presence->getJour(),
+                static fn ($presence) => $presence->getJour(),
                 $presences
             );
         $data = [];
@@ -135,7 +135,7 @@ final class PresenceUtils
             $telephones = '';
             foreach ($this->relationRepository->findByEnfant($enfant) as $relation) {
                 $tuteur = $relation->getTuteur();
-                $telephones .= ' '.TuteurUtils::getTelephones($tuteur);
+                $telephones .= ' ' . TuteurUtils::getTelephones($tuteur);
             }
 
             $enfant->setTelephones($telephones);
@@ -153,16 +153,16 @@ final class PresenceUtils
         array_map(
             static function ($presence) use ($plaines) {
                 $jour = $presence->getJour();
-                if (! $jour) {
+                if (!$jour) {
                     return null;
                 }
                 
                 $plaine = $jour->getPlaine();
-                if (! $plaine instanceof Plaine) {
+                if (!$plaine instanceof Plaine) {
                     return null;
                 }
                 
-                if (! $plaines->contains($plaine)) {
+                if (!$plaines->contains($plaine)) {
                     $plaines->add($plaine);
                 }
             },

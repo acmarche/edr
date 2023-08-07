@@ -103,7 +103,7 @@ final class FactureRepository extends ServiceEntityRepository
         return $this->getQBl()
             ->andWhere('facture.payeLe IS NOT NULL')
             ->andWhere('facture.mois LIKE :year')
-            ->setParameter('year', '%'.$year.'%')
+            ->setParameter('year', '%' . $year . '%')
             ->addOrderBy('facture.nom')
             ->getQuery()->getResult();
     }
@@ -131,17 +131,17 @@ final class FactureRepository extends ServiceEntityRepository
 
         if ($tuteur) {
             $queryBuilder->andWhere('tuteur.nom LIKE :tuteur OR tuteur.prenom LIKE :tuteur')
-                ->setParameter('tuteur', '%'.$tuteur.'%');
+                ->setParameter('tuteur', '%' . $tuteur . '%');
         }
 
         if ($enfant) {
             $queryBuilder->andWhere('facturePresences.nom LIKE :enfant OR facturePresences.prenom LIKE :enfant')
-                ->setParameter('enfant', '%'.$enfant.'%');
+                ->setParameter('enfant', '%' . $enfant . '%');
         }
 
         if ($ecole instanceof Ecole) {
             $queryBuilder->andWhere('facture.ecoles LIKE :ecole')
-                ->setParameter('ecole', '%'.$ecole.'%');
+                ->setParameter('ecole', '%' . $ecole . '%');
         }
 
         if ($plaine instanceof Plaine) {
@@ -156,12 +156,12 @@ final class FactureRepository extends ServiceEntityRepository
 
         if (null !== $communication) {
             $queryBuilder->andWhere('facture.communication LIKE :commu')
-                ->setParameter('commu', '%'.$communication.'%');
+                ->setParameter('commu', '%' . $communication . '%');
         }
 
         if ($datePaiement instanceof DateTimeInterface) {
             $queryBuilder->andWhere('facture.payeLe LIKE :datePaiement')
-                ->setParameter('datePaiement', $datePaiement->format('Y-m-d').'%');
+                ->setParameter('datePaiement', $datePaiement->format('Y-m-d') . '%');
         }
 
         if (false === $paye) {

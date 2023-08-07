@@ -76,7 +76,7 @@ final class PresenceController extends AbstractController
         }
 
         $santeFiche = $this->santeHandler->init($enfant);
-        if (! $this->santeChecker->isComplete($santeFiche)) {
+        if (!$this->santeChecker->isComplete($santeFiche)) {
             $this->addFlash('danger', 'La fiche santé de votre enfant doit être complétée');
 
             return $this->redirectToRoute('edr_parent_sante_fiche_show', [
@@ -131,8 +131,8 @@ final class PresenceController extends AbstractController
     public function delete(Request $request, Presence $presence): RedirectResponse
     {
         $enfant = $presence->getEnfant();
-        if ($this->isCsrfTokenValid('delete'.$presence->getId(), $request->request->get('_token'))) {
-            if (! DeleteConstraint::canBeDeleted($presence)) {
+        if ($this->isCsrfTokenValid('delete' . $presence->getId(), $request->request->get('_token'))) {
+            if (!DeleteConstraint::canBeDeleted($presence)) {
                 $this->addFlash('danger', 'Une présence passée ne peut être supprimée');
 
                 return $this->redirectToRoute('edr_parent_enfant_show', [

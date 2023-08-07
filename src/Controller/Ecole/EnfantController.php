@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[Route(path: '/enfant')]
 final class EnfantController extends AbstractController
 {
@@ -123,7 +122,7 @@ final class EnfantController extends AbstractController
     public function santeFiche(Enfant $enfant): Response
     {
         $santeFiche = $this->santeHandler->init($enfant);
-        if (! $santeFiche->getId()) {
+        if (!$santeFiche->getId()) {
             $this->addFlash('warning', 'Cette enfant n\'a pas encore de fiche santé');
 
             return $this->redirectToRoute('edr_ecole_enfant_show', [

@@ -109,15 +109,15 @@ final class PlaineController extends AbstractController
             foreach ($enfantsSelected as $enfant) {
                 $santeFiche = $this->santeHandler->init($enfant);
 
-                if (! $this->santeChecker->isComplete($santeFiche)) {
-                    $this->addFlash('danger', 'La fiche santé de '.$enfant.' doit être complétée');
+                if (!$this->santeChecker->isComplete($santeFiche)) {
+                    $this->addFlash('danger', 'La fiche santé de ' . $enfant . ' doit être complétée');
 
                     continue;
                 }
 
                 if ($plaine instanceof Plaine) {
                     $this->plaineHandler->handleAddEnfant($plaine, $this->tuteur, $enfant);
-                    $this->addFlash('success', $enfant.' a bien été inscrits à la plaine');
+                    $this->addFlash('success', $enfant . ' a bien été inscrits à la plaine');
                 }
             }
 
@@ -161,7 +161,7 @@ final class PlaineController extends AbstractController
                 $this->plaineHandler->confirm($plaine, $tuteur);
                 $this->addFlash('success', 'La facture a bien été générée et envoyée sur votre mail');
             } catch (Exception $e) {
-                $this->addFlash('danger', 'Erreur survenue: '.$e->getMessage());
+                $this->addFlash('danger', 'Erreur survenue: ' . $e->getMessage());
             }
 
             return $this->redirectToRoute('edr_parent_plaine_show', [

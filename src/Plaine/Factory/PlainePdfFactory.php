@@ -2,8 +2,8 @@
 
 namespace AcMarche\Edr\Plaine\Factory;
 
-use AcMarche\Edr\Entity\Scolaire\GroupeScolaire;
 use AcMarche\Edr\Entity\Plaine\Plaine;
+use AcMarche\Edr\Entity\Scolaire\GroupeScolaire;
 use AcMarche\Edr\Pdf\PdfDownloaderTrait;
 use AcMarche\Edr\Plaine\Repository\PlainePresenceRepository;
 use AcMarche\Edr\Presence\Repository\PresenceRepository;
@@ -93,14 +93,14 @@ class PlainePdfFactory
             $this->pdf->setOption('orientation', 'landscape');
         }
 
-        return $this->downloadPdf($html, $name.'.pdf');
+        return $this->downloadPdf($html, $name . '.pdf');
     }
 
     private function getImagesBase64(): array
     {
-        $root = $this->parameterBag->get('kernel.project_dir').'/public/bundles/acmarcheedr/images/';
-        $ok = $root.'check_ok.jpg';
-        $ko = $root.'check_ko.jpg';
+        $root = $this->parameterBag->get('kernel.project_dir') . '/public/bundles/acmarcheedr/images/';
+        $ok = $root . 'check_ok.jpg';
+        $ko = $root . 'check_ko.jpg';
         $data = [];
         $data['ok'] = base64_encode(file_get_contents($ok));
         $data['ko'] = base64_encode(file_get_contents($ko));

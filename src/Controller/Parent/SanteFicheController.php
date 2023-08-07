@@ -39,7 +39,7 @@ final class SanteFicheController extends AbstractController
     public function show(Enfant $enfant): Response
     {
         $santeFiche = $this->santeHandler->init($enfant);
-        if (! $santeFiche->getId()) {
+        if (!$santeFiche->getId()) {
             $this->addFlash('warning', 'Cette enfant n\'a pas encore de fiche santé');
 
             return $this->redirectToRoute('edr_parent_sante_fiche_edit', [

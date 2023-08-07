@@ -151,7 +151,7 @@ final class JourController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_jour_delete', methods: ['POST'])]
     public function delete(Request $request, Jour $jour): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$jour->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $jour->getId(), $request->request->get('_token'))) {
             $jourId = $jour->getId();
             $this->jourRepository->remove($jour);
             $this->jourRepository->flush();

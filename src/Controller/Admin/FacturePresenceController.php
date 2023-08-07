@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/facture_presence')]
 final class FacturePresenceController extends AbstractController
@@ -116,7 +115,7 @@ final class FacturePresenceController extends AbstractController
     public function delete(Request $request, FacturePresence $facturePresence): RedirectResponse
     {
         $facture = $facturePresence->getFacture();
-        if ($this->isCsrfTokenValid('delete'.$facturePresence->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $facturePresence->getId(), $request->request->get('_token'))) {
             $this->facturePresenceRepository->remove($facturePresence);
             $this->facturePresenceRepository->flush();
 

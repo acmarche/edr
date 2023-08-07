@@ -143,7 +143,7 @@ final class EnfantController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_enfant_delete', methods: ['POST'])]
     public function delete(Request $request, Enfant $enfant): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$enfant->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $enfant->getId(), $request->request->get('_token'))) {
             $enfantId = $enfant->getId();
             $this->enfantRepository->remove($enfant);
             $this->enfantRepository->flush();

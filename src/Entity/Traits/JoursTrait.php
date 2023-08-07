@@ -22,7 +22,7 @@ trait JoursTrait
 
     public function addJour(Jour $jour): self
     {
-        if (! $this->jours->contains($jour)) {
+        if (!$this->jours->contains($jour)) {
             $this->jours[] = $jour;
         }
 

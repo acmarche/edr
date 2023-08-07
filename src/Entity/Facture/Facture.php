@@ -88,7 +88,7 @@ class Facture implements TimestampableInterface, UuidableInterface, FactureInter
     private float $cloture_obsolete;
 
     public function __construct(
-          Tuteur $tuteur
+        Tuteur $tuteur
     ) {
         $this->tuteur = $tuteur;
         $this->facturePresences = new ArrayCollection();
@@ -99,14 +99,14 @@ class Facture implements TimestampableInterface, UuidableInterface, FactureInter
 
     public function __toString(): string
     {
-        return 'Facture '.$this->id;
+        return 'Facture ' . $this->id;
     }
 
     public function getEnfants(): array
     {
         $enfants = [];
         foreach ($this->facturePresences as $presence) {
-            $nom = $presence->getNom().' '.$presence->getPrenom();
+            $nom = $presence->getNom() . ' ' . $presence->getPrenom();
             $enfants[$nom] = $nom;
         }
 

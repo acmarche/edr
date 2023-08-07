@@ -47,7 +47,7 @@ final class EcoleVoter extends Voter
     protected function supports($attribute, $subject): bool
     {
         //a cause de index pas d'ecole defini
-        if ($subject && ! $subject instanceof Ecole) {
+        if ($subject && !$subject instanceof Ecole) {
             return false;
         }
 
@@ -56,7 +56,7 @@ final class EcoleVoter extends Voter
 
     protected function voteOnAttribute($attribute, $ecole, TokenInterface $token): bool
     {
-        if (! $token->getUser() instanceof UserInterface) {
+        if (!$token->getUser() instanceof UserInterface) {
             return false;
         }
 
@@ -66,7 +66,7 @@ final class EcoleVoter extends Voter
             return true;
         }
 
-        if (! $this->security->isGranted(EdrSecurityRole::ROLE_ECOLE)) {
+        if (!$this->security->isGranted(EdrSecurityRole::ROLE_ECOLE)) {
             return false;
         }
 
@@ -94,7 +94,7 @@ final class EcoleVoter extends Voter
 
     private function canEdit(): bool
     {
-        if (! $this->checkEcoles()) {
+        if (!$this->checkEcoles()) {
             return false;
         }
 

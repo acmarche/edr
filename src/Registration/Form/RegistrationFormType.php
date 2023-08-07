@@ -53,7 +53,7 @@ final class RegistrationFormType extends AbstractType
                 [
                     'label' => "J'accepte les conditions d'utilisation",
                     'help_html' => true,
-                    'help' => '<a href="'.$url.'" target="_blank">Lire les conditions d\'utilisation</a>',
+                    'help' => '<a href="' . $url . '" target="_blank">Lire les conditions d\'utilisation</a>',
                     'mapped' => false,
                     'constraints' => [
                         new IsTrue(

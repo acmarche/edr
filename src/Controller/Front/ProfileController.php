@@ -16,7 +16,6 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[Route(path: '/profile')]
 #[IsGranted(data: 'IS_AUTHENTICATED_FULLY')]
 final class ProfileController extends AbstractController
@@ -58,7 +57,7 @@ final class ProfileController extends AbstractController
 
             $roles = array_filter(
                 $roles,
-                static fn($e) => $e !== $del_val
+                static fn ($e) => $e !== $del_val
             );
 
             if (\count($roles) > 1) {

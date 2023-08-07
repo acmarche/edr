@@ -45,7 +45,7 @@ final class EnfantVoter extends Voter
 
     protected function supports($attribute, $subject): bool
     {
-        if ($subject && ! $subject instanceof Enfant) {
+        if ($subject && !$subject instanceof Enfant) {
             return false;
         }
 
@@ -58,7 +58,7 @@ final class EnfantVoter extends Voter
 
     protected function voteOnAttribute($attribute, $enfant, TokenInterface $token): bool
     {
-        if (! $token->getUser() instanceof UserInterface) {
+        if (!$token->getUser() instanceof UserInterface) {
             return false;
         }
 
@@ -113,7 +113,7 @@ final class EnfantVoter extends Voter
     private function checkAnimateur(): bool
     {
         $animateur = $this->user->getAnimateur();
-        if (! $animateur instanceof Animateur) {
+        if (!$animateur instanceof Animateur) {
             return false;
         }
 
@@ -124,20 +124,20 @@ final class EnfantVoter extends Voter
 
     private function checkTuteur(): bool
     {
-        if (! $this->security->isGranted(EdrSecurityRole::ROLE_PARENT)) {
+        if (!$this->security->isGranted(EdrSecurityRole::ROLE_PARENT)) {
             return false;
         }
 
         $tuteur = null;
         $tuteur = $this->tuteurUtils->getTuteurByUser($this->user);
-        if (! $tuteur instanceof Tuteur) {
+        if (!$tuteur instanceof Tuteur) {
             return false;
         }
 
         $relations = $this->relationRepository->findByTuteur($tuteur);
 
         $enfants = array_map(
-            static fn($relation) => $relation->getEnfant()->getId(),
+            static fn ($relation) => $relation->getEnfant()->getId(),
             $relations
         );
 

@@ -46,35 +46,35 @@ final class TuteurType extends AbstractType
                 'rue',
                 TextType::class,
                 [
-                    'required' => ! $isAdmin,
+                    'required' => !$isAdmin,
                 ]
             )
             ->add(
                 'code_postal',
                 IntegerType::class,
                 [
-                    'required' => ! $isAdmin,
+                    'required' => !$isAdmin,
                 ]
             )
             ->add(
                 'localite',
                 TextType::class,
                 [
-                    'required' => ! $isAdmin,
+                    'required' => !$isAdmin,
                 ]
             )
             ->add(
                 'email',
                 EmailType::class,
                 [
-                    'required' => ! $isAdmin,
+                    'required' => !$isAdmin,
                 ]
             )
             ->add(
                 'telephone',
                 TextType::class,
                 [
-                    'required' => ! $isAdmin,
+                    'required' => !$isAdmin,
                 ]
             )
             ->add(

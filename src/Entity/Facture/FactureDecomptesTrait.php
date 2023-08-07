@@ -23,7 +23,7 @@ trait FactureDecomptesTrait
 
     public function addFactureDecompte(FactureDecompte $factureDecompte): self
     {
-        if (! $this->factureDecomptes->contains($factureDecompte)) {
+        if (!$this->factureDecomptes->contains($factureDecompte)) {
             $this->factureDecomptes[] = $factureDecompte;
             $factureDecompte->setFacture($this);
         }

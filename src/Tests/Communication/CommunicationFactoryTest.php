@@ -32,6 +32,6 @@ class CommunicationFactoryTest extends KernelTestCase
         self::assertSame('21', $short);
         $communication = $communicationFactory->generateForPresence($facture);
 
-        self::assertSame('Hot '.$id.' '.$facture->getMois(), $communication);
+        self::assertSame('Hot ' . $id . ' ' . $facture->getMois(), $communication);
     }
 }

@@ -50,8 +50,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure()
         ->private();
 
-    $services->load('AcMarche\Edr\\', __DIR__.'/../src/*')
-        ->exclude([__DIR__.'/../src/{Entity,Tests2}']);
+    $services->load('AcMarche\Edr\\', __DIR__ . '/../src/*')
+        ->exclude([__DIR__ . '/../src/{Entity,Tests2}']);
 
     $services->set(DirectoryNamer::class)
         ->public();

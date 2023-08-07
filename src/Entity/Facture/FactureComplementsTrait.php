@@ -23,7 +23,7 @@ trait FactureComplementsTrait
 
     public function addFactureComplement(FactureComplement $factureComplement): self
     {
-        if (! $this->factureComplements->contains($factureComplement)) {
+        if (!$this->factureComplements->contains($factureComplement)) {
             $this->factureComplements[] = $factureComplement;
             $factureComplement->setFacture($this);
         }

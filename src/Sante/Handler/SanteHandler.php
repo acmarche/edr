@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Sante\Handler;
 
-use AcMarche\Edr\Entity\Sante\SanteReponse;
 use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Entity\Sante\SanteFiche;
 use AcMarche\Edr\Entity\Sante\SanteQuestion;
+use AcMarche\Edr\Entity\Sante\SanteReponse;
 use AcMarche\Edr\Sante\Factory\SanteFactory;
 use AcMarche\Edr\Sante\Repository\SanteFicheRepository;
 use AcMarche\Edr\Sante\Repository\SanteReponseRepository;

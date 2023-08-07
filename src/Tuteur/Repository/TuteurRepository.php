@@ -38,7 +38,7 @@ final class TuteurRepository extends ServiceEntityRepository
             ->andWhere(
                 'tuteur.nom LIKE :keyword OR tuteur.prenom LIKE :keyword OR tuteur.email_conjoint LIKE :keyword OR tuteur.email LIKE :keyword'
             )
-            ->setParameter('keyword', '%'.$keyword.'%')
+            ->setParameter('keyword', '%' . $keyword . '%')
             ->andwhere('tuteur.archived = :archive')
             ->setParameter('archive', $archived)
             ->addOrderBy('tuteur.nom', 'ASC')
@@ -137,7 +137,7 @@ final class TuteurRepository extends ServiceEntityRepository
                 'tuteur.nom LIKE :nom OR tuteur.prenom LIKE :nom OR tuteur.nom_conjoint LIKE :nom 
                 OR tuteur.prenom_conjoint LIKE :nom OR tuteur.email LIKE :nom OR tuteur.email_conjoint LIKE :nom'
             )
-                ->setParameter('nom', '%'.$nom.'%');
+                ->setParameter('nom', '%' . $nom . '%');
         }
 
         return $qb->andwhere('enfant.archive = 1')->orderBy('tuteur.nom')

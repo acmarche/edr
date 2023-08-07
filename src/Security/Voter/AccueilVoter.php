@@ -55,7 +55,7 @@ final class AccueilVoter extends Voter
 
     protected function voteOnAttribute($attribute, $accueil, TokenInterface $token): bool
     {
-        if (! $token->getUser() instanceof UserInterface) {
+        if (!$token->getUser() instanceof UserInterface) {
             return false;
         }
 
@@ -93,14 +93,14 @@ final class AccueilVoter extends Voter
     {
         $this->tuteurOfUser = $this->tuteurUtils->getTuteurByUser($this->user);
 
-        if (! $this->tuteurOfUser instanceof Tuteur) {
+        if (!$this->tuteurOfUser instanceof Tuteur) {
             return false;
         }
 
         $relations = $this->relationRepository->findByTuteur($this->tuteurOfUser);
 
         $enfants = array_map(
-            static fn($relation) => $relation->getEnfant()->getId(),
+            static fn ($relation) => $relation->getEnfant()->getId(),
             $relations
         );
 

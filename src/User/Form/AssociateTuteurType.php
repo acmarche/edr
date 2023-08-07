@@ -24,7 +24,7 @@ final class AssociateTuteurType extends AbstractType
                     'class' => Tuteur::class,
                     'placeholder' => 'Sélectionnez le parent',
                     'required' => true,
-                    'query_builder' => static fn(TuteurRepository $cr) => $cr->findForAssociateParent(),
+                    'query_builder' => static fn (TuteurRepository $cr) => $cr->findForAssociateParent(),
                 ]
             )
             ->add(

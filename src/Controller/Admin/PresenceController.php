@@ -204,7 +204,7 @@ final class PresenceController extends AbstractController
     public function delete(Request $request, Presence $presence): RedirectResponse
     {
         $enfant = $presence->getEnfant();
-        if ($this->isCsrfTokenValid('delete'.$presence->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $presence->getId(), $request->request->get('_token'))) {
             if ($this->factureHandler->isBilled($presence->getId(), FactureInterface::OBJECT_PRESENCE)) {
                 $this->addFlash('danger', 'Une présence déjà facturée ne peut être supprimée');
 

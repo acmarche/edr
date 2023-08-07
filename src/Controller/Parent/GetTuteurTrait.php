@@ -23,7 +23,7 @@ trait GetTuteurTrait
     {
         $user = $this->getUser();
 
-        if (! $this->tuteur = $this->tuteurUtils->getTuteurByUser($user)) {
+        if (!$this->tuteur = $this->tuteurUtils->getTuteurByUser($user)) {
             return $this->redirectToRoute('edr_parent_nouveau');
         }
 

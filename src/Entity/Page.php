@@ -92,5 +92,4 @@ class Page implements SluggableInterface, Stringable
     {
         $this->menu = $menu;
     }
-
 }

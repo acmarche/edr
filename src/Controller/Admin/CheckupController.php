@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Controller\Admin;
 
-use AcMarche\Edr\Entity\Presence\Presence;
 use AcMarche\Edr\Contrat\Facture\FactureCalculatorInterface;
 use AcMarche\Edr\Contrat\Presence\PresenceCalculatorInterface;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
+use AcMarche\Edr\Entity\Presence\Presence;
 use AcMarche\Edr\Facture\FactureInterface;
 use AcMarche\Edr\Facture\Repository\FacturePresenceRepository;
 use AcMarche\Edr\Facture\Repository\FactureRepository;
@@ -20,7 +20,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 #[Route(path: '/checkup')]
 #[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
@@ -196,8 +195,8 @@ final class CheckupController extends AbstractController
                     $data[$i]['facture'] = $facture;
                     $data[$i]['presences'][] = [
                         'object' => $presence,
-                        'prix' => 'Passe de '.$prixFactured.' € à '.$prix.' €',
-                        'ordre' => 'Passe de '.$ordreFactured.' à '.$ordre,
+                        'prix' => 'Passe de ' . $prixFactured . ' € à ' . $prix . ' €',
+                        'ordre' => 'Passe de ' . $ordreFactured . ' à ' . $ordre,
                     ];
                     if ($presence instanceof Presence) {
                         $newcout = $this->presenceCalculator->calculate(
@@ -205,7 +204,7 @@ final class CheckupController extends AbstractController
                         );
                     }
 
-                    if (! isset($data[$i]['montant'])) {
+                    if (!isset($data[$i]['montant'])) {
                         $data[$i]['montant'] = 0;
                     }
 

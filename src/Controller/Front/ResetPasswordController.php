@@ -2,7 +2,6 @@
 
 namespace AcMarche\Edr\Controller\Front;
 
-use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 use AcMarche\Edr\Entity\Security\User;
 use AcMarche\Edr\Mailer\Factory\RegistrationMailerFactory;
 use AcMarche\Edr\Mailer\NotificationMailer;
@@ -17,6 +16,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
+use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 #[Route(path: '/reset-password')]

@@ -4,11 +4,8 @@ namespace AcMarche\Edr\Tests\Pest;
 
 class Pest
 {
-
     public function do()
     {
-
-
         /*
         |--------------------------------------------------------------------------
         | Test Case
@@ -20,7 +17,7 @@ class Pest
         |
         */
 
-// uses(Tests\TestCase::class)->in('Feature');
+        // uses(Tests\TestCase::class)->in('Feature');
 
         /*
         |--------------------------------------------------------------------------
@@ -33,7 +30,7 @@ class Pest
         |
         */
 
-        expect()->extend('toBeOne', fn() => $this->toBe(1));
+        expect()->extend('toBeOne', fn () => $this->toBe(1));
     }
 
     /*
@@ -51,5 +48,4 @@ class Pest
     {
         // ..
     }
-
 }

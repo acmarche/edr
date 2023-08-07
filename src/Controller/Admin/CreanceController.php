@@ -106,7 +106,7 @@ final class CreanceController extends AbstractController
     public function delete(Request $request, Creance $creance): RedirectResponse
     {
         $tuteur = $creance->getTuteur();
-        if ($this->isCsrfTokenValid('delete'.$creance->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $creance->getId(), $request->request->get('_token'))) {
             $this->creanceRepository->remove($creance);
             $this->creanceRepository->flush();
 

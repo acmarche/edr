@@ -17,7 +17,7 @@ class PresenceConstraintPass implements CompilerPassInterface
     public function process(ContainerBuilder $container): void
     {
         // always first check finds out if there is an "PresenceConstraintInterface" definition or alias
-        if (! $container->has(PresenceConstraintInterface::class)) {
+        if (!$container->has(PresenceConstraintInterface::class)) {
             return;
         }
 

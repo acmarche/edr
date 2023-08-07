@@ -121,7 +121,7 @@ final class TuteurController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_tuteur_delete', methods: ['POST'])]
     public function delete(Request $request, Tuteur $tuteur): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$tuteur->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $tuteur->getId(), $request->request->get('_token'))) {
             /*      if (count($this->presenceRepository->findByTuteur($tuteur)) > 0) {
                       $this->addFlash('danger', 'Ce tuteur ne peut pas être supprimé car il y a des présences à son nom');
 

@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
 final class DefaultController extends AbstractController
 {

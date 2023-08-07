@@ -95,14 +95,14 @@ class FactureEmailFactory
     public function attachFactureFromPath(NotificationEmail $message, Facture $facture): void
     {
         $path = $this->factureFactory->getBasePathFacture($facture->getMois());
-        $factureFile = $path.'facture-'.$facture->getId().'.pdf';
+        $factureFile = $path . 'facture-' . $facture->getId() . '.pdf';
 
         $date = $facture->getFactureLe();
-        if (! is_readable($factureFile)) {
-            throw new Exception('Pdf non trouvé '.$factureFile);
+        if (!is_readable($factureFile)) {
+            throw new Exception('Pdf non trouvé ' . $factureFile);
         }
 
-        $message->attachFromPath($factureFile, 'facture_'.$date->format('d-m-Y').'.pdf', 'application/pdf');
+        $message->attachFromPath($factureFile, 'facture_' . $date->format('d-m-Y') . '.pdf', 'application/pdf');
     }
 
     /**
@@ -114,7 +114,7 @@ class FactureEmailFactory
         $invoicepdf = $this->getPdf()->getOutputFromHtml($htmlInvoice);
 
         $date = $facture->getFactureLe();
-        $message->attach($invoicepdf, 'facture_'.$date->format('d-m-Y').'.pdf', 'application/pdf');
+        $message->attach($invoicepdf, 'facture_' . $date->format('d-m-Y') . '.pdf', 'application/pdf');
     }
 
     public function attachFacturePlaineOnTheFly(FactureInterface $facture, Email $message): void
@@ -123,6 +123,6 @@ class FactureEmailFactory
         $invoicepdf = $this->getPdf()->getOutputFromHtml($htmlInvoice);
 
         $date = $facture->getFactureLe();
-        $message->attach($invoicepdf, 'facture_'.$date->format('d-m-Y').'.pdf', 'application/pdf');
+        $message->attach($invoicepdf, 'facture_' . $date->format('d-m-Y') . '.pdf', 'application/pdf');
     }
 }

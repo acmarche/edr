@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[Route(path: '/attestation')]
 final class AttestationController extends AbstractController
 {
@@ -44,6 +43,6 @@ final class AttestationController extends AbstractController
             ]
         );
 
-        return $this->downloadPdf($html, $enfant->getSlug().'-attestation-'.$year.'.pdf');
+        return $this->downloadPdf($html, $enfant->getSlug() . '-attestation-' . $year . '.pdf');
     }
 }

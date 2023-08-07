@@ -101,7 +101,7 @@ final class GroupeScolaireController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_groupe_scolaire_delete', methods: ['POST'])]
     public function delete(Request $request, GroupeScolaire $groupeScolaire): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$groupeScolaire->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $groupeScolaire->getId(), $request->request->get('_token'))) {
             $ecoleId = $groupeScolaire->getId();
             $this->groupeScolaireRepository->remove($groupeScolaire);
             $this->groupeScolaireRepository->flush();

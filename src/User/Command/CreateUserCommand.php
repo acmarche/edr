@@ -44,7 +44,7 @@ final class CreateUserCommand extends Command
         $name = $input->getArgument('name');
         $password = $input->getArgument('password');
 
-        if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $symfonyStyle->error('Adresse email non valide');
 
             return Command::FAILURE;

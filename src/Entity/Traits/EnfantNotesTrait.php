@@ -24,7 +24,7 @@ trait EnfantNotesTrait
 
     public function addNote(Note $note): self
     {
-        if (! $this->notes->contains($note)) {
+        if (!$this->notes->contains($note)) {
             $this->notes[] = $note;
         }
 

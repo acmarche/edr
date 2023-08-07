@@ -48,14 +48,14 @@ class CommunicationFactoryHotton implements CommunicationFactoryInterface
         $ecoles = '';
         foreach ($facture->ecolesListing as $ecole) {
             if ($ecole->getAbreviation()) {
-                $ecoles .= $ecole->getAbreviation().' ';
+                $ecoles .= $ecole->getAbreviation() . ' ';
             } else {
                 $ecoles .= $ecole->getLocalite();
             }
         }
 
         //list($month, $year) = explode('-', $facture->getMois());
-        $communication = $ecoles.' '.$facture->getId().' '.$facture->getMois();
+        $communication = $ecoles . ' ' . $facture->getId() . ' ' . $facture->getMois();
 
         return $communication;
     }
@@ -63,10 +63,10 @@ class CommunicationFactoryHotton implements CommunicationFactoryInterface
     public function generateForPlaine(Plaine $plaine, FactureInterface $facture): string
     {
         $communication = $plaine->getCommunication();
-        if (! $communication) {
-            return $plaine->getSlug().' '.$facture->getId();
+        if (!$communication) {
+            return $plaine->getSlug() . ' ' . $facture->getId();
         }
 
-        return $communication.' '.$facture->getId();
+        return $communication . ' ' . $facture->getId();
     }
 }

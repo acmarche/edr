@@ -21,7 +21,7 @@ class UserEmailFactory
 
         $message = NotificationEmailJf::asPublicEmailJf();
         $message
-            ->subject('informations sur votre compte '.$this->organisation->getNom())
+            ->subject('informations sur votre compte ' . $this->organisation->getNom())
             ->from($from)
             ->to($user->getEmail())
             ->bcc($from)
@@ -48,7 +48,7 @@ class UserEmailFactory
 
         $message = NotificationEmailJf::asPublicEmailJf();
         $message
-            ->subject('informations sur votre compte de '.$this->organisation->getNom())
+            ->subject('informations sur votre compte de ' . $this->organisation->getNom())
             ->from($from)
             ->to($user->getEmail())
             ->bcc($from)

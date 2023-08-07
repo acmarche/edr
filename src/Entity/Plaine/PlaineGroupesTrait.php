@@ -21,7 +21,7 @@ trait PlaineGroupesTrait
 
     public function addPlaineGroupe(PlaineGroupe $plaineGroupe): self
     {
-        if (! $this->plaine_groupes->contains($plaineGroupe)) {
+        if (!$this->plaine_groupes->contains($plaineGroupe)) {
             $this->plaine_groupes[] = $plaineGroupe;
             $plaineGroupe->setPlaine($this);
         }

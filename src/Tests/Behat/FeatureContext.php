@@ -83,7 +83,7 @@ class FeatureContext extends MinkContext
         $sContent = $this->getSession()->getPage()->getText();
         $iFound = substr_count((string) $sContent, (string) $sText);
         if ($iExpected !== $iFound) {
-            throw new Exception('Found '.$iFound.' occurences of "'.$sText.'" when expecting '.$iExpected);
+            throw new Exception('Found ' . $iFound . ' occurences of "' . $sText . '" when expecting ' . $iExpected);
         }
     }
 }

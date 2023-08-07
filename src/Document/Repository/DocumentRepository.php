@@ -29,7 +29,7 @@ final class DocumentRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('document')
             ->andWhere('document.nom LIKE :keyword OR document.prenom LIKE :keyword')
-            ->setParameter('keyword', '%'.$keyword.'%')
+            ->setParameter('keyword', '%' . $keyword . '%')
             ->addOrderBy('document.nom', 'ASC')
             ->getQuery()->getResult();
     }

@@ -32,18 +32,18 @@ final class PresenceNewForParentType extends AbstractType
                     'choices' => $this->presenceDaysProvider->getAllDaysToSubscribe($enfant),
                     'multiple' => true,
                     'label' => 'Sélectionnez une ou plusieurs dates',
-                    'choice_label' => static function (Jour $jour) : string {
+                    'choice_label' => static function (Jour $jour): string {
                         $peda = '';
                         if ($jour->isPedagogique()) {
                             $ecoles = EcoleUtils::getNamesEcole($jour->getEcoles());
-                            $peda = '(Pédagogique '.$ecoles.')';
+                            $peda = '(Pédagogique ' . $ecoles . ')';
                         }
-                        return ucfirst(DateUtils::formatFr($jour->getDatejour()).' '.$peda);
+                        return ucfirst(DateUtils::formatFr($jour->getDatejour()) . ' ' . $peda);
                     },
                     'attr' => [
                         'style' => 'height:150px;',
                     ],
-                    'group_by' => static fn($date) => $date->getDateJour()->format('m').'-'.$date->getDateJour()->format('Y'),
+                    'group_by' => static fn ($date) => $date->getDateJour()->format('m') . '-' . $date->getDateJour()->format('Y'),
                 ]
             );
     }

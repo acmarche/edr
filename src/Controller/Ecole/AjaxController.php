@@ -2,9 +2,9 @@
 
 namespace AcMarche\Edr\Controller\Ecole;
 
-use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Accueil\Repository\AccueilRepository;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
+use AcMarche\Edr\Entity\Enfant;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

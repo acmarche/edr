@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/parent_enfant')]
 final class QuickController extends AbstractController

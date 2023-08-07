@@ -49,7 +49,7 @@ final class EnfantRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->getOrCreateQueryBuilder()
             ->andWhere('enfant.nom LIKE :keyword OR enfant.prenom LIKE :keyword')
-            ->setParameter('keyword', '%'.$keyword.'%');
+            ->setParameter('keyword', '%' . $keyword . '%');
 
         if ($actif) {
             $queryBuilder->andWhere('enfant.archived = 0');
@@ -119,7 +119,7 @@ final class EnfantRepository extends ServiceEntityRepository
 
         if ($nom) {
             $queryBuilder->andWhere('enfant.nom LIKE :keyword OR enfant.prenom LIKE :keyword')
-                ->setParameter('keyword', '%'.$nom.'%');
+                ->setParameter('keyword', '%' . $nom . '%');
         }
 
         if ($ecole instanceof Ecole) {
@@ -148,7 +148,7 @@ final class EnfantRepository extends ServiceEntityRepository
 
         if ($nom) {
             $queryBuilder->andWhere('enfant.nom LIKE :keyword OR enfant.prenom LIKE :keyword')
-                ->setParameter('keyword', '%'.$nom.'%');
+                ->setParameter('keyword', '%' . $nom . '%');
         }
 
         $queryBuilder->andWhere('enfant.ecole IN (:ecoles)')
@@ -197,7 +197,7 @@ final class EnfantRepository extends ServiceEntityRepository
 
         if ($nom) {
             $queryBuilder->andWhere('enfant.nom LIKE :keyword OR enfant.prenom LIKE :keyword')
-                ->setParameter('keyword', '%'.$nom.'%');
+                ->setParameter('keyword', '%' . $nom . '%');
         }
 
         return $queryBuilder

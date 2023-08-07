@@ -33,7 +33,7 @@ final class RelationController extends AbstractController
     #[Route(path: '/attach/enfant/{id}', name: 'edr_admin_relation_attach_enfant', methods: ['POST'])]
     public function attachEnfant(Request $request, Tuteur $tuteur): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('attachEnfant'.$tuteur->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('attachEnfant' . $tuteur->getId(), $request->request->get('_token'))) {
             $enfantId = (int) $request->request->get('enfantId');
 
             try {
@@ -83,21 +83,21 @@ final class RelationController extends AbstractController
     public function delete(Request $request): RedirectResponse
     {
         $relationId = $request->request->get('relationid');
-        if (! $relationId) {
+        if (!$relationId) {
             $this->addFlash('danger', 'Relation non trouvée');
 
             return $this->redirectToRoute('edr_admin_home');
         }
 
         $relation = $this->relationRepository->find($relationId);
-        if (! $relation instanceof Relation) {
+        if (!$relation instanceof Relation) {
             $this->addFlash('danger', 'Relation non trouvée');
 
             return $this->redirectToRoute('edr_admin_home');
         }
 
         $tuteur = $relation->getTuteur();
-        if ($this->isCsrfTokenValid('delete'.$relation->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $relation->getId(), $request->request->get('_token'))) {
             $this->relationRepository->remove($relation);
             $this->relationRepository->flush();
             $this->dispatcher->dispatch(new RelationDeleted($relationId));

@@ -66,14 +66,14 @@ final class AcMarcheEdrExtension extends Extension implements PrependExtensionIn
 
     protected function loadConfig(string $name): void
     {
-        $this->loader->load('packages/'.$name.'.php');
+        $this->loader->load('packages/' . $name . '.php');
     }
 
     protected function initPhpFilerLoader(ContainerBuilder $containerBuilder): PhpFileLoader
     {
         return new PhpFileLoader(
             $containerBuilder,
-            new FileLocator(__DIR__.'/../../config/'),
+            new FileLocator(__DIR__ . '/../../config/'),
             null,
             class_exists(ConfigBuilderGenerator::class) ? new ConfigBuilderGenerator(
                 $containerBuilder->getParameter('kernel.cache_dir')

@@ -34,7 +34,7 @@ final class EnfantType extends AbstractType
         $year = new DateTime('today');
         $year = $year->format('Y');
 
-        $isAdmin = ! $this->security->isGranted(EdrSecurityRole::ROLE_ADMIN);
+        $isAdmin = !$this->security->isGranted(EdrSecurityRole::ROLE_ADMIN);
 
         $formBuilder
             ->add(

@@ -32,14 +32,14 @@ class TuteurSubsciberFieldType implements EventSubscriberInterface
             $form = $event->getForm();
 
             //new
-            if (! $presence || null === $presence->getId()) {
+            if (!$presence || null === $presence->getId()) {
                 $form->add(
                     'jours',
                     EntityType::class,
                     [
                         'class' => Jour::class,
                         'multiple' => true,
-                        'query_builder' => static fn(JourRepository $cr) => $cr->getForList($enfant),
+                        'query_builder' => static fn (JourRepository $cr) => $cr->getForList($enfant),
                         'label' => 'Choisissez une ou plusieurs dates',
                     ]
                 );

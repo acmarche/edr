@@ -52,7 +52,7 @@ final class PresenceOneController extends AbstractController
             $data = [];
             foreach ($months as $monthString) {
                 try {
-                    $month = DateUtils::createDateTimeFromDayMonth($monthString.'/'.$year);
+                    $month = DateUtils::createDateTimeFromDayMonth($monthString . '/' . $year);
                     $dataMonth = ['days' => []];
                     $totalByMonth = 0;
                     foreach (DateUtils::getAllDaysOfMonth($month) as $day) {
@@ -85,7 +85,7 @@ final class PresenceOneController extends AbstractController
                 'prim' => 0,
             ];
 
-            $ref = DateUtils::createDateTimeFromDayMonth($months[0].'/'.$year);
+            $ref = DateUtils::createDateTimeFromDayMonth($months[0] . '/' . $year);
             foreach ($childs as $child) {
                 if ($child->getAge($ref) > 6) {
                     ++$ages['prim'];
@@ -105,5 +105,4 @@ final class PresenceOneController extends AbstractController
             ]
         );
     }
-
 }

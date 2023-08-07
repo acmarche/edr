@@ -2,12 +2,12 @@
 
 namespace AcMarche\Edr\Controller\Admin;
 
-use AcMarche\Edr\Facture\FactureInterface;
 use AcMarche\Edr\Contrat\Facture\FactureCalculatorInterface;
 use AcMarche\Edr\Contrat\Facture\FactureHandlerInterface;
 use AcMarche\Edr\Contrat\Facture\FactureRenderInterface;
 use AcMarche\Edr\Entity\Facture\Facture;
 use AcMarche\Edr\Entity\Tuteur;
+use AcMarche\Edr\Facture\FactureInterface;
 use AcMarche\Edr\Facture\Form\FactureEditType;
 use AcMarche\Edr\Facture\Form\FactureManualType;
 use AcMarche\Edr\Facture\Form\FacturePayerType;
@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 #[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/facture')]
@@ -187,7 +186,7 @@ final class FactureController extends AbstractController
             try {
                 $factures = $this->factureHandler->generateByMonthForEveryone($month);
             } catch (Exception $exception) {
-                $this->addFlash('danger', 'Erreur survenue: '.$exception->getMessage());
+                $this->addFlash('danger', 'Erreur survenue: ' . $exception->getMessage());
 
                 return $this->redirectToRoute('edr_admin_facture_new_month_all');
             }
@@ -279,7 +278,7 @@ final class FactureController extends AbstractController
     public function delete(Request $request, Facture $facture): RedirectResponse
     {
         $tuteur = null;
-        if ($this->isCsrfTokenValid('delete'.$facture->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $facture->getId(), $request->request->get('_token'))) {
             $factureId = $facture->getId();
             $tuteur = $facture->getTuteur();
             $this->factureRepository->remove($facture);

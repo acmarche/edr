@@ -145,7 +145,7 @@ final class NoteController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_note_delete', methods: ['POST'])]
     public function delete(Request $request, Note $note): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$note->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $note->getId(), $request->request->get('_token'))) {
             $enfant = $note->getEnfant();
             $noteId = $note->getId();
             $this->noteRepository->remove($note);

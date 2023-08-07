@@ -27,11 +27,11 @@ final class TuteurUtils
         $telephoneConjoint = $tuteur->getTelephoneConjoint();
 
         if ($gsm || $gsmConjoint) {
-            $telephones .= $gsm.' | '.$gsmConjoint;
+            $telephones .= $gsm . ' | ' . $gsmConjoint;
         } elseif ($telephoneBureau || $telephoneBureauConjoint) {
-            $telephones .= $telephoneBureau.' | '.$telephoneBureauConjoint;
+            $telephones .= $telephoneBureau . ' | ' . $telephoneBureauConjoint;
         } else {
-            $telephones .= $telephone.' | '.$telephoneConjoint;
+            $telephones .= $telephone . ' | ' . $telephoneConjoint;
         }
 
         return $telephones;
@@ -43,19 +43,19 @@ final class TuteurUtils
             return false;
         }
 
-        if (! $tuteur->getNom()) {
+        if (!$tuteur->getNom()) {
             return false;
         }
 
-        if (! $tuteur->getPrenom()) {
+        if (!$tuteur->getPrenom()) {
             return false;
         }
 
-        if (! $tuteur->getRue()) {
+        if (!$tuteur->getRue()) {
             return false;
         }
 
-        if (! $tuteur->getCodePostal()) {
+        if (!$tuteur->getCodePostal()) {
             return false;
         }
 
@@ -137,7 +137,7 @@ final class TuteurUtils
     {
         $data = [];
         foreach ($tuteurs as $tuteur) {
-            if (! $this->tuteurIsActif($tuteur)) {
+            if (!$this->tuteurIsActif($tuteur)) {
                 continue;
             }
 

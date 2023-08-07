@@ -40,7 +40,7 @@ final class ScolaireUtils
      */
     public function findGroupeScolaireEnfantByAge(?float $age): ?GroupeScolaire
     {
-        if (! $age) {
+        if (!$age) {
             return null;
         }
 

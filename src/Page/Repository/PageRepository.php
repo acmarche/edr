@@ -42,11 +42,11 @@ final class PageRepository extends ServiceEntityRepository
      */
     public function findToDisplayMenu(): array
     {
-       return $this->createQueryBuilder('page')
-           ->andWhere('page.menu = 1')
-           ->orderBy('page.position','ASC')
-           ->getQuery()
-           ->getResult();
+        return $this->createQueryBuilder('page')
+            ->andWhere('page.menu = 1')
+            ->orderBy('page.position', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     public function findHomePage(): ?Page

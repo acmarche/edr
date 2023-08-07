@@ -11,5 +11,5 @@ interface PresenceDaysProviderInterface
      * @return Jour[]
      */
     public function getAllDaysToSubscribe(Enfant $enfant): array
-   ;
+    ;
 }

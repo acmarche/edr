@@ -35,11 +35,11 @@ final class DateUtils
      */
     public static function createDateTimeFromDayMonth(string $mois): DateTime
     {
-        if ($date = DateTime::createFromFormat('d/m/Y', '01/'.$mois)) {
+        if ($date = DateTime::createFromFormat('d/m/Y', '01/' . $mois)) {
             return $date;
         }
 
-        throw new Exception('Mauvais format de date: '.$mois);
+        throw new Exception('Mauvais format de date: ' . $mois);
     }
 
     public static function formatFr(DateTimeInterface $dateTime, ?int $format = IntlDateFormatter::FULL): bool|string

@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/export')]
 final class ExportController extends AbstractController
@@ -51,7 +50,7 @@ final class ExportController extends AbstractController
     {
         $args = $this->searchHelper->getArgs(SearchHelper::PRESENCE_LIST_BY_MONTH);
         $mois = $args['mois'] ?? null;
-        if (! $mois) {
+        if (!$mois) {
             $this->addFlash('danger', 'Indiquez un mois');
 
             return $this->redirectToRoute('edr_admin_presence_by_month');
@@ -65,7 +64,7 @@ final class ExportController extends AbstractController
             return $this->redirectToRoute('edr_admin_presence_by_month');
         }
 
-        $fileName = 'listing-'.$date->format('m-Y').'.xls';
+        $fileName = 'listing-' . $date->format('m-Y') . '.xls';
         $listingPresences = $this->listingPresenceByMonth->create($date);
         if ($one) {
             $spreadsheet = $this->spreadsheetFactory->createXlsByMonthForOne($date, $listingPresences);

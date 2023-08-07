@@ -92,9 +92,9 @@ class FacturePdfPresenceMarche implements FacturePdfPresenceInterface
 
     private function groupPresences(FacturePresence $facturePresence, array $data): array
     {
-        $enfant = $facturePresence->getNom().' '.$facturePresence->getPrenom();
+        $enfant = $facturePresence->getNom() . ' ' . $facturePresence->getPrenom();
         $slug = $this->factureUtils->slugger->slug($enfant);
-        if (! $facturePresence->isPedagogique()) {
+        if (!$facturePresence->isPedagogique()) {
             ++$data['enfants'][$slug->toString()]['edr'];
         }
 

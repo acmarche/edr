@@ -47,7 +47,7 @@ final class AnimateurVoter extends Voter
     protected function supports($attribute, $subject): bool
     {
         //a cause de index pas d'animateur defini
-        if ($subject && ! $subject instanceof Animateur) {
+        if ($subject && !$subject instanceof Animateur) {
             return false;
         }
 
@@ -56,7 +56,7 @@ final class AnimateurVoter extends Voter
 
     protected function voteOnAttribute($attribute, $animateur, TokenInterface $token): bool
     {
-        if (! $token->getUser() instanceof UserInterface) {
+        if (!$token->getUser() instanceof UserInterface) {
             return false;
         }
 
@@ -66,7 +66,7 @@ final class AnimateurVoter extends Voter
             return true;
         }
 
-        if (! $this->security->isGranted(EdrSecurityRole::ROLE_ANIMATEUR)) {
+        if (!$this->security->isGranted(EdrSecurityRole::ROLE_ANIMATEUR)) {
             return false;
         }
 
@@ -94,7 +94,7 @@ final class AnimateurVoter extends Voter
 
     private function canEdit(): bool
     {
-        if (! $this->checkAnimateurs()) {
+        if (!$this->checkAnimateurs()) {
             return false;
         }
 

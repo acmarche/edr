@@ -101,7 +101,7 @@ final class SanteQuestionController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_sante_question_delete', methods: ['POST'])]
     public function delete(Request $request, SanteQuestion $santeQuestion): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$santeQuestion->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $santeQuestion->getId(), $request->request->get('_token'))) {
             $id = $santeQuestion->getId();
             $this->santeQuestionRepository->remove($santeQuestion);
             $this->santeQuestionRepository->flush();

@@ -101,7 +101,7 @@ final class PageController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_page_delete', methods: ['POST'])]
     public function delete(Request $request, Page $page): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$page->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $page->getId(), $request->request->get('_token'))) {
             $pageId = $page->getId();
             $this->pageRepository->remove($page);
             $this->pageRepository->flush();

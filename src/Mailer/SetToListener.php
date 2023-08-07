@@ -12,7 +12,7 @@ class SetToListener implements EventSubscriberInterface
     public function onMessage(MessageEvent $event): void
     {
         $email = $event->getMessage();
-        if (! $email instanceof Email) {
+        if (!$email instanceof Email) {
             return;
         }
 

@@ -46,7 +46,7 @@ class FacturePlaineHandler implements FacturePlaineHandlerInterface
         $this->attachPresences($facture, $plaine, $presences);
         $this->factureFactory->setEcoles($facture);
 
-        if (! $facture->getId()) {
+        if (!$facture->getId()) {
             $this->factureRepository->persist($facture);
         }
 

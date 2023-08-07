@@ -2,8 +2,6 @@
 
 namespace AcMarche\Edr\Facture\Handler;
 
-use DateTimeInterface;
-use AcMarche\Edr\Entity\Scolaire\Ecole;
 use AcMarche\Edr\Accueil\Calculator\AccueilCalculatorInterface;
 use AcMarche\Edr\Accueil\Repository\AccueilRepository;
 use AcMarche\Edr\Contrat\Facture\FactureHandlerInterface;
@@ -14,6 +12,7 @@ use AcMarche\Edr\Entity\Facture\FactureComplement;
 use AcMarche\Edr\Entity\Facture\FacturePresence;
 use AcMarche\Edr\Entity\Presence\Accueil;
 use AcMarche\Edr\Entity\Presence\Presence;
+use AcMarche\Edr\Entity\Scolaire\Ecole;
 use AcMarche\Edr\Entity\Tuteur;
 use AcMarche\Edr\Facture\Factory\CommunicationFactoryInterface;
 use AcMarche\Edr\Facture\Factory\FactureFactory;
@@ -26,6 +25,7 @@ use AcMarche\Edr\Tuteur\Repository\TuteurRepository;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use DateTime;
+use DateTimeInterface;
 
 final class FactureHandler implements FactureHandlerInterface
 {
@@ -172,7 +172,7 @@ final class FactureHandler implements FactureHandlerInterface
         $this->attachRetard($facture, $accueils);
         $this->factureFactory->setEcoles($facture);
 
-        if (! $facture->getId()) {
+        if (!$facture->getId()) {
             $this->factureRepository->persist($facture);
         }
 
@@ -241,7 +241,7 @@ final class FactureHandler implements FactureHandlerInterface
             $complement = new FactureComplement($facture);
             $complement->setDateLe(new DateTime());
             $complement->setForfait($total);
-            $complement->setNom('Retard pour les accueils: '.implode(', ', $retards));
+            $complement->setNom('Retard pour les accueils: ' . implode(', ', $retards));
             $facture->addFactureComplement($complement);
             $this->factureRepository->persist($complement);
         }

@@ -26,7 +26,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/message')]
 final class MessageController extends AbstractController
@@ -71,7 +70,7 @@ final class MessageController extends AbstractController
                 $tuteurs[] = PresenceUtils::extractTuteurs($presences);
             }
 
-            if (! $jour && ! $ecole && ! $plaine) {
+            if (!$jour && !$ecole && !$plaine) {
                 $relations = $this->relationRepository->findTuteursActifs();
                 $tuteurs[] = RelationUtils::extractTuteurs($relations);
             }

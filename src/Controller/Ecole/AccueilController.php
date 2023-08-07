@@ -181,7 +181,7 @@ final class AccueilController extends AbstractController
                     'duree' => $accueil->getDuree(),
                     'tuteur' => $accueil->getTuteur()->getId(),
                 ];
-            //    $tuteurSelected = $accueil->getTuteur()->getId();
+                //    $tuteurSelected = $accueil->getTuteur()->getId();
             }
 
             $rows['tuteurSelected'] = $tuteurSelected;
@@ -238,10 +238,10 @@ final class AccueilController extends AbstractController
             $dateRetard = $data['date_retard'];
             $heureRetard = $data['heure_retard'];
             if (!($accueil = $this->accueilRepository->findOneByEnfantAndDayAndHour(
-                    $enfant,
-                    $dateRetard,
-                    AccueilInterface::SOIR
-                )) instanceof Accueil) {
+                $enfant,
+                $dateRetard,
+                AccueilInterface::SOIR
+            )) instanceof Accueil) {
                 $this->addFlash('danger', 'Aucun accueil encodé pour ce jour là. Veuillez d\'abord ajouté un accueil');
             } else {
                 $dateRetard->setTime($heureRetard->format('H'), $heureRetard->format('i'));

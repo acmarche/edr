@@ -10,7 +10,6 @@ use AcMarche\Edr\Jour\Repository\JourRepository;
 use AcMarche\Edr\Plaine\Repository\PlainePresenceRepository;
 use AcMarche\Edr\Plaine\Repository\PlaineRepository;
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 final class PlaineAdminHandler
@@ -32,7 +31,7 @@ final class PlaineAdminHandler
         if ([] === $currentJours) {
             $plaine->addJour(new Jour(new DateTime('today')));
             for ($i = 1; $i < 5; ++$i) {
-                $plaine->addJour(new Jour(new DateTime('+'.$i.' day')));
+                $plaine->addJour(new Jour(new DateTime('+' . $i . ' day')));
             }
         }
     }
@@ -75,10 +74,10 @@ final class PlaineAdminHandler
                 }
             }
 
-            if (! $found) {
+            if (!$found) {
                 if ($presences = $this->plainePresenceRepository->findByDay($jour, $plaine)) {
                     foreach ($presences as $presence) {
-                        if (! $this->factureHandler->isBilled($presence->getId(), FactureInterface::OBJECT_PLAINE)) {
+                        if (!$this->factureHandler->isBilled($presence->getId(), FactureInterface::OBJECT_PLAINE)) {
                             $this->jourRepository->remove($presence);
                         }
                     }

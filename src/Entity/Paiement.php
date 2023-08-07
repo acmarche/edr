@@ -67,12 +67,12 @@ class Paiement implements Stringable
 
     public function __toString(): string
     {
-        $string = $this->getTypePaiement().' du ';
+        $string = $this->getTypePaiement() . ' du ';
         if (null !== $this->getDatePaiement()) {
             $string .= $this->getDatePaiement()->format('d-m-Y');
         }
 
-        return $string.(' ('.$this->getMontant().' €)');
+        return $string . (' (' . $this->getMontant() . ' €)');
     }
 
     public function getId(): ?int

@@ -48,8 +48,8 @@ final class AccueilController extends AbstractController
         $accueils = [];
         $grouped = false;
         $date = null;
-        $count =0;
-        $heure='';
+        $count = 0;
+        $heure = '';
         $form = $this->createForm(SearchAccueilByDate::class, []);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -178,7 +178,7 @@ final class AccueilController extends AbstractController
     public function delete(Request $request, Accueil $accueil): RedirectResponse
     {
         $enfant = null;
-        if ($this->isCsrfTokenValid('delete'.$accueil->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $accueil->getId(), $request->request->get('_token'))) {
             if ($this->factureHandler->isBilled($accueil->getId(), FactureInterface::OBJECT_ACCUEIL)) {
                 $this->addFlash('danger', 'Un accueil déjà facturé ne peut être supprimé');
 

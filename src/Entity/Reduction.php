@@ -30,7 +30,7 @@ class Reduction implements Stringable
 
     public function __toString(): string
     {
-        return $this->getNom().' ('.$this->pourcentage.'%)';
+        return $this->getNom() . ' (' . $this->pourcentage . '%)';
     }
 
     public function getPourcentage(): ?float

@@ -29,7 +29,7 @@ final class UserAddSubscriber implements EventSubscriberInterface
     public function prePersist(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $object = $lifecycleEventArgs->getObject();
-        if (! $this->propertyUtil->getPropertyAccessor()->isWritable($object, 'userAdd')) {
+        if (!$this->propertyUtil->getPropertyAccessor()->isWritable($object, 'userAdd')) {
             return;
         }
 
@@ -45,7 +45,7 @@ final class UserAddSubscriber implements EventSubscriberInterface
 
         $user = $this->security->getUser();
 
-        if (! $user instanceof UserInterface) {
+        if (!$user instanceof UserInterface) {
             throw new Exception('You must be login');
         }
 

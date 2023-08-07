@@ -107,7 +107,7 @@ final class DocumentController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_document_delete', methods: ['POST'])]
     public function delete(Request $request, Document $document): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$document->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $document->getId(), $request->request->get('_token'))) {
             $id = $document->getId();
             $this->documentRepository->remove($document);
             $this->documentRepository->flush();

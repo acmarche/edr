@@ -21,7 +21,7 @@ final class UserFactory
     public function getInstance(?string $email = null): ?User
     {
         $user = new User();
-        if ($email && ! $user = $this->userRepository->findOneByEmailOrUserName($email)) {
+        if ($email && !$user = $this->userRepository->findOneByEmailOrUserName($email)) {
             $user = new User();
             $user->setEmail($email);
             $user->setUsername($email);
@@ -34,7 +34,7 @@ final class UserFactory
 
     public function newFromAnimateur(Animateur $animateur, ?User $user = null): ?User
     {
-        if (! $user instanceof User) {
+        if (!$user instanceof User) {
             $user = $this->getInstance($animateur->getEmail());
             $user->setNom($animateur->getNom());
             $user->setPrenom($animateur->getPreNom());
@@ -57,7 +57,7 @@ final class UserFactory
 
     public function newFromTuteur(Tuteur $tuteur, ?User $user = null): ?User
     {
-        if (! $user instanceof User) {
+        if (!$user instanceof User) {
             $user = $this->getInstance($tuteur->getEmail());
             $user->setNom($tuteur->getNom());
             $user->setPrenom($tuteur->getPreNom());

@@ -22,7 +22,7 @@ class FactureUtils
     {
         $enfants = [];
         foreach ($facture->getFacturePresences() as $facturePresence) {
-            $enfant = $facturePresence->getNom().' '.$facturePresence->getPrenom();
+            $enfant = $facturePresence->getNom() . ' ' . $facturePresence->getPrenom();
             $slug = $this->slugger->slug($enfant);
             $enfants[$slug->toString()] = $enfant;
         }
@@ -42,7 +42,7 @@ class FactureUtils
             $tuteur = $facture->getTuteur();
             $data[$tuteur->getId()]['tuteur'] = $tuteur;
             $data[$tuteur->getId()]['factures'][] = $facture;
-            if(!isset($data[$tuteur->getId()]['total'])){
+            if (!isset($data[$tuteur->getId()]['total'])) {
                 $data[$tuteur->getId()]['total'] = $facture->factureDetailDto->total;
             }
 

@@ -154,8 +154,8 @@ final class PlaineController extends AbstractController
             } else {
                 $this->addFlash(
                     'danger',
-                    'Les inscriptions n\'ont pas pu être ouvrir car la plaine '.$plaineOpen->getNom(
-                    ).' est toujours ouverte'
+                    'Les inscriptions n\'ont pas pu être ouvrir car la plaine ' . $plaineOpen->getNom(
+                    ) . ' est toujours ouverte'
                 );
             }
 
@@ -176,7 +176,7 @@ final class PlaineController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_plaine_delete', methods: ['POST'])]
     public function delete(Request $request, Plaine $plaine): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$plaine->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $plaine->getId(), $request->request->get('_token'))) {
             $plaineId = $plaine->getId();
             $this->plaineRepository->remove($plaine);
             $this->plaineRepository->flush();

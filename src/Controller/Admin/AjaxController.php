@@ -2,9 +2,9 @@
 
 namespace AcMarche\Edr\Controller\Admin;
 
-use AcMarche\Edr\Entity\Sante\SanteQuestion;
-use AcMarche\Edr\Entity\Page;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
+use AcMarche\Edr\Entity\Page;
+use AcMarche\Edr\Entity\Sante\SanteQuestion;
 use AcMarche\Edr\Page\Repository\PageRepository;
 use AcMarche\Edr\Sante\Repository\SanteQuestionRepository;
 use AcMarche\Edr\Tuteur\Repository\TuteurRepository;
@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 #[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/ajax')]
@@ -117,7 +116,7 @@ final class AjaxController extends AbstractController
                 $this->pageRepository->flush();
             }
 
-            return new Response('<div class="alert alert-success">Tri enregistré '.$position.'</div>');
+            return new Response('<div class="alert alert-success">Tri enregistré ' . $position . '</div>');
         }
 
         return new Response('<div class="alert alert-danger">Faill</div>');

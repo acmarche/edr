@@ -101,7 +101,7 @@ final class AnneeScolaireController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_annee_scolaire_delete', methods: ['POST'])]
     public function delete(Request $request, AnneeScolaire $anneeScolaire): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$anneeScolaire->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $anneeScolaire->getId(), $request->request->get('_token'))) {
             if (\count($anneeScolaire->getEnfants()) > 0) {
                 $this->addFlash('danger', 'Une année scolaire contenant des enfants ne peux pas être supprimée');
 

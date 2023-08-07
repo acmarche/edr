@@ -105,7 +105,7 @@ class GroupeScolaire implements Stringable
 
     public function addEnfant(Enfant $enfant): self
     {
-        if (! $this->enfants->contains($enfant)) {
+        if (!$this->enfants->contains($enfant)) {
             $this->enfants[] = $enfant;
             $enfant->setGroupeScolaire($this);
         }
@@ -133,7 +133,7 @@ class GroupeScolaire implements Stringable
 
     public function addAnneesScolaire(AnneeScolaire $anneesScolaire): self
     {
-        if (! $this->annees_scolaires->contains($anneesScolaire)) {
+        if (!$this->annees_scolaires->contains($anneesScolaire)) {
             $this->annees_scolaires[] = $anneesScolaire;
             $anneesScolaire->setGroupeScolaire($this);
         }
@@ -161,7 +161,7 @@ class GroupeScolaire implements Stringable
 
     public function addPlaineGroupe(PlaineGroupe $plaineGroupe): self
     {
-        if (! $this->plaine_groupes->contains($plaineGroupe)) {
+        if (!$this->plaine_groupes->contains($plaineGroupe)) {
             $this->plaine_groupes[] = $plaineGroupe;
             $plaineGroupe->setGroupeScolaire($this);
         }

@@ -55,7 +55,7 @@ class AnneeScolaire implements Stringable
 
     public function addEnfant(Enfant $enfant): self
     {
-        if (! $this->enfants->contains($enfant)) {
+        if (!$this->enfants->contains($enfant)) {
             $this->enfants[] = $enfant;
             $enfant->setAnneeScolaire($this);
         }

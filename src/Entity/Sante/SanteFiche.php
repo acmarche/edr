@@ -70,7 +70,7 @@ class SanteFiche implements TimestampableInterface, Stringable
 
     public function __toString(): string
     {
-        return 'Fiche '.$this->id;
+        return 'Fiche ' . $this->id;
     }
 
     public function getPersonneUrgence(): ?string
