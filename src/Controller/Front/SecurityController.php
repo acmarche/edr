@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Controller\Front;
 
+use Symfony\Component\Security\Core\User\UserInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,9 +14,10 @@ final class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if (null !== $this->getUser()) {
+        if ($this->getUser() instanceof UserInterface) {
             return $this->redirectToRoute('edr_front_home');
         }
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -31,7 +33,7 @@ final class SecurityController extends AbstractController
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
-    public function logout(): void
+    public function logout(): never
     {
         throw new LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }

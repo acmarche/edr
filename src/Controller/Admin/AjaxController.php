@@ -2,6 +2,8 @@
 
 namespace AcMarche\Edr\Controller\Admin;
 
+use AcMarche\Edr\Entity\Sante\SanteQuestion;
+use AcMarche\Edr\Entity\Page;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
 use AcMarche\Edr\Page\Repository\PageRepository;
 use AcMarche\Edr\Sante\Repository\SanteQuestionRepository;
@@ -19,10 +21,10 @@ use Symfony\Component\Routing\Annotation\Route;
 final class AjaxController extends AbstractController
 {
     public function __construct(
-        private EnfantRepository $enfantRepository,
-        private TuteurRepository $tuteurRepository,
-        private SanteQuestionRepository $santeQuestionRepository,
-        private PageRepository $pageRepository
+        private readonly EnfantRepository $enfantRepository,
+        private readonly TuteurRepository $tuteurRepository,
+        private readonly SanteQuestionRepository $santeQuestionRepository,
+        private readonly PageRepository $pageRepository
     ) {
     }
 
@@ -94,10 +96,11 @@ final class AjaxController extends AbstractController
         $questions = $data->questions;
         foreach ($questions as $position => $questionId) {
             $question = $this->santeQuestionRepository->find($questionId);
-            if (null !== $question) {
+            if ($question instanceof SanteQuestion) {
                 $question->setDisplayOrder($position);
             }
         }
+
         $this->santeQuestionRepository->flush();
 
         return $this->json('<div class="alert alert-success">Tri enregistré</div>');
@@ -109,7 +112,7 @@ final class AjaxController extends AbstractController
         $isAjax = $request->isXmlHttpRequest();
         if ($isAjax) {
             $position = $request->request->get('position');
-            if (($page = $this->pageRepository->find($id)) !== null) {
+            if (($page = $this->pageRepository->find($id)) instanceof Page) {
                 $page->setPosition($position);
                 $this->pageRepository->flush();
             }

@@ -21,21 +21,27 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class JourVoter extends Voter
 {
     public const ADD = 'jour_new';
+
     public const SHOW = 'jour_show';
+
     public const EDIT = 'jour_edit';
+
     public const DELETE = 'jour_delete';
 
     private ?UserInterface $user = null;
+
     private Jour $jour;
+
     /**
      * @var Jour[]|ArrayCollection
      */
     private iterable $jours;
+
     private ?Animateur $animateur = null;
 
     public function __construct(
         public RelationRepository $relationRepository,
-        private Security $security
+        private readonly Security $security
     ) {
     }
 

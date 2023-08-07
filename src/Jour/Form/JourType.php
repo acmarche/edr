@@ -23,7 +23,7 @@ final class JourType extends AbstractType
                 'date_jour',
                 DateWidgetType::class,
                 [
-                    'label' => 'Date du jour d\'accueil',
+                    'label' => "Date du jour d'accueil",
                 ]
             )
             ->add(
@@ -49,7 +49,7 @@ final class JourType extends AbstractType
                 EntityType::class,
                 [
                     'class' => Ecole::class,
-                    'query_builder' => fn (EcoleRepository $ecoleRepository) => $ecoleRepository->getQbForListing(),
+                    'query_builder' => static fn(EcoleRepository $ecoleRepository) => $ecoleRepository->getQbForListing(),
                     'help' => 'Donnée utilisée pour les journées pédagogiques',
                     'required' => false,
                     'multiple' => true,

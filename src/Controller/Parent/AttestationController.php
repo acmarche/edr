@@ -27,9 +27,10 @@ final class AttestationController extends AbstractController
     #[IsGranted(data: 'enfant_show', subject: 'enfant')]
     public function default(int $year, Enfant $enfant): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $relations = $this->relationRepository->findByTuteur($this->tuteur);
         $enfants = RelationUtils::extractEnfants($relations);
         $factures = [];

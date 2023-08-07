@@ -32,12 +32,12 @@ use Symfony\Component\Routing\Annotation\Route;
 final class PlainePresenceController extends AbstractController
 {
     public function __construct(
-        private PlaineHandlerInterface $plaineHandler,
-        private EnfantRepository $enfantRepository,
-        private RelationRepository $relationRepository,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private PlaineCalculatorInterface $plaineCalculator,
-        private MessageBusInterface $dispatcher
+        private readonly PlaineHandlerInterface $plaineHandler,
+        private readonly EnfantRepository $enfantRepository,
+        private readonly RelationRepository $relationRepository,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly PlaineCalculatorInterface $plaineCalculator,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -45,18 +45,20 @@ final class PlainePresenceController extends AbstractController
     public function new(Request $request, Plaine $plaine): Response
     {
         if (0 === \count($plaine->getJours())) {
-            $this->addFlash('danger', 'La plaine n\'a aucune date');
+            $this->addFlash('danger', "La plaine n'a aucune date");
 
             return $this->redirectToRoute('edr_admin_plaine_show', [
                 'id' => $plaine->getId(),
             ]);
         }
+
         $nom = null;
         $form = $this->createForm(SearchNameType::class, null);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $nom = $form->get('nom')->getData();
         }
+
         $enfants = $nom ? $this->enfantRepository->findByName($nom) : $this->enfantRepository->findAllActif();
 
         return $this->render(
@@ -121,6 +123,7 @@ final class PlainePresenceController extends AbstractController
     {
         $presences = $this->plainePresenceRepository->findByPlaineAndEnfant($plaine, $enfant);
         $presences = SortUtils::sortPresences($presences);
+
         $cout = $this->plaineCalculator->calculate($plaine, $presences);
 
         return $this->render(
@@ -218,12 +221,14 @@ final class PlainePresenceController extends AbstractController
 
                 return $this->redirectToRoute('edr_admin_plaine_index');
             }
+
             $presence = $this->plainePresenceRepository->find($presenceId);
             if (null === $presence) {
                 $this->addFlash('danger', 'Présence non trouvée');
 
                 return $this->redirectToRoute('edr_admin_plaine_index');
             }
+
             $enfant = $presence->getEnfant();
             $this->plainePresenceRepository->remove($presence);
             $this->plainePresenceRepository->flush();

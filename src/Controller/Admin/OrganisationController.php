@@ -21,15 +21,15 @@ use Symfony\Component\Routing\Annotation\Route;
 final class OrganisationController extends AbstractController
 {
     public function __construct(
-        private OrganisationRepository $organisationRepository,
-        private MessageBusInterface $dispatcher
+        private readonly OrganisationRepository $organisationRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
     #[Route(path: '/', name: 'edr_admin_organisation_index', methods: ['GET'])]
     public function index(): Response
     {
-        if (null !== ($organisation = $this->organisationRepository->getOrganisation())) {
+        if (($organisation = $this->organisationRepository->getOrganisation()) instanceof Organisation) {
             return $this->redirectToRoute('edr_admin_organisation_show', [
                 'id' => $organisation->getId(),
             ]);
@@ -46,13 +46,14 @@ final class OrganisationController extends AbstractController
     #[Route(path: '/new', name: 'edr_admin_organisation_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
-        if (null !== ($organisation = $this->organisationRepository->getOrganisation())) {
+        if (($organisation = $this->organisationRepository->getOrganisation()) instanceof Organisation) {
             $this->addFlash('danger', 'Une seule organisation peut être enregistrée');
 
             return $this->redirectToRoute('edr_admin_organisation_show', [
                 'id' => $organisation->getId(),
             ]);
         }
+
         $organisation = new Organisation();
         $form = $this->createForm(OrganisationType::class, $organisation);
         $form->handleRequest($request);

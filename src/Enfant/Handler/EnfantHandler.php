@@ -11,8 +11,8 @@ use AcMarche\Edr\Relation\Repository\RelationRepository;
 final class EnfantHandler
 {
     public function __construct(
-        private EnfantRepository $enfantRepository,
-        private RelationRepository $relationRepository
+        private readonly EnfantRepository $enfantRepository,
+        private readonly RelationRepository $relationRepository
     ) {
     }
 

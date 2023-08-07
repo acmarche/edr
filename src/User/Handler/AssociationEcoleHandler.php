@@ -11,13 +11,13 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class AssociationEcoleHandler
 {
-    private FlashBagInterface $flashBag;
+    private readonly FlashBagInterface $flashBag;
 
     public function __construct(
-        private EcoleRepository $ecoleRepository,
+        private readonly EcoleRepository $ecoleRepository,
         RequestStack $requestStack
     ) {
-        $this->flashBag = $requestStack->getSession()?->getFlashBag();
+        $this->flashBag = $requestStack->getSession()->getFlashBag();
     }
 
     public function handleAssociateEcole(AssociateUserEcoleDto $associateUserEcoleDto): void

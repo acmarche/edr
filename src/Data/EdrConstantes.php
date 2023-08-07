@@ -8,6 +8,7 @@ final class EdrConstantes
         'Masculin' => 'Masculin',
         'Féminin' => 'Féminin',
     ];
+
     public const ORDRES = [
         '0' => 0,
         1 => 1,
@@ -16,7 +17,9 @@ final class EdrConstantes
     ];
 
     public const ABSENCE_NON = 0;
+
     public const ABSENCE_AVEC_CERTIF = 1;
+
     public const ABSENCE_SANS_CERTIF = -1;
 
     public static function getListAbsences(): array

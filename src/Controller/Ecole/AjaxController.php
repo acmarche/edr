@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Controller\Ecole;
 
+use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Accueil\Repository\AccueilRepository;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -13,8 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class AjaxController extends AbstractController
 {
     public function __construct(
-        private AccueilRepository $accueilRepository,
-        private EnfantRepository $enfantRepository
+        private readonly AccueilRepository $accueilRepository,
+        private readonly EnfantRepository $enfantRepository
     ) {
     }
 
@@ -27,11 +28,12 @@ class AjaxController extends AbstractController
         $date = $data->date;
         $heure = $data->heure;
         $duree = $data->duree;
-        if (($enfant = $this->enfantRepository->find($enfantId)) === null) {
+        if (!($enfant = $this->enfantRepository->find($enfantId)) instanceof Enfant) {
             return $this->json([
                 'error' => 'Enfant non trouvé',
             ]);
         }
+
         $accueil = $this->accueilRepository->findByEnfantDateAndHeure($enfant, $date, $heure);
 
         return $this->json($data);

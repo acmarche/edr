@@ -24,18 +24,23 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class PresenceVoter extends Voter
 {
     public const ADD = 'presence_new';
+
     public const SHOW = 'presence_show';
+
     public const EDIT = 'presence_edit';
+
     public const DELETE = 'presence_delete';
 
     public ?Tuteur $tuteurOfUser = null;
+
     private ?UserInterface $user = null;
+
     private ?Enfant $enfant = null;
 
     public function __construct(
-        private RelationRepository $relationRepository,
-        private TuteurUtils $tuteurUtils,
-        private Security $security
+        private readonly RelationRepository $relationRepository,
+        private readonly TuteurUtils $tuteurUtils,
+        private readonly Security $security
     ) {
     }
 
@@ -128,7 +133,7 @@ final class PresenceVoter extends Voter
         $relations = $this->relationRepository->findByTuteur($this->tuteurOfUser);
 
         $enfants = array_map(
-            fn ($relation) => $relation->getEnfant()->getId(),
+            static fn($relation) => $relation->getEnfant()->getId(),
             $relations
         );
 

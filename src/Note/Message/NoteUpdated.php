@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Note\Message;
 final class NoteUpdated
 {
     public function __construct(
-        private int $noteId
+        private readonly int $noteId
     ) {
     }
 

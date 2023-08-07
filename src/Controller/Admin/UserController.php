@@ -27,9 +27,9 @@ use Symfony\Component\Routing\Annotation\Route;
 final class UserController extends AbstractController
 {
     public function __construct(
-        private UserRepository $userRepository,
-        private UserPasswordHasherInterface $userPasswordEncoder,
-        private MessageBusInterface $dispatcher
+        private readonly UserRepository $userRepository,
+        private readonly UserPasswordHasherInterface $userPasswordEncoder,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -100,6 +100,7 @@ final class UserController extends AbstractController
         $user = User::newFromObject($tuteur);
         $user->addRole(EdrSecurityRole::ROLE_PARENT);
         $user->addTuteur($tuteur);
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

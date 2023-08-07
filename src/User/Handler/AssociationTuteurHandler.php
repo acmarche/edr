@@ -15,23 +15,23 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class AssociationTuteurHandler
 {
-    private FlashBagInterface $flashBag;
+    private readonly FlashBagInterface $flashBag;
 
     public function __construct(
-        private TuteurRepository $tuteurRepository,
-        private UserFactory $userFactory,
-        private NotificationMailer $notificationMailer,
-        private UserEmailFactory $userEmailFactory,
+        private readonly TuteurRepository $tuteurRepository,
+        private readonly UserFactory $userFactory,
+        private readonly NotificationMailer $notificationMailer,
+        private readonly UserEmailFactory $userEmailFactory,
         RequestStack $requestStack
     ) {
-        $this->flashBag = $requestStack->getSession()?->getFlashBag();
+        $this->flashBag = $requestStack->getSession()->getFlashBag();
     }
 
     public function suggestTuteur(User $user, AssociateUserTuteurDto $associateUserTuteurDto): void
     {
         try {
             $tuteur = $this->tuteurRepository->findOneByEmail($user->getEmail());
-            if (null !== $tuteur) {
+            if ($tuteur instanceof Tuteur) {
                 $associateUserTuteurDto->setTuteur($tuteur);
             }
         } catch (NonUniqueResultException) {
@@ -48,11 +48,12 @@ final class AssociationTuteurHandler
             $user->getTuteurs()->clear();
         }
 
-        if (null === $tuteur) {
+        if (!$tuteur instanceof Tuteur) {
             $this->flashBag->add('danger', 'Aucun tuteur sélectionné.');
 
             return;
         }
+
         $user->addTuteur($tuteur);
         $this->tuteurRepository->flush();
 

@@ -9,6 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait OrganisationPropertyInitTrait
 {
     private OrganisationRepository $organisationRepository;
+
     private ?Organisation $organisation = null;
 
     #[Required]

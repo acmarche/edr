@@ -22,8 +22,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class NoteController extends AbstractController
 {
     public function __construct(
-        private NoteRepository $noteRepository,
-        private MessageBusInterface $dispatcher
+        private readonly NoteRepository $noteRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 

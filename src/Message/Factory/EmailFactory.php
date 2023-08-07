@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Message\Factory;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use AcMarche\Edr\Entity\Message;
 use AcMarche\Edr\Entity\Plaine\Plaine;
 use AcMarche\Edr\Mailer\NotificationEmailJf;
@@ -13,7 +14,7 @@ final class EmailFactory
     use OrganisationPropertyInitTrait;
 
     public function __construct(
-        private StorageInterface $storage
+        private readonly StorageInterface $storage
     ) {
     }
 
@@ -33,7 +34,7 @@ final class EmailFactory
         /*
          * Pieces jointes.
          */
-        if (null !== ($uploadedFile = $message->getFile())) {
+        if (($uploadedFile = $message->getFile()) instanceof UploadedFile) {
             $notification->attachFromPath(
                 $uploadedFile->getRealPath(),
                 $uploadedFile->getClientOriginalName(),

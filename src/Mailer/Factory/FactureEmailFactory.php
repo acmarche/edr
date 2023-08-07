@@ -27,10 +27,10 @@ class FactureEmailFactory
     use PdfDownloaderTrait;
 
     public function __construct(
-        private FacturePdfPresenceInterface $facturePdfPresence,
-        private FacturePdfPlaineInterface $facturePdfPlaine,
-        private FactureFactory $factureFactory,
-        private ParameterBagInterface $parameterBag
+        private readonly FacturePdfPresenceInterface $facturePdfPresence,
+        private readonly FacturePdfPlaineInterface $facturePdfPlaine,
+        private readonly FactureFactory $factureFactory,
+        private readonly ParameterBagInterface $parameterBag
     ) {
     }
 
@@ -38,7 +38,7 @@ class FactureEmailFactory
     {
         $data = [];
         $data['from'] = $this->getEmailAddressOrganisation();
-        if (null !== $facture) {
+        if ($facture instanceof Facture) {
             $tuteur = $facture->getTuteur();
             if ($emails = TuteurUtils::getEmailsOfOneTuteur($tuteur)) {
                 $data['to'] = $emails[0];
@@ -76,6 +76,7 @@ class FactureEmailFactory
         foreach ($tos as $email) {
             $message->addTo(new Address($email));
         }
+
         if ($this->parameterBag->has(Option::EMAILS_FACTURE)) {
             $copies = explode(',', $this->parameterBag->get(Option::EMAILS_FACTURE));
             if (\is_array($copies)) {
@@ -100,6 +101,7 @@ class FactureEmailFactory
         if (! is_readable($factureFile)) {
             throw new Exception('Pdf non trouvé '.$factureFile);
         }
+
         $message->attachFromPath($factureFile, 'facture_'.$date->format('d-m-Y').'.pdf', 'application/pdf');
     }
 

@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Security\Checker;
 
+use AcMarche\Edr\Entity\Animateur;
 use AcMarche\Edr\Entity\Security\User;
 use Symfony\Component\Security\Core\Exception\LockedException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
@@ -15,7 +16,7 @@ class UserChecker implements UserCheckerInterface
             return;
         }
 
-        if (null === $user->getAnimateur()) {
+        if (!$user->getAnimateur() instanceof Animateur) {
             throw new LockedException();
         }
     }
@@ -24,6 +25,7 @@ class UserChecker implements UserCheckerInterface
     {
     }
 }
+
 /*
  * # config/packages/security.yaml
 security:

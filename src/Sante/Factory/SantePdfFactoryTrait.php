@@ -15,10 +15,10 @@ final class SantePdfFactoryTrait
     use PdfDownloaderTrait;
 
     public function __construct(
-        private SanteQuestionRepository $santeQuestionRepository,
-        private OrganisationRepository $organisationRepository,
-        private SanteChecker $santeChecker,
-        private Environment $environment
+        private readonly SanteQuestionRepository $santeQuestionRepository,
+        private readonly OrganisationRepository $organisationRepository,
+        private readonly SanteChecker $santeChecker,
+        private readonly Environment $environment
     ) {
     }
 

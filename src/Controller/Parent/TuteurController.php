@@ -20,8 +20,8 @@ final class TuteurController extends AbstractController
     use GetTuteurTrait;
 
     public function __construct(
-        private TuteurRepository $tuteurRepository,
-        private MessageBusInterface $dispatcher
+        private readonly TuteurRepository $tuteurRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -29,9 +29,10 @@ final class TuteurController extends AbstractController
     #[IsGranted(data: 'ROLE_MERCREDI_PARENT')]
     public function show(): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $tuteurIsComplete = TuteurUtils::coordonneesIsComplete($this->tuteur);
 
         return $this->render(
@@ -47,9 +48,10 @@ final class TuteurController extends AbstractController
     #[IsGranted(data: 'ROLE_MERCREDI_PARENT')]
     public function edit(Request $request): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $form = $this->createForm(TuteurType::class, $this->tuteur);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

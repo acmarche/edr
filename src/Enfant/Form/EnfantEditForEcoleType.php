@@ -19,7 +19,7 @@ final class EnfantEditForEcoleType extends AbstractType
                 [
                     'required' => false,
                     'label' => 'Accueils du matin et soir',
-                    'help' => 'Cochez cette case si l\'enfant vient aux accueils',
+                    'help' => "Cochez cette case si l'enfant vient aux accueils",
                 ]
             );
     }

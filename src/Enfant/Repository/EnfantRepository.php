@@ -26,8 +26,8 @@ final class EnfantRepository extends ServiceEntityRepository
 
     public function __construct(
         ManagerRegistry $managerRegistry,
-        private JourRepository $jourRepository,
-        private PresenceRepository $presenceRepository
+        private readonly JourRepository $jourRepository,
+        private readonly PresenceRepository $presenceRepository
     ) {
         parent::__construct($managerRegistry, Enfant::class);
     }
@@ -122,26 +122,22 @@ final class EnfantRepository extends ServiceEntityRepository
                 ->setParameter('keyword', '%'.$nom.'%');
         }
 
-        if (null !== $ecole) {
+        if ($ecole instanceof Ecole) {
             $queryBuilder->andWhere('ecole = :ecole')
                 ->setParameter('ecole', $ecole);
         }
 
-        if (null !== $anneeScolaire) {
+        if ($anneeScolaire instanceof AnneeScolaire) {
             $queryBuilder->andWhere('enfant.annee_scolaire = :annee')
                 ->setParameter('annee', $anneeScolaire);
         }
 
-        switch ($archived) {
-            case true | false:
-                $queryBuilder->andwhere('enfant.archived = :archive')
-                    ->setParameter('archive', $archived);
-                break;
-            default:
-                $queryBuilder->andwhere('enfant.archived = :archive')
-                    ->setParameter('archive', 0);
-                break;
-        }
+        match ($archived) {
+            true | false => $queryBuilder->andwhere('enfant.archived = :archive')
+                ->setParameter('archive', $archived),
+            default => $queryBuilder->andwhere('enfant.archived = :archive')
+                ->setParameter('archive', 0),
+        };
 
         return $queryBuilder->getQuery()->getResult();
     }
@@ -174,7 +170,7 @@ final class EnfantRepository extends ServiceEntityRepository
 
         $jours = $this->jourRepository->findByAnimateur($animateur);
 
-        if (0 === \count($jours)) {
+        if ([] === $jours) {
             return [];
         }
 
@@ -192,8 +188,8 @@ final class EnfantRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->getNotArchivedQueryBuilder();
 
-        $jours = null !== $jour ? [$jour] : $this->jourRepository->findByAnimateur($animateur);
-        if (0 === \count($jours)) {
+        $jours = $jour instanceof Jour ? [$jour] : $this->jourRepository->findByAnimateur($animateur);
+        if ([] === $jours) {
             return [];
         }
 

@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Organisation\Message;
 final class OrganisationDeleted
 {
     public function __construct(
-        private int $organisationId
+        private readonly int $organisationId
     ) {
     }
 

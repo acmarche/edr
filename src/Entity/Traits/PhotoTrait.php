@@ -11,9 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 trait PhotoTrait
 {
-    /**
-     * @Vich\UploadableField(mapping="edr_enfant_image", fileNameProperty="photoName")
-     */
+    #[Vich\UploadableField(mapping: 'edr_enfant_image', fileNameProperty: 'photoName')]
     #[Assert\Image(maxSize: '7M')]
     private ?File $photo = null;
 
@@ -27,7 +25,7 @@ trait PhotoTrait
     {
         $this->photo = $file;
 
-        if (null !== $file) {
+        if ($file instanceof File) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new DateTime('now');

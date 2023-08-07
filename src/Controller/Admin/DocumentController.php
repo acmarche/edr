@@ -23,9 +23,9 @@ use Symfony\Component\Routing\Annotation\Route;
 final class DocumentController extends AbstractController
 {
     public function __construct(
-        private DocumentRepository $documentRepository,
-        private PageRepository $pageRepository,
-        private MessageBusInterface $dispatcher
+        private readonly DocumentRepository $documentRepository,
+        private readonly PageRepository $pageRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 

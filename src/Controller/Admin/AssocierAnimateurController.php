@@ -22,8 +22,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class AssocierAnimateurController extends AbstractController
 {
     public function __construct(
-        private AssociationAnimateurHandler $associationAnimateurHandler,
-        private AnimateurRepository $animateurRepository
+        private readonly AssociationAnimateurHandler $associationAnimateurHandler,
+        private readonly AnimateurRepository $animateurRepository
     ) {
     }
 
@@ -37,6 +37,7 @@ final class AssocierAnimateurController extends AbstractController
                 'id' => $user->getId(),
             ]);
         }
+
         $associateUserAnimateurDto = new AssociateUserAnimateurDto($user);
         $form = $this->createForm(AssociateAnimateurType::class, $associateUserAnimateurDto);
         $form->handleRequest($request);

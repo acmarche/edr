@@ -26,12 +26,12 @@ use Symfony\Component\Routing\Annotation\Route;
 final class FacturePresenceController extends AbstractController
 {
     public function __construct(
-        private FacturePresenceRepository $facturePresenceRepository,
-        private FactureHandlerInterface $factureHandler,
-        private FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository,
+        private readonly FacturePresenceRepository $facturePresenceRepository,
+        private readonly FactureHandlerInterface $factureHandler,
+        private readonly FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository,
         public PresenceCalculatorInterface $presenceCalculator,
-        private PresenceRepository $presenceRepository,
-        private AccueilRepository $accueilRepository
+        private readonly PresenceRepository $presenceRepository,
+        private readonly AccueilRepository $accueilRepository
     ) {
     }
 
@@ -68,11 +68,13 @@ final class FacturePresenceController extends AbstractController
     public function show(FacturePresence $facturePresence): Response
     {
         $facture = $facturePresence->getFacture();
-        $presence = $accueil = null;
+        $presence = null;
+        $accueil = null;
         $type = $facturePresence->getObjectType();
         if (FactureInterface::OBJECT_PRESENCE === $type || FactureInterface::OBJECT_PLAINE === $type) {
             $presence = $this->presenceRepository->find($facturePresence->getPresenceId());
         }
+
         if (FactureInterface::OBJECT_ACCUEIL === $type) {
             $accueil = $this->accueilRepository->find($facturePresence->getPresenceId());
         }

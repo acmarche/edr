@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Tests\Pest;
 class Pest
 {
 
-    function do()
+    public function do()
     {
 
 
@@ -33,9 +33,7 @@ class Pest
         |
         */
 
-        expect()->extend('toBeOne', function () {
-            return $this->toBe(1);
-        });
+        expect()->extend('toBeOne', fn() => $this->toBe(1));
     }
 
     /*
@@ -49,7 +47,7 @@ class Pest
     |
     */
 
-    function something()
+    public function something()
     {
         // ..
     }

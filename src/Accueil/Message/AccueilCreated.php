@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Accueil\Message;
 final class AccueilCreated
 {
     public function __construct(
-        private int $accueilId
+        private readonly int $accueilId
     ) {
     }
 

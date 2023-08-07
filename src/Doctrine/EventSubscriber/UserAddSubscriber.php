@@ -13,8 +13,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class UserAddSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private Security $security,
-        private PropertyUtil $propertyUtil
+        private readonly Security $security,
+        private readonly PropertyUtil $propertyUtil
     ) {
     }
 

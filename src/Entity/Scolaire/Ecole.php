@@ -29,11 +29,13 @@ class Ecole implements Stringable
     use UsersTrait;
     #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private ?string $abreviation = null;
+
     /**
      * @var User[]|Collection
      */
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'ecoles')]
     private Collection $users;
+
     /**
      * @var Enfant[]|Collection
      */

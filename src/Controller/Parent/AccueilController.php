@@ -16,7 +16,7 @@ final class AccueilController extends AbstractController
     use GetTuteurTrait;
 
     public function __construct(
-        private AccueilCalculatorInterface $accueilCalculator
+        private readonly AccueilCalculatorInterface $accueilCalculator
     ) {
     }
 

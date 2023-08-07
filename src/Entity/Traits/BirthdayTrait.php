@@ -19,7 +19,7 @@ trait BirthdayTrait
     /**
      * @return DateTime|DateTimeImmutable|null
      */
-    public function getBirthday(): ?\DateTimeInterface
+    public function getBirthday(): ?DateTimeInterface
     {
         return $this->birthday;
     }
@@ -45,7 +45,7 @@ trait BirthdayTrait
 
         $today = Carbon::now();
 
-        if (null !== $dateReference) {
+        if ($dateReference instanceof DateTimeInterface) {
             $today = Carbon::instance($dateReference);
         }
 

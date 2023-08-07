@@ -52,14 +52,18 @@ class Presence implements TimestampableInterface, PresenceInterface, UuidableInt
 
     #[ORM\ManyToOne(targetEntity: Tuteur::class, inversedBy: 'presences')]
     private ?Tuteur $tuteur = null;
+
     #[ORM\ManyToOne(targetEntity: Enfant::class, inversedBy: 'presences')]
     private ?Enfant $enfant = null;
+
     #[ORM\ManyToOne(targetEntity: Jour::class, inversedBy: 'presences')]
     private ?Jour $jour = null;
+
     /**
      * @var array|Enfant[]
      */
     public array $fratries = [];
+
     public int $ordreTmp = 0;
 
     public function __construct(Tuteur $tuteur, Enfant $enfant, Jour $jour)

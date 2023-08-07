@@ -23,9 +23,9 @@ use Symfony\Component\Routing\Annotation\Route;
 final class AnimateurController extends AbstractController
 {
     public function __construct(
-        private AnimateurRepository $animateurRepository,
-        private SearchHelper $searchHelper,
-        private MessageBusInterface $dispatcher
+        private readonly AnimateurRepository $animateurRepository,
+        private readonly SearchHelper $searchHelper,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 

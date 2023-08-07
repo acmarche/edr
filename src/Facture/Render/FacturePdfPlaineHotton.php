@@ -12,10 +12,10 @@ use Twig\Environment;
 class FacturePdfPlaineHotton implements FacturePdfPlaineInterface
 {
     public function __construct(
-        private OrganisationRepository $organisationRepository,
-        private FactureCalculatorInterface $factureCalculator,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private Environment $environment
+        private readonly OrganisationRepository $organisationRepository,
+        private readonly FactureCalculatorInterface $factureCalculator,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly Environment $environment
     ) {
     }
 

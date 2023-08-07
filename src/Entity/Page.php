@@ -22,25 +22,25 @@ class Page implements SluggableInterface, Stringable
     use ContentTrait;
     use SluggableTrait;
     use DocumentsTraits;
-    public bool $system;
+    public bool $system = false;
+
     #[ORM\Column(type: 'text', length: 100, nullable: true)]
     private ?string $slug_system = null;
+
     #[ORM\Column(type: 'smallint', nullable: true)]
     private ?int $position = null;
 
     #[ORM\Column(type: 'boolean')]
-    private bool $menu;
+    private bool $menu = true;
 
     /**
      * @var Document[]
      */
     #[ORM\ManyToMany(targetEntity: Document::class)]
-    private Collection $documents;
+    private Collection|array $documents = [];
 
     public function __construct()
     {
-        $this->system = false;
-        $this->menu = true;
         $this->documents = new ArrayCollection();
     }
 

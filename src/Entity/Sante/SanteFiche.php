@@ -37,19 +37,23 @@ class SanteFiche implements TimestampableInterface, Stringable
     #[ORM\Column(type: 'text', nullable: false)]
     #[Assert\NotBlank]
     private ?string $personne_urgence = null;
+
     #[ORM\Column(type: 'string', length: 200, nullable: false)]
     #[Assert\NotBlank]
     private ?string $medecin_nom = null;
+
     #[ORM\Column(type: 'string', length: 200, nullable: false)]
     #[Assert\NotBlank]
     private ?string $medecin_telephone = null;
+
     /**
      * Pour le cascade.
      *
      * @var SanteReponse[]
      */
     #[ORM\OneToMany(targetEntity: SanteReponse::class, mappedBy: 'sante_fiche', cascade: ['remove'])]
-    private Collection $reponses;
+    private Collection|array $reponses = [];
+
     /**
      * @var SanteQuestion[]|Collection
      * @AcMarcheSanteAssert\ResponseIsComplete()

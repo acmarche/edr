@@ -12,16 +12,16 @@ use AcMarche\Edr\Sante\Repository\SanteReponseRepository;
 final class SanteFactory
 {
     public function __construct(
-        private SanteFicheRepository $santeFicheRepository,
-        private SanteReponseRepository $santeReponseRepository
+        private readonly SanteFicheRepository $santeFicheRepository,
+        private readonly SanteReponseRepository $santeReponseRepository
     ) {
     }
 
     public function getSanteFicheByEnfant(Enfant $enfant): SanteFiche
     {
-        if (null === ($santeFiche = $this->santeFicheRepository->findOneBy([
+        if (!($santeFiche = $this->santeFicheRepository->findOneBy([
             'enfant' => $enfant,
-        ]))) {
+        ])) instanceof SanteFiche) {
             $santeFiche = new SanteFiche($enfant);
             $this->santeFicheRepository->persist($santeFiche);
         }

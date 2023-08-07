@@ -44,9 +44,7 @@ use Knp\DoctrineBehaviors\Model\Uuidable\UuidableTrait;
 use Stringable;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
-/**
- * @Vich\Uploadable
- */
+#[Vich\Uploadable]
 #[ORM\Entity]
 class Enfant implements SluggableInterface, TimestampableInterface, UuidableInterface, Stringable
 {
@@ -78,33 +76,40 @@ class Enfant implements SluggableInterface, TimestampableInterface, UuidableInte
     use RegistreNationalTrait;
     use PoidsTrait;
     use IdOldTrait;
+
     #[ORM\Column(type: 'boolean', nullable: false)]
-    private bool $photo_autorisation;
+    private bool $photo_autorisation = false;
+
     #[ORM\ManyToOne(targetEntity: AnneeScolaire::class, inversedBy: 'enfants')]
     private ?AnneeScolaire $annee_scolaire = null;
+
     #[ORM\ManyToOne(targetEntity: GroupeScolaire::class, inversedBy: 'enfants')]
     private ?GroupeScolaire $groupe_scolaire = null;
+
     #[ORM\ManyToOne(targetEntity: Ecole::class, inversedBy: 'enfants')]
     private ?Ecole $ecole = null;
+
     /**
      * @var Relation[]
      */
     #[ORM\OneToMany(targetEntity: Relation::class, mappedBy: 'enfant', cascade: ['remove'])]
-    private Collection $relations;
+    private Collection|array $relations = [];
+
     /**
      * J'ai mis la definition pour pouvoir mettre le cascade.
      *
      * @var Presence[]
      */
     #[ORM\OneToMany(targetEntity: Presence::class, mappedBy: 'enfant', cascade: ['remove'])]
-    private Collection $presences;
+    private Collection|array $presences = [];
+
     /**
      * J'ai mis la definition pour pouvoir mettre le cascade.
      *
      * @var Accueil[]
      */
     #[ORM\OneToMany(targetEntity: Accueil::class, mappedBy: 'enfant', cascade: ['remove'])]
-    private Collection $accueils;
+    private Collection|array $accueils = [];
 
     public function __construct()
     {
@@ -113,7 +118,6 @@ class Enfant implements SluggableInterface, TimestampableInterface, UuidableInte
         $this->presences = new ArrayCollection();
         $this->notes = new ArrayCollection();
         $this->ficheSanteIsComplete = false;
-        $this->photo_autorisation = false;
     }
 
     public function __toString(): string
@@ -134,7 +138,7 @@ class Enfant implements SluggableInterface, TimestampableInterface, UuidableInte
     public function getTuteurs(): array
     {
         return array_map(
-            fn ($relation) => $relation->getTuteur(),
+            static fn($relation) => $relation->getTuteur(),
             $this->getRelations()->toArray()
         );
     }

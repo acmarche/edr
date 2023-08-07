@@ -14,18 +14,8 @@ final class FacturePdfFactoryTrait
 {
     use PdfDownloaderTrait;
 
-    private FacturePdfPresenceInterface $facturePdfPresence;
-    private FacturePdfPlaineInterface $facturePdfPlaine;
-    private SluggerInterface $slugger;
-
-    public function __construct(
-        FacturePdfPresenceInterface $facturePdfPresence,
-        FacturePdfPlaineInterface $facturePdfPlaine,
-        SluggerInterface $slugger
-    ) {
-        $this->facturePdfPresence = $facturePdfPresence;
-        $this->facturePdfPlaine = $facturePdfPlaine;
-        $this->slugger = $slugger;
+    public function __construct(private readonly FacturePdfPresenceInterface $facturePdfPresence, private readonly FacturePdfPlaineInterface $facturePdfPlaine, private readonly SluggerInterface $slugger)
+    {
     }
 
     public function generate(FactureInterface $facture): Response
@@ -35,6 +25,7 @@ final class FacturePdfFactoryTrait
         } else {
             $html = $this->facturePdfPresence->render($facture);
         }
+
         $slug = $this->slugger->slug($facture->getNom().' '.$facture->getPrenom());
 
         //   return new Response($html);

@@ -37,23 +37,27 @@ class Plaine implements SluggableInterface, Stringable
     use FacturesTrait;
     use IdOldTrait;
     public array $enfants = [];
+
     /**
      * @var Jour[]
      */
     #[ORM\OneToMany(targetEntity: Jour::class, mappedBy: 'plaine', cascade: ['remove'])]
-    private Collection $jours;
+    private Collection|array $jours = [];
+
     /**
      * @var PlaineGroupe[]|null
      */
     #[ORM\OneToMany(targetEntity: PlaineGroupe::class, mappedBy: 'plaine', cascade: ['remove', 'persist'])]
     private Collection $plaine_groupes;
+
     #[ORM\Column(type: 'string', length: 100, nullable: true, unique: false)]
     private ?string $communication = null;
+
     /**
      * @var Facture[]
      */
     #[ORM\OneToMany(targetEntity: Facture::class, mappedBy: 'plaine', cascade: ['remove'])]
-    private Collection $factures;
+    private Collection|array $factures = [];
 
     public function __construct()
     {

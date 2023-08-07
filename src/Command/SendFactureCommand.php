@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Command;
 
+use DateTimeInterface;
 use AcMarche\Edr\Facture\Repository\FactureCronRepository;
 use AcMarche\Edr\Facture\Repository\FactureRepository;
 use AcMarche\Edr\Mailer\Factory\AdminEmailFactory;
@@ -21,14 +22,15 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 class SendFactureCommand extends Command
 {
     protected static $defaultName = 'edr:send-facture';
+
     protected static $defaultDescription = 'Envoie les factures par mail';
 
     public function __construct(
-        private FactureRepository $factureRepository,
-        private FactureCronRepository $factureCronRepository,
-        private FactureEmailFactory $factureEmailFactory,
-        private AdminEmailFactory $adminEmailFactory,
-        private NotificationMailer $notificationMailer,
+        private readonly FactureRepository $factureRepository,
+        private readonly FactureCronRepository $factureCronRepository,
+        private readonly FactureEmailFactory $factureEmailFactory,
+        private readonly AdminEmailFactory $adminEmailFactory,
+        private readonly NotificationMailer $notificationMailer,
         string $name = null
     ) {
         parent::__construct($name);
@@ -68,7 +70,7 @@ class SendFactureCommand extends Command
             );
 
             foreach ($factures as $facture) {
-                if (null !== $facture->getEnvoyeLe() && ! $force) {
+                if ($facture->getEnvoyeLe() instanceof DateTimeInterface && ! $force) {
                     continue;
                 }
 
@@ -109,6 +111,7 @@ class SendFactureCommand extends Command
                 $io->writeln($i.'/'.$count);
                 $this->factureRepository->flush();
             }
+
             $cron->setDone(true);
         }
 

@@ -14,11 +14,11 @@ use AcMarche\Edr\Reduction\Calculator\ReductionCalculator;
 class FactureCalculator implements FactureCalculatorInterface
 {
     public function __construct(
-        private FacturePresenceRepository $facturePresenceRepository,
-        private FactureReductionRepository $factureReductionRepository,
-        private FactureComplementRepository $factureComplementRepository,
-        private FactureDecompteRepository $factureDecompteRepository,
-        private ReductionCalculator $reductionCalculator
+        private readonly FacturePresenceRepository $facturePresenceRepository,
+        private readonly FactureReductionRepository $factureReductionRepository,
+        private readonly FactureComplementRepository $factureComplementRepository,
+        private readonly FactureDecompteRepository $factureDecompteRepository,
+        private readonly ReductionCalculator $reductionCalculator
     ) {
     }
 

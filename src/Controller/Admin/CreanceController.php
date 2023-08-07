@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class CreanceController extends AbstractController
 {
     public function __construct(
-        private CreanceRepository $creanceRepository
+        private readonly CreanceRepository $creanceRepository
     ) {
     }
 
@@ -81,6 +81,7 @@ final class CreanceController extends AbstractController
     {
         $form = $this->createForm(CreanceType::class, $creance);
         $form->handleRequest($request);
+
         $tuteur = $creance->getTuteur();
         if ($form->isSubmitted() && $form->isValid()) {
             $this->creanceRepository->flush();

@@ -9,11 +9,10 @@ final class PresenceSelectDays
 {
     use EnfantTrait;
 
-    protected array $jours;
+    protected array $jours = [];
 
     public function __construct(Enfant $enfant)
     {
-        $this->jours = [];
         $this->enfant = $enfant;
     }
 

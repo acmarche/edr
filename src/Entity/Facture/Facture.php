@@ -47,31 +47,43 @@ class Facture implements TimestampableInterface, UuidableInterface, FactureInter
 
     #[ORM\ManyToOne(targetEntity: Tuteur::class, inversedBy: 'factures')]
     private ?Tuteur $tuteur = null;
+
     /**
      * Use for commu factory.
      *
      * @var array|Ecole[]
      */
     public array $ecolesListing = [];
+
     public ?FactureDetailDto $factureDetailDto = null;
+
     #[ORM\ManyToOne(targetEntity: Plaine::class, inversedBy: 'factures')]
     private ?Plaine $plaine = null;
+
     #[ORM\Column(type: 'datetime', nullable: false)]
     private ?DateTimeInterface $factureLe = null;
+
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?DateTimeInterface $payeLe = null;
+
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?DateTimeInterface $envoyeLe = null;
+
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     private ?string $envoyeA = null;
+
     #[ORM\Column(type: 'string', length: 100, nullable: false)]
     private ?string $mois = null;
+
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $plaine_nom = null;
+
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $ecoles = null;
+
     #[ORM\Column(type: 'decimal', precision: 6, scale: 2, nullable: true)]
     private float $montant_obsolete;
+
     #[ORM\Column(type: 'boolean', nullable: true)]
     private float $cloture_obsolete;
 
@@ -101,36 +113,36 @@ class Facture implements TimestampableInterface, UuidableInterface, FactureInter
         return $enfants;
     }
 
-    public function getPayeLe(): ?\DateTimeInterface
+    public function getPayeLe(): ?DateTimeInterface
     {
         return $this->payeLe;
     }
 
-    public function setPayeLe(?\DateTimeInterface $payeLe): self
+    public function setPayeLe(?DateTimeInterface $payeLe): self
     {
         $this->payeLe = $payeLe;
 
         return $this;
     }
 
-    public function getFactureLe(): ?\DateTimeInterface
+    public function getFactureLe(): ?DateTimeInterface
     {
         return $this->factureLe;
     }
 
-    public function setFactureLe(\DateTimeInterface $factureLe): self
+    public function setFactureLe(DateTimeInterface $factureLe): self
     {
         $this->factureLe = $factureLe;
 
         return $this;
     }
 
-    public function getEnvoyeLe(): ?\DateTimeInterface
+    public function getEnvoyeLe(): ?DateTimeInterface
     {
         return $this->envoyeLe;
     }
 
-    public function setEnvoyeLe(?\DateTimeInterface $envoyeLe): self
+    public function setEnvoyeLe(?DateTimeInterface $envoyeLe): self
     {
         $this->envoyeLe = $envoyeLe;
 

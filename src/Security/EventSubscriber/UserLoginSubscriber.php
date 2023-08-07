@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 final class UserLoginSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager
     ) {
     }
 
@@ -30,6 +30,7 @@ final class UserLoginSubscriber implements EventSubscriberInterface
         /** @var User $user */
         $user = $event->getUser();
         $user->setLastLogin(new DateTimeImmutable());
+
         $this->entityManager->flush();
     }
 }

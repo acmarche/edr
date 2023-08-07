@@ -13,8 +13,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 final class UserFactory
 {
     public function __construct(
-        private UserRepository $userRepository,
-        private UserPasswordHasherInterface $userPasswordHasher
+        private readonly UserRepository $userRepository,
+        private readonly UserPasswordHasherInterface $userPasswordHasher
     ) {
     }
 
@@ -72,6 +72,7 @@ final class UserFactory
 
         $user->addTuteur($tuteur);
         $user->addRole(EdrSecurityRole::ROLE_PARENT);
+
         $this->userRepository->persist($user);
         $this->userRepository->flush();
 

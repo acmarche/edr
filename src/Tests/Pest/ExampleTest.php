@@ -3,8 +3,8 @@
 namespace AcMarche\Edr\Tests\Pest;
 
 Class ExampleTest {
-function do() {
-    test('example', function () {
+public function do() {
+    test('example', static function () {
         expect(true)->toBeTrue();
     });
 

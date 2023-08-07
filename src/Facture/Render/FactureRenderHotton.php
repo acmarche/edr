@@ -14,12 +14,12 @@ use Twig\Environment;
 class FactureRenderHotton implements FactureRenderInterface
 {
     public function __construct(
-        private FacturePresenceRepository $facturePresenceRepository,
-        private FactureReductionRepository $factureReductionRepository,
-        private FactureComplementRepository $factureComplementRepository,
-        private FactureCalculatorInterface $factureCalculator,
-        private FactureDecompteRepository $factureDecompteRepository,
-        private Environment $environment
+        private readonly FacturePresenceRepository $facturePresenceRepository,
+        private readonly FactureReductionRepository $factureReductionRepository,
+        private readonly FactureComplementRepository $factureComplementRepository,
+        private readonly FactureCalculatorInterface $factureCalculator,
+        private readonly FactureDecompteRepository $factureDecompteRepository,
+        private readonly Environment $environment
     ) {
     }
 

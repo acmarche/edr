@@ -19,17 +19,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class TuteurVoter extends Voter
 {
     public const ADD = 'tuteur_new';
+
     public const SHOW = 'tuteur_show';
+
     public const EDIT = 'tuteur_edit';
+
     public const DELETE = 'tuteur_delete';
 
     private UserInterface $user;
+
     private ?Tuteur $tuteurOfUser = null;
+
     private ?Tuteur $tuteurToCheck = null;
 
     public function __construct(
-        private Security $security,
-        private TuteurUtils $tuteurUtils
+        private readonly Security $security,
+        private readonly TuteurUtils $tuteurUtils
     ) {
     }
 

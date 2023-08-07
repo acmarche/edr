@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Presence\Message;
 final class PresenceDeleted
 {
     public function __construct(
-        private int $presenceId
+        private readonly int $presenceId
     ) {
     }
 

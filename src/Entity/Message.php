@@ -22,16 +22,20 @@ class Message implements TimestampableInterface
 
     #[Assert\NotBlank]
     private ?string $from = null;
+
     /**
      * Assert\NotBlank().
      */
     private ?string $to = null;
+
     #[ORM\Column(type: 'text', nullable: false)]
     #[Assert\NotBlank]
     private ?string $sujet = null;
+
     #[ORM\Column(type: 'text', nullable: false)]
     #[Assert\NotBlank]
     private ?string $texte = null;
+
     private ?UploadedFile $file = null;
 
     #[ORM\Column(type: 'array', nullable: false)]

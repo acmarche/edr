@@ -21,8 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class ReductionController extends AbstractController
 {
     public function __construct(
-        private ReductionRepository $reductionRepository,
-        private MessageBusInterface $dispatcher
+        private readonly ReductionRepository $reductionRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 

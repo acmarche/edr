@@ -19,10 +19,10 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 final class RegistrationController extends AbstractController
 {
     public function __construct(
-        private RegisterCreatedHandler $registerCreatedHandler,
-        private UserPasswordHasherInterface $userPasswordEncoder,
-        private UserRepository $userRepository,
-        private MessageBusInterface $dispatcher
+        private readonly RegisterCreatedHandler $registerCreatedHandler,
+        private readonly UserPasswordHasherInterface $userPasswordEncoder,
+        private readonly UserRepository $userRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -32,6 +32,7 @@ final class RegistrationController extends AbstractController
         if (! $this->registerCreatedHandler->isOpen()) {
             return $this->redirectToRoute('edr_front_home');
         }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -69,11 +70,12 @@ final class RegistrationController extends AbstractController
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->registerCreatedHandler->handleEmailConfirmation($request, $this->getUser());
-        } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $exception->getReason());
+        } catch (VerifyEmailExceptionInterface $verifyEmailException) {
+            $this->addFlash('verify_email_error', $verifyEmailException->getReason());
 
             return $this->redirectToRoute('edr_front_register');
         }
+
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('edr_front_register');

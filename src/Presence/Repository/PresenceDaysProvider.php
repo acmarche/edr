@@ -11,8 +11,8 @@ use AcMarche\Edr\Utils\SortUtils;
 final class PresenceDaysProvider implements PresenceDaysProviderInterface
 {
     public function __construct(
-        private JourRepository $jourRepository,
-        private PresenceUtils $presenceUtils
+        private readonly JourRepository $jourRepository,
+        private readonly PresenceUtils $presenceUtils
     ) {
     }
 

@@ -44,6 +44,7 @@ class Animateur implements TimestampableInterface, Stringable
      */
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'animateurs')]
     private Collection $users;
+
     /**
      * @var Jour[]|Collection
      */

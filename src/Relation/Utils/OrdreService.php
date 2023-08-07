@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Relation\Utils;
 
+use AcMarche\Edr\Entity\Relation;
 use AcMarche\Edr\Contrat\Presence\PresenceInterface;
 use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Entity\Presence\Presence;
@@ -13,8 +14,8 @@ use AcMarche\Edr\Utils\SortUtils;
 final class OrdreService
 {
     public function __construct(
-        private RelationRepository $relationRepository,
-        private PresenceRepository $presenceRepository
+        private readonly RelationRepository $relationRepository,
+        private readonly PresenceRepository $presenceRepository
     ) {
     }
 
@@ -24,7 +25,7 @@ final class OrdreService
     public function getOrdreOnRelation(Enfant $enfant, Tuteur $tuteur): ?int
     {
         $relation = $this->relationRepository->findOneByTuteurAndEnfant($tuteur, $enfant);
-        if (null !== $relation && 0 !== $relation->getOrdre()) {
+        if ($relation instanceof Relation && 0 !== $relation->getOrdre()) {
             return $relation->getOrdre();
         }
 
@@ -46,6 +47,7 @@ final class OrdreService
         if ($ordreRelation = $this->getOrdreOnRelation($enfant, $tuteur)) {
             $ordreBase = $ordreRelation;
         }
+
         /*
          * quand enfant premier, fratrie pas d'importance
          */
@@ -123,7 +125,7 @@ final class OrdreService
         $jour = $presence->getJour();
         $presents = [];
         foreach ($fratries as $fratry) {
-            if (null !== $this->presenceRepository->findByTuteurEnfantAndJour($tuteur, $fratry, $jour)) {
+            if ($this->presenceRepository->findByTuteurEnfantAndJour($tuteur, $fratry, $jour) instanceof Presence) {
                 $presents[] = $fratry;
             }
         }

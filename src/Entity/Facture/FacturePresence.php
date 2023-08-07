@@ -31,12 +31,16 @@ class FacturePresence
     use ReductionTrait;
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $heure = null;
+
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $duree = null;
+
     #[ORM\Column(type: 'date', nullable: false)]
     private ?DateTimeInterface $presenceDate = null;
+
     #[ORM\Column(type: 'decimal', precision: 4, scale: 2, nullable: false)]
     private ?float $cout_brut = null;
+
     #[ORM\Column(type: 'decimal', precision: 4, scale: 2, nullable: false)]
     private ?float $cout_calculated = null;
 
@@ -47,12 +51,12 @@ class FacturePresence
     ) {
     }
 
-    public function getPresenceDate(): ?\DateTimeInterface
+    public function getPresenceDate(): ?DateTimeInterface
     {
         return $this->presenceDate;
     }
 
-    public function setPresenceDate(\DateTimeInterface $presenceDate): self
+    public function setPresenceDate(DateTimeInterface $presenceDate): self
     {
         $this->presenceDate = $presenceDate;
 

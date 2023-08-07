@@ -14,6 +14,7 @@ final class ResponseIsComplete extends Constraint
      * Then, use these in your validator class.
      */
     public string $message = 'The value "{{ value }}" is not valid.';
+
     public string $message_question = '{{ string }}';
 
     /**

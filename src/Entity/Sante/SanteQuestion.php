@@ -21,28 +21,35 @@ class SanteQuestion implements Stringable
     use RemarqueTrait;
     #[ORM\Column(type: 'string', length: 200)]
     private ?string $nom = null;
+
     /**
      * Information complementaire necessaire.
      */
     #[ORM\Column(type: 'boolean')]
     private bool $complement = false;
+
     /**
      * Texte d'aide pour le complement.
      */
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
     private ?string $complement_label = null;
+
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $display_order = null;
+
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     private ?string $categorie = null;
+
     /**
      * J'ai mis la definition pour pouvoir mettre le cascade.
      *
      * @var Presence[]
      */
     #[ORM\OneToMany(targetEntity: SanteReponse::class, mappedBy: 'question', cascade: ['remove'])]
-    private Collection $reponse;
+    private Collection|array $reponse = [];
+
     private ?bool $reponseTxt = null;
+
     private ?string $remarque = null;
 
     public function __construct()

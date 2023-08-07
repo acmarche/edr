@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
 class ArchiveController extends AbstractController
 {
-    public function __construct(private TuteurRepository $tuteurRepository)
+    public function __construct(private readonly TuteurRepository $tuteurRepository)
     {
     }
 

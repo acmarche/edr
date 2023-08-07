@@ -22,12 +22,12 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 class PlaineHandlerHotton implements PlaineHandlerInterface
 {
     public function __construct(
-        private PlainePresenceRepository $plainePresenceRepository,
-        private FacturePlaineHandler $facturePlaineHandler,
-        private FactureEmailFactory $factureEmailFactory,
-        private NotificationMailer $notificationMailer,
-        private AdminEmailFactory $adminEmailFactory,
-        private PresenceHandlerInterface $presenceHandler
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly FacturePlaineHandler $facturePlaineHandler,
+        private readonly FactureEmailFactory $factureEmailFactory,
+        private readonly NotificationMailer $notificationMailer,
+        private readonly AdminEmailFactory $adminEmailFactory,
+        private readonly PresenceHandlerInterface $presenceHandler
     ) {
     }
 
@@ -53,7 +53,7 @@ class PlaineHandlerHotton implements PlaineHandlerInterface
 
         foreach ($enMoins as $jour) {
             $presence = $this->plainePresenceRepository->findOneByEnfantJour($enfant, $jour);
-            if (null !== $presence) {
+            if ($presence instanceof Presence) {
                 $this->plainePresenceRepository->remove($presence);
             }
         }
@@ -67,6 +67,7 @@ class PlaineHandlerHotton implements PlaineHandlerInterface
         foreach ($presences as $presence) {
             $this->plainePresenceRepository->remove($presence);
         }
+
         $this->plainePresenceRepository->flush();
     }
 
@@ -84,6 +85,7 @@ class PlaineHandlerHotton implements PlaineHandlerInterface
         foreach ($inscriptions as $inscription) {
             $inscription->setConfirmed(true);
         }
+
         $this->plainePresenceRepository->flush();
 
         $facture = $this->facturePlaineHandler->newInstance($plaine, $tuteur);
@@ -107,8 +109,8 @@ class PlaineHandlerHotton implements PlaineHandlerInterface
 
         try {
             $this->notificationMailer->sendMail($message);
-        } catch (TransportExceptionInterface $e) {
-            $error = 'Facture plaine num '.$facture->getId().' '.$e->getMessage();
+        } catch (TransportExceptionInterface $transportException) {
+            $error = 'Facture plaine num '.$facture->getId().' '.$transportException->getMessage();
             $message = $this->adminEmailFactory->messageAlert('Erreur envoie facture plaine', $error);
             $this->notificationMailer->sendAsEmailNotification($message);
         }
@@ -116,6 +118,7 @@ class PlaineHandlerHotton implements PlaineHandlerInterface
         $this->notificationMailer->sendAsEmailNotification($message);
         $facture->setEnvoyeA(implode(',', $emails));
         $facture->setEnvoyeLe(new DateTime());
+
         $this->plainePresenceRepository->flush();
     }
 }

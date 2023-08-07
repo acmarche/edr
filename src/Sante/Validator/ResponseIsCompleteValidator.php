@@ -10,7 +10,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 final class ResponseIsCompleteValidator extends ConstraintValidator
 {
     public function __construct(
-        private SanteChecker $santeChecker
+        private readonly SanteChecker $santeChecker
     ) {
     }
 
@@ -32,6 +32,7 @@ final class ResponseIsCompleteValidator extends ConstraintValidator
                     } else {
                         $txt = $question->getNom().' répondez par oui ou non';
                     }
+
                     $this->context->buildViolation($constraint->message_question)
                         ->atPath('sante_fiche_etape3[questions]['.$order.'][remarque]')
                         ->setParameter('{{ string }}', $txt)

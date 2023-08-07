@@ -14,6 +14,7 @@ final class ConjointType extends AbstractType
      * @var string
      */
     private const LABEL = 'label';
+
     /**
      * @var string
      */

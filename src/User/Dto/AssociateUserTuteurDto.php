@@ -12,7 +12,7 @@ final class AssociateUserTuteurDto
     private bool $sendEmail = true;
 
     public function __construct(
-        private UserInterface $user
+        private readonly UserInterface $user
     ) {
     }
 

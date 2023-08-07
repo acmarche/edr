@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Sante\Message;
 final class SanteFicheDeleted
 {
     public function __construct(
-        private int $santeFicheId
+        private readonly int $santeFicheId
     ) {
     }
 

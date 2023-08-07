@@ -22,8 +22,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class AssocierEcoleController extends AbstractController
 {
     public function __construct(
-        private AssociationEcoleHandler $associationEcoleHandler,
-        private EcoleRepository $ecoleRepository
+        private readonly AssociationEcoleHandler $associationEcoleHandler,
+        private readonly EcoleRepository $ecoleRepository
     ) {
     }
 
@@ -37,6 +37,7 @@ final class AssocierEcoleController extends AbstractController
                 'id' => $user->getId(),
             ]);
         }
+
         $associateUserEcoleDto = new AssociateUserEcoleDto($user);
         $form = $this->createForm(AssociateEcoleType::class, $associateUserEcoleDto);
         $form->handleRequest($request);

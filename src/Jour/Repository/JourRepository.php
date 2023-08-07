@@ -26,7 +26,7 @@ final class JourRepository extends ServiceEntityRepository
 
     public function __construct(
         ManagerRegistry $managerRegistry,
-        private PresenceRepository $presenceRepository
+        private readonly PresenceRepository $presenceRepository
     ) {
         parent::__construct($managerRegistry, Jour::class);
     }
@@ -152,7 +152,7 @@ final class JourRepository extends ServiceEntityRepository
      *
      * @throws NonUniqueResultException
      */
-    public function findOneByDateTimeAndPlaine(\DateTimeInterface $dateTime, Plaine $plaine): ?Jour
+    public function findOneByDateTimeAndPlaine(DateTimeInterface $dateTime, Plaine $plaine): ?Jour
     {
         return $this->createQueryBuilder('jour')
             ->andWhere('jour.date_jour LIKE :date')

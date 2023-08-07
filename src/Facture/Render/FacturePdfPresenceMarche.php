@@ -13,10 +13,10 @@ use Twig\Environment;
 class FacturePdfPresenceMarche implements FacturePdfPresenceInterface
 {
     public function __construct(
-        private Environment $environment,
-        private OrganisationRepository $organisationRepository,
-        private FactureUtils $factureUtils,
-        private FacturePresenceRepository $facturePresenceRepository
+        private readonly Environment $environment,
+        private readonly OrganisationRepository $organisationRepository,
+        private readonly FactureUtils $factureUtils,
+        private readonly FacturePresenceRepository $facturePresenceRepository
     ) {
     }
 
@@ -97,6 +97,7 @@ class FacturePdfPresenceMarche implements FacturePdfPresenceInterface
         if (! $facturePresence->isPedagogique()) {
             ++$data['enfants'][$slug->toString()]['edr'];
         }
+
         $data['enfants'][$slug->toString()]['cout'] += $facturePresence->getCoutCalculated();
 
         return $data;

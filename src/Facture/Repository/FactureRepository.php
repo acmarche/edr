@@ -139,12 +139,12 @@ final class FactureRepository extends ServiceEntityRepository
                 ->setParameter('enfant', '%'.$enfant.'%');
         }
 
-        if (null !== $ecole) {
+        if ($ecole instanceof Ecole) {
             $queryBuilder->andWhere('facture.ecoles LIKE :ecole')
                 ->setParameter('ecole', '%'.$ecole.'%');
         }
 
-        if (null !== $plaine) {
+        if ($plaine instanceof Plaine) {
             $queryBuilder->andWhere('facture.plaine = :plaine')
                 ->setParameter('plaine', $plaine->getNom());
         }
@@ -159,7 +159,7 @@ final class FactureRepository extends ServiceEntityRepository
                 ->setParameter('commu', '%'.$communication.'%');
         }
 
-        if (null !== $datePaiement) {
+        if ($datePaiement instanceof DateTimeInterface) {
             $queryBuilder->andWhere('facture.payeLe LIKE :datePaiement')
                 ->setParameter('datePaiement', $datePaiement->format('Y-m-d').'%');
         }
@@ -167,6 +167,7 @@ final class FactureRepository extends ServiceEntityRepository
         if (false === $paye) {
             $queryBuilder->andWhere('facture.payeLe IS NULL');
         }
+
         if (true === $paye) {
             $queryBuilder->andWhere('facture.payeLe IS NOT NULL');
         }

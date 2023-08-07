@@ -18,13 +18,11 @@ final class SortUtils
     {
         usort(
             $data,
-            function ($jourA, $jourB) {
+            static function ($jourA, $jourB) {
                 $dateA = $jourA->getDateJour();
                 $dateA->format('Y-m-d');
-
                 $dateB = $jourB->getDateJour();
                 $dateB->format('Y-m-d');
-
                 return $dateA <=> $dateB;
             }
         );
@@ -41,13 +39,11 @@ final class SortUtils
     {
         usort(
             $presences,
-            function ($presenceA, $presenceB) {
+            static function ($presenceA, $presenceB) {
                 $dateA = $presenceA->getJour()->getDateJour();
                 $dateA->format('Y-m-d');
-
                 $dateB = $presenceB->getJour()->getDateJour();
                 $dateB->format('Y-m-d');
-
                 return $dateB <=> $dateA;
             }
         );
@@ -59,10 +55,9 @@ final class SortUtils
     {
         uasort(
             $groups,
-            function ($dataA, $dataB) {
+            static function ($dataA, $dataB) {
                 $groupeA = $dataA['groupe'];
                 $groupeB = $dataB['groupe'];
-
                 return $groupeB->getOrdre() <=> $groupeA->getOrdre();
             }
         );
@@ -79,13 +74,11 @@ final class SortUtils
     {
         usort(
             $data,
-            function ($enfantA, $enfantB) {
+            static function ($enfantA, $enfantB) {
                 $dateA = $enfantA->getBirthday();
                 $dateA->format('Y-m-d');
-
                 $dateB = $enfantB->getBirthday();
                 $dateB->format('Y-m-d');
-
                 if ($dateA === $dateB) {
                     if ($enfantA->getPrenom() > $enfantB->getPrenom()) {
                         return +1;
@@ -93,7 +86,6 @@ final class SortUtils
 
                     return -1;
                 }
-
                 return $dateA > $dateB ? +1 : -1;
             }
         );
@@ -110,10 +102,9 @@ final class SortUtils
     {
         usort(
             $data,
-            function ($enfantA, $enfantB) {
+            static function ($enfantA, $enfantB) {
                 $nameA = $enfantA->getNom();
                 $nameB = $enfantB->getNom();
-
                 if ($nameA === $nameB) {
                     if ($enfantA->getPrenom() > $enfantB->getPrenom()) {
                         return +1;
@@ -121,7 +112,6 @@ final class SortUtils
 
                     return -1;
                 }
-
                 return $nameA > $nameB ? +1 : -1;
             }
         );

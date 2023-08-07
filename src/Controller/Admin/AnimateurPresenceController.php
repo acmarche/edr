@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class AnimateurPresenceController extends AbstractController
 {
     public function __construct(
-        private AnimateurRepository $animateurRepository
+        private readonly AnimateurRepository $animateurRepository
     ) {
     }
 

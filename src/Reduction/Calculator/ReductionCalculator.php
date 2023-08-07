@@ -11,6 +11,7 @@ final class ReductionCalculator
         if ($forfait = $reduction->getForfait()) {
             return $montant - $forfait;
         }
+
         if ($pourcentage = $reduction->getPourcentage()) {
             return $montant - $this->calculatePourcentage($montant, $pourcentage);
         }

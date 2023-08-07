@@ -24,9 +24,9 @@ final class SearchMessageType extends AbstractType
                     'class' => Jour::class,
                     'placeholder' => 'Choisissez une date',
                     'required' => false,
-                    'query_builder' => fn (JourRepository $jourRepository) => $jourRepository->getQlNotPlaine(),
+                    'query_builder' => static fn(JourRepository $jourRepository) => $jourRepository->getQlNotPlaine(),
                     //todo display name day
-                    'group_by' => fn ($jour, $key, $id) => $jour->getDateJour()->format('Y'),
+                    'group_by' => static fn($jour, $key, $id) => $jour->getDateJour()->format('Y'),
                 ]
             )
             ->add(
@@ -39,7 +39,7 @@ final class SearchMessageType extends AbstractType
                         'class' => 'sr-only',
                     ],
                     'class' => Ecole::class,
-                    'query_builder' => fn (EcoleRepository $ecoleRepository) => $ecoleRepository->getQbForListing(),
+                    'query_builder' => static fn(EcoleRepository $ecoleRepository) => $ecoleRepository->getQbForListing(),
                 ]
             )
             ->add(
@@ -52,7 +52,7 @@ final class SearchMessageType extends AbstractType
                         'class' => 'sr-only',
                     ],
                     'class' => Plaine::class,
-                    'query_builder' => fn (PlaineRepository $plaineRepository) => $plaineRepository->getQbForListing(),
+                    'query_builder' => static fn(PlaineRepository $plaineRepository) => $plaineRepository->getQbForListing(),
                 ]
             );
     }

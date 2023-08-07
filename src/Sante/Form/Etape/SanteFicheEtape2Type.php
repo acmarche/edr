@@ -24,7 +24,7 @@ final class SanteFicheEtape2Type extends AbstractType
                 'personne_urgence',
                 TextareaType::class,
                 [
-                    'label' => 'Personne(s) en cas d\'urgence',
+                    'label' => "Personne(s) en cas d'urgence",
                     'help' => 'Nom, prénom et numéro de téléphone',
                 ]
             )

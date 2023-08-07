@@ -23,7 +23,7 @@ class EcoleUtils
     public static function getNamesEcole(array|Collection $ecoles): string
     {
         $noms = array_map(
-            fn ($ecole) => $ecole->getNom(),
+            static fn($ecole) => $ecole->getNom(),
             $ecoles->toArray()
         );
 

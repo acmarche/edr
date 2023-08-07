@@ -53,6 +53,7 @@ class FeatureContext extends MinkContext
         $today = Carbon::today();
         $today->addDays($nbDays);
         $today = ucfirst(DateUtils::formatFr($today));
+
         $select = $this->fixStepArgument($select);
         $option = $this->fixStepArgument($today);
         $this->getSession()->getPage()->selectFieldOption($select, $option);
@@ -66,6 +67,7 @@ class FeatureContext extends MinkContext
         $today = Carbon::today();
         $today->addDays($nbDays);
         $today = ucfirst(DateUtils::formatFr($today));
+
         $select = $this->fixStepArgument($select);
         $option = $this->fixStepArgument($today);
         $this->getSession()->getPage()->selectFieldOption($select, $option, true);
@@ -79,7 +81,7 @@ class FeatureContext extends MinkContext
     public function iShouldSeeTextSoManyTimes($sText, $iExpected): void
     {
         $sContent = $this->getSession()->getPage()->getText();
-        $iFound = substr_count($sContent, $sText);
+        $iFound = substr_count((string) $sContent, (string) $sText);
         if ($iExpected !== $iFound) {
             throw new Exception('Found '.$iFound.' occurences of "'.$sText.'" when expecting '.$iExpected);
         }

@@ -18,7 +18,7 @@ final class DefaultController extends AbstractController
     #[Route(path: '/', name: 'edr_animateur_home')]
     public function default(): Response
     {
-        if (($response = $this->hasAnimateur()) !== null) {
+        if (($response = $this->hasAnimateur()) instanceof Response) {
             return $response;
         }
 

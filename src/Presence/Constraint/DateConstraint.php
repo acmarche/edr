@@ -15,14 +15,15 @@ final class DateConstraint implements PresenceConstraintInterface
      * @var string
      */
     private const FORMAT = 'Y-m-d';
-    private FlashBagInterface $flashBag;
+
+    private readonly FlashBagInterface $flashBag;
 
     public function __construct(
         RequestStack $requestStack,
-        private Environment $environment,
-        private PresenceUtils $presenceUtils
+        private readonly Environment $environment,
+        private readonly PresenceUtils $presenceUtils
     ) {
-        $this->flashBag = $requestStack->getSession()?->getFlashBag();
+        $this->flashBag = $requestStack->getSession()->getFlashBag();
     }
 
     /**
@@ -44,6 +45,7 @@ final class DateConstraint implements PresenceConstraintInterface
         if ($jour->isPedagogique()) {
             return $deadLinePedagogique->format(self::FORMAT) <= $datePresence->format(self::FORMAT);
         }
+
         /*
          * Pas pédagogique
          */

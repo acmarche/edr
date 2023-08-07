@@ -21,9 +21,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class FacturePlaineController extends AbstractController
 {
     public function __construct(
-        private FacturePlaineHandler $facturePlaineHandler,
-        private RelationRepository $relationRepository,
-        private PlainePresenceRepository $plainePresenceRepository
+        private readonly FacturePlaineHandler $facturePlaineHandler,
+        private readonly RelationRepository $relationRepository,
+        private readonly PlainePresenceRepository $plainePresenceRepository
     ) {
     }
 
@@ -36,6 +36,7 @@ class FacturePlaineController extends AbstractController
         foreach ($enfants as $enfant) {
             $plaines[] = $this->plainePresenceRepository->findPlainesByEnfant($enfant);
         }
+
         $plaines = array_merge(...$plaines);
 
         return $this->render(

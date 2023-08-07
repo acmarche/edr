@@ -17,12 +17,12 @@ use AcMarche\Edr\Plaine\Repository\PlainePresenceRepository;
 class FacturePlaineHandler implements FacturePlaineHandlerInterface
 {
     public function __construct(
-        private FactureFactory $factureFactory,
-        private CommunicationFactoryInterface $communicationFactory,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private FactureRepository $factureRepository,
-        private PlaineCalculatorInterface $plaineCalculator,
-        private FacturePresenceRepository $facturePresenceRepository
+        private readonly FactureFactory $factureFactory,
+        private readonly CommunicationFactoryInterface $communicationFactory,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly FactureRepository $factureRepository,
+        private readonly PlaineCalculatorInterface $plaineCalculator,
+        private readonly FacturePresenceRepository $facturePresenceRepository
     ) {
     }
 
@@ -58,10 +58,10 @@ class FacturePlaineHandler implements FacturePlaineHandlerInterface
     private function attachPresences(FactureInterface $facture, Plaine $plaine, array $presences): void
     {
         foreach ($presences as $presence) {
-            if (($facturePresence = $this->facturePresenceRepository->findByIdAndType(
+            if (!($facturePresence = $this->facturePresenceRepository->findByIdAndType(
                 $presence->getId(),
                 FactureInterface::OBJECT_PLAINE
-            )) === null) {
+            )) instanceof FacturePresence) {
                 $facturePresence = new FacturePresence($facture, $presence->getId(), FactureInterface::OBJECT_PLAINE);
                 $this->facturePresenceRepository->persist($facturePresence);
             }
@@ -71,6 +71,7 @@ class FacturePlaineHandler implements FacturePlaineHandlerInterface
             if ($ecole = $enfant->getEcole()) {
                 $facture->ecolesListing[$ecole->getId()] = $ecole;
             }
+
             $facturePresence->setNom($enfant->getNom());
             $facturePresence->setPrenom($enfant->getPrenom());
             $ordre = $this->plaineCalculator->getOrdreOnePresence($presence);

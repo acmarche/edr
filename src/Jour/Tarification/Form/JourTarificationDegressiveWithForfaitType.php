@@ -14,10 +14,12 @@ final class JourTarificationDegressiveWithForfaitType extends AbstractType
      * @var string
      */
     private const REQUIRED = 'required';
+
     /**
      * @var string
      */
     private const LABEL = 'label';
+
     /**
      * @var string
      */

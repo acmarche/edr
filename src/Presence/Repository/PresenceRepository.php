@@ -104,7 +104,7 @@ final class PresenceRepository extends ServiceEntityRepository
             ->andWhere('presence.tuteur = :tuteur')
             ->setParameter('tuteur', $tuteur);
 
-        if (null !== $date) {
+        if ($date instanceof DateTimeInterface) {
             $qb->andWhere('jour.date_jour LIKE :date')
                 ->setParameter('date', $date->format('Y-m').'%');
         }
@@ -139,7 +139,7 @@ final class PresenceRepository extends ServiceEntityRepository
                 ->setParameter('jour', $jour);
         }
 
-        if (null !== $ecole) {
+        if ($ecole instanceof Ecole) {
             $queryBuilder->andWhere('enfant.ecole = :ecole')
                 ->setParameter('ecole', $ecole);
         }

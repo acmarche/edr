@@ -21,13 +21,16 @@ class AnneeScolaire implements Stringable
     #[ORM\OneToOne(targetEntity: self::class)]
     #[ORM\JoinColumn(onDelete: 'SET NULL', unique: true)]
     private ?AnneeScolaire $annee_suivante = null;
+
     #[ORM\Column(type: 'integer')]
     private ?int $ordre = null;
+
     /**
      * @var Enfant[]
      */
     #[ORM\OneToMany(targetEntity: Enfant::class, mappedBy: 'annee_scolaire')]
-    private Collection $enfants;
+    private Collection|array $enfants = [];
+
     #[ORM\ManyToOne(targetEntity: GroupeScolaire::class, inversedBy: 'annees_scolaires')]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?GroupeScolaire $groupe_scolaire = null;

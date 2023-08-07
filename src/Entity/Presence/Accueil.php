@@ -48,8 +48,10 @@ class Accueil implements TimestampableInterface, UuidableInterface, Stringable
     #[ORM\Column(type: 'date')]
     #[Assert\Type(type: 'datetime')]
     private ?DateTimeInterface $date_jour = null;
+
     #[ORM\Column(type: 'smallint')]
-    private int $duree;
+    private int $duree = 0;
+
     #[ORM\Column(type: 'string', nullable: false, length: 50)]
     private ?string $heure = null;
 
@@ -59,7 +61,6 @@ class Accueil implements TimestampableInterface, UuidableInterface, Stringable
     ) {
         $this->tuteur = $tuteur;
         $this->enfant = $enfant;
-        $this->duree = 0;
     }
 
     public function __toString(): string
@@ -67,12 +68,12 @@ class Accueil implements TimestampableInterface, UuidableInterface, Stringable
         return $this->date_jour->format('Y-m-d');
     }
 
-    public function getDateJour(): ?\DateTimeInterface
+    public function getDateJour(): ?DateTimeInterface
     {
         return $this->date_jour;
     }
 
-    public function setDateJour(\DateTimeInterface $date_jour): self
+    public function setDateJour(DateTimeInterface $date_jour): self
     {
         $this->date_jour = $date_jour;
 

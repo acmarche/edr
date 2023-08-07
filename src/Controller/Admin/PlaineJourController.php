@@ -19,9 +19,9 @@ use Symfony\Component\Routing\Annotation\Route;
 final class PlaineJourController extends AbstractController
 {
     public function __construct(
-        private PlaineAdminHandler $plaineAdminHandler,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private GroupingInterface $grouping
+        private readonly PlaineAdminHandler $plaineAdminHandler,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly GroupingInterface $grouping
     ) {
     }
 

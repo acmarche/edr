@@ -5,7 +5,7 @@ namespace AcMarche\Edr\ServiceIterator;
 final class Register
 {
     public function __construct(
-        private iterable $secondaryFlows
+        private readonly iterable $secondaryFlows
     ) {
     }
 

@@ -22,7 +22,7 @@ use Twig\Environment;
 final class DateUtils
 {
     public function __construct(
-        private Environment $environment
+        private readonly Environment $environment
     ) {
     }
 
@@ -33,7 +33,7 @@ final class DateUtils
      * @throws Exception
      *
      */
-    public static function createDateTimeFromDayMonth(string $mois): \DateTime
+    public static function createDateTimeFromDayMonth(string $mois): DateTime
     {
         if ($date = DateTime::createFromFormat('d/m/Y', '01/'.$mois)) {
             return $date;
@@ -58,7 +58,7 @@ final class DateUtils
     /**
      * @param DateTime $dateTime "01/08/2018"
      */
-    public static function getDatePeriod(\DateTimeInterface $dateTime): DatePeriod
+    public static function getDatePeriod(DateTimeInterface $dateTime): DatePeriod
     {
         $begin = DateTimeImmutable::createFromMutable($dateTime);
         $end = $begin->modify('last day of this month');
@@ -72,7 +72,7 @@ final class DateUtils
     /**
      * @param DateTime $dateTime "01/08/2018"
      */
-    public static function getAllDaysOfMonth(\DateTimeInterface $dateTime): DatePeriod
+    public static function getAllDaysOfMonth(DateTimeInterface $dateTime): DatePeriod
     {
         $begin = DateTimeImmutable::createFromMutable($dateTime);
         $start = $begin->modify('first day of this month');
@@ -150,7 +150,7 @@ final class DateUtils
     public static function getMonths(DateTimeInterface $dateBegin): CarbonPeriod
     {
         $date = Carbon::instance($dateBegin);
-        $today = Carbon::instance(new \DateTime());
+        $today = Carbon::instance(new DateTime());
 
         $firstDayOfWeek = $date->toMutable()->toDateString();
         $lastDayOffWeek = $today->toDateString(); //+6

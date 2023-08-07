@@ -10,6 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait GetAnimateurTrait
 {
     private ?Animateur $animateur = null;
+
     private EcoleUtils $ecoleUtils;
 
     #[Required]

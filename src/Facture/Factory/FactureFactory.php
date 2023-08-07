@@ -16,8 +16,8 @@ final class FactureFactory
     use PdfDownloaderTrait;
 
     public function __construct(
-        private FacturePdfPresenceInterface $facturePdfPresence,
-        private ParameterBagInterface $parameterBag
+        private readonly FacturePdfPresenceInterface $facturePdfPresence,
+        private readonly ParameterBagInterface $parameterBag
     ) {
     }
 
@@ -54,15 +54,18 @@ final class FactureFactory
             if (is_readable($fileName)) {
                 continue;
             }
+
             $htmlInvoice = $this->createHtml($facture);
             try {
                 $this->getPdf()->generateFromHtml($htmlInvoice, $fileName);
             } catch (Exception $exception) {
                 throw new Exception($exception->getMessage(), $exception->getCode(), $exception);
             }
+
             if ($i > $max) {
                 return false;
             }
+
             ++$i;
         }
 

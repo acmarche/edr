@@ -28,12 +28,12 @@ use Symfony\Component\Routing\Annotation\Route;
 final class PlaineController extends AbstractController
 {
     public function __construct(
-        private PlaineRepository $plaineRepository,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private GroupeScolaireRepository $groupeScolaireRepository,
-        private PlaineAdminHandler $plaineAdminHandler,
-        private GroupingInterface $grouping,
-        private MessageBusInterface $dispatcher
+        private readonly PlaineRepository $plaineRepository,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly GroupeScolaireRepository $groupeScolaireRepository,
+        private readonly PlaineAdminHandler $plaineAdminHandler,
+        private readonly GroupingInterface $grouping,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -49,6 +49,7 @@ final class PlaineController extends AbstractController
             $archived = $data['archived'];
             $nom = $data['nom'];
         }
+
         $plaines = $this->plaineRepository->search($nom, $archived);
         array_map(function ($plaine) {
             $plaine->enfants = $this->plainePresenceRepository->findEnfantsByPlaine($plaine);
@@ -71,6 +72,7 @@ final class PlaineController extends AbstractController
             $plaineGroupe = new PlaineGroupe($plaine, $groupe);
             $plaine->addPlaineGroupe($plaineGroupe);
         }
+
         $form = $this->createForm(PlaineType::class, $plaine);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -102,6 +104,7 @@ final class PlaineController extends AbstractController
                 'id' => $plaine->getId(),
             ]);
         }
+
         $enfants = $this->plainePresenceRepository->findEnfantsByPlaine($plaine);
         $data = $this->grouping->groupEnfantsForPlaine($plaine, $enfants);
 
@@ -145,7 +148,7 @@ final class PlaineController extends AbstractController
         $form = $this->createForm(PlaineOpenType::class, $plaine);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if (($plaineOpen = $this->plaineAdminHandler->handleOpeningRegistrations($plaine)) === null) {
+            if (!($plaineOpen = $this->plaineAdminHandler->handleOpeningRegistrations($plaine)) instanceof Plaine) {
                 $this->plaineRepository->flush();
                 $this->dispatcher->dispatch(new PlaineUpdated($plaine->getId()));
             } else {

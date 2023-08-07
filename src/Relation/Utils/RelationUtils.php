@@ -10,7 +10,7 @@ use AcMarche\Edr\Relation\Repository\RelationRepository;
 final class RelationUtils
 {
     public function __construct(
-        private RelationRepository $relationRepository
+        private readonly RelationRepository $relationRepository
     ) {
     }
 
@@ -33,7 +33,7 @@ final class RelationUtils
     {
         return array_unique(
             array_map(
-                fn ($relation) => $relation->getTuteur(),
+                static fn($relation) => $relation->getTuteur(),
                 $relations
             )
         );
@@ -48,7 +48,7 @@ final class RelationUtils
     {
         return array_unique(
             array_map(
-                fn ($relation) => $relation->getEnfant(),
+                static fn($relation) => $relation->getEnfant(),
                 $relations
             )
         );

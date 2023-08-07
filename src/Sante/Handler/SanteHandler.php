@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Sante\Handler;
 
+use AcMarche\Edr\Entity\Sante\SanteReponse;
 use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Entity\Sante\SanteFiche;
 use AcMarche\Edr\Entity\Sante\SanteQuestion;
@@ -14,10 +15,10 @@ use Doctrine\Common\Collections\Collection;
 final class SanteHandler
 {
     public function __construct(
-        private SanteFicheRepository $santeFicheRepository,
-        private SanteReponseRepository $santeReponseRepository,
-        private SanteFactory $santeFactory,
-        private SanteBinder $santeBinder
+        private readonly SanteFicheRepository $santeFicheRepository,
+        private readonly SanteReponseRepository $santeReponseRepository,
+        private readonly SanteFactory $santeFactory,
+        private readonly SanteBinder $santeBinder
     ) {
     }
 
@@ -45,9 +46,11 @@ final class SanteHandler
             if (null === $question->getReponseTxt()) {
                 return;
             }
-            if (null === ($reponse = $this->santeReponseRepository->getResponse($santeFiche, $question))) {
+
+            if (!($reponse = $this->santeReponseRepository->getResponse($santeFiche, $question)) instanceof SanteReponse) {
                 $reponse = $this->santeFactory->createSanteReponse($santeFiche, $question);
             }
+
             $reponse->setReponse($question->getReponseTxt());
             $reponse->setRemarque($question->getRemarque());
             $this->santeReponseRepository->flush();

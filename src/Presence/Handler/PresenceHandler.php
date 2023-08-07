@@ -17,10 +17,10 @@ use Doctrine\ORM\NonUniqueResultException;
 final class PresenceHandler implements PresenceHandlerInterface
 {
     public function __construct(
-        private PresenceRepository $presenceRepository,
-        private PresenceUtils $presenceUtils,
-        private PresenceConstraints $presenceConstraints,
-        private GroupingInterface $grouping
+        private readonly PresenceRepository $presenceRepository,
+        private readonly PresenceUtils $presenceUtils,
+        private readonly PresenceConstraints $presenceConstraints,
+        private readonly GroupingInterface $grouping
     ) {
     }
 
@@ -32,7 +32,7 @@ final class PresenceHandler implements PresenceHandlerInterface
     public function handleNew(Tuteur $tuteur, Enfant $enfant, iterable $days): void
     {
         foreach ($days as $jour) {
-            if (null !== $this->presenceRepository->isRegistered($enfant, $jour)) {
+            if ($this->presenceRepository->isRegistered($enfant, $jour) instanceof Presence) {
                 continue;
             }
 
@@ -43,6 +43,7 @@ final class PresenceHandler implements PresenceHandlerInterface
             $presence = new Presence($tuteur, $enfant, $jour);
             $this->presenceRepository->persist($presence);
         }
+
         $this->presenceRepository->flush();
     }
 

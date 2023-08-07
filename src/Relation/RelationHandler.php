@@ -12,8 +12,8 @@ use Exception;
 final class RelationHandler
 {
     public function __construct(
-        private RelationRepository $relationRepository,
-        private EnfantRepository $enfantRepository
+        private readonly RelationRepository $relationRepository,
+        private readonly EnfantRepository $enfantRepository
     ) {
     }
 
@@ -31,7 +31,7 @@ final class RelationHandler
             throw new Exception('Enfant non trouvé');
         }
 
-        if (null !== $this->relationRepository->findOneByTuteurAndEnfant($tuteur, $enfant)) {
+        if ($this->relationRepository->findOneByTuteurAndEnfant($tuteur, $enfant) instanceof Relation) {
             throw new Exception('L\'enfant est déjà lié à ce parent');
         }
 

@@ -18,7 +18,7 @@ final class AssociateUserEcoleDto
     private bool $sendEmail = true;
 
     public function __construct(
-        private UserInterface $user
+        private readonly UserInterface $user
     ) {
         $this->ecoles = new ArrayCollection();
     }

@@ -10,6 +10,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait GetTuteurTrait
 {
     private TuteurUtils $tuteurUtils;
+
     private ?Tuteur $tuteur = null;
 
     #[Required]

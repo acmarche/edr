@@ -19,9 +19,9 @@ final class DefaultController extends AbstractController
     use OrganisationPropertyInitTrait;
 
     public function __construct(
-        private RelationUtils $relationUtils,
-        private SanteChecker $santeChecker,
-        private FactureRepository $factureRepository
+        private readonly RelationUtils $relationUtils,
+        private readonly SanteChecker $santeChecker,
+        private readonly FactureRepository $factureRepository
     ) {
     }
 
@@ -29,9 +29,10 @@ final class DefaultController extends AbstractController
     #[IsGranted(data: 'ROLE_MERCREDI_PARENT')]
     public function default(): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $enfants = $this->relationUtils->findEnfantsByTuteur($this->tuteur);
         $this->santeChecker->isCompleteForEnfants($enfants);
         $tuteurIsComplete = TuteurUtils::coordonneesIsComplete($this->tuteur);

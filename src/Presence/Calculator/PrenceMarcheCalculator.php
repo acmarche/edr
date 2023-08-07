@@ -2,6 +2,9 @@
 
 namespace AcMarche\Edr\Presence\Calculator;
 
+use AcMarche\Edr\Entity\Plaine\Plaine;
+use AcMarche\Edr\Entity\Scolaire\Ecole;
+use AcMarche\Edr\Entity\Reduction;
 use AcMarche\Edr\Contrat\Presence\PresenceCalculatorInterface;
 use AcMarche\Edr\Contrat\Presence\PresenceInterface;
 use AcMarche\Edr\Data\EdrConstantes;
@@ -15,8 +18,8 @@ final class PrenceMarcheCalculator implements PresenceCalculatorInterface
     public array $ecoles;
 
     public function __construct(
-        private OrdreService $ordreService,
-        private ReductionCalculator $reductionCalculator
+        private readonly OrdreService $ordreService,
+        private readonly ReductionCalculator $reductionCalculator
     ) {
     }
 
@@ -28,8 +31,9 @@ final class PrenceMarcheCalculator implements PresenceCalculatorInterface
         if (EdrConstantes::ABSENCE_AVEC_CERTIF === $presence->getAbsent()) {
             return 0;
         }
+
         $jour = $presence->getJour();
-        if (null !== $jour->getPlaine()) {
+        if ($jour->getPlaine() instanceof Plaine) {
             return $this->calculatePlaine($presence, $jour);
         }
 
@@ -40,12 +44,15 @@ final class PrenceMarcheCalculator implements PresenceCalculatorInterface
     {
         $facturePresence->setPedagogique($presence->getJour()->isPedagogique());
         $facturePresence->setPresenceDate($presence->getJour()->getDateJour());
+
         $enfant = $presence->getEnfant();
-        if (null !== $enfant->getEcole()) {
+        if ($enfant->getEcole() instanceof Ecole) {
             $this->ecoles[] = $enfant->getEcole()->getNom();
         }
+
         $facturePresence->setNom($enfant->getNom());
         $facturePresence->setPrenom($enfant->getPrenom());
+
         $ordre = $this->getOrdreOnPresence($presence);
         $facturePresence->setOrdre($ordre);
         $facturePresence->setAbsent($presence->getAbsent());
@@ -63,6 +70,7 @@ final class PrenceMarcheCalculator implements PresenceCalculatorInterface
         if ($ordre >= 3) {
             return $jour->getPrix3();
         }
+
         if (2 === $ordre) {
             return $jour->getPrix2();
         }
@@ -94,7 +102,7 @@ final class PrenceMarcheCalculator implements PresenceCalculatorInterface
 
     private function reductionApplicate(PresenceInterface $presence, float $cout): float
     {
-        if (null !== ($reduction = $presence->getReduction())) {
+        if (($reduction = $presence->getReduction()) instanceof Reduction) {
             return $this->reductionCalculator->applicate($reduction, $cout);
         }
 

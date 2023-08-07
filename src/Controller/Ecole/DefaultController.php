@@ -18,7 +18,7 @@ final class DefaultController extends AbstractController
     #[IsGranted(data: 'ROLE_MERCREDI_ECOLE')]
     public function default(): Response
     {
-        if (($response = $this->hasEcoles()) !== null) {
+        if (($response = $this->hasEcoles()) instanceof Response) {
             return $response;
         }
 

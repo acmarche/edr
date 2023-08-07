@@ -32,13 +32,13 @@ use Symfony\Component\Routing\Annotation\Route;
 final class AccueilController extends AbstractController
 {
     public function __construct(
-        private AccueilRepository $accueilRepository,
-        private AccueilHandler $accueilHandler,
-        private RelationRepository $relationRepository,
-        private AccueilCalculatorInterface $accueilCalculator,
-        private FactureHandlerInterface $factureHandler,
-        private FacturePresenceRepository $facturePresenceRepository,
-        private MessageBusInterface $dispatcher
+        private readonly AccueilRepository $accueilRepository,
+        private readonly AccueilHandler $accueilHandler,
+        private readonly RelationRepository $relationRepository,
+        private readonly AccueilCalculatorInterface $accueilCalculator,
+        private readonly FactureHandlerInterface $factureHandler,
+        private readonly FacturePresenceRepository $facturePresenceRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -152,6 +152,7 @@ final class AccueilController extends AbstractController
                 'id' => $accueil->getId(),
             ]);
         }
+
         $form = $this->createForm(AccueilType::class, $accueil);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

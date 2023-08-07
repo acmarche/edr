@@ -17,9 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 final class ExportPdfController extends AbstractController
 {
     public function __construct(
-        private SanteHandler $santeHandler,
-        private SantePdfFactoryTrait $santePdfFactory,
-        private FacturePdfFactoryTrait $facturePdfFactory
+        private readonly SanteHandler $santeHandler,
+        private readonly SantePdfFactoryTrait $santePdfFactory,
+        private readonly FacturePdfFactoryTrait $facturePdfFactory
     ) {
     }
 

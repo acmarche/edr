@@ -15,10 +15,10 @@ class HealthCommand extends Command
     protected static $defaultName = 'edr:health';
 
     public function __construct(
-        private EnfantRepository $enfantRepository,
-        private TuteurRepository $tuteurRepository,
-        private AdminEmailFactory $adminEmailFactory,
-        private NotificationMailer $notifcationMailer,
+        private readonly EnfantRepository $enfantRepository,
+        private readonly TuteurRepository $tuteurRepository,
+        private readonly AdminEmailFactory $adminEmailFactory,
+        private readonly NotificationMailer $notifcationMailer,
         string $name = null
     ) {
         parent::__construct($name);
@@ -44,17 +44,20 @@ class HealthCommand extends Command
             if (0 === \count($relations)) {
                 continue;
             }
+
             $count = 0;
             foreach ($tuteur->getRelations() as $relation) {
                 if ($relation->getEnfant()->isArchived()) {
                     ++$count;
                 }
             }
+
             if ($count === \count($relations)) {
                 $tuteurs[] = $tuteur;
                 $tuteur->setArchived(true);
             }
         }
+
         //  $this->tuteurRepository->flush();
         if ([] !== $enfants) {
             $message = $this->adminEmailFactory->messageTuteurArchived($tuteurs);

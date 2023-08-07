@@ -11,7 +11,7 @@ final class FactureDto
     /**
      * @var Presence[]
      */
-    private Collection $presences;
+    private Collection|array $presences = [];
 
     public function __construct(array $presences)
     {

@@ -21,14 +21,16 @@ class PlaineGroupe implements TimestampableInterface, Stringable
     use IdTrait;
     use FileTrait;
     use TimestampableTrait;
+
     #[ORM\Column(type: 'integer')]
     private ?int $inscription_maximum = 0;
-    /**
-     * @Vich\UploadableField(mapping="edr_groupe", fileNameProperty="fileName", mimeType="mimeType", size="fileSize")
-     *
-     * note This is not a mapped field of entity metadata, just a simple property.
-     */
-    #[Assert\File(maxSize: '10M', mimeTypes: ['application/pdf', 'application/x-pdf', 'image/*'], mimeTypesMessage: 'Uniquement des images ou Pdf')]
+
+    #[Vich\UploadableField(mapping: 'edr_groupe', fileNameProperty: 'fileName', mimeType: "mimeType", size: "fileSize")]
+    #[Assert\File(maxSize: '10M', mimeTypes: [
+        'application/pdf',
+        'application/x-pdf',
+        'image/*',
+    ], mimeTypesMessage: 'Uniquement des images ou Pdf')]
     private ?File $file = null;
 
     public function __construct(

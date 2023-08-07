@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Enfant\Message;
 final class EnfantCreated
 {
     public function __construct(
-        private int $enfantId
+        private readonly int $enfantId
     ) {
     }
 

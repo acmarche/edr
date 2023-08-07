@@ -30,12 +30,15 @@ class FactureReduction implements TimestampableInterface, UuidableInterface
 
     #[ORM\ManyToOne(targetEntity: Facture::class, inversedBy: 'factureReductions')]
     private FactureInterface $facture;
+
     #[ORM\Column(type: 'decimal', precision: 4, scale: 2, nullable: true)]
     #[Assert\Range(min: 0)]
     private ?float $forfait = null;
+
     #[ORM\Column(type: 'decimal', precision: 4, scale: 2, nullable: true)]
     #[Assert\Range(min: 0, max: 100)]
     private ?float $pourcentage = null;
+
     #[ORM\Column(type: 'datetime', nullable: false)]
     private ?DateTimeInterface $dateLe = null;
 
@@ -69,12 +72,12 @@ class FactureReduction implements TimestampableInterface, UuidableInterface
         return $this;
     }
 
-    public function getDateLe(): ?\DateTimeInterface
+    public function getDateLe(): ?DateTimeInterface
     {
         return $this->dateLe;
     }
 
-    public function setDateLe(\DateTimeInterface $dateLe): self
+    public function setDateLe(DateTimeInterface $dateLe): self
     {
         $this->dateLe = $dateLe;
 

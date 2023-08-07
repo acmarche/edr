@@ -19,7 +19,9 @@ use Ramsey\Uuid\UuidInterface;
 interface FactureInterface
 {
     public const OBJECT_PRESENCE = 'presence';
+
     public const OBJECT_ACCUEIL = 'accueil';
+
     public const OBJECT_PLAINE = 'plaine';
 
     public function __toString(): string;
@@ -44,17 +46,17 @@ interface FactureInterface
 
     public function getEnfants(): array;
 
-    public function getPayeLe(): ?\DateTimeInterface;
+    public function getPayeLe(): ?DateTimeInterface;
 
-    public function setPayeLe(?\DateTimeInterface $payeLe): self;
+    public function setPayeLe(?DateTimeInterface $payeLe): self;
 
-    public function getFactureLe(): ?\DateTimeInterface;
+    public function getFactureLe(): ?DateTimeInterface;
 
-    public function setFactureLe(\DateTimeInterface $factureLe): self;
+    public function setFactureLe(DateTimeInterface $factureLe): self;
 
-    public function getEnvoyeLe(): ?\DateTimeInterface;
+    public function getEnvoyeLe(): ?DateTimeInterface;
 
-    public function setEnvoyeLe(?\DateTimeInterface $envoyeLe): self;
+    public function setEnvoyeLe(?DateTimeInterface $envoyeLe): self;
 
     public function getEnvoyeA(): ?string;
 

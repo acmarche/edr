@@ -39,7 +39,7 @@ class TuteurSubsciberFieldType implements EventSubscriberInterface
                     [
                         'class' => Jour::class,
                         'multiple' => true,
-                        'query_builder' => fn (JourRepository $cr) => $cr->getForList($enfant),
+                        'query_builder' => static fn(JourRepository $cr) => $cr->getForList($enfant),
                         'label' => 'Choisissez une ou plusieurs dates',
                     ]
                 );

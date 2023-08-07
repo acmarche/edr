@@ -25,12 +25,12 @@ use Symfony\Component\Routing\Annotation\Route;
 final class SanteFicheController extends AbstractController
 {
     public function __construct(
-        private SanteFicheRepository $santeFicheRepository,
-        private SanteQuestionRepository $santeQuestionRepository,
-        private OrganisationRepository $organisationRepository,
-        private SanteHandler $santeHandler,
-        private SanteChecker $santeChecker,
-        private MessageBusInterface $dispatcher
+        private readonly SanteFicheRepository $santeFicheRepository,
+        private readonly SanteQuestionRepository $santeQuestionRepository,
+        private readonly OrganisationRepository $organisationRepository,
+        private readonly SanteHandler $santeHandler,
+        private readonly SanteChecker $santeChecker,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -45,6 +45,7 @@ final class SanteFicheController extends AbstractController
                 'id' => $enfant->getId(),
             ]);
         }
+
         $isComplete = $this->santeChecker->isComplete($santeFiche);
         $questions = $this->santeQuestionRepository->findAllOrberByPosition();
         $organisation = $this->organisationRepository->getOrganisation();
@@ -68,6 +69,7 @@ final class SanteFicheController extends AbstractController
         if ([] === $santeFiche->getAccompagnateurs()) {
             $santeFiche->addAccompagnateur(' ');
         }
+
         $form = $this->createForm(SanteFicheFullType::class, $santeFiche);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

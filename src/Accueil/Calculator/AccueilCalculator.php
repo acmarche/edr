@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Accueil\Calculator;
 
+use DateTimeInterface;
 use AcMarche\Edr\Entity\Presence\Accueil;
 use AcMarche\Edr\Parameter\Option;
 use Carbon\Carbon;
@@ -10,7 +11,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 final class AccueilCalculator implements AccueilCalculatorInterface
 {
     public function __construct(
-        private ParameterBagInterface $parameterBag
+        private readonly ParameterBagInterface $parameterBag
     ) {
     }
 
@@ -33,7 +34,7 @@ final class AccueilCalculator implements AccueilCalculatorInterface
     public function calculateRetard(Accueil $accueil): float
     {
         $heureRetard = $accueil->getHeureRetard();
-        if (null !== $heureRetard) {
+        if ($heureRetard instanceof DateTimeInterface) {
             $h18 = Carbon::instance($heureRetard);
             $h18->hour(18);
             $h18->minute(15);
@@ -41,9 +42,11 @@ final class AccueilCalculator implements AccueilCalculatorInterface
             if ($minutes > 45) {
                 return 1.5;
             }
+
             if ($minutes > 30) {
                 return 1.0;
             }
+
             if ($minutes > 15) {
                 return 0.5;
             }

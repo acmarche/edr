@@ -17,8 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class PasswordController extends AbstractController
 {
     public function __construct(
-        private UserRepository $userRepository,
-        private UserPasswordHasherInterface $userPasswordEncoder
+        private readonly UserRepository $userRepository,
+        private readonly UserPasswordHasherInterface $userPasswordEncoder
     ) {
     }
 

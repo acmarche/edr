@@ -9,7 +9,7 @@ use AcMarche\Edr\Facture\Repository\FactureRepository;
 class CommunicationFactoryHotton implements CommunicationFactoryInterface
 {
     public function __construct(
-        private FactureRepository $factureRepository
+        private readonly FactureRepository $factureRepository
     ) {
     }
 

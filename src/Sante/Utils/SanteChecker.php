@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Sante\Utils;
 
+use AcMarche\Edr\Entity\Scolaire\Ecole;
 use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Entity\Sante\SanteFiche;
 use AcMarche\Edr\Entity\Sante\SanteQuestion;
@@ -12,9 +13,9 @@ use AcMarche\Edr\Sante\Repository\SanteReponseRepository;
 final class SanteChecker
 {
     public function __construct(
-        private SanteQuestionRepository $santeQuestionRepository,
-        private SanteReponseRepository $santeReponseRepository,
-        private SanteHandler $santeHandler
+        private readonly SanteQuestionRepository $santeQuestionRepository,
+        private readonly SanteReponseRepository $santeReponseRepository,
+        private readonly SanteHandler $santeHandler
     ) {
     }
 
@@ -27,12 +28,7 @@ final class SanteChecker
         if (! $enfant->getPrenom()) {
             return false;
         }
-
-        if (null === $enfant->getEcole()) {
-            return false;
-        }
-
-        return true;
+        return $enfant->getEcole() instanceof Ecole;
     }
 
     public function isComplete(SanteFiche $santeFiche): bool
@@ -81,12 +77,14 @@ final class SanteChecker
         if (null === $santeQuestion->getReponseTxt()) {
             return false;
         }
+
         //si complement on verifie si mis
         if ($santeQuestion->getComplement()) {
             //on repond non
             if (0 === (int) $santeQuestion->getReponseTxt()) {
                 return true;
             }
+
             if (null === $santeQuestion->getRemarque()) {
                 return false;
             }

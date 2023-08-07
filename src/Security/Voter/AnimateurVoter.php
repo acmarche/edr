@@ -21,19 +21,26 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class AnimateurVoter extends Voter
 {
     public const INDEX = 'animateur_index';
+
     public const SHOW = 'animateur_show';
+
     public const ADD = 'animateur_add';
+
     public const EDIT = 'animateur_edit';
+
     public const DELETE = 'animateur_delete';
+
     public UserInterface $user;
+
     private ?Animateur $animateur = null;
+
     /**
      * @var Animateur[]|Collection
      */
     private array|Collection $animateurs;
 
     public function __construct(
-        private Security $security
+        private readonly Security $security
     ) {
     }
 
@@ -90,7 +97,8 @@ final class AnimateurVoter extends Voter
         if (! $this->checkAnimateurs()) {
             return false;
         }
-        if (null === $this->animateur) {
+
+        if (!$this->animateur instanceof Animateur) {
             return false;
         }
 

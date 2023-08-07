@@ -22,9 +22,9 @@ use Symfony\Component\Routing\Annotation\Route;
 final class ProfileController extends AbstractController
 {
     public function __construct(
-        private UserRepository $userRepository,
-        private UserPasswordHasherInterface $userPasswordEncoder,
-        private MessageBusInterface $dispatcher
+        private readonly UserRepository $userRepository,
+        private readonly UserPasswordHasherInterface $userPasswordEncoder,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -33,8 +33,8 @@ final class ProfileController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        if (null === $user) {
-            $this->addFlash('warning', 'Votre compte n\'est pas encore actif');
+        if (!$user instanceof User) {
+            $this->addFlash('warning', "Votre compte n'est pas encore actif");
 
             return $this->redirectToRoute('edr_front_home');
         }
@@ -52,13 +52,13 @@ final class ProfileController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        if (null !== $user) {
+        if ($user instanceof User) {
             $roles = $user->getRoles();
             $del_val = 'ROLE_USER';
 
             $roles = array_filter(
                 $roles,
-                fn ($e) => $e !== $del_val
+                static fn($e) => $e !== $del_val
             );
 
             if (\count($roles) > 1) {
@@ -81,6 +81,7 @@ final class ProfileController extends AbstractController
                 return $this->redirectToRoute('edr_admin_home');
             }
         }
+
         $this->addFlash('warning', 'Aucun rôle ne vous a été attribué');
 
         return $this->redirectToRoute('edr_front_home');

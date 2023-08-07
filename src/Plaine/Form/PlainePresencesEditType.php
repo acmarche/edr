@@ -18,12 +18,11 @@ final class PlainePresencesEditType extends AbstractType
     {
         $formBuilder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function (FormEvent $event): void {
+            static function (FormEvent $event) : void {
                 $form = $event->getForm();
                 /** @var PlainePresencesDto $dto */
                 $dto = $event->getData();
                 $jours = $dto->daysOfPlaine;
-
                 $form->add(
                     'jours',
                     EntityType::class,

@@ -12,7 +12,7 @@ use Vich\UploaderBundle\Handler\DownloadHandler;
 final class DocumentController extends AbstractController
 {
     public function __construct(
-        private DownloadHandler $downloadHandler
+        private readonly DownloadHandler $downloadHandler
     ) {
     }
 

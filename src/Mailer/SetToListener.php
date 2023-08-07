@@ -15,6 +15,7 @@ class SetToListener implements EventSubscriberInterface
         if (! $email instanceof Email) {
             return;
         }
+
         //$email->bcc(new Address('xx@xx.be', 'Test mail'));
     }
 

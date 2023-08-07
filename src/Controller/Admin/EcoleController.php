@@ -22,9 +22,9 @@ use Symfony\Component\Routing\Annotation\Route;
 final class EcoleController extends AbstractController
 {
     public function __construct(
-        private EcoleRepository $ecoleRepository,
-        private EnfantRepository $enfantRepository,
-        private MessageBusInterface $dispatcher
+        private readonly EcoleRepository $ecoleRepository,
+        private readonly EnfantRepository $enfantRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -114,6 +114,7 @@ final class EcoleController extends AbstractController
                     'id' => $ecole->getId(),
                 ]);
             }
+
             $ecoleId = $ecole->getId();
             $this->ecoleRepository->remove($ecole);
             $this->ecoleRepository->flush();

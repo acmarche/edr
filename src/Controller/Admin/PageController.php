@@ -21,8 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class PageController extends AbstractController
 {
     public function __construct(
-        private PageRepository $pageRepository,
-        private MessageBusInterface $dispatcher
+        private readonly PageRepository $pageRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 

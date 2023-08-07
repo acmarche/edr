@@ -8,12 +8,16 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 final class SearchHelper
 {
     public const ENFANT_LIST = 'enfant_list';
+
     public const TUTEUR_LIST = 'tuteur_list';
+
     public const PRESENCE_LIST = 'presence_list';
+
     public const PRESENCE_LIST_BY_MONTH = 'presence_list_by_month';
+
     public const MESSAGE_INDEX = 'message_index';
 
-    private SessionInterface $session;
+    private readonly SessionInterface $session;
 
     public function __construct(RequestStack $requestStack)
     {

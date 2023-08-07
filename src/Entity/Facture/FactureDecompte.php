@@ -26,8 +26,10 @@ class FactureDecompte implements TimestampableInterface, UuidableInterface
 
     #[ORM\ManyToOne(targetEntity: Facture::class, inversedBy: 'factureDecomptes')]
     private FactureInterface $facture;
+
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?DateTimeInterface $payeLe = null;
+
     #[ORM\Column(type: 'decimal', precision: 4, scale: 2, nullable: false)]
     #[Assert\Range(min: '0.1')]
     private ?float $montant = null;
@@ -38,12 +40,12 @@ class FactureDecompte implements TimestampableInterface, UuidableInterface
         $this->facture = $facture;
     }
 
-    public function getPayeLe(): ?\DateTimeInterface
+    public function getPayeLe(): ?DateTimeInterface
     {
         return $this->payeLe;
     }
 
-    public function setPayeLe(?\DateTimeInterface $payeLe): self
+    public function setPayeLe(?DateTimeInterface $payeLe): self
     {
         $this->payeLe = $payeLe;
 

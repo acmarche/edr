@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class TuteurUtils
 {
     public function __construct(
-        private RelationRepository $relationRepository
+        private readonly RelationRepository $relationRepository
     ) {
     }
 
@@ -140,10 +140,12 @@ final class TuteurUtils
             if (! $this->tuteurIsActif($tuteur)) {
                 continue;
             }
+
             $t = self::getEmailsOfOneTuteur($tuteur);
             if (null !== $t) {
                 continue;
             }
+
             $data[] = $tuteur;
         }
 

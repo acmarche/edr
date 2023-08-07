@@ -29,14 +29,14 @@ use Symfony\Component\Routing\Annotation\Route;
 final class EnfantController extends AbstractController
 {
     public function __construct(
-        private EnfantRepository $enfantRepository,
-        private EnfantHandler $enfantHandler,
-        private RelationRepository $relationRepository,
-        private PresenceRepository $presenceRepository,
-        private PresenceUtils $presenceUtils,
-        private SearchHelper $searchHelper,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private MessageBusInterface $dispatcher
+        private readonly EnfantRepository $enfantRepository,
+        private readonly EnfantHandler $enfantHandler,
+        private readonly RelationRepository $relationRepository,
+        private readonly PresenceRepository $presenceRepository,
+        private readonly PresenceUtils $presenceUtils,
+        private readonly SearchHelper $searchHelper,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -46,6 +46,7 @@ final class EnfantController extends AbstractController
     {
         $form = $this->createForm(SearchEnfantType::class);
         $form->handleRequest($request);
+
         $enfants = [];
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();

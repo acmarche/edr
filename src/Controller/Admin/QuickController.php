@@ -21,10 +21,10 @@ use Symfony\Component\Routing\Annotation\Route;
 final class QuickController extends AbstractController
 {
     public function __construct(
-        private TuteurRepository $tuteurRepository,
-        private EnfantRepository $enfantRepository,
-        private RelationRepository $relationRepository,
-        private AssociationTuteurHandler $associationHandler
+        private readonly TuteurRepository $tuteurRepository,
+        private readonly EnfantRepository $enfantRepository,
+        private readonly RelationRepository $relationRepository,
+        private readonly AssociationTuteurHandler $associationHandler
     ) {
     }
 
@@ -46,7 +46,8 @@ final class QuickController extends AbstractController
 
             $this->relationRepository->persist($relation);
             $this->relationRepository->flush();
-            $user = $password = null;
+            $user = null;
+            $password = null;
 
             if ($tuteur->getEmail()) {
                 $user = $this->associationHandler->handleCreateUserFromTuteur($tuteur);

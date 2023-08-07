@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Controller\Admin;
 
+use DateTimeInterface;
 use AcMarche\Edr\Entity\Facture\Facture;
 use AcMarche\Edr\Entity\Facture\FactureReduction;
 use AcMarche\Edr\Facture\Form\FactureReductionType;
@@ -19,20 +20,21 @@ use Symfony\Component\Routing\Annotation\Route;
 final class FactureReductionController extends AbstractController
 {
     public function __construct(
-        private FactureReductionRepository $factureReductionRepository
+        private readonly FactureReductionRepository $factureReductionRepository
     ) {
     }
 
     #[Route(path: '/{id}/new', name: 'edr_admin_facture_reduction_new', methods: ['GET', 'POST'])]
     public function new(Request $request, Facture $facture): Response
     {
-        if (null !== $facture->getEnvoyeLe()) {
+        if ($facture->getEnvoyeLe() instanceof DateTimeInterface) {
             $this->addFlash('danger', 'La facture a déjà été envoyée');
 
             return $this->redirectToRoute('edr_admin_facture_show', [
                 'id' => $facture->getId(),
             ]);
         }
+
         $factureReduction = new FactureReduction($facture);
         $form = $this->createForm(FactureReductionType::class, $factureReduction);
         $form->handleRequest($request);
@@ -74,13 +76,14 @@ final class FactureReductionController extends AbstractController
     #[Route(path: '/{id}/edit', name: 'edr_admin_facture_reduction_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, FactureReduction $factureReduction): Response
     {
-        if (null !== $factureReduction->getFacture()->getEnvoyeLe()) {
+        if ($factureReduction->getFacture()->getEnvoyeLe() instanceof DateTimeInterface) {
             $this->addFlash('danger', 'La facture a déjà été envoyée');
 
             return $this->redirectToRoute('edr_admin_facture_show', [
                 'id' => $factureReduction->getFacture()->getId(),
             ]);
         }
+
         $form = $this->createForm(FactureReductionType::class, $factureReduction);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

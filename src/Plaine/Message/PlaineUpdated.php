@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Plaine\Message;
 final class PlaineUpdated
 {
     public function __construct(
-        private int $plaineId
+        private readonly int $plaineId
     ) {
     }
 

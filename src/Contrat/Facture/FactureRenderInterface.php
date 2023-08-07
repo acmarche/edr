@@ -8,7 +8,6 @@ interface FactureRenderInterface
 {
     /**
      * Render html details to show the facture
-     * @param FactureInterface $facture
      * @return string
      */
     public function render(FactureInterface $facture): string;

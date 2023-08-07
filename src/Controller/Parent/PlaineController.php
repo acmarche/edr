@@ -30,17 +30,17 @@ final class PlaineController extends AbstractController
     use GetTuteurTrait;
 
     public function __construct(
-        private PlaineRepository $plaineRepository,
-        private RelationUtils $relationUtils,
-        private SanteHandler $santeHandler,
-        private SanteChecker $santeChecker,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private FacturePlaineHandlerInterface $facturePlaineHandler,
-        private FactureEmailFactory $factureEmailFactory,
-        private NotificationMailer $notificationMailer,
-        private AdminEmailFactory $adminEmailFactory,
-        private PlaineHandlerInterface $plaineHandler,
-        private FactureRepository $factureRepository
+        private readonly PlaineRepository $plaineRepository,
+        private readonly RelationUtils $relationUtils,
+        private readonly SanteHandler $santeHandler,
+        private readonly SanteChecker $santeChecker,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly FacturePlaineHandlerInterface $facturePlaineHandler,
+        private readonly FactureEmailFactory $factureEmailFactory,
+        private readonly NotificationMailer $notificationMailer,
+        private readonly AdminEmailFactory $adminEmailFactory,
+        private readonly PlaineHandlerInterface $plaineHandler,
+        private readonly FactureRepository $factureRepository
     ) {
     }
 
@@ -62,9 +62,10 @@ final class PlaineController extends AbstractController
     #[IsGranted(data: 'ROLE_MERCREDI_PARENT')]
     public function show(Plaine $plaine): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $tuteur = $this->tuteur;
         $inscriptions = $this->plainePresenceRepository->findByPlaineAndTuteur($plaine, $tuteur);
         $enfantsInscrits = PresenceUtils::extractEnfants($inscriptions);
@@ -93,9 +94,10 @@ final class PlaineController extends AbstractController
     #[Route(path: '/select/enfant', name: 'edr_parent_plaine_select_enfant', methods: ['GET', 'POST'])]
     public function selectEnfant(Request $request): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $enfants = $this->relationUtils->findEnfantsByTuteur($this->tuteur);
         $form = $this->createForm(SelectEnfantType::class, null, [
             'enfants' => $enfants,
@@ -113,7 +115,7 @@ final class PlaineController extends AbstractController
                     continue;
                 }
 
-                if (null !== $plaine) {
+                if ($plaine instanceof Plaine) {
                     $this->plaineHandler->handleAddEnfant($plaine, $this->tuteur, $enfant);
                     $this->addFlash('success', $enfant.' a bien été inscrits à la plaine');
                 }
@@ -138,9 +140,10 @@ final class PlaineController extends AbstractController
     #[Route(path: '/confirmation', name: 'edr_parent_plaine_presence_confirmation', methods: ['GET', 'POST'])]
     public function confirmation(Request $request): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $tuteur = $this->tuteur;
         $plaine = $this->plaineRepository->findPlaineOpen();
         if ($this->plaineHandler->isRegistrationFinalized($plaine, $tuteur)) {
@@ -148,6 +151,7 @@ final class PlaineController extends AbstractController
                 'id' => $plaine->getId(),
             ]);
         }
+
         $enfantsInscrits = $this->plainePresenceRepository->findEnfantsByPlaineAndTuteur($plaine, $tuteur);
         $enfants = $this->relationUtils->findEnfantsByTuteur($tuteur);
         $form = $this->createForm(PlaineConfirmationType::class);

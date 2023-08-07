@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class SanteFicheEtape3Type extends AbstractType
 {
     public function __construct(
-        private SanteChecker $santeChecker
+        private readonly SanteChecker $santeChecker
     ) {
     }
 

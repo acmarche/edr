@@ -17,7 +17,7 @@ trait AnimateursTrait
     public function getAnimateur(): ?Animateur
     {
         $animateurs = $this->animateurs;
-        if (\count($animateurs) > 0) {
+        if ((is_countable($animateurs) ? \count($animateurs) : 0) > 0) {
             return $animateurs[0];
         }
 

@@ -13,6 +13,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 trait InitMailerTrait
 {
     private MailerInterface $mailer;
+
     private NotifierInterface $notifier;
 
     #[Required]

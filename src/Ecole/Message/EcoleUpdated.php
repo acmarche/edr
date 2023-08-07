@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Ecole\Message;
 final class EcoleUpdated
 {
     public function __construct(
-        private int $ecoleId
+        private readonly int $ecoleId
     ) {
     }
 

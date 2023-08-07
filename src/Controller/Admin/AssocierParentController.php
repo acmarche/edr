@@ -22,8 +22,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class AssocierParentController extends AbstractController
 {
     public function __construct(
-        private AssociationTuteurHandler $associationHandler,
-        private TuteurRepository $tuteurRepository
+        private readonly AssociationTuteurHandler $associationHandler,
+        private readonly TuteurRepository $tuteurRepository
     ) {
     }
 
@@ -37,6 +37,7 @@ final class AssocierParentController extends AbstractController
                 'id' => $user->getId(),
             ]);
         }
+
         $associateUserTuteurDto = new AssociateUserTuteurDto($user);
         $this->associationHandler->suggestTuteur($user, $associateUserTuteurDto);
         $form = $this->createForm(AssociateTuteurType::class, $associateUserTuteurDto);

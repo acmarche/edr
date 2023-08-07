@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 final class RegistrationFormType extends AbstractType
 {
     public function __construct(
-        private RouterInterface $router
+        private readonly RouterInterface $router
     ) {
     }
 
@@ -51,7 +51,7 @@ final class RegistrationFormType extends AbstractType
                 'agreeTerms',
                 CheckboxType::class,
                 [
-                    'label' => 'J\'accepte les conditions d\'utilisation',
+                    'label' => "J'accepte les conditions d'utilisation",
                     'help_html' => true,
                     'help' => '<a href="'.$url.'" target="_blank">Lire les conditions d\'utilisation</a>',
                     'mapped' => false,

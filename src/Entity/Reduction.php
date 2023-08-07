@@ -23,6 +23,7 @@ class Reduction implements Stringable
     #[ORM\Column(type: 'float', nullable: true)]
     #[Assert\Range(min: 0, max: 100)]
     private ?float $pourcentage = null;
+
     #[ORM\Column(type: 'float', nullable: true)]
     #[Assert\Range(min: 0)]
     private ?float $forfait = null;

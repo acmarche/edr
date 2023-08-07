@@ -22,11 +22,11 @@ final class EnfantController extends AbstractController
     use GetAnimateurTrait;
 
     public function __construct(
-        private EnfantRepository $enfantRepository,
-        private SanteHandler $santeHandler,
-        private SanteChecker $santeChecker,
-        private PresenceRepository $presenceRepository,
-        private RelationRepository $relationRepository
+        private readonly EnfantRepository $enfantRepository,
+        private readonly SanteHandler $santeHandler,
+        private readonly SanteChecker $santeChecker,
+        private readonly PresenceRepository $presenceRepository,
+        private readonly RelationRepository $relationRepository
     ) {
     }
 
@@ -34,9 +34,10 @@ final class EnfantController extends AbstractController
     #[IsGranted(data: 'ROLE_MERCREDI_ANIMATEUR')]
     public function index(Request $request): Response
     {
-        if (($hasAnimateur = $this->hasAnimateur()) !== null) {
+        if (($hasAnimateur = $this->hasAnimateur()) instanceof Response) {
             return $hasAnimateur;
         }
+
         $nom = null;
         $form = $this->createForm(
             SearchEnfantForAnimateurType::class,
@@ -50,6 +51,7 @@ final class EnfantController extends AbstractController
             $data = $form->getData();
             $nom = $data['nom'];
         }
+
         $enfants = $this->enfantRepository->searchForAnimateur($this->animateur, $nom);
 
         return $this->render(

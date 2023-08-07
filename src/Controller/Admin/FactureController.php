@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Controller\Admin;
 
+use AcMarche\Edr\Facture\FactureInterface;
 use AcMarche\Edr\Contrat\Facture\FactureCalculatorInterface;
 use AcMarche\Edr\Contrat\Facture\FactureHandlerInterface;
 use AcMarche\Edr\Contrat\Facture\FactureRenderInterface;
@@ -33,12 +34,12 @@ use Symfony\Component\Routing\Annotation\Route;
 final class FactureController extends AbstractController
 {
     public function __construct(
-        private FactureRepository $factureRepository,
-        private FactureHandlerInterface $factureHandler,
-        private FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository,
-        private FactureCalculatorInterface $factureCalculator,
-        private FactureRenderInterface $factureRender,
-        private MessageBusInterface $dispatcher
+        private readonly FactureRepository $factureRepository,
+        private readonly FactureHandlerInterface $factureHandler,
+        private readonly FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository,
+        private readonly FactureCalculatorInterface $factureCalculator,
+        private readonly FactureRenderInterface $factureRender,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -72,6 +73,7 @@ final class FactureController extends AbstractController
         $factures = [];
         $form = $this->createForm(FactureSearchType::class);
         $form->handleRequest($request);
+
         $total = 0;
         if ($form->isSubmitted() && $form->isValid()) {
             $dataForm = $form->getData();
@@ -87,10 +89,12 @@ final class FactureController extends AbstractController
                 $dataForm['communication'],
             );
         }
+
         foreach ($factures as $facture) {
             $facture->factureDetailDto = $this->factureCalculator->createDetail($facture);
             $total += $facture->factureDetailDto->total;
         }
+
         $formMonth = $this->createForm(
             FactureSelectMonthType::class,
             null,
@@ -150,7 +154,7 @@ final class FactureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $month = $form->get('mois')->getData();
 
-            if (($facture = $this->factureHandler->generateByMonthForTuteur($tuteur, $month)) === null) {
+            if (!($facture = $this->factureHandler->generateByMonthForTuteur($tuteur, $month)) instanceof FactureInterface) {
                 $this->addFlash('warning', 'Aucune présences ou accueils non facturés pour ce mois');
 
                 return $this->redirectToRoute('edr_admin_facture_index_by_tuteur', [
@@ -164,6 +168,7 @@ final class FactureController extends AbstractController
                 'id' => $facture->getId(),
             ]);
         }
+
         $this->addFlash('danger', 'Date non valide');
 
         return $this->redirectToRoute('edr_admin_facture_index_by_tuteur', [

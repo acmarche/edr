@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Page\Message;
 final class PageCreated
 {
     public function __construct(
-        private int $pageId
+        private readonly int $pageId
     ) {
     }
 

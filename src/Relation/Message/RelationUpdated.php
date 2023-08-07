@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Relation\Message;
 final class RelationUpdated
 {
     public function __construct(
-        private int $relationId
+        private readonly int $relationId
     ) {
     }
 

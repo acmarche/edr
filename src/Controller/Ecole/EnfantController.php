@@ -28,15 +28,15 @@ final class EnfantController extends AbstractController
     use GetEcolesTrait;
 
     public function __construct(
-        private EnfantRepository $enfantRepository,
-        private SanteHandler $santeHandler,
-        private SanteChecker $santeChecker,
-        private PresenceRepository $presenceRepository,
-        private AccueilRepository $accueilRepository,
-        private RelationRepository $relationRepository,
-        private SanteQuestionRepository $santeQuestionRepository,
-        private OrganisationRepository $organisationRepository,
-        private MessageBusInterface $dispatcher
+        private readonly EnfantRepository $enfantRepository,
+        private readonly SanteHandler $santeHandler,
+        private readonly SanteChecker $santeChecker,
+        private readonly PresenceRepository $presenceRepository,
+        private readonly AccueilRepository $accueilRepository,
+        private readonly RelationRepository $relationRepository,
+        private readonly SanteQuestionRepository $santeQuestionRepository,
+        private readonly OrganisationRepository $organisationRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -44,9 +44,10 @@ final class EnfantController extends AbstractController
     #[IsGranted(data: 'ROLE_MERCREDI_ECOLE')]
     public function index(Request $request): Response
     {
-        if (($response = $this->hasEcoles()) !== null) {
+        if (($response = $this->hasEcoles()) instanceof Response) {
             return $response;
         }
+
         $nom = null;
         $accueil = true;
         $form = $this->createForm(SearchEnfantEcoleType::class, [
@@ -58,6 +59,7 @@ final class EnfantController extends AbstractController
             $nom = $data['nom'];
             $accueil = $data['accueil'];
         }
+
         $enfants = $this->enfantRepository->searchForEcole($this->ecoles, $nom, $accueil);
 
         return $this->render(
@@ -128,6 +130,7 @@ final class EnfantController extends AbstractController
                 'uuid' => $enfant->getUuid(),
             ]);
         }
+
         $isComplete = $this->santeChecker->isComplete($santeFiche);
         $questions = $this->santeQuestionRepository->findAllOrberByPosition();
         $organisation = $this->organisationRepository->getOrganisation();

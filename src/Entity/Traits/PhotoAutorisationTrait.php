@@ -4,7 +4,7 @@ namespace AcMarche\Edr\Entity\Traits;
 
 trait PhotoAutorisationTrait
 {
-    private bool $photo_autorisation;
+    private bool $photo_autorisation = false;
 
     public function isPhotoAutorisation(): bool
     {

@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class PresenceOneController extends AbstractController
 {
     public function __construct(
-        private AccueilRepository $accueilRepository
+        private readonly AccueilRepository $accueilRepository
     ) {
     }
 
@@ -30,7 +30,10 @@ final class PresenceOneController extends AbstractController
     {
         $form = $this->createForm(SearchAccueilForQuarter::class, ['year' => date('Y')]);
         $form->handleRequest($request);
-        $childs = $data = $ages = [];
+
+        $childs = [];
+        $data = [];
+        $ages = [];
 
         if ($form->isSubmitted() && $form->isValid()) {
             $dataForm = $form->getData();
@@ -38,31 +41,13 @@ final class PresenceOneController extends AbstractController
             $trimestre = $dataForm['trimestre'];
             $year = $dataForm['year'];
 
-            switch ($trimestre) {
-                case 1:
-                {
-                    $months = [1, 2, 3];
-                    break;
-                }
-                case 2:
-                {
-                    $months = [4, 5, 6];
-                    break;
-                }
-                case 3:
-                {
-                    $months = [7, 8, 9];
-                    break;
-                }
-                case 4:
-                {
-                    $months = [10, 11, 12];
-                    break;
-                }
-                default:
-                    $months = [];
-                    break;
-            }
+            $months = match ($trimestre) {
+                1 => [1, 2, 3],
+                2 => [4, 5, 6],
+                3 => [7, 8, 9],
+                4 => [10, 11, 12],
+                default => [],
+            };
 
             $data = [];
             foreach ($months as $monthString) {
@@ -86,6 +71,7 @@ final class PresenceOneController extends AbstractController
                             }
                         }
                     }
+
                     $dataMonth['total'] = $totalByMonth;
                     $data[$month->format('Y-m-d')] = $dataMonth;
                 } catch (Exception $e) {
@@ -102,9 +88,9 @@ final class PresenceOneController extends AbstractController
             $ref = DateUtils::createDateTimeFromDayMonth($months[0].'/'.$year);
             foreach ($childs as $child) {
                 if ($child->getAge($ref) > 6) {
-                    $ages['prim']++;
+                    ++$ages['prim'];
                 } else {
-                    $ages['mat']++;
+                    ++$ages['mat'];
                 }
             }
         }

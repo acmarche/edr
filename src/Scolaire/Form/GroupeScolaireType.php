@@ -55,7 +55,7 @@ final class GroupeScolaireType extends AbstractType
                 EntityType::class,
                 [
                     'class' => AnneeScolaire::class,
-                    'query_builder' => function (AnneeScolaireRepository $anneeScolaireRepository) {
+                    'query_builder' => static function (AnneeScolaireRepository $anneeScolaireRepository) {
                         $anneeScolaireRepository->getQbForListing();
                     },
                     'label' => 'Année(s) scolaire(s)',
@@ -65,7 +65,7 @@ final class GroupeScolaireType extends AbstractType
                 ]
             )
             ->add('ordre', IntegerType::class, [
-                'label' => 'Ordre d\'affichage',
+                'label' => "Ordre d'affichage",
                 'help' => 'Ordre dans le listing',
             ]);
     }

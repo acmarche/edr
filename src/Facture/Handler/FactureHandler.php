@@ -2,6 +2,8 @@
 
 namespace AcMarche\Edr\Facture\Handler;
 
+use DateTimeInterface;
+use AcMarche\Edr\Entity\Scolaire\Ecole;
 use AcMarche\Edr\Accueil\Calculator\AccueilCalculatorInterface;
 use AcMarche\Edr\Accueil\Repository\AccueilRepository;
 use AcMarche\Edr\Contrat\Facture\FactureHandlerInterface;
@@ -28,16 +30,16 @@ use DateTime;
 final class FactureHandler implements FactureHandlerInterface
 {
     public function __construct(
-        private FactureRepository $factureRepository,
-        private FacturePresenceRepository $facturePresenceRepository,
-        private FactureFactory $factureFactory,
-        private PresenceCalculatorInterface $presenceCalculator,
-        private PresenceRepository $presenceRepository,
-        private AccueilRepository $accueilRepository,
-        private AccueilCalculatorInterface $accueilCalculator,
-        private TuteurRepository $tuteurRepository,
-        private CommunicationFactoryInterface $communicationFactory,
-        private FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository
+        private readonly FactureRepository $factureRepository,
+        private readonly FacturePresenceRepository $facturePresenceRepository,
+        private readonly FactureFactory $factureFactory,
+        private readonly PresenceCalculatorInterface $presenceCalculator,
+        private readonly PresenceRepository $presenceRepository,
+        private readonly AccueilRepository $accueilRepository,
+        private readonly AccueilCalculatorInterface $accueilCalculator,
+        private readonly TuteurRepository $tuteurRepository,
+        private readonly CommunicationFactoryInterface $communicationFactory,
+        private readonly FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository
     ) {
     }
 
@@ -74,7 +76,7 @@ final class FactureHandler implements FactureHandlerInterface
         $date = Carbon::createFromDate($year, $month, 01);
 
         $facture = $this->handleByTuteur($tuteur, $date);
-        if (null !== $facture) {
+        if ($facture instanceof Facture) {
             $this->flush();
             $facture->setCommunication($this->communicationFactory->generateForPresence($facture));
             $this->flush();
@@ -91,7 +93,7 @@ final class FactureHandler implements FactureHandlerInterface
 
         $tuteurs = $this->tuteurRepository->findAllOrderByNom();
         foreach ($tuteurs as $tuteur) {
-            if (($facture = $this->handleByTuteur($tuteur, $date)) !== null) {
+            if (($facture = $this->handleByTuteur($tuteur, $date)) instanceof Facture) {
                 $factures[] = $facture;
             }
         }
@@ -100,6 +102,7 @@ final class FactureHandler implements FactureHandlerInterface
         foreach ($factures as $facture) {
             $facture->setCommunication($this->communicationFactory->generateForPresence($facture));
         }
+
         $this->flush();
 
         return $factures;
@@ -112,8 +115,8 @@ final class FactureHandler implements FactureHandlerInterface
 
     public function isSended(int $presenceId, string $type): bool
     {
-        if (($facturePresence = $this->facturePresenceRepository->findByIdAndType($presenceId, $type)) !== null) {
-            return null !== $facturePresence->getFacture()->getEnvoyeLe();
+        if (($facturePresence = $this->facturePresenceRepository->findByIdAndType($presenceId, $type)) instanceof FacturePresence) {
+            return $facturePresence->getFacture()->getEnvoyeLe() instanceof DateTimeInterface;
         }
 
         return false;
@@ -126,12 +129,15 @@ final class FactureHandler implements FactureHandlerInterface
     ): void {
         $facturePresence->setPedagogique($presence->getJour()->isPedagogique());
         $facturePresence->setPresenceDate($presence->getJour()->getDateJour());
+
         $enfant = $presence->getEnfant();
-        if (($ecole = $enfant->getEcole()) !== null) {
+        if (($ecole = $enfant->getEcole()) instanceof Ecole) {
             $facture->ecolesListing[$ecole->getId()] = $ecole;
         }
+
         $facturePresence->setNom($enfant->getNom());
         $facturePresence->setPrenom($enfant->getPrenom());
+
         $ordre = $this->presenceCalculator->getOrdreOnPresence($presence);
         $facturePresence->setOrdre($ordre);
         $facturePresence->setAbsent($presence->getAbsent());
@@ -198,9 +204,10 @@ final class FactureHandler implements FactureHandlerInterface
             $facturePresence->setHeure($accueil->getHeure());
             $facturePresence->setDuree($accueil->getDuree());
             $enfant = $accueil->getEnfant();
-            if (($ecole = $enfant->getEcole()) !== null) {
+            if (($ecole = $enfant->getEcole()) instanceof Ecole) {
                 $facture->ecolesListing[$ecole->getId()] = $ecole;
             }
+
             $facturePresence->setNom($enfant->getNom());
             $facturePresence->setPrenom($enfant->getPrenom());
             $facturePresence->setCoutBrut($this->accueilCalculator->getPrix($accueil));
@@ -224,11 +231,12 @@ final class FactureHandler implements FactureHandlerInterface
         $retards = [];
         $total = 0;
         foreach ($accueils as $accueil) {
-            if (null !== $accueil->getHeureRetard()) {
+            if ($accueil->getHeureRetard() instanceof DateTimeInterface) {
                 $total += $this->accueilCalculator->calculateRetard($accueil);
                 $retards[] = $accueil->getDateJour()->format('d-m');
             }
         }
+
         if ($total > 0) {
             $complement = new FactureComplement($facture);
             $complement->setDateLe(new DateTime());

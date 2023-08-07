@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Facture\Message;
 final class FactureDeleted
 {
     public function __construct(
-        private int $factureId
+        private readonly int $factureId
     ) {
     }
 

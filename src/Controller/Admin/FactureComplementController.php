@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class FactureComplementController extends AbstractController
 {
     public function __construct(
-        private FactureComplementRepository $factureComplementRepository
+        private readonly FactureComplementRepository $factureComplementRepository
     ) {
     }
 

@@ -32,15 +32,15 @@ final class PresenceController extends AbstractController
     use GetTuteurTrait;
 
     public function __construct(
-        private RelationUtils $relationUtils,
-        private PresenceRepository $presenceRepository,
-        private PresenceHandlerInterface $presenceHandler,
-        private SanteChecker $santeChecker,
-        private SanteHandler $santeHandler,
-        private PresenceCalculatorInterface $presenceCalculator,
-        private PresenceDaysProviderInterface $presenceDaysProvider,
-        private FacturePresenceRepository $facturePresenceRepository,
-        private MessageBusInterface $dispatcher
+        private readonly RelationUtils $relationUtils,
+        private readonly PresenceRepository $presenceRepository,
+        private readonly PresenceHandlerInterface $presenceHandler,
+        private readonly SanteChecker $santeChecker,
+        private readonly SanteHandler $santeHandler,
+        private readonly PresenceCalculatorInterface $presenceCalculator,
+        private readonly PresenceDaysProviderInterface $presenceDaysProvider,
+        private readonly FacturePresenceRepository $facturePresenceRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -50,9 +50,10 @@ final class PresenceController extends AbstractController
     #[Route(path: '/select/enfant', name: 'edr_parent_presence_select_enfant', methods: ['GET'])]
     public function selectEnfant(): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $enfants = $this->relationUtils->findEnfantsByTuteur($this->tuteur);
 
         return $this->render(
@@ -70,9 +71,10 @@ final class PresenceController extends AbstractController
     #[IsGranted(data: 'enfant_edit', subject: 'enfant')]
     public function selectJours(Request $request, Enfant $enfant): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $santeFiche = $this->santeHandler->init($enfant);
         if (! $this->santeChecker->isComplete($santeFiche)) {
             $this->addFlash('danger', 'La fiche santé de votre enfant doit être complétée');
@@ -81,6 +83,7 @@ final class PresenceController extends AbstractController
                 'uuid' => $enfant->getUuid(),
             ]);
         }
+
         $presenceSelectDays = new PresenceSelectDays($enfant);
         $form = $this->createForm(PresenceNewForParentType::class, $presenceSelectDays);
         $dates = $this->presenceDaysProvider->getAllDaysToSubscribe($enfant);
@@ -136,6 +139,7 @@ final class PresenceController extends AbstractController
                     'uuid' => $enfant->getUuid(),
                 ]);
             }
+
             $presenceId = $presence->getId();
             $this->presenceRepository->remove($presence);
             $this->presenceRepository->flush();

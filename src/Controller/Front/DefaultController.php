@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Controller\Front;
 
+use AcMarche\Edr\Entity\Page;
 use AcMarche\Edr\Page\Factory\PageFactory;
 use AcMarche\Edr\Page\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,8 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class DefaultController extends AbstractController
 {
     public function __construct(
-        private PageRepository $pageRepository,
-        private PageFactory $pageFactory
+        private readonly PageRepository $pageRepository,
+        private readonly PageFactory $pageFactory
     ) {
     }
 
@@ -21,7 +22,7 @@ final class DefaultController extends AbstractController
     public function index(): Response
     {
         $homePage = $this->pageRepository->findHomePage();
-        if (null === $homePage) {
+        if (!$homePage instanceof Page) {
             $homePage = $this->pageFactory->createHomePage();
         }
 

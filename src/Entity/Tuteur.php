@@ -60,11 +60,13 @@ class Tuteur implements SluggableInterface, TimestampableInterface, Stringable
     use IbanTrait;
     use CreancesTrait;
     use IdOldTrait;
+
     /**
      * @var Relation[]
      */
     #[ORM\OneToMany(targetEntity: Relation::class, mappedBy: 'tuteur', cascade: ['remove'])]
-    private Collection $relations;
+    private Collection|array $relations = [];
+
     /**
      * J'ai mis la definition pour pouvoir mettre le cascade.
      *
@@ -72,11 +74,13 @@ class Tuteur implements SluggableInterface, TimestampableInterface, Stringable
      */
     #[ORM\OneToMany(targetEntity: Accueil::class, mappedBy: 'tuteur', cascade: ['remove'])]
     private Collection $accueils;
+
     /**
      * @var Facture[]
      */
     #[ORM\OneToMany(targetEntity: Facture::class, mappedBy: 'tuteur', cascade: ['remove'])]
-    private Collection $factures;
+    private Collection|array $factures = [];
+
     /**
      * @var User[]|Collection
      */

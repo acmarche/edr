@@ -49,17 +49,22 @@ class User implements UserInterface, LegacyPasswordAuthenticatedUserInterface, S
     use IdOldTrait;
     #[ORM\Column(type: 'string', nullable: true)]
     protected ?string $salt = null;
+
     #[ORM\Column(type: 'string', length: 150, nullable: true)]
     private ?string $telephone = null;
+
     #[ORM\Column(type: 'string', length: 50, unique: true)]
     private ?string $email = null;
+
     /**
      * The hashed password.
      */
     #[ORM\Column(type: 'string')]
     private ?string $password = null;
+
     #[ORM\Column(type: 'boolean')]
     private bool $isVerified = false;
+
     #[ORM\OneToMany(targetEntity: ResetPasswordRequest::class, mappedBy: 'user', cascade: ['remove'])]
     private Collection $request_password;
 

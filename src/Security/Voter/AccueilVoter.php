@@ -24,17 +24,23 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class AccueilVoter extends Voter
 {
     public const ADD = 'accueil_new';
+
     public const SHOW = 'accueil_show';
+
     public const EDIT = 'accueil_edit';
+
     public const DELETE = 'accueil_delete';
+
     public ?Tuteur $tuteurOfUser = null;
+
     private ?UserInterface $user = null;
+
     private Enfant $enfant;
 
     public function __construct(
-        private Security $security,
-        private RelationRepository $relationRepository,
-        private TuteurUtils $tuteurUtils
+        private readonly Security $security,
+        private readonly RelationRepository $relationRepository,
+        private readonly TuteurUtils $tuteurUtils
     ) {
     }
 
@@ -94,7 +100,7 @@ final class AccueilVoter extends Voter
         $relations = $this->relationRepository->findByTuteur($this->tuteurOfUser);
 
         $enfants = array_map(
-            fn ($relation) => $relation->getEnfant()->getId(),
+            static fn($relation) => $relation->getEnfant()->getId(),
             $relations
         );
 

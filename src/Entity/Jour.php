@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Entity;
 
+use DateTimeInterface;
 use AcMarche\Edr\Entity\Plaine\Plaine;
 use AcMarche\Edr\Entity\Plaine\PlaineTrait;
 use AcMarche\Edr\Entity\Presence\Presence;
@@ -50,23 +51,24 @@ class Jour implements TimestampableInterface, Stringable
      * @var Presence[]
      */
     #[ORM\OneToMany(targetEntity: Presence::class, mappedBy: 'jour', cascade: ['remove'])]
-    private Collection $presences;
+    private Collection|array $presences = [];
+
     #[ORM\ManyToOne(targetEntity: Plaine::class, inversedBy: 'jours')]
     private ?Plaine $plaine = null;
+
     /**
      * @var Animateur[]
      */
     #[ORM\ManyToMany(targetEntity: Animateur::class, mappedBy: 'jours')]
-    private Collection $animateurs;
+    private Collection|array $animateurs = [];
+
     #[ORM\ManyToMany(targetEntity: Ecole::class)]
     private Collection $ecoles;
-    #[ORM\Column(name: 'date_jour', type: 'date')]
-    private ?\DateTimeInterface $date_jour = null;
 
     public function __construct(
-        ?\DateTimeInterface $date_jour
+        #[ORM\Column(name: 'date_jour', type: 'date')]
+        private ?DateTimeInterface $date_jour
     ) {
-        $this->date_jour = $date_jour;
         $this->presences = new ArrayCollection();
         $this->animateurs = new ArrayCollection();
         $this->ecoles = new ArrayCollection();
@@ -82,12 +84,12 @@ class Jour implements TimestampableInterface, Stringable
         return $this->date_jour->format('d-m-Y');
     }
 
-    public function getDateJour(): ?\DateTimeInterface
+    public function getDateJour(): ?DateTimeInterface
     {
         return $this->date_jour;
     }
 
-    public function setDateJour(\DateTimeInterface $date_jour): self
+    public function setDateJour(DateTimeInterface $date_jour): self
     {
         $this->date_jour = $date_jour;
 

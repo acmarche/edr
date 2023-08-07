@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Accueil\Handler;
 
+use AcMarche\Edr\Entity\Tuteur;
 use AcMarche\Edr\Accueil\Repository\AccueilRepository;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
 use AcMarche\Edr\Entity\Enfant;
@@ -14,20 +15,20 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class AccueilHandler
 {
-    private FlashBagInterface $flashBag;
+    private readonly FlashBagInterface $flashBag;
 
     public function __construct(
-        private AccueilRepository $accueilRepository,
-        private EnfantRepository $enfantRepository,
-        private TuteurRepository $tuteurRepository,
+        private readonly AccueilRepository $accueilRepository,
+        private readonly EnfantRepository $enfantRepository,
+        private readonly TuteurRepository $tuteurRepository,
         RequestStack $requestStack
     ) {
-        $this->flashBag = $requestStack->getSession()?->getFlashBag();
+        $this->flashBag = $requestStack->getSession()->getFlashBag();
     }
 
     public function handleNew(Enfant $enfant, Accueil $accueilSubmited): Accueil
     {
-        if (null !== ($accueil = $this->accueilRepository->isRegistered($accueilSubmited, $enfant))) {
+        if (($accueil = $this->accueilRepository->isRegistered($accueilSubmited, $enfant)) instanceof Accueil) {
             $this->updateAccueil($accueil, $accueilSubmited);
 
             return $accueilSubmited;
@@ -47,17 +48,19 @@ final class AccueilHandler
             foreach ($days as $dateString => $duree) {
                 $duree = (int) $duree;
 
-                if (($enfant = $this->enfantRepository->find((int) $enfantId)) === null) {
+                if (!($enfant = $this->enfantRepository->find((int) $enfantId)) instanceof Enfant) {
                     $this->flashBag->add('danger', 'Référence pour l\enfant '.$enfantId.' non trouvé');
 
                     continue;
                 }
+
                 $tuteurId = (int) $tuteurs[$enfantId][0];
 
-                if (($tuteur = $this->tuteurRepository->find($tuteurId)) === null) {
+                if (!($tuteur = $this->tuteurRepository->find($tuteurId)) instanceof Tuteur) {
                     if ($duree > 0) {
                         $this->flashBag->add('danger', 'Spécifié sous quelle garde pour '.$enfant);
                     }
+
                     continue;
                 }
 
@@ -93,6 +96,7 @@ final class AccueilHandler
             $accueilExistant->setDuree($accueilSubmited->getDuree());
             $accueilExistant->setRemarque($accueilSubmited->getRemarque());
         }
+
         $this->accueilRepository->flush();
     }
 }

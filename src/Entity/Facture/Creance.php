@@ -36,8 +36,10 @@ class Creance implements TimestampableInterface, UuidableInterface, Stringable
     #[ORM\Column(type: 'decimal', precision: 4, scale: 2, nullable: false)]
     #[Assert\Range(min: '0.1')]
     private ?float $montant = 0;
+
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?DateTimeInterface $dateLe = null;
+
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?DateTimeInterface $payeLe = null;
 
@@ -64,24 +66,24 @@ class Creance implements TimestampableInterface, UuidableInterface, Stringable
         return $this;
     }
 
-    public function getDateLe(): ?\DateTimeInterface
+    public function getDateLe(): ?DateTimeInterface
     {
         return $this->dateLe;
     }
 
-    public function setDateLe(?\DateTimeInterface $dateLe): self
+    public function setDateLe(?DateTimeInterface $dateLe): self
     {
         $this->dateLe = $dateLe;
 
         return $this;
     }
 
-    public function getPayeLe(): ?\DateTimeInterface
+    public function getPayeLe(): ?DateTimeInterface
     {
         return $this->payeLe;
     }
 
-    public function setPayeLe(?\DateTimeInterface $payeLe): self
+    public function setPayeLe(?DateTimeInterface $payeLe): self
     {
         $this->payeLe = $payeLe;
 

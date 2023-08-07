@@ -25,7 +25,7 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 final class EnfantType extends AbstractType
 {
     public function __construct(
-        private Security $security
+        private readonly Security $security
     ) {
     }
 
@@ -33,6 +33,7 @@ final class EnfantType extends AbstractType
     {
         $year = new DateTime('today');
         $year = $year->format('Y');
+
         $isAdmin = ! $this->security->isGranted(EdrSecurityRole::ROLE_ADMIN);
 
         $formBuilder
@@ -131,7 +132,7 @@ final class EnfantType extends AbstractType
                 [
                     'required' => false,
                     'label' => 'Autorisation de diffusion de ses photos',
-                    'help' => 'Cochez si vous autorisez la diffusion des photos de l\'enfant',
+                    'help' => "Cochez si vous autorisez la diffusion des photos de l'enfant",
                     'label_attr' => [
                         'class' => 'switch-custom',
                     ],

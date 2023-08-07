@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Tuteur\Message;
 final class TuteurDeleted
 {
     public function __construct(
-        private int $tuteurId
+        private readonly int $tuteurId
     ) {
     }
 

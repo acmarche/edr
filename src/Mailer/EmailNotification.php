@@ -12,7 +12,7 @@ use Symfony\Component\Notifier\Recipient\RecipientInterface;
 class EmailNotification extends Notification implements EmailNotificationInterface
 {
     public function __construct(
-        private TemplatedEmail $templatedEmail,
+        private readonly TemplatedEmail $templatedEmail,
         string $subject = '',
         array $channels = [
         ]

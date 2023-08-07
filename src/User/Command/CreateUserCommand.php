@@ -20,8 +20,8 @@ final class CreateUserCommand extends Command
     protected static $defaultName = 'edr:create-user';
 
     public function __construct(
-        private UserRepository $userRepository,
-        private UserPasswordHasherInterface $userPasswordHasher,
+        private readonly UserRepository $userRepository,
+        private readonly UserPasswordHasherInterface $userPasswordHasher,
         ?string $name = null
     ) {
         parent::__construct($name);
@@ -50,14 +50,15 @@ final class CreateUserCommand extends Command
             return Command::FAILURE;
         }
 
-        if (\strlen($name) < 1) {
+        if (\strlen((string) $name) < 1) {
             $symfonyStyle->error('Name minium 1');
 
             return Command::FAILURE;
         }
-        if (null !== $this->userRepository->findOneBy([
+
+        if ($this->userRepository->findOneBy([
             'email' => $email,
-        ])) {
+        ]) instanceof User) {
             $symfonyStyle->error('Un utilisateur existe déjà avec cette adresse email');
 
             return Command::FAILURE;

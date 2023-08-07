@@ -13,8 +13,8 @@ final class PlainePresencesDto
     private Collection $jours;
 
     public function __construct(
-        private Plaine $plaine,
-        private Enfant $enfant,
+        private readonly Plaine $plaine,
+        private readonly Enfant $enfant,
         public iterable $daysOfPlaine
     ) {
         $this->jours = new ArrayCollection();

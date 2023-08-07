@@ -28,24 +28,23 @@ final class PresenceNewType extends AbstractType
                 [
                     'class' => Jour::class,
                     'multiple' => true,
-                    'query_builder' => fn (JourRepository $cr) => $cr->getQlJourByDateGreatherOrEqualAndNotRegister(
+                    'query_builder' => static fn(JourRepository $cr) => $cr->getQlJourByDateGreatherOrEqualAndNotRegister(
                         $enfant,
                         $date
                     ),
                     'label' => 'Sélectionnez une ou plusieurs dates',
-                    'choice_label' => function (Jour $jour) {
+                    'choice_label' => static function (Jour $jour) : string {
                         $peda = '';
                         if ($jour->isPedagogique()) {
                             $ecoles = EcoleUtils::getNamesEcole($jour->getEcoles());
                             $peda = '(Pédagogique '.$ecoles.')';
                         }
-
                         return ucfirst(DateUtils::formatFr($jour->getDatejour()).' '.$peda);
                     },
                     'attr' => [
                         'style' => 'height:150px;',
                     ],
-                    'group_by' => fn ($date) => $date->getDateJour()->format('m').'-'.$date->getDateJour()->format('Y'),
+                    'group_by' => static fn($date) => $date->getDateJour()->format('m').'-'.$date->getDateJour()->format('Y'),
                 ]
             );
     }

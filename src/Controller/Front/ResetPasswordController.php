@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Controller\Front;
 
+use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 use AcMarche\Edr\Entity\Security\User;
 use AcMarche\Edr\Mailer\Factory\RegistrationMailerFactory;
 use AcMarche\Edr\Mailer\NotificationMailer;
@@ -24,10 +25,10 @@ class ResetPasswordController extends AbstractController
     use ResetPasswordControllerTrait;
 
     public function __construct(
-        private ResetPasswordHelperInterface $resetPasswordHelper,
-        private RegistrationMailerFactory $registrationMailerFactory,
-        private NotificationMailer $notificationMailer,
-        private ManagerRegistry $managerRegistry
+        private readonly ResetPasswordHelperInterface $resetPasswordHelper,
+        private readonly RegistrationMailerFactory $registrationMailerFactory,
+        private readonly NotificationMailer $notificationMailer,
+        private readonly ManagerRegistry $managerRegistry
     ) {
     }
 
@@ -61,7 +62,7 @@ class ResetPasswordController extends AbstractController
     {
         // Generate a fake token if the user does not exist or someone hit this page directly.
         // This prevents exposing whether or not a user was found with the given email address or not
-        if (null === ($resetToken = $this->getTokenObjectFromSession())) {
+        if (!($resetToken = $this->getTokenObjectFromSession()) instanceof ResetPasswordToken) {
             $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
         }
 
@@ -86,23 +87,26 @@ class ResetPasswordController extends AbstractController
 
             return $this->redirectToRoute('edr_front_reset_password');
         }
+
         $token = $this->getTokenFromSession();
         if (null === $token) {
             throw $this->createNotFoundException('No reset password token found in the URL or in the session.');
         }
+
         try {
             $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
-        } catch (ResetPasswordExceptionInterface $e) {
+        } catch (ResetPasswordExceptionInterface $resetPasswordException) {
             $this->addFlash(
                 'danger',
                 sprintf(
                     'There was a problem validating your reset request - %s',
-                    $e->getReason()
+                    $resetPasswordException->getReason()
                 )
             );
 
             return $this->redirectToRoute('edr_front_forgot_password_request');
         }
+
         // The token is valid; allow the user to change their password.
         $form = $this->createForm(ChangePasswordFormType::class);
         $form->handleRequest($request);
@@ -142,7 +146,7 @@ class ResetPasswordController extends AbstractController
         );
 
         // Do not reveal whether a user account was found or not.
-        if (null === $user) {
+        if (!$user instanceof User) {
             //$this->addFlash('danger', 'Utilisateur non trouvé');
 
             return $this->redirectToRoute('edr_front_forgot_password_request');
@@ -150,7 +154,7 @@ class ResetPasswordController extends AbstractController
 
         try {
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
-        } catch (ResetPasswordExceptionInterface $e) {
+        } catch (ResetPasswordExceptionInterface $resetPasswordException) {
             // If you want to tell the user why a reset email was not sent, uncomment
             // the lines below and change the redirect to 'app_forgot_password_request'.
             // Caution: This may reveal if a user is registered or not.
@@ -159,7 +163,7 @@ class ResetPasswordController extends AbstractController
                 'danger',
                 sprintf(
                     'There was a problem handling your password reset request - %s',
-                    $e->getReason()
+                    $resetPasswordException->getReason()
                 )
             );
 

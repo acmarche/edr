@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Registration\Message;
 final class RegisterCreated
 {
     public function __construct(
-        private int $userId
+        private readonly int $userId
     ) {
     }
 

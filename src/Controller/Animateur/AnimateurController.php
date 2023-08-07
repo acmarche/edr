@@ -20,18 +20,19 @@ final class AnimateurController extends AbstractController
     use GetAnimateurTrait;
 
     public function __construct(
-        private AnimateurRepository $animateurRepository,
-        private EnfantRepository $enfantRepository,
-        private MessageBusInterface $dispatcher
+        private readonly AnimateurRepository $animateurRepository,
+        private readonly EnfantRepository $enfantRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
     #[Route(path: '/', name: 'edr_animateur_animateur_show', methods: ['GET'])]
     public function show(): Response
     {
-        if (($t = $this->hasAnimateur()) !== null) {
+        if (($t = $this->hasAnimateur()) instanceof Response) {
             return $t;
         }
+
         $this->denyAccessUnlessGranted('animateur_show', $this->animateur);
 
         return $this->render(
@@ -45,9 +46,10 @@ final class AnimateurController extends AbstractController
     #[Route(path: '/edit', name: 'edr_animateur_animateur_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request): Response
     {
-        if (($t = $this->hasAnimateur()) !== null) {
+        if (($t = $this->hasAnimateur()) instanceof Response) {
             return $t;
         }
+
         $this->denyAccessUnlessGranted('animateur_edit', $this->animateur);
         $form = $this->createForm(AnimateurType::class, $this->animateur);
         $form->handleRequest($request);

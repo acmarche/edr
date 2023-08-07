@@ -14,22 +14,22 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class AssociationAnimateurHandler
 {
-    private FlashBagInterface $flashBag;
+    private readonly FlashBagInterface $flashBag;
 
     public function __construct(
-        private AnimateurRepository $animateurRepository,
-        private UserFactory $userFactory,
-        private NotificationMailer $notificationMailer,
-        private UserEmailFactory $userEmailFactory,
+        private readonly AnimateurRepository $animateurRepository,
+        private readonly UserFactory $userFactory,
+        private readonly NotificationMailer $notificationMailer,
+        private readonly UserEmailFactory $userEmailFactory,
         RequestStack $requestStack
     ) {
-        $this->flashBag = $requestStack->getSession()?->getFlashBag();
+        $this->flashBag = $requestStack->getSession()->getFlashBag();
     }
 
     public function suggestAnimateur(User $user, AssociateUserAnimateurDto $associateUserAnimateurDto): void
     {
         $animateur = $this->animateurRepository->findOneByEmail($user->getEmail());
-        if (null !== $animateur) {
+        if ($animateur instanceof Animateur) {
             $associateUserAnimateurDto->setAnimateur($animateur);
         }
     }

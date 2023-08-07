@@ -24,9 +24,9 @@ use Symfony\Component\Routing\Annotation\Route;
 final class RelationController extends AbstractController
 {
     public function __construct(
-        private RelationRepository $relationRepository,
-        private RelationHandler $relationHandler,
-        private MessageBusInterface $dispatcher
+        private readonly RelationRepository $relationRepository,
+        private readonly RelationHandler $relationHandler,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -88,12 +88,14 @@ final class RelationController extends AbstractController
 
             return $this->redirectToRoute('edr_admin_home');
         }
+
         $relation = $this->relationRepository->find($relationId);
         if (! $relation instanceof Relation) {
             $this->addFlash('danger', 'Relation non trouvée');
 
             return $this->redirectToRoute('edr_admin_home');
         }
+
         $tuteur = $relation->getTuteur();
         if ($this->isCsrfTokenValid('delete'.$relation->getId(), $request->request->get('_token'))) {
             $this->relationRepository->remove($relation);

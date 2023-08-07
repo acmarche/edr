@@ -17,7 +17,7 @@ final class OneController extends AbstractController
     use PdfDownloaderTrait;
 
     public function __construct(
-        private AccueilRepository $accueilRepository
+        private readonly AccueilRepository $accueilRepository
     ) {
     }
 

@@ -11,8 +11,8 @@ use Twig\Environment;
 final class TarificationMarcheFormGenerator implements TarificationFormGeneratorInterface
 {
     public function __construct(
-        private FormFactoryInterface $formFactory,
-        private Environment $environment
+        private readonly FormFactoryInterface $formFactory,
+        private readonly Environment $environment
     ) {
     }
 

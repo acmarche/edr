@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Plaine\Calculator;
 
+use AcMarche\Edr\Entity\Reduction;
 use AcMarche\Edr\Contrat\Plaine\PlaineCalculatorInterface;
 use AcMarche\Edr\Contrat\Presence\PresenceInterface;
 use AcMarche\Edr\Data\EdrConstantes;
@@ -12,8 +13,8 @@ use AcMarche\Edr\Relation\Utils\OrdreService;
 final class PlaineMarcheCalculator implements PlaineCalculatorInterface
 {
     public function __construct(
-        private OrdreService $ordreService,
-        private ReductionCalculator $reductionCalculator
+        private readonly OrdreService $ordreService,
+        private readonly ReductionCalculator $reductionCalculator
     ) {
     }
 
@@ -36,6 +37,7 @@ final class PlaineMarcheCalculator implements PlaineCalculatorInterface
         if (EdrConstantes::ABSENCE_AVEC_CERTIF === $presence->getAbsent()) {
             return 0;
         }
+
         $ordre = $this->getOrdreOnePresence($presence);
         $prix = $this->getPrixByOrdre($plaine, $ordre);
 
@@ -58,7 +60,7 @@ final class PlaineMarcheCalculator implements PlaineCalculatorInterface
 
     private function applicateReduction(PresenceInterface $presence, float $cout): float
     {
-        if (null !== ($reduction = $presence->getReduction())) {
+        if (($reduction = $presence->getReduction()) instanceof Reduction) {
             return $this->reductionCalculator->applicate($reduction, $cout);
         }
 

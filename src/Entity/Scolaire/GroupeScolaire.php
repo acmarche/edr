@@ -31,28 +31,33 @@ class GroupeScolaire implements Stringable
     #[ORM\Column(type: 'decimal', precision: 3, scale: 1, nullable: true)]
     #[Assert\LessThan(propertyPath: 'age_maximum')]
     private ?float $age_minimum = null;
+
     #[ORM\Column(type: 'decimal', precision: 3, scale: 1, nullable: true)]
     #[Assert\GreaterThan(propertyPath: 'age_minimum')]
     private ?float $age_maximum = null;
+
     #[ORM\Column(type: 'boolean', length: 10, nullable: false)]
     private ?bool $is_plaine = false;
+
     /**
      * @var Enfant[]
      */
     #[ORM\OneToMany(targetEntity: Enfant::class, mappedBy: 'groupe_scolaire')]
-    private Collection $enfants;
+    private Collection|array $enfants = [];
+
     /**
      * @var AnneeScolaire[]
      */
     #[ORM\OneToMany(targetEntity: AnneeScolaire::class, mappedBy: 'groupe_scolaire')]
-    private Collection $annees_scolaires;
+    private Collection|array $annees_scolaires = [];
+
     /**
      * Pour la cascade.
      *
      * @var PlaineGroupe[]
      */
     #[ORM\OneToMany(targetEntity: PlaineGroupe::class, mappedBy: 'groupe_scolaire', cascade: ['remove'])]
-    private Collection $plaine_groupes;
+    private Collection|array $plaine_groupes = [];
 
     public function __construct()
     {

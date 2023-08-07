@@ -24,10 +24,10 @@ use Symfony\Component\Routing\Annotation\Route;
 final class TuteurController extends AbstractController
 {
     public function __construct(
-        private TuteurRepository $tuteurRepository,
-        private RelationRepository $relationRepository,
-        private SearchHelper $searchHelper,
-        private MessageBusInterface $dispatcher
+        private readonly TuteurRepository $tuteurRepository,
+        private readonly RelationRepository $relationRepository,
+        private readonly SearchHelper $searchHelper,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 

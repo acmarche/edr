@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Sante\Utils;
 
+use AcMarche\Edr\Entity\Sante\SanteReponse;
 use AcMarche\Edr\Entity\Sante\SanteFiche;
 use AcMarche\Edr\Entity\Sante\SanteQuestion;
 use AcMarche\Edr\Sante\Repository\SanteQuestionRepository;
@@ -10,8 +11,8 @@ use AcMarche\Edr\Sante\Repository\SanteReponseRepository;
 final class SanteBinder
 {
     public function __construct(
-        private SanteQuestionRepository $santeQuestionRepository,
-        private SanteReponseRepository $santeReponseRepository
+        private readonly SanteQuestionRepository $santeQuestionRepository,
+        private readonly SanteReponseRepository $santeReponseRepository
     ) {
     }
 
@@ -29,7 +30,7 @@ final class SanteBinder
 
         foreach ($questions as $question) {
             $question->setReponseTxt(null);
-            if (null !== ($reponse = $this->santeReponseRepository->getResponse($santeFiche, $question))) {
+            if (($reponse = $this->santeReponseRepository->getResponse($santeFiche, $question)) instanceof SanteReponse) {
                 $question->setReponseTxt($reponse->getReponse());
 
                 $question->setRemarque($reponse->getRemarque());

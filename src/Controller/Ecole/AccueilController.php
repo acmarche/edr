@@ -36,14 +36,14 @@ final class AccueilController extends AbstractController
     use GetEcolesTrait;
 
     public function __construct(
-        private AccueilRepository $accueilRepository,
-        private AccueilHandler $accueilHandler,
-        private RelationRepository $relationRepository,
-        private AccueilCalculatorInterface $accueilCalculator,
-        private EnfantRepository $enfantRepository,
-        private DateUtils $dateUtils,
-        private FacturePresenceRepository $facturePresenceRepository,
-        private MessageBusInterface $dispatcher
+        private readonly AccueilRepository $accueilRepository,
+        private readonly AccueilHandler $accueilHandler,
+        private readonly RelationRepository $relationRepository,
+        private readonly AccueilCalculatorInterface $accueilCalculator,
+        private readonly EnfantRepository $enfantRepository,
+        private readonly DateUtils $dateUtils,
+        private readonly FacturePresenceRepository $facturePresenceRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -51,9 +51,10 @@ final class AccueilController extends AbstractController
     #[IsGranted(data: 'ROLE_MERCREDI_ECOLE')]
     public function index(Request $request): Response
     {
-        if (($response = $this->hasEcoles()) !== null) {
+        if (($response = $this->hasEcoles()) instanceof Response) {
             return $response;
         }
+
         $accueils = [];
         $form = $this->createForm(SearchAccueilByDate::class, []);
         $form->handleRequest($request);
@@ -164,6 +165,7 @@ final class AccueilController extends AbstractController
             //pas de week quand on change de mois
             $date = $this->dateUtils->createDateImmutableFromYearMonth($year, $month);
         }
+
         $weekPeriod = $this->dateUtils->getWeekByNumber($date, $week);
         $data = [];
         $enfants = $this->enfantRepository->findByEcolesForInscription($ecole);
@@ -181,6 +183,7 @@ final class AccueilController extends AbstractController
                 ];
             //    $tuteurSelected = $accueil->getTuteur()->getId();
             }
+
             $rows['tuteurSelected'] = $tuteurSelected;
             $data[$enfant->getId()] = $rows;
         }
@@ -202,6 +205,7 @@ final class AccueilController extends AbstractController
                 'week' => $week,
             ]);
         }
+
         $calendar = $this->dateUtils->renderMonth($ecole, $heure, $week, $date);
 
         return $this->render(
@@ -233,11 +237,11 @@ final class AccueilController extends AbstractController
             $data = $form->getData();
             $dateRetard = $data['date_retard'];
             $heureRetard = $data['heure_retard'];
-            if (($accueil = $this->accueilRepository->findOneByEnfantAndDayAndHour(
+            if (!($accueil = $this->accueilRepository->findOneByEnfantAndDayAndHour(
                     $enfant,
                     $dateRetard,
                     AccueilInterface::SOIR
-                )) === null) {
+                )) instanceof Accueil) {
                 $this->addFlash('danger', 'Aucun accueil encodé pour ce jour là. Veuillez d\'abord ajouté un accueil');
             } else {
                 $dateRetard->setTime($heureRetard->format('H'), $heureRetard->format('i'));

@@ -21,8 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class AnneeScolaireController extends AbstractController
 {
     public function __construct(
-        private AnneeScolaireRepository $anneeScolaireRepository,
-        private MessageBusInterface $dispatcher
+        private readonly AnneeScolaireRepository $anneeScolaireRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 

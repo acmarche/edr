@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Plaine\Factory;
 
+use AcMarche\Edr\Entity\Scolaire\GroupeScolaire;
 use AcMarche\Edr\Entity\Plaine\Plaine;
 use AcMarche\Edr\Pdf\PdfDownloaderTrait;
 use AcMarche\Edr\Plaine\Repository\PlainePresenceRepository;
@@ -16,11 +17,11 @@ class PlainePdfFactory
     use PdfDownloaderTrait;
 
     public function __construct(
-        private GroupingInterface $grouping,
-        private PresenceRepository $presenceRepository,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private ParameterBagInterface $parameterBag,
-        private Environment $environment
+        private readonly GroupingInterface $grouping,
+        private readonly PresenceRepository $presenceRepository,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly ParameterBagInterface $parameterBag,
+        private readonly Environment $environment
     ) {
     }
 
@@ -39,6 +40,7 @@ class PlainePdfFactory
         $dataEnfants = [];
         $groupeForce = $plaine->getPlaineGroupes()[0]->getGroupeScolaire();
         $groupeForce->setNom('Non classé');
+
         $stats = [];
         foreach ($plaine->getPlaineGroupes() as $plaineGroupe) {
             foreach ($dates as $date) {
@@ -46,6 +48,7 @@ class PlainePdfFactory
                 $stats[$plaineGroupe->getGroupeScolaire()->getId()][$date->getId()]['moins6'] = 0;
             }
         }
+
         foreach ($presences as $presence) {
             $enfant = $presence->getEnfant();
             $tuteur = $presence->getTuteur();
@@ -53,13 +56,15 @@ class PlainePdfFactory
             $enfantId = $enfant->getId();
             $age = $enfant->getAge($firstDay, true);
             $groupeScolaire = $this->grouping->findGroupeScolaireByAge($age);
-            if (null === $groupeScolaire) {
+            if (!$groupeScolaire instanceof GroupeScolaire) {
                 $groupeScolaire = $groupeForce;
             }
+
             ++$stats[$groupeScolaire->getId()][$jour->getId()]['total'];
             if ($age < 6) {
                 ++$stats[$groupeScolaire->getId()][$jour->getId()]['moins6'];
             }
+
             $dataEnfants[$enfantId]['enfant'] = $enfant;
             $dataEnfants[$enfantId]['tuteur'] = $tuteur;
             $dataEnfants[$enfantId]['jours'][] = $jour;

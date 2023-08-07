@@ -18,8 +18,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 final class PresenceUtils
 {
     public function __construct(
-        private ParameterBagInterface $parameterBag,
-        private RelationRepository $relationRepository
+        private readonly ParameterBagInterface $parameterBag,
+        private readonly RelationRepository $relationRepository
     ) {
     }
 
@@ -61,7 +61,7 @@ final class PresenceUtils
     public static function extractTuteurs(array $presences): array
     {
         $tuteurs = array_map(
-            fn ($presence) => $presence->getTuteur(),
+            static fn($presence) => $presence->getTuteur(),
             $presences
         );
         $data = [];
@@ -82,16 +82,16 @@ final class PresenceUtils
     {
         $enfants =
             array_map(
-                function ($presence) use ($registerRemarques) {
+                static function ($presence) use ($registerRemarques) {
                     $enfant = $presence->getEnfant();
                     if ($registerRemarques) {
                         $remarques = $enfant->getRemarque();
                         if ($presence->getRemarque()) {
                             $remarques .= ' (Parent=>) '.$presence->getRemarque();
                         }
+
                         $enfant->setRemarque($remarques);
                     }
-
                     return $enfant;
                 },
                 $presences
@@ -115,7 +115,7 @@ final class PresenceUtils
     {
         $jours =
             array_map(
-                fn ($presence) => $presence->getJour(),
+                static fn($presence) => $presence->getJour(),
                 $presences
             );
         $data = [];
@@ -137,6 +137,7 @@ final class PresenceUtils
                 $tuteur = $relation->getTuteur();
                 $telephones .= ' '.TuteurUtils::getTelephones($tuteur);
             }
+
             $enfant->setTelephones($telephones);
         }
     }
@@ -150,15 +151,17 @@ final class PresenceUtils
     {
         $plaines = new ArrayCollection();
         array_map(
-            function ($presence) use ($plaines) {
+            static function ($presence) use ($plaines) {
                 $jour = $presence->getJour();
                 if (! $jour) {
                     return null;
                 }
+                
                 $plaine = $jour->getPlaine();
                 if (! $plaine instanceof Plaine) {
                     return null;
                 }
+                
                 if (! $plaines->contains($plaine)) {
                     $plaines->add($plaine);
                 }

@@ -29,17 +29,17 @@ final class EnfantController extends AbstractController
     use GetTuteurTrait;
 
     public function __construct(
-        private EnfantRepository $enfantRepository,
-        private SanteHandler $santeHandler,
-        private RelationUtils $relationUtils,
-        private SanteChecker $santeChecker,
-        private PresenceRepository $presenceRepository,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private AccueilRepository $accueilRepository,
-        private EnfantHandler $enfantHandler,
-        private AdminEmailFactory $adminEmailFactory,
-        private NotificationMailer $notifcationMailer,
-        private MessageBusInterface $dispatcher
+        private readonly EnfantRepository $enfantRepository,
+        private readonly SanteHandler $santeHandler,
+        private readonly RelationUtils $relationUtils,
+        private readonly SanteChecker $santeChecker,
+        private readonly PresenceRepository $presenceRepository,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly AccueilRepository $accueilRepository,
+        private readonly EnfantHandler $enfantHandler,
+        private readonly AdminEmailFactory $adminEmailFactory,
+        private readonly NotificationMailer $notifcationMailer,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -47,9 +47,10 @@ final class EnfantController extends AbstractController
     #[IsGranted(data: 'ROLE_MERCREDI_PARENT')]
     public function index(): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $enfants = $this->relationUtils->findEnfantsByTuteur($this->tuteur);
         $this->santeChecker->isCompleteForEnfants($enfants);
 

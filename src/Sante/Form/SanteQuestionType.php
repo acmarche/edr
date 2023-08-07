@@ -20,7 +20,7 @@ final class SanteQuestionType extends AbstractType
                 CheckboxType::class,
                 [
                     'label' => 'Un complément d\'information est-il nécessaire ?',
-                    'help' => 'Cochez la case si c\'est le cas. ',
+                    'help' => "Cochez la case si c'est le cas. ",
                     'required' => false,
                     'label_attr' => [
                         'class' => 'switch-custom',

@@ -18,17 +18,17 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 final class RegisterCreatedHandler implements MessageHandlerInterface
 {
-    private FlashBagInterface $flashBag;
+    private readonly FlashBagInterface $flashBag;
 
     public function __construct(
-        private UserRepository $userRepository,
+        private readonly UserRepository $userRepository,
         RequestStack $requestStack,
-        private RegistrationMailerFactory $registrationMailerFactory,
-        private VerifyEmailHelperInterface $verifyEmailHelper,
-        private NotificationMailer $notificationMailer,
-        private ParameterBagInterface $parameterBag
+        private readonly RegistrationMailerFactory $registrationMailerFactory,
+        private readonly VerifyEmailHelperInterface $verifyEmailHelper,
+        private readonly NotificationMailer $notificationMailer,
+        private readonly ParameterBagInterface $parameterBag
     ) {
-        $this->flashBag = $requestStack->getSession()?->getFlashBag();
+        $this->flashBag = $requestStack->getSession()->getFlashBag();
     }
 
     public function __invoke(RegisterCreated $registerCreated): void
@@ -63,9 +63,7 @@ final class RegisterCreatedHandler implements MessageHandlerInterface
 
     public function isOpen(): bool
     {
-        $register = (bool) $this->parameterBag->get(Option::REGISTER);
-
-        return true === $register;
+        return (bool) $this->parameterBag->get(Option::REGISTER);
     }
 
     /**

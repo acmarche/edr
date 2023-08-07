@@ -15,8 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class AttestationController extends AbstractController
 {
     public function __construct(
-        private FactureRepository $factureRepository,
-        private FactureUtils $factureUtils
+        private readonly FactureRepository $factureRepository,
+        private readonly FactureUtils $factureUtils
     ) {
     }
 

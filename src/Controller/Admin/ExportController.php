@@ -21,11 +21,11 @@ use Symfony\Component\Routing\Annotation\Route;
 final class ExportController extends AbstractController
 {
     public function __construct(
-        private SpreadsheetFactory $spreadsheetFactory,
-        private ListingPresenceByMonth $listingPresenceByMonth,
-        private PresenceRepository $presenceRepository,
-        private PlainePdfFactory $plainePdfFactory,
-        private SearchHelper $searchHelper
+        private readonly SpreadsheetFactory $spreadsheetFactory,
+        private readonly ListingPresenceByMonth $listingPresenceByMonth,
+        private readonly PresenceRepository $presenceRepository,
+        private readonly PlainePdfFactory $plainePdfFactory,
+        private readonly SearchHelper $searchHelper
     ) {
     }
 
@@ -56,13 +56,15 @@ final class ExportController extends AbstractController
 
             return $this->redirectToRoute('edr_admin_presence_by_month');
         }
+
         try {
             $date = DateUtils::createDateTimeFromDayMonth($mois);
-        } catch (Exception $e) {
-            $this->addFlash('danger', $e->getMessage());
+        } catch (Exception $exception) {
+            $this->addFlash('danger', $exception->getMessage());
 
             return $this->redirectToRoute('edr_admin_presence_by_month');
         }
+
         $fileName = 'listing-'.$date->format('m-Y').'.xls';
         $listingPresences = $this->listingPresenceByMonth->create($date);
         if ($one) {

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class OrganisationController extends AbstractController
 {
     public function __construct(
-        private OrganisationRepository $organisationRepository
+        private readonly OrganisationRepository $organisationRepository
     ) {
     }
 

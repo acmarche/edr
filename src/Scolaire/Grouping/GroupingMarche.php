@@ -11,7 +11,7 @@ use AcMarche\Edr\Utils\SortUtils;
 class GroupingMarche implements GroupingInterface
 {
     public function __construct(
-        private ScolaireUtils $scolaireUtils
+        private readonly ScolaireUtils $scolaireUtils
     ) {
     }
 
@@ -44,11 +44,13 @@ class GroupingMarche implements GroupingInterface
             $groupeForce = new GroupeScolaire();
             $groupeForce->setNom('Inexistant');
         }
+
         foreach ($enfants as $enfant) {
             $groupe = $this->findGroupeScolaireByAge($enfant->getAge($date, true));
-            if (null === $groupe) {
+            if (!$groupe instanceof GroupeScolaire) {
                 $groupe = $groupeForce;
             }
+
             $groups[$groupe->getId()]['groupe'] = $groupe;
             $groups[$groupe->getId()]['enfants'][] = $enfant;
         }

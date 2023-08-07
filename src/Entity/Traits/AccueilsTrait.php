@@ -12,7 +12,7 @@ trait AccueilsTrait
      *
      * @var Accueil[]|Collection
      */
-    private Collection $accueils;
+    private Collection|array $accueils = [];
 
     /**
      * @return Collection|Accueil[]
@@ -24,7 +24,7 @@ trait AccueilsTrait
 
     public function addAccueil(Accueil $accueil): self
     {
-        if (! $this->accueils->contains($accueil)) {
+        if (!$this->accueils->contains($accueil)) {
             $this->accueils[] = $accueil;
             $accueil->setEnfant($this);
         }

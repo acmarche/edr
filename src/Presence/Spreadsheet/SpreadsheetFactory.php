@@ -2,6 +2,8 @@
 
 namespace AcMarche\Edr\Presence\Spreadsheet;
 
+use DateTime;
+use DateTimeImmutable;
 use AcMarche\Edr\Entity\Presence\Presence;
 use AcMarche\Edr\Presence\Dto\ListingPresenceByMonth;
 use AcMarche\Edr\Presence\Utils\PresenceUtils;
@@ -18,22 +20,24 @@ final class SpreadsheetFactory
      * @var string
      */
     private const NOM = 'Nom';
+
     /**
      * @var string
      */
     private const FORMAT = 'd-m-Y';
+
     /**
      * @var int
      */
     private const COLONNE = 1;
 
     public function __construct(
-        private ScolaireUtils $scolaireUtils
+        private readonly ScolaireUtils $scolaireUtils
     ) {
     }
 
     public function createXlsByMonthForOne(
-        \DateTime|\DateTimeImmutable $dateTime,
+        DateTime|DateTimeImmutable $dateTime,
         ListingPresenceByMonth $listingPresenceByMonth
     ): Spreadsheet {
         $spreadsheet = new Spreadsheet();
@@ -75,6 +79,7 @@ final class SpreadsheetFactory
                 ++$colonne;
                 $worksheet->setCellValue($colonne.$ligne, 1);
             }
+
             ++$ligne;
         }
 
@@ -99,6 +104,7 @@ final class SpreadsheetFactory
         foreach ($listingPresenceByMonth->getJoursListing() as $jourListing) {
             $worksheet->setCellValue(++$colonne.$ligne, $jourListing->getJour()->getDateJour()->format(self::FORMAT));
         }
+
         $worksheet->setCellValue(++$colonne.$ligne, 'Total');
 
         /**
@@ -121,8 +127,10 @@ final class SpreadsheetFactory
                     $present = 1;
                     ++$countPresences;
                 }
+
                 $worksheet->setCellValue(++$colonne.$ligne, $present);
             }
+
             $worksheet->setCellValue(++$colonne.$ligne, $countPresences);
             ++$ligne;
         }

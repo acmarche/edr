@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Controller\Admin;
 
+use AcMarche\Edr\Entity\Presence\Presence;
 use AcMarche\Edr\Contrat\Facture\FactureCalculatorInterface;
 use AcMarche\Edr\Contrat\Presence\PresenceCalculatorInterface;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
@@ -28,16 +29,16 @@ final class CheckupController extends AbstractController
     private $tutru = null;
 
     public function __construct(
-        private EnfantRepository $enfantRepository,
-        private TuteurRepository $tuteurRepository,
-        private UserRepository $userRepository,
-        private PresenceRepository $presenceRepository,
-        private OrdreService $ordreService,
-        private JourRepository $jourRepository,
-        private FactureRepository $factureRepository,
-        private FactureCalculatorInterface $factureCalculator,
-        private FacturePresenceRepository $facturePresenceRepository,
-        private PresenceCalculatorInterface $presenceCalculator
+        private readonly EnfantRepository $enfantRepository,
+        private readonly TuteurRepository $tuteurRepository,
+        private readonly UserRepository $userRepository,
+        private readonly PresenceRepository $presenceRepository,
+        private readonly OrdreService $ordreService,
+        private readonly JourRepository $jourRepository,
+        private readonly FactureRepository $factureRepository,
+        private readonly FactureCalculatorInterface $factureCalculator,
+        private readonly FacturePresenceRepository $facturePresenceRepository,
+        private readonly PresenceCalculatorInterface $presenceCalculator
     ) {
     }
 
@@ -98,6 +99,7 @@ final class CheckupController extends AbstractController
                 ];
                 continue;
             }
+
             if ($user->hasRole(EdrSecurityRole::ROLE_PARENT) && 0 === \count($user->getTuteurs())) {
                 $bad[] = [
                     'error' => 'Rôle parent, mais aucun parent associé',
@@ -105,6 +107,7 @@ final class CheckupController extends AbstractController
                 ];
                 continue;
             }
+
             if ($user->hasRole(EdrSecurityRole::ROLE_ANIMATEUR) && 0 === \count($user->getAnimateurs())) {
                 $bad[] = [
                     'error' => 'Rôle animateur, mais aucun animateur associé',
@@ -112,6 +115,7 @@ final class CheckupController extends AbstractController
                 ];
                 continue;
             }
+
             if ($user->hasRole(EdrSecurityRole::ROLE_ECOLE) && 0 === \count($user->getEcoles())) {
                 $bad[] = [
                     'error' => 'Rôle école, mais aucune école associée',
@@ -179,10 +183,11 @@ final class CheckupController extends AbstractController
             );
             foreach ($facturePresences as $presenceFactured) {
                 $presence = $this->presenceRepository->find($presenceFactured->getPresenceId());
-                if (null !== $presence) {
+                if ($presence instanceof Presence) {
                     $ordre = $this->presenceCalculator->getOrdreOnPresence($presence);
                     $prix = $this->presenceCalculator->getPrixByOrdre($presence, $ordre);
                 }
+
                 $prixFactured = $presenceFactured->getCoutBrut();
                 $ordreFactured = $presenceFactured->getOrdre();
                 if ($prix !== $prixFactured) {
@@ -194,14 +199,16 @@ final class CheckupController extends AbstractController
                         'prix' => 'Passe de '.$prixFactured.' € à '.$prix.' €',
                         'ordre' => 'Passe de '.$ordreFactured.' à '.$ordre,
                     ];
-                    if (null !== $presence) {
+                    if ($presence instanceof Presence) {
                         $newcout = $this->presenceCalculator->calculate(
                             $presence
                         );
                     }
+
                     if (! isset($data[$i]['montant'])) {
                         $data[$i]['montant'] = 0;
                     }
+
                     $data[$i]['montant'] += ($newcout - $presenceFactured->getCoutCalculated());
                 }
             }

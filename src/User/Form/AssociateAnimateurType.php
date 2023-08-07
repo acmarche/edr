@@ -24,7 +24,7 @@ final class AssociateAnimateurType extends AbstractType
                     'class' => Animateur::class,
                     'placeholder' => 'Sélectionnez l\'animateur',
                     'required' => true,
-                    'query_builder' => fn (AnimateurRepository $cr) => $cr->findForAssociateAnimateur(),
+                    'query_builder' => static fn(AnimateurRepository $cr) => $cr->findForAssociateAnimateur(),
                 ]
             )
             ->add(

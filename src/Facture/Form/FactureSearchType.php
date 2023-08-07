@@ -45,7 +45,7 @@ final class FactureSearchType extends AbstractType
                 [
                     'required' => false,
                     'attr' => [
-                        'placeholder' => 'Nom de l\'enfant',
+                        'placeholder' => "Nom de l'enfant",
                     ],
                 ]
             )

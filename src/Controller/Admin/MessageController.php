@@ -32,15 +32,15 @@ use Symfony\Component\Routing\Annotation\Route;
 final class MessageController extends AbstractController
 {
     public function __construct(
-        private PresenceRepository $presenceRepository,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private RelationRepository $relationRepository,
-        private MessageRepository $messageRepository,
-        private SearchHelper $searchHelper,
-        private TuteurUtils $tuteurUtils,
-        private MessageFactory $messageFactory,
-        private MessageHandler $messageHandler,
-        private PresenceHandlerInterface $presenceHandler
+        private readonly PresenceRepository $presenceRepository,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly RelationRepository $relationRepository,
+        private readonly MessageRepository $messageRepository,
+        private readonly SearchHelper $searchHelper,
+        private readonly TuteurUtils $tuteurUtils,
+        private readonly MessageFactory $messageFactory,
+        private readonly MessageHandler $messageHandler,
+        private readonly PresenceHandlerInterface $presenceHandler
     ) {
     }
 
@@ -81,6 +81,7 @@ final class MessageController extends AbstractController
             $relations = $this->relationRepository->findTuteursActifs();
             $tuteurs = RelationUtils::extractTuteurs($relations);
         }
+
         $emails = $this->tuteurUtils->getEmails($tuteurs);
         $tuteursWithOutEmails = $this->tuteurUtils->filterTuteursWithOutEmail($tuteurs);
         $this->searchHelper->saveSearch(SearchHelper::MESSAGE_INDEX, $emails);
@@ -103,6 +104,7 @@ final class MessageController extends AbstractController
         $emails = $this->tuteurUtils->getEmails($tuteurs);
         $message = $this->messageFactory->createInstance();
         $message->setDestinataires($emails);
+
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -134,6 +136,7 @@ final class MessageController extends AbstractController
 
             return $this->redirectToRoute('edr_admin_presence_index');
         }
+
         $jour = $args['jour'];
         $ecole = $args['ecole'];
         $data = $this->presenceHandler->searchAndGrouping($jour, $ecole, false);
@@ -142,6 +145,7 @@ final class MessageController extends AbstractController
         $emails = $this->tuteurUtils->getEmails($tuteurs);
         $message = $this->messageFactory->createInstance();
         $message->setDestinataires($emails);
+
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -171,6 +175,7 @@ final class MessageController extends AbstractController
         $emails = $this->tuteurUtils->getEmails($tuteurs);
         $message = $this->messageFactory->createInstance();
         $message->setDestinataires($emails);
+
         $form = $this->createForm(MessagePlaineType::class, $message);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -200,6 +205,7 @@ final class MessageController extends AbstractController
         $emails = $this->searchHelper->getArgs(SearchHelper::MESSAGE_INDEX);
         $message = $this->messageFactory->createInstance();
         $message->setDestinataires($emails);
+
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

@@ -8,7 +8,7 @@ use AcMarche\Edr\Page\Repository\PageRepository;
 final class PageFactory
 {
     public function __construct(
-        private PageRepository $pageRepository
+        private readonly PageRepository $pageRepository
     ) {
     }
 

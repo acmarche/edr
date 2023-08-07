@@ -21,19 +21,26 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class EcoleVoter extends Voter
 {
     public const INDEX = 'ecole_index';
+
     public const SHOW = 'ecole_show';
+
     public const ADD = 'ecole_add';
+
     public const EDIT = 'ecole_edit';
+
     public const DELETE = 'ecole_delete';
+
     public UserInterface $user;
+
     private ?Ecole $ecole = null;
+
     /**
      * @var Ecole[]|Collection
      */
     private iterable $ecoles;
 
     public function __construct(
-        private Security $security
+        private readonly Security $security
     ) {
     }
 
@@ -90,7 +97,8 @@ final class EcoleVoter extends Voter
         if (! $this->checkEcoles()) {
             return false;
         }
-        if (null === $this->ecole) {
+
+        if (!$this->ecole instanceof Ecole) {
             return false;
         }
 

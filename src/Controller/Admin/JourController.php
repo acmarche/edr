@@ -24,10 +24,10 @@ use Symfony\Component\Routing\Annotation\Route;
 final class JourController extends AbstractController
 {
     public function __construct(
-        private JourRepository $jourRepository,
-        private TarificationFormGeneratorInterface $tarificationFormGenerator,
-        private PresenceRepository $presenceRepository,
-        private MessageBusInterface $dispatcher
+        private readonly JourRepository $jourRepository,
+        private readonly TarificationFormGeneratorInterface $tarificationFormGenerator,
+        private readonly PresenceRepository $presenceRepository,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -36,6 +36,7 @@ final class JourController extends AbstractController
     {
         $form = $this->createForm(SearchJourType::class);
         $form->handleRequest($request);
+
         $archived = false;
         $pedagogique = null;
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,6 +44,7 @@ final class JourController extends AbstractController
             $archived = $data['archived'];
             $pedagogique = $data['pedagogique'];
         }
+
         $jours = $this->jourRepository->search($archived, $pedagogique);
 
         return $this->render(

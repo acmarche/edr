@@ -30,13 +30,13 @@ use Symfony\Component\Routing\Annotation\Route;
 final class FactureSendController extends AbstractController
 {
     public function __construct(
-        private FactureRepository $factureRepository,
-        private FactureCronRepository $factureCronRepository,
-        private FacturePdfFactoryTrait $facturePdfFactory,
-        private FactureEmailFactory $factureEmailFactory,
-        private NotificationMailer $notificationMailer,
-        private FactureFactory $factureFactory,
-        private AdminEmailFactory $adminEmailFactory
+        private readonly FactureRepository $factureRepository,
+        private readonly FactureCronRepository $factureCronRepository,
+        private readonly FacturePdfFactoryTrait $facturePdfFactory,
+        private readonly FactureEmailFactory $factureEmailFactory,
+        private readonly NotificationMailer $notificationMailer,
+        private readonly FactureFactory $factureFactory,
+        private readonly AdminEmailFactory $adminEmailFactory
     ) {
     }
 
@@ -53,6 +53,7 @@ final class FactureSendController extends AbstractController
                     'month' => $mois,
                 ]);
             }
+
             if ('papier' === $mode) {
                 return $this->redirectToRoute('edr_admin_facture_send_all_by_paper', [
                     'month' => $mois,
@@ -117,7 +118,7 @@ final class FactureSendController extends AbstractController
                 return $this->redirectToRoute('edr_admin_facture_send_select_month');
             }
 
-            if (($cron = $this->factureCronRepository->findOneByMonth($month)) !== null) {
+            if (($cron = $this->factureCronRepository->findOneByMonth($month)) instanceof FactureCron) {
                 $cron->setFromAdresse($data['from']);
                 $cron->setSubject($data['sujet']);
                 $cron->setBody($data['texte']);
@@ -125,6 +126,7 @@ final class FactureSendController extends AbstractController
                 $cron = new FactureCron($data['from'], $data['sujet'], $data['texte'], $month);
                 $this->factureCronRepository->persist($cron);
             }
+
             $this->factureCronRepository->flush();
 
             return $this->redirectToRoute(
@@ -150,11 +152,12 @@ final class FactureSendController extends AbstractController
     public function pdfAll(string $month, int $pause): Response
     {
         $factures = $this->factureRepository->findFacturesByMonth($month);
-        if (null === $this->factureCronRepository->findOneByMonth($month)) {
+        if (!$this->factureCronRepository->findOneByMonth($month) instanceof FactureCron) {
             $this->addFlash('danger', 'Erreur aucun cron trouvé');
 
             return $this->redirectToRoute('edr_admin_facture_index');
         }
+
         if (1 === $pause) {
             return $this->render(
                 '@AcMarcheEdrAdmin/facture/create_pdf.html.twig',
@@ -165,15 +168,17 @@ final class FactureSendController extends AbstractController
                 ]
             );
         }
+
         try {
             $finish = $this->factureFactory->createAllPdf($factures, $month);
-        } catch (Exception $e) {
-            $this->addFlash('danger', 'Erreur survenue: '.$e->getMessage());
+        } catch (Exception $exception) {
+            $this->addFlash('danger', 'Erreur survenue: '.$exception->getMessage());
 
             return $this->redirectToRoute('edr_admin_facture_send_all_by_mail', [
                 'month' => $month,
             ]);
         }
+
         if ($finish) {
             $this->addFlash(
                 'success',

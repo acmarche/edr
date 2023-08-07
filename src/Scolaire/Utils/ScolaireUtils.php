@@ -9,7 +9,7 @@ use AcMarche\Edr\Scolaire\Repository\GroupeScolaireRepository;
 final class ScolaireUtils
 {
     public function __construct(
-        private GroupeScolaireRepository $groupeScolaireRepository
+        private readonly GroupeScolaireRepository $groupeScolaireRepository
     ) {
     }
 
@@ -20,13 +20,13 @@ final class ScolaireUtils
      */
     public function findGroupeScolaireEnfantByAnneeScolaire(Enfant $enfant): GroupeScolaire
     {
-        if (null !== ($groupeScolaire = $enfant->getGroupeScolaire())) {
+        if (($groupeScolaire = $enfant->getGroupeScolaire()) instanceof GroupeScolaire) {
             return $groupeScolaire;
         }
 
         $anneeScolaire = $enfant->getAnneeScolaire();
 
-        if (($groupeScolaire = $anneeScolaire->getGroupeScolaire()) !== null) {
+        if (($groupeScolaire = $anneeScolaire->getGroupeScolaire()) instanceof GroupeScolaire) {
             return $groupeScolaire;
         }
 

@@ -19,17 +19,18 @@ final class EcoleController extends AbstractController
     use GetEcolesTrait;
 
     public function __construct(
-        private EcoleRepository $ecoleRepository,
-        private EnfantRepository $enfantRepository
+        private readonly EcoleRepository $ecoleRepository,
+        private readonly EnfantRepository $enfantRepository
     ) {
     }
 
     #[Route(path: '/', name: 'edr_ecole_ecole_index', methods: ['GET'])]
     public function index(): Response
     {
-        if (($response = $this->hasEcoles()) !== null) {
+        if (($response = $this->hasEcoles()) instanceof Response) {
             return $response;
         }
+
         $today = Carbon::today();
 
         return $this->render(

@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 
 trait PresencesTrait
 {
-    private Collection $presences;
+    private Collection|array $presences = [];
 
     /**
      * @return Collection|Presence[]

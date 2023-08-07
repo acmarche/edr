@@ -17,8 +17,8 @@ final class LoadfixturesCommand extends Command
     protected static $defaultName = 'edr:load-fixtures';
 
     public function __construct(
-        private FixtureLoader $fixtureLoader,
-        private EntityManagerInterface $entityManager,
+        private readonly FixtureLoader $fixtureLoader,
+        private readonly EntityManagerInterface $entityManager,
         ?string $name = null
     ) {
         parent::__construct($name);

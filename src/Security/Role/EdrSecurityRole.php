@@ -5,8 +5,11 @@ namespace AcMarche\Edr\Security\Role;
 final class EdrSecurityRole
 {
     public const ROLE_ADMIN = 'ROLE_MERCREDI_ADMIN';
+
     public const ROLE_PARENT = 'ROLE_MERCREDI_PARENT';
+
     public const ROLE_ECOLE = 'ROLE_MERCREDI_ECOLE';
+
     public const ROLE_ANIMATEUR = 'ROLE_MERCREDI_ANIMATEUR';
 
     public const ROLES = [

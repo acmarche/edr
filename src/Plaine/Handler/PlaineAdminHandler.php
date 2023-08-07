@@ -16,10 +16,10 @@ use Doctrine\Common\Collections\Collection;
 final class PlaineAdminHandler
 {
     public function __construct(
-        private PlaineRepository $plaineRepository,
-        private JourRepository $jourRepository,
-        private PlainePresenceRepository $plainePresenceRepository,
-        private FactureHandlerInterface $factureHandler
+        private readonly PlaineRepository $plaineRepository,
+        private readonly JourRepository $jourRepository,
+        private readonly PlainePresenceRepository $plainePresenceRepository,
+        private readonly FactureHandlerInterface $factureHandler
     ) {
     }
 
@@ -46,9 +46,11 @@ final class PlaineAdminHandler
             if ($jour->getId()) {
                 continue;
             }
+
             $jour->setPlaine($plaine);
             $this->jourRepository->persist($jour);
         }
+
         $this->removeJours($plaine, $newJours);
         $this->jourRepository->flush();
     }
@@ -72,6 +74,7 @@ final class PlaineAdminHandler
                     break;
                 }
             }
+
             if (! $found) {
                 if ($presences = $this->plainePresenceRepository->findByDay($jour, $plaine)) {
                     foreach ($presences as $presence) {
@@ -80,6 +83,7 @@ final class PlaineAdminHandler
                         }
                     }
                 }
+
                 $this->jourRepository->remove($jour);
             }
         }

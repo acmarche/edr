@@ -38,7 +38,7 @@ final class PresenceType extends AbstractType
 
         $formBuilder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function (FormEvent $event): void {
+            static function (FormEvent $event) : void {
                 $form = $event->getForm();
                 /** @var Presence $presence */
                 $presence = $event->getData();

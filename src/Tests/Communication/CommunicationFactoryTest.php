@@ -25,12 +25,13 @@ class CommunicationFactoryTest extends KernelTestCase
         $ecole = new Ecole();
         $ecole->setNom('Hotton');
         $ecole->setAbreviation('Hot');
+
         $facture->ecolesListing = [$ecole];
         $year = 2021;
         $short = substr($year, -2, 2);
         self::assertSame('21', $short);
         $communication = $communicationFactory->generateForPresence($facture);
 
-        self::assertSame('Hot'.' '.$id.' '.$facture->getMois(), $communication);
+        self::assertSame('Hot '.$id.' '.$facture->getMois(), $communication);
     }
 }

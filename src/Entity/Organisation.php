@@ -17,9 +17,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
-/**
- * @Vich\Uploadable
- */
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: OrganisationRepository::class)]
 class Organisation implements Stringable
 {
@@ -33,17 +31,15 @@ class Organisation implements Stringable
     use PhotoTrait;
     #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private ?string $initiale = null;
+
     /**
      * overload pour nullable false.
      */
     #[ORM\Column(name: 'email', type: 'string', length: 50, nullable: false)]
     #[Assert\Email]
     private ?string $email = null;
-    /**
-     * @Vich\UploadableField(mapping="edr_organisation_image", fileNameProperty="photoName")
-     *
-     * note This is not a mapped field of entity metadata, just a simple property.
-     */
+
+    #[Vich\UploadableField(mapping: 'edr_organisation_image', fileNameProperty: 'photoName')]
     #[Assert\Image(maxSize: '7M')]
     private ?File $photo = null;
 

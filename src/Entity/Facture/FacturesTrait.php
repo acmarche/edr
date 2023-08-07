@@ -9,7 +9,7 @@ trait FacturesTrait
     /**
      * @var Facture[]
      */
-    private Collection $factures;
+    private Collection|array $factures = [];
 
     /**
      * @return Facture[]

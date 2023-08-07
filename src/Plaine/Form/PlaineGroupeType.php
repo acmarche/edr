@@ -21,7 +21,7 @@ final class PlaineGroupeType extends AbstractType
                 EntityType::class,
                 [
                     'class' => GroupeScolaire::class,
-                    'query_builder' => fn (GroupeScolaireRepository $groupeScolaireRepository) => $groupeScolaireRepository->getQbForListingPlaine(),
+                    'query_builder' => static fn(GroupeScolaireRepository $groupeScolaireRepository) => $groupeScolaireRepository->getQbForListingPlaine(),
                     'attr' => [
                         'readonly' => true,
                     ],
@@ -29,7 +29,7 @@ final class PlaineGroupeType extends AbstractType
                 ]
             )
             ->add('inscription_maximum', IntegerType::class, [
-                'label' => 'Nombre maximum d\'inscrits',
+                'label' => "Nombre maximum d'inscrits",
             ]);
     }
 

@@ -20,19 +20,20 @@ final class FactureController extends AbstractController
     use GetTuteurTrait;
 
     public function __construct(
-        private FactureRepository $factureRepository,
-        private FacturePresenceRepository $facturePresenceRepository,
-        private FactureCalculatorInterface $factureCalculator,
-        private factureRenderInterface $factureRender
+        private readonly FactureRepository $factureRepository,
+        private readonly FacturePresenceRepository $facturePresenceRepository,
+        private readonly FactureCalculatorInterface $factureCalculator,
+        private readonly factureRenderInterface $factureRender
     ) {
     }
 
     #[Route(path: '/', name: 'edr_parent_facture_index', methods: ['GET', 'POST'])]
     public function index(): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $factures = $this->factureRepository->findFacturesByTuteurWhoIsSend($this->tuteur);
 
         return $this->render(
@@ -47,9 +48,10 @@ final class FactureController extends AbstractController
     #[Route(path: '/{uuid}/show', name: 'edr_parent_facture_show', methods: ['GET'])]
     public function show(Facture $facture): Response
     {
-        if (($hasTuteur = $this->hasTuteur()) !== null) {
+        if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
             return $hasTuteur;
         }
+
         $html = $this->factureRender->render($facture);
 
         return $this->render(

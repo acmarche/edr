@@ -18,11 +18,11 @@ use Symfony\Component\Routing\Annotation\Route;
 final class PageController extends AbstractController
 {
     public function __construct(
-        private OrganisationRepository $organisationRepository,
-        private PageRepository $pageRepository,
-        private PageFactory $pageFactory,
-        private ContactEmailFactory $contactEmailFactory,
-        private NotificationMailer $notificationMailer
+        private readonly OrganisationRepository $organisationRepository,
+        private readonly PageRepository $pageRepository,
+        private readonly PageFactory $pageFactory,
+        private readonly ContactEmailFactory $contactEmailFactory,
+        private readonly NotificationMailer $notificationMailer
     ) {
     }
 
@@ -32,6 +32,7 @@ final class PageController extends AbstractController
         if ('home' === $page->getSlugSystem()) {
             return $this->redirectToRoute('edr_front_home');
         }
+
         if ('contact' === $page->getSlugSystem()) {
             return $this->redirectToRoute('edr_front_contact');
         }
@@ -48,9 +49,10 @@ final class PageController extends AbstractController
     public function contact(Request $request): Response
     {
         $page = $this->pageRepository->findContactPage();
-        if (null === $page) {
+        if (!$page instanceof Page) {
             $page = $this->pageFactory->createContactPage();
         }
+
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -80,7 +82,7 @@ final class PageController extends AbstractController
     public function modalite(): Response
     {
         $page = $this->pageRepository->findModalitePage();
-        if (null === $page) {
+        if (!$page instanceof Page) {
             $page = $this->pageFactory->createModalitePage();
         }
 

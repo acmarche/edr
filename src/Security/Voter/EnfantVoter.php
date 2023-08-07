@@ -24,18 +24,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class EnfantVoter extends Voter
 {
     public const ADD = 'enfant_new';
+
     public const SHOW = 'enfant_show';
+
     public const EDIT = 'enfant_edit';
+
     public const DELETE = 'enfant_delete';
 
     private UserInterface $user;
+
     private Enfant $enfant;
 
     public function __construct(
-        private RelationRepository $relationRepository,
-        private TuteurUtils $tuteurUtils,
-        private EnfantRepository $enfantRepository,
-        private Security $security
+        private readonly RelationRepository $relationRepository,
+        private readonly TuteurUtils $tuteurUtils,
+        private readonly EnfantRepository $enfantRepository,
+        private readonly Security $security
     ) {
     }
 
@@ -79,6 +83,7 @@ final class EnfantVoter extends Voter
         if ($this->security->isGranted(EdrSecurityRole::ROLE_ECOLE) && $this->checkEcoles()) {
             return true;
         }
+
         if ($this->security->isGranted(EdrSecurityRole::ROLE_ANIMATEUR) && $this->checkAnimateur()) {
             return true;
         }
@@ -132,7 +137,7 @@ final class EnfantVoter extends Voter
         $relations = $this->relationRepository->findByTuteur($tuteur);
 
         $enfants = array_map(
-            fn ($relation) => $relation->getEnfant()->getId(),
+            static fn($relation) => $relation->getEnfant()->getId(),
             $relations
         );
 

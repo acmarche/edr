@@ -18,8 +18,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class FactureAccueilController extends AbstractController
 {
     public function __construct(
-        private FactureHandlerInterface $factureHandler,
-        private FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository
+        private readonly FactureHandlerInterface $factureHandler,
+        private readonly FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository
     ) {
     }
 

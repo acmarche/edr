@@ -5,7 +5,7 @@ namespace AcMarche\Edr\Document\Message;
 final class DocumentUpdated
 {
     public function __construct(
-        private int $documentId
+        private readonly int $documentId
     ) {
     }
 

@@ -39,15 +39,15 @@ use Symfony\Component\Routing\Annotation\Route;
 final class PresenceController extends AbstractController
 {
     public function __construct(
-        private PresenceRepository $presenceRepository,
-        private PresenceHandlerInterface $presenceHandler,
-        private SearchHelper $searchHelper,
-        private ListingPresenceByMonth $listingPresenceByMonth,
-        private FacturePresenceRepository $facturePresenceRepository,
-        private FactureHandlerInterface $factureHandler,
-        private PresenceCalculatorInterface $presenceCalculator,
-        private OrdreService $ordreService,
-        private MessageBusInterface $dispatcher
+        private readonly PresenceRepository $presenceRepository,
+        private readonly PresenceHandlerInterface $presenceHandler,
+        private readonly SearchHelper $searchHelper,
+        private readonly ListingPresenceByMonth $listingPresenceByMonth,
+        private readonly FacturePresenceRepository $facturePresenceRepository,
+        private readonly FactureHandlerInterface $factureHandler,
+        private readonly PresenceCalculatorInterface $presenceCalculator,
+        private readonly OrdreService $ordreService,
+        private readonly MessageBusInterface $dispatcher
     ) {
     }
 
@@ -178,6 +178,7 @@ final class PresenceController extends AbstractController
                 'id' => $presence->getId(),
             ]);
         }
+
         $form = $this->createForm(PresenceType::class, $presence);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
