@@ -32,9 +32,6 @@ class ResetPasswordController extends AbstractController
     ) {
     }
 
-    /**
-     * Display & process form to request a password reset.
-     */
     #[Route(path: '/', name: 'edr_front_forgot_password_request')]
     public function request(Request $request): Response
     {
