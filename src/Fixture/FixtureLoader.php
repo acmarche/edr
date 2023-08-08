@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 final class FixtureLoader
 {
     public function __construct(
-        private readonly LoaderInterface $loader,
+
         private readonly EntityManagerInterface $entityManager,
         private readonly ParameterBagInterface $parameterBag,
         private readonly TuteurRepository $tuteurRepository,

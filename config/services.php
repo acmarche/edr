@@ -50,8 +50,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure()
         ->private();
 
-    $services->load('AcMarche\Edr\\', __DIR__ . '/../src/*')
-        ->exclude([__DIR__ . '/../src/{Entity,Tests2}']);
+    $services->load('AcMarche\Edr\\', __DIR__.'/../src/*')
+        ->exclude([__DIR__.'/../src/{Entity,Tests2}']);
 
     $services->set(DirectoryNamer::class)
         ->public();
@@ -61,7 +61,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->alias(PlaineCalculatorInterface::class, PlaineHottonCalculator::class);
     $services->alias(FacturePdfPresenceInterface::class, FacturePdfPresenceHotton::class);
 
-    $services->alias(LoaderInterface::class, 'fidry_alice_data_fixtures.doctrine.persister_loader');
+    if (interface_exists(LoaderInterface::class)) {
+        $services->alias(LoaderInterface::class, 'fidry_alice_data_fixtures.doctrine.persister_loader');
+    }
 
     $services->instanceof(AfterUserRegistration::class)
         ->tag('app.user.after_registration');
