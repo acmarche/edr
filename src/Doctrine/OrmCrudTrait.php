@@ -2,32 +2,32 @@
 
 namespace AcMarche\Edr\Doctrine;
 
-use Doctrine\ORM\EntityManager;
-
 trait OrmCrudTrait
 {
-    /**
-     * @var EntityManager
-     */
-    protected $_em;
-
-    public function persist(object $entity)
+    public function insert(object $object): void
     {
-        $this->_em->persist($entity);
+        $this->persist($object);
+        $this->flush();
     }
 
-    public function flush()
+    public function persist(object $object): void
     {
-        $this->_em->flush();
+        $this->getEntityManager()->persist($object);
     }
 
-    public function remove(object $entity)
+    public function flush(): void
     {
-        $this->_em->remove($entity);
+        $this->getEntityManager()->flush();
     }
 
-    public function getOriginalEntityData(object $entity)
+    public function remove(object $object): void
     {
-        return $this->_em->getUnitOfWork()->getOriginalEntityData($entity);
+        $this->getEntityManager()->remove($object);
     }
+
+    public function getOriginalEntityData(object $object)
+    {
+        return $this->getEntityManager()->getUnitOfWork()->getOriginalEntityData($object);
+    }
+
 }

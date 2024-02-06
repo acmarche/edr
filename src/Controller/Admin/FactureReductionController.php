@@ -7,14 +7,14 @@ use AcMarche\Edr\Entity\Facture\FactureReduction;
 use AcMarche\Edr\Facture\Form\FactureReductionType;
 use AcMarche\Edr\Facture\Repository\FactureReductionRepository;
 use DateTimeInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/facture_reduction')]
 final class FactureReductionController extends AbstractController
 {
@@ -53,7 +53,7 @@ final class FactureReductionController extends AbstractController
             [
                 'facture' => $facture,
                 'tuteur' => $facture->getTuteur(),
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -102,7 +102,7 @@ final class FactureReductionController extends AbstractController
             [
                 'facture' => $factureReduction->getFacture(),
                 'factureReduction' => $factureReduction,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

@@ -41,7 +41,7 @@ final class JourVoter extends Voter
 
     public function __construct(
         public RelationRepository $relationRepository,
-        private readonly Security $security
+        private readonly \Symfony\Bundle\SecurityBundle\Security $security
     ) {
     }
 

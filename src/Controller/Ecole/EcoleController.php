@@ -7,13 +7,13 @@ use AcMarche\Edr\Ecole\Repository\EcoleRepository;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
 use AcMarche\Edr\Entity\Scolaire\Ecole;
 use Carbon\Carbon;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/ecole')]
-#[IsGranted(data: 'ROLE_MERCREDI_ECOLE')]
+#[IsGranted('ROLE_MERCREDI_ECOLE')]
 final class EcoleController extends AbstractController
 {
     use GetEcolesTrait;
@@ -44,7 +44,7 @@ final class EcoleController extends AbstractController
     }
 
     #[Route(path: '/{id}', name: 'edr_ecole_ecole_show', methods: ['GET'])]
-    #[IsGranted(data: 'ecole_show', subject: 'ecole')]
+    #[IsGranted('ecole_show', subject: 'ecole')]
     public function show(Ecole $ecole): Response
     {
         $enfants = $this->enfantRepository->findByEcolesForEcole([$ecole]);

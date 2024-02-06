@@ -18,17 +18,17 @@ use AcMarche\Edr\Presence\Utils\PresenceUtils;
 use AcMarche\Edr\Relation\Repository\RelationRepository;
 use AcMarche\Edr\Search\Form\SearchNameType;
 use AcMarche\Edr\Utils\SortUtils;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/plaine/presence')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class PlainePresenceController extends AbstractController
 {
     public function __construct(
@@ -66,14 +66,14 @@ final class PlainePresenceController extends AbstractController
             [
                 'enfants' => $enfants,
                 'plaine' => $plaine,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
 
     #[Route(path: '/select/tuteur/{plaine}/{enfant}', name: 'edr_admin_plaine_presence_select_tuteur', methods: ['GET', 'POST'])]
-    #[Entity(data: 'plaine', expr: 'repository.find(plaine)')]
-    #[Entity(data: 'enfant', expr: 'repository.find(enfant)')]
+    //#[Entity(data: 'plaine', expr: 'repository.find(plaine)')]
+    //#[Entity(data: 'enfant', expr: 'repository.find(enfant)')]
     public function selectTuteur(Plaine $plaine, Enfant $enfant): Response
     {
         $tuteurs = $this->relationRepository->findTuteursByEnfant($enfant);
@@ -101,9 +101,9 @@ final class PlainePresenceController extends AbstractController
     }
 
     #[Route(path: '/confirmation/{plaine}/{tuteur}/{enfant}', name: 'edr_admin_plaine_presence_confirmation', methods: ['GET', 'POST'])]
-    #[Entity(data: 'tuteur', expr: 'repository.find(tuteur)')]
-    #[Entity(data: 'plaine', expr: 'repository.find(plaine)')]
-    #[Entity(data: 'enfant', expr: 'repository.find(enfant)')]
+    //#[Entity(data: 'tuteur', expr: 'repository.find(tuteur)')]
+    //#[Entity(data: 'plaine', expr: 'repository.find(plaine)')]
+    //#[Entity(data: 'enfant', expr: 'repository.find(enfant)')]
     public function confirmation(Plaine $plaine, Tuteur $tuteur, Enfant $enfant): RedirectResponse
     {
         $this->plaineHandler->handleAddEnfant($plaine, $tuteur, $enfant);
@@ -163,7 +163,7 @@ final class PlainePresenceController extends AbstractController
                 'plaine' => $plaine,
                 'presence' => $presence,
                 'enfant' => $enfant,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -205,7 +205,7 @@ final class PlainePresenceController extends AbstractController
             [
                 'plaine' => $plaine,
                 'enfant' => $enfant,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

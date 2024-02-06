@@ -12,13 +12,13 @@ use AcMarche\Edr\Plaine\Repository\PlaineRepository;
 use DateTime;
 use Doctrine\Common\Collections\Collection;
 
-final class PlaineAdminHandler
+final readonly class PlaineAdminHandler
 {
     public function __construct(
-        private readonly PlaineRepository $plaineRepository,
-        private readonly JourRepository $jourRepository,
-        private readonly PlainePresenceRepository $plainePresenceRepository,
-        private readonly FactureHandlerInterface $factureHandler
+        private PlaineRepository $plaineRepository,
+        private JourRepository $jourRepository,
+        private PlainePresenceRepository $plainePresenceRepository,
+        private FactureHandlerInterface $factureHandler
     ) {
     }
 

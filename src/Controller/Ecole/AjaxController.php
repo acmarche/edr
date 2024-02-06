@@ -5,11 +5,11 @@ namespace AcMarche\Edr\Controller\Ecole;
 use AcMarche\Edr\Accueil\Repository\AccueilRepository;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
 use AcMarche\Edr\Entity\Enfant;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class AjaxController extends AbstractController
 {
@@ -20,7 +20,7 @@ class AjaxController extends AbstractController
     }
 
     #[Route(path: '/accueil/ajax/duree', name: 'edr_ecole_ajax_duree', methods: ['POST'])]
-    #[IsGranted(data: 'ROLE_MERCREDI_ECOLE')]
+    #[IsGranted('ROLE_MERCREDI_ECOLE')]
     public function updateDuree(Request $request): Response
     {
         $data = json_decode($request->getContent(), null, 512, JSON_THROW_ON_ERROR);

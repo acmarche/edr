@@ -12,7 +12,7 @@ use AcMarche\Edr\Page\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 final class PageController extends AbstractController
 {
@@ -72,7 +72,7 @@ final class PageController extends AbstractController
             [
                 'page' => $page,
                 'organisation' => $this->organisationRepository->getOrganisation(),
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

@@ -5,15 +5,15 @@ namespace AcMarche\Edr\Controller\Admin;
 use AcMarche\Edr\Entity\Security\User;
 use AcMarche\Edr\User\Form\UserPasswordType;
 use AcMarche\Edr\User\Repository\UserRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/utilisateur/password')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class PasswordController extends AbstractController
 {
     public function __construct(
@@ -45,7 +45,7 @@ final class PasswordController extends AbstractController
             '@AcMarcheEdrAdmin/user/password.html.twig',
             [
                 'user' => $user,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

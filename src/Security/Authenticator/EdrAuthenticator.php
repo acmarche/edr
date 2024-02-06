@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Security\Authenticator;
 
+use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use AcMarche\Edr\User\Repository\UserRepository;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -56,7 +57,7 @@ class EdrAuthenticator extends AbstractAuthenticator implements AuthenticationEn
         $password = $request->request->get('password', '');
         $token = $request->request->get('_csrf_token', '');
 
-        $request->getSession()->set(Security::LAST_USERNAME, $email);
+        $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
 
         $badges =
             [
@@ -86,7 +87,7 @@ class EdrAuthenticator extends AbstractAuthenticator implements AuthenticationEn
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         if ($request->hasSession()) {
-            $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+            $request->getSession()->set(SecurityRequestAttributes::AUTHENTICATION_ERROR, $exception);
         }
 
         if (interface_exists(LdapInterface::class)) {

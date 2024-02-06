@@ -3,6 +3,7 @@
 namespace AcMarche\Edr\Command;
 
 use AcMarche\Edr\Mailer\InitMailerTrait;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,16 +12,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Email;
 
+#[AsCommand(
+    name: 'edr:test-mail', description: 'Test envoie mail'
+)]
 class MailTestCommand extends Command
 {
     use InitMailerTrait;
 
-    protected static $defaultName = 'edr:test-mail';
-
     protected function configure(): void
     {
         $this
-            ->setDescription('Test envoie mail')
             ->addArgument('from', InputArgument::REQUIRED, 'Expéditeur')
             ->addArgument('to', InputArgument::REQUIRED, 'Destinataire');
     }
@@ -41,7 +42,7 @@ class MailTestCommand extends Command
             $this->sendMail($message);
             $io->success('Le mail a bien été envoyé.');
         } catch (TransportExceptionInterface $transportException) {
-            $io->error('Erreur lors de l envoie: ' . $transportException->getMessage());
+            $io->error('Erreur lors de l envoie: '.$transportException->getMessage());
         }
 
         return Command::SUCCESS;

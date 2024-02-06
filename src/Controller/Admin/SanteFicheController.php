@@ -12,16 +12,16 @@ use AcMarche\Edr\Sante\Message\SanteFicheUpdated;
 use AcMarche\Edr\Sante\Repository\SanteFicheRepository;
 use AcMarche\Edr\Sante\Repository\SanteQuestionRepository;
 use AcMarche\Edr\Sante\Utils\SanteChecker;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/santeFiche')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class SanteFicheController extends AbstractController
 {
     public function __construct(
@@ -87,7 +87,7 @@ final class SanteFicheController extends AbstractController
             '@AcMarcheEdrAdmin/sante_fiche/edit.html.twig',
             [
                 'sante_fiche' => $santeFiche,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

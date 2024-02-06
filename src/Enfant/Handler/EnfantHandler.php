@@ -8,11 +8,11 @@ use AcMarche\Edr\Entity\Relation;
 use AcMarche\Edr\Entity\Tuteur;
 use AcMarche\Edr\Relation\Repository\RelationRepository;
 
-final class EnfantHandler
+final readonly class EnfantHandler
 {
     public function __construct(
-        private readonly EnfantRepository $enfantRepository,
-        private readonly RelationRepository $relationRepository
+        private EnfantRepository $enfantRepository,
+        private RelationRepository $relationRepository
     ) {
     }
 

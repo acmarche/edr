@@ -10,11 +10,11 @@ use Exception;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class UserAddSubscriber implements EventSubscriberInterface
+final readonly class UserAddSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly Security $security,
-        private readonly PropertyUtil $propertyUtil
+        private Security $security,
+        private PropertyUtil $propertyUtil
     ) {
     }
 

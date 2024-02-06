@@ -5,10 +5,10 @@ namespace AcMarche\Edr\Page\Factory;
 use AcMarche\Edr\Entity\Page;
 use AcMarche\Edr\Page\Repository\PageRepository;
 
-final class PageFactory
+final readonly class PageFactory
 {
     public function __construct(
-        private readonly PageRepository $pageRepository
+        private PageRepository $pageRepository
     ) {
     }
 

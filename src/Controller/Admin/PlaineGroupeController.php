@@ -5,14 +5,14 @@ namespace AcMarche\Edr\Controller\Admin;
 use AcMarche\Edr\Entity\Plaine\PlaineGroupe;
 use AcMarche\Edr\Plaine\Form\PlaineGroupeEditType;
 use AcMarche\Edr\Plaine\Repository\PlaineGroupeRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/plaine_groupe')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class PlaineGroupeController extends AbstractController
 {
     public function __construct(
@@ -40,7 +40,7 @@ final class PlaineGroupeController extends AbstractController
             [
                 'plaine' => $plaine,
                 'plaine_groupe' => $plaineGroupe,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

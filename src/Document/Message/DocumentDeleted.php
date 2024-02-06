@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Document\Message;
 
-final class DocumentDeleted
+final readonly class DocumentDeleted
 {
     public function __construct(
-        private readonly int $documentId
+        private int $documentId
     ) {
     }
 

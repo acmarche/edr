@@ -5,6 +5,7 @@ namespace AcMarche\Edr\User\Command;
 use AcMarche\Edr\Entity\Security\User;
 use AcMarche\Edr\Security\Role\EdrSecurityRole;
 use AcMarche\Edr\User\Repository\UserRepository;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,12 +13,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+#[AsCommand(
+    name: 'edr:create-user', description: 'Create user'
+)]
 final class CreateUserCommand extends Command
 {
-    /**
-     * @var string
-     */
-    protected static $defaultName = 'edr:create-user';
 
     public function __construct(
         private readonly UserRepository $userRepository,
@@ -50,15 +50,15 @@ final class CreateUserCommand extends Command
             return Command::FAILURE;
         }
 
-        if (\strlen((string) $name) < 1) {
+        if (\strlen((string)$name) < 1) {
             $symfonyStyle->error('Name minium 1');
 
             return Command::FAILURE;
         }
 
         if ($this->userRepository->findOneBy([
-            'email' => $email,
-        ]) instanceof User) {
+                'email' => $email,
+            ]) instanceof User) {
             $symfonyStyle->error('Un utilisateur existe déjà avec cette adresse email');
 
             return Command::FAILURE;

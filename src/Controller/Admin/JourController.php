@@ -11,16 +11,16 @@ use AcMarche\Edr\Jour\Message\JourDeleted;
 use AcMarche\Edr\Jour\Message\JourUpdated;
 use AcMarche\Edr\Jour\Repository\JourRepository;
 use AcMarche\Edr\Presence\Repository\PresenceRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/jour')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class JourController extends AbstractController
 {
     public function __construct(
@@ -51,7 +51,7 @@ final class JourController extends AbstractController
             '@AcMarcheEdrAdmin/jour/index.html.twig',
             [
                 'jours' => $jours,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -77,7 +77,7 @@ final class JourController extends AbstractController
             '@AcMarcheEdrAdmin/jour/new.html.twig',
             [
                 'jour' => $jour,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -102,7 +102,7 @@ final class JourController extends AbstractController
             '@AcMarcheEdrAdmin/jour/tarif.html.twig',
             [
                 'jour' => $jour,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -143,7 +143,7 @@ final class JourController extends AbstractController
             '@AcMarcheEdrAdmin/jour/edit.html.twig',
             [
                 'jour' => $jour,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

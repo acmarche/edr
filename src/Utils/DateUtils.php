@@ -19,10 +19,10 @@ use IntlDateFormatter;
 use Locale;
 use Twig\Environment;
 
-final class DateUtils
+final readonly class DateUtils
 {
     public function __construct(
-        private readonly Environment $environment
+        private Environment $environment
     ) {
     }
 

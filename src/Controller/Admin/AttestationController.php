@@ -4,13 +4,13 @@ namespace AcMarche\Edr\Controller\Admin;
 
 use AcMarche\Edr\Facture\Repository\FactureRepository;
 use AcMarche\Edr\Facture\Utils\FactureUtils;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/attestation')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class AttestationController extends AbstractController
 {
     public function __construct(

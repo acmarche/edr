@@ -9,11 +9,11 @@ use AcMarche\Edr\Entity\Sante\SanteReponse;
 use AcMarche\Edr\Sante\Repository\SanteFicheRepository;
 use AcMarche\Edr\Sante\Repository\SanteReponseRepository;
 
-final class SanteFactory
+final readonly class SanteFactory
 {
     public function __construct(
-        private readonly SanteFicheRepository $santeFicheRepository,
-        private readonly SanteReponseRepository $santeReponseRepository
+        private SanteFicheRepository $santeFicheRepository,
+        private SanteReponseRepository $santeReponseRepository
     ) {
     }
 

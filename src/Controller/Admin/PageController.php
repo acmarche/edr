@@ -8,16 +8,16 @@ use AcMarche\Edr\Page\Message\PageCreated;
 use AcMarche\Edr\Page\Message\PageDeleted;
 use AcMarche\Edr\Page\Message\PageUpdated;
 use AcMarche\Edr\Page\Repository\PageRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/page')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class PageController extends AbstractController
 {
     public function __construct(
@@ -58,7 +58,7 @@ final class PageController extends AbstractController
             '@AcMarcheEdrAdmin/page/new.html.twig',
             [
                 'page' => $page,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -93,7 +93,7 @@ final class PageController extends AbstractController
             '@AcMarcheEdrAdmin/page/edit.html.twig',
             [
                 'page' => $page,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

@@ -97,7 +97,7 @@ class Tuteur implements SluggableInterface, TimestampableInterface, Stringable
 
     public function __toString(): string
     {
-        return mb_strtoupper($this->nom, 'UTF-8') . ' ' . $this->prenom;
+        return mb_strtoupper((string) $this->nom, 'UTF-8') . ' ' . $this->prenom;
     }
 
     public function getSluggableFields(): array

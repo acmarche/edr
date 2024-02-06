@@ -10,11 +10,11 @@ use AcMarche\Edr\Security\Role\EdrSecurityRole;
 use AcMarche\Edr\User\Repository\UserRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-final class UserFactory
+final readonly class UserFactory
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
-        private readonly UserPasswordHasherInterface $userPasswordHasher
+        private UserRepository $userRepository,
+        private UserPasswordHasherInterface $userPasswordHasher
     ) {
     }
 

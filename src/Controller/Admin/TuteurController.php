@@ -11,16 +11,16 @@ use AcMarche\Edr\Tuteur\Message\TuteurCreated;
 use AcMarche\Edr\Tuteur\Message\TuteurDeleted;
 use AcMarche\Edr\Tuteur\Message\TuteurUpdated;
 use AcMarche\Edr\Tuteur\Repository\TuteurRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/tuteur')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class TuteurController extends AbstractController
 {
     public function __construct(
@@ -48,7 +48,7 @@ final class TuteurController extends AbstractController
             '@AcMarcheEdrAdmin/tuteur/index.html.twig',
             [
                 'tuteurs' => $tuteurs,
-                'form' => $form->createView(),
+                'form' => $form,
                 'search' => $form->isSubmitted()
             ]
         );
@@ -75,7 +75,7 @@ final class TuteurController extends AbstractController
             '@AcMarcheEdrAdmin/tuteur/new.html.twig',
             [
                 'tuteur' => $tuteur,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -113,7 +113,7 @@ final class TuteurController extends AbstractController
             '@AcMarcheEdrAdmin/tuteur/edit.html.twig',
             [
                 'tuteur' => $tuteur,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

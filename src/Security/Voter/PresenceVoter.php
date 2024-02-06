@@ -40,7 +40,7 @@ final class PresenceVoter extends Voter
     public function __construct(
         private readonly RelationRepository $relationRepository,
         private readonly TuteurUtils $tuteurUtils,
-        private readonly Security $security
+        private readonly \Symfony\Bundle\SecurityBundle\Security $security
     ) {
     }
 

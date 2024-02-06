@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Security\Authenticator;
 
+use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use AcMarche\Edr\Parameter\Option;
 use AcMarche\Edr\Security\Ldap\LdapEdr;
 use AcMarche\Edr\User\Repository\UserRepository;
@@ -49,7 +50,7 @@ class EdrLdapAuthenticator extends AbstractLoginFormAuthenticator
         $password = $request->request->get('password', '');
         $token = $request->request->get('_csrf_token', '');
 
-        $request->getSession()->set(Security::LAST_USERNAME, $email);
+        $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
 
         $badges =
             [

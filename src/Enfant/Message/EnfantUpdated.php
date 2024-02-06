@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Enfant\Message;
 
-final class EnfantUpdated
+final readonly class EnfantUpdated
 {
     public function __construct(
-        private readonly int $enfantId
+        private int $enfantId
     ) {
     }
 

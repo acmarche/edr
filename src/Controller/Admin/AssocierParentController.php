@@ -7,18 +7,18 @@ use AcMarche\Edr\Tuteur\Repository\TuteurRepository;
 use AcMarche\Edr\User\Dto\AssociateUserTuteurDto;
 use AcMarche\Edr\User\Form\AssociateTuteurType;
 use AcMarche\Edr\User\Handler\AssociationTuteurHandler;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * User controller.
  */
 #[Route(path: '/security/associer/parent')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class AssocierParentController extends AbstractController
 {
     public function __construct(
@@ -54,7 +54,7 @@ final class AssocierParentController extends AbstractController
             '@AcMarcheEdrAdmin/user/associer_tuteur.html.twig',
             [
                 'user' => $user,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

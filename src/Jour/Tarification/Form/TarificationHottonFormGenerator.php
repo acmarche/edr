@@ -8,11 +8,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Twig\Environment;
 
-final class TarificationHottonFormGenerator implements TarificationFormGeneratorInterface
+final readonly class TarificationHottonFormGenerator implements TarificationFormGeneratorInterface
 {
     public function __construct(
-        private readonly FormFactoryInterface $formFactory,
-        private readonly Environment $environment
+        private FormFactoryInterface $formFactory,
+        private Environment $environment
     ) {
     }
 

@@ -11,6 +11,7 @@ use AcMarche\Edr\Tuteur\Utils\TuteurUtils;
 use DateTime;
 use DateTimeInterface;
 use Exception;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,12 +20,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
+#[AsCommand(
+    name: 'edr:send-facture', description: 'Envoie les factures par mail'
+)]
 class SendFactureCommand extends Command
 {
-    protected static $defaultName = 'edr:send-facture';
-
-    protected static $defaultDescription = 'Envoie les factures par mail';
-
     public function __construct(
         private readonly FactureRepository $factureRepository,
         private readonly FactureCronRepository $factureCronRepository,
@@ -45,7 +45,7 @@ class SendFactureCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $force = (bool) $input->getOption('force');
+        $force = (bool)$input->getOption('force');
         /* $month = $input->getArgument('month');
 
          if (preg_match("#^\d{2}-\d{4}$#", $month) == false) {
@@ -61,7 +61,7 @@ class SendFactureCommand extends Command
             $i = 0;
             $factures = $this->factureRepository->findFacturesByMonth($cron->getMonth());
             $count = \count($factures);
-            $io->writeln($count . ' factures trouvées');
+            $io->writeln($count.' factures trouvées');
 
             $messageBase = $this->factureEmailFactory->messageFacture(
                 $cron->getFromAdresse(),
@@ -80,7 +80,7 @@ class SendFactureCommand extends Command
                 $emails = TuteurUtils::getEmailsOfOneTuteur($tuteur);
 
                 if (\count($emails) < 1) {
-                    $error = 'Pas de mail pour la facture: ' . $facture->getId();
+                    $error = 'Pas de mail pour la facture: '.$facture->getId();
                     $message = $this->adminEmailFactory->messageAlert('Erreur envoie facture', $error);
                     $this->notificationMailer->sendAsEmailNotification($message);
                     continue;
@@ -90,7 +90,7 @@ class SendFactureCommand extends Command
                 try {
                     $this->factureEmailFactory->attachFactureFromPath($messageFacture, $facture);
                 } catch (Exception $e) {
-                    $error = 'Pas de pièce jointe pour la facture: ' . $facture->getId();
+                    $error = 'Pas de pièce jointe pour la facture: '.$facture->getId();
                     $message = $this->adminEmailFactory->messageAlert('Erreur envoie facture', $error);
                     $this->notificationMailer->sendAsEmailNotification($message);
                     continue;
@@ -99,7 +99,7 @@ class SendFactureCommand extends Command
                 try {
                     $this->notificationMailer->sendMail($messageFacture);
                 } catch (TransportExceptionInterface $e) {
-                    $error = 'Facture num ' . $facture->getId() . ' ' . $e->getMessage();
+                    $error = 'Facture num '.$facture->getId().' '.$e->getMessage();
                     $message = $this->adminEmailFactory->messageAlert('Erreur envoie facture', $error);
                     $this->notificationMailer->sendAsEmailNotification($message);
                     continue;
@@ -108,7 +108,7 @@ class SendFactureCommand extends Command
                 $facture->setEnvoyeA(implode(', ', $emails));
                 $facture->setEnvoyeLe(new DateTime());
                 ++$i;
-                $io->writeln($i . '/' . $count);
+                $io->writeln($i.'/'.$count);
                 $this->factureRepository->flush();
             }
 

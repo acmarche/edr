@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Security;
 final class TuteurType extends AbstractType
 {
     public function __construct(
-        private readonly Security $security
+        private readonly \Symfony\Bundle\SecurityBundle\Security $security
     ) {
     }
 

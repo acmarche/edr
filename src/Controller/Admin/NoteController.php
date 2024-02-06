@@ -9,16 +9,16 @@ use AcMarche\Edr\Note\Message\NoteCreated;
 use AcMarche\Edr\Note\Message\NoteDeleted;
 use AcMarche\Edr\Note\Message\NoteUpdated;
 use AcMarche\Edr\Note\Repository\NoteRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/note')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class NoteController extends AbstractController
 {
     public function __construct(
@@ -62,7 +62,7 @@ final class NoteController extends AbstractController
             '@AcMarcheEdrAdmin/note/new.html.twig',
             [
                 'note' => $note,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -89,7 +89,7 @@ final class NoteController extends AbstractController
             [
                 'note' => $note,
                 'enfant' => $enfant,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -137,7 +137,7 @@ final class NoteController extends AbstractController
             '@AcMarcheEdrAdmin/note/edit.html.twig',
             [
                 'note' => $note,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

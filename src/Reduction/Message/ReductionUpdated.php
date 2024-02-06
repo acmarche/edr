@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Reduction\Message;
 
-final class ReductionUpdated
+final readonly class ReductionUpdated
 {
     public function __construct(
-        private readonly int $ecoleId
+        private int $ecoleId
     ) {
     }
 

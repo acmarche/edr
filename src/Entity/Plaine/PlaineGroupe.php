@@ -41,7 +41,7 @@ class PlaineGroupe implements TimestampableInterface, Stringable
 
     public function __toString(): string
     {
-        return $this->getGroupeScolaire()->getNom();
+        return (string) $this->getGroupeScolaire()->getNom();
     }
 
     public function getPlaine(): ?Plaine

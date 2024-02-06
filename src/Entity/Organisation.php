@@ -45,7 +45,7 @@ class Organisation implements Stringable
 
     public function __toString(): string
     {
-        return $this->nom;
+        return (string) $this->nom;
     }
 
     public function getInitiale(): ?string

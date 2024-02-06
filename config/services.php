@@ -13,7 +13,6 @@ use AcMarche\Edr\Presence\Calculator\PrenceHottonCalculator;
 use AcMarche\Edr\Security\Ldap\LdapEdr;
 use AcMarche\Edr\ServiceIterator\AfterUserRegistration;
 use AcMarche\Edr\ServiceIterator\Register;
-use Fidry\AliceDataFixtures\LoaderInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Ldap\Adapter\ExtLdap\Adapter;
 use Symfony\Component\Ldap\Ldap;
@@ -60,10 +59,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->alias(PresenceCalculatorInterface::class, PrenceHottonCalculator::class);
     $services->alias(PlaineCalculatorInterface::class, PlaineHottonCalculator::class);
     $services->alias(FacturePdfPresenceInterface::class, FacturePdfPresenceHotton::class);
-
-    if (interface_exists(LoaderInterface::class)) {
-        $services->alias(LoaderInterface::class, 'fidry_alice_data_fixtures.doctrine.persister_loader');
-    }
 
     $services->instanceof(AfterUserRegistration::class)
         ->tag('app.user.after_registration');

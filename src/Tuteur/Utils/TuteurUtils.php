@@ -9,10 +9,10 @@ use AcMarche\Edr\Relation\Repository\RelationRepository;
 use AcMarche\Edr\Relation\Utils\RelationUtils;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class TuteurUtils
+final readonly class TuteurUtils
 {
     public function __construct(
-        private readonly RelationRepository $relationRepository
+        private RelationRepository $relationRepository
     ) {
     }
 

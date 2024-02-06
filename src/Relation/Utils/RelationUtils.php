@@ -7,10 +7,10 @@ use AcMarche\Edr\Entity\Relation;
 use AcMarche\Edr\Entity\Tuteur;
 use AcMarche\Edr\Relation\Repository\RelationRepository;
 
-final class RelationUtils
+final readonly class RelationUtils
 {
     public function __construct(
-        private readonly RelationRepository $relationRepository
+        private RelationRepository $relationRepository
     ) {
     }
 

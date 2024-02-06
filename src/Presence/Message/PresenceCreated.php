@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Presence\Message;
 
-final class PresenceCreated
+final readonly class PresenceCreated
 {
     public function __construct(
-        private readonly array $days
+        private array $days
     ) {
     }
 

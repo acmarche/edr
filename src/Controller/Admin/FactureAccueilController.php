@@ -6,13 +6,13 @@ use AcMarche\Edr\Contrat\Facture\FactureHandlerInterface;
 use AcMarche\Edr\Entity\Facture\Facture;
 use AcMarche\Edr\Facture\Form\FactureAttachType;
 use AcMarche\Edr\Facture\Repository\FacturePresenceNonPayeRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/facture_accueil')]
 final class FactureAccueilController extends AbstractController
 {
@@ -46,7 +46,7 @@ final class FactureAccueilController extends AbstractController
                 'facture' => $facture,
                 'tuteur' => $facture->getTuteur(),
                 'accueils' => $accueils,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

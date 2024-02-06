@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\User\Message;
 
-final class UserDeleted
+final readonly class UserDeleted
 {
     public function __construct(
-        private readonly int $userId
+        private int $userId
     ) {
     }
 

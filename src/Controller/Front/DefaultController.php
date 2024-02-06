@@ -7,7 +7,7 @@ use AcMarche\Edr\Page\Factory\PageFactory;
 use AcMarche\Edr\Page\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 final class DefaultController extends AbstractController
 {

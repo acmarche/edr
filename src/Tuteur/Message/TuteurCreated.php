@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Tuteur\Message;
 
-final class TuteurCreated
+final readonly class TuteurCreated
 {
     public function __construct(
-        private readonly int $tuteurId
+        private int $tuteurId
     ) {
     }
 

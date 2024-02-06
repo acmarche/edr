@@ -8,14 +8,14 @@ use AcMarche\Edr\Plaine\Form\PlaineJoursType;
 use AcMarche\Edr\Plaine\Handler\PlaineAdminHandler;
 use AcMarche\Edr\Plaine\Repository\PlainePresenceRepository;
 use AcMarche\Edr\Scolaire\Grouping\GroupingInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/plaine_jour')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class PlaineJourController extends AbstractController
 {
     public function __construct(
@@ -46,7 +46,7 @@ final class PlaineJourController extends AbstractController
             '@AcMarcheEdrAdmin/plaine_jour/edit.html.twig',
             [
                 'plaine' => $plaine,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

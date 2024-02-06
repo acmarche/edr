@@ -1,4 +1,0 @@
-AcMarche\Edr\Entity\Reduction:
-  reduction_{Cpas, Militaire}:
-    nom: '<current()>'
-    pourcentage: '<randomFloat(2, 25, 100)>'

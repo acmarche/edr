@@ -6,10 +6,10 @@ use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Entity\Scolaire\GroupeScolaire;
 use AcMarche\Edr\Scolaire\Repository\GroupeScolaireRepository;
 
-final class ScolaireUtils
+final readonly class ScolaireUtils
 {
     public function __construct(
-        private readonly GroupeScolaireRepository $groupeScolaireRepository
+        private GroupeScolaireRepository $groupeScolaireRepository
     ) {
     }
 

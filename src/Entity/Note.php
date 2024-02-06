@@ -34,6 +34,6 @@ class Note implements TimestampableInterface, Stringable
 
     public function __toString(): string
     {
-        return $this->getRemarque();
+        return (string) $this->getRemarque();
     }
 }

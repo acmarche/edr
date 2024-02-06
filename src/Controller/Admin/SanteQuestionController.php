@@ -8,16 +8,16 @@ use AcMarche\Edr\Sante\Message\SanteQuestionCreated;
 use AcMarche\Edr\Sante\Message\SanteQuestionDeleted;
 use AcMarche\Edr\Sante\Message\SanteQuestionUpdated;
 use AcMarche\Edr\Sante\Repository\SanteQuestionRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/sante/question')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class SanteQuestionController extends AbstractController
 {
     public function __construct(
@@ -58,7 +58,7 @@ final class SanteQuestionController extends AbstractController
             '@AcMarcheEdrAdmin/sante_question/new.html.twig',
             [
                 'sante_question' => $santeQuestion,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -93,7 +93,7 @@ final class SanteQuestionController extends AbstractController
             '@AcMarcheEdrAdmin/sante_question/edit.html.twig',
             [
                 'sante_question' => $santeQuestion,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

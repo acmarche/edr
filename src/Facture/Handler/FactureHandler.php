@@ -27,19 +27,19 @@ use Carbon\CarbonInterface;
 use DateTime;
 use DateTimeInterface;
 
-final class FactureHandler implements FactureHandlerInterface
+final readonly class FactureHandler implements FactureHandlerInterface
 {
     public function __construct(
-        private readonly FactureRepository $factureRepository,
-        private readonly FacturePresenceRepository $facturePresenceRepository,
-        private readonly FactureFactory $factureFactory,
-        private readonly PresenceCalculatorInterface $presenceCalculator,
-        private readonly PresenceRepository $presenceRepository,
-        private readonly AccueilRepository $accueilRepository,
-        private readonly AccueilCalculatorInterface $accueilCalculator,
-        private readonly TuteurRepository $tuteurRepository,
-        private readonly CommunicationFactoryInterface $communicationFactory,
-        private readonly FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository
+        private FactureRepository $factureRepository,
+        private FacturePresenceRepository $facturePresenceRepository,
+        private FactureFactory $factureFactory,
+        private PresenceCalculatorInterface $presenceCalculator,
+        private PresenceRepository $presenceRepository,
+        private AccueilRepository $accueilRepository,
+        private AccueilCalculatorInterface $accueilCalculator,
+        private TuteurRepository $tuteurRepository,
+        private CommunicationFactoryInterface $communicationFactory,
+        private FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository
     ) {
     }
 

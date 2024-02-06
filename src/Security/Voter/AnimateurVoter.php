@@ -40,7 +40,7 @@ final class AnimateurVoter extends Voter
     private array|Collection $animateurs;
 
     public function __construct(
-        private readonly Security $security
+        private readonly \Symfony\Bundle\SecurityBundle\Security $security
     ) {
     }
 

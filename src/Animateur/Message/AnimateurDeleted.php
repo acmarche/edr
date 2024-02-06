@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Animateur\Message;
 
-final class AnimateurDeleted
+final readonly class AnimateurDeleted
 {
     public function __construct(
-        private readonly int $animateurId
+        private int $animateurId
     ) {
     }
 

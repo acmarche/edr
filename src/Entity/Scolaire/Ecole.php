@@ -50,7 +50,7 @@ class Ecole implements Stringable
 
     public function __toString(): string
     {
-        return $this->nom;
+        return (string) $this->nom;
     }
 
     /**

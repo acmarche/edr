@@ -1,8 +1,0 @@
-AcMarche\Edr\Entity\Organisation:
-  orga:
-    nom: 'Espace enfance jeunesse'
-    initiale: 'EEJ'
-    email: 'eej@domain.be'
-    telephone: '<phoneNumber()>'
-    rue: '<streetName()>, <numberBetween(1,50)>'
-    localite: '<city()>'

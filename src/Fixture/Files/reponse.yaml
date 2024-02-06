@@ -1,5 +1,0 @@
-AcMarche\Edr\Entity\Sante\SanteReponse:
-  reponse_merlin:
-    __construct: ['@sante_merlin','@question_3']
-    remarque: 'des lunettes de soleil'
-    reponse: '1'

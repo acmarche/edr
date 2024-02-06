@@ -20,13 +20,13 @@ use AcMarche\Edr\Relation\Repository\RelationRepository;
 use AcMarche\Edr\Relation\Utils\RelationUtils;
 use AcMarche\Edr\Search\SearchHelper;
 use AcMarche\Edr\Tuteur\Utils\TuteurUtils;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/message')]
 final class MessageController extends AbstractController
 {
@@ -88,7 +88,7 @@ final class MessageController extends AbstractController
         return $this->render(
             '@AcMarcheEdrAdmin/message/index.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
                 'emails' => $emails,
                 'tuteurs' => $tuteursWithOutEmails,
             ]
@@ -118,7 +118,7 @@ final class MessageController extends AbstractController
             '@AcMarcheEdrAdmin/message/new.html.twig',
             [
                 'emailuser' => $this->getUser()->getEmail(),
-                'form' => $form->createView(),
+                'form' => $form,
                 'emails' => $emails,
                 'jour' => $jour,
                 'tuteurs' => [],
@@ -159,7 +159,7 @@ final class MessageController extends AbstractController
             '@AcMarcheEdrAdmin/message/new.html.twig',
             [
                 'emailuser' => $this->getUser()->getEmail(),
-                'form' => $form->createView(),
+                'form' => $form,
                 'emails' => $emails,
                 'tuteurs' => [],
             ]
@@ -190,7 +190,7 @@ final class MessageController extends AbstractController
             '@AcMarcheEdrAdmin/message/new_from_plaine.html.twig',
             [
                 'emailuser' => $this->getUser()->getEmail(),
-                'form' => $form->createView(),
+                'form' => $form,
                 'emails' => $emails,
                 'plaine' => $plaine,
                 'tuteurs' => [],
@@ -221,7 +221,7 @@ final class MessageController extends AbstractController
             '@AcMarcheEdrAdmin/message/new.html.twig',
             [
                 'emails' => $emails,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

@@ -78,7 +78,7 @@ class FactureEmailFactory
         }
 
         if ($this->parameterBag->has(Option::EMAILS_FACTURE)) {
-            $copies = explode(',', $this->parameterBag->get(Option::EMAILS_FACTURE));
+            $copies = explode(',', (string) $this->parameterBag->get(Option::EMAILS_FACTURE));
             if (\is_array($copies)) {
                 foreach ($copies as $copy) {
                     if (filter_var($copy, FILTER_VALIDATE_EMAIL)) {

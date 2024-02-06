@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Sante\Message;
 
-final class SanteFicheUpdated
+final readonly class SanteFicheUpdated
 {
     public function __construct(
-        private readonly int $santeFicheId
+        private int $santeFicheId
     ) {
     }
 

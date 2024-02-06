@@ -10,11 +10,11 @@ use AcMarche\Edr\Entity\Reduction;
 use AcMarche\Edr\Reduction\Calculator\ReductionCalculator;
 use AcMarche\Edr\Relation\Utils\OrdreService;
 
-final class PlaineHottonCalculator implements PlaineCalculatorInterface
+final readonly class PlaineHottonCalculator implements PlaineCalculatorInterface
 {
     public function __construct(
-        private readonly OrdreService $ordreService,
-        private readonly ReductionCalculator $reductionCalculator
+        private OrdreService $ordreService,
+        private ReductionCalculator $reductionCalculator
     ) {
     }
 

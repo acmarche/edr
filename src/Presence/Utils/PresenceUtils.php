@@ -15,11 +15,11 @@ use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-final class PresenceUtils
+final readonly class PresenceUtils
 {
     public function __construct(
-        private readonly ParameterBagInterface $parameterBag,
-        private readonly RelationRepository $relationRepository
+        private ParameterBagInterface $parameterBag,
+        private RelationRepository $relationRepository
     ) {
     }
 

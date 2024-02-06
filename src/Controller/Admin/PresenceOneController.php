@@ -7,14 +7,14 @@ use AcMarche\Edr\Accueil\Form\SearchAccueilForQuarter;
 use AcMarche\Edr\Accueil\Repository\AccueilRepository;
 use AcMarche\Edr\Utils\DateUtils;
 use Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/presence/one')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class PresenceOneController extends AbstractController
 {
     public function __construct(
@@ -98,7 +98,7 @@ final class PresenceOneController extends AbstractController
         return $this->render(
             '@AcMarcheEdrAdmin/presence/index_by_quarter.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
                 'data' => $data,
                 'search' => $form->isSubmitted(),
                 'ages' => $ages,

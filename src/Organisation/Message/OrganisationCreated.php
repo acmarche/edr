@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Organisation\Message;
 
-final class OrganisationCreated
+final readonly class OrganisationCreated
 {
     public function __construct(
-        private readonly int $organisationId
+        private int $organisationId
     ) {
     }
 

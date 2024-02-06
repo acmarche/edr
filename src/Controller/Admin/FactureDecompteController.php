@@ -6,14 +6,14 @@ use AcMarche\Edr\Entity\Facture\Facture;
 use AcMarche\Edr\Entity\Facture\FactureDecompte;
 use AcMarche\Edr\Facture\Form\FactureDecompteType;
 use AcMarche\Edr\Facture\Repository\FactureDecompteRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/facture_decompte')]
 final class FactureDecompteController extends AbstractController
 {
@@ -44,7 +44,7 @@ final class FactureDecompteController extends AbstractController
             [
                 'facture' => $facture,
                 'tuteur' => $facture->getTuteur(),
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -82,7 +82,7 @@ final class FactureDecompteController extends AbstractController
             [
                 'facture' => $factureDecompte->getFacture(),
                 'factureDecompte' => $factureDecompte,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

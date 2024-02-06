@@ -6,10 +6,10 @@ use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Pdf\PdfDownloaderTrait;
 use AcMarche\Edr\Relation\Repository\RelationRepository;
 use AcMarche\Edr\Relation\Utils\RelationUtils;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/attestation')]
 final class AttestationController extends AbstractController
@@ -23,7 +23,7 @@ final class AttestationController extends AbstractController
     }
 
     #[Route(path: '/{year}/{uuid}', name: 'edr_parent_attestation')]
-    #[IsGranted(data: 'enfant_show', subject: 'enfant')]
+    #[IsGranted('enfant_show', subject: 'enfant')]
     public function default(int $year, Enfant $enfant): Response
     {
         if (($hasTuteur = $this->hasTuteur()) instanceof Response) {

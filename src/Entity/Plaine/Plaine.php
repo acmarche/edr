@@ -71,7 +71,7 @@ class Plaine implements SluggableInterface, Stringable
 
     public function __toString(): string
     {
-        return $this->nom;
+        return (string) $this->nom;
     }
 
     public function getSluggableFields(): array

@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Jour\Message;
 
-final class JourDeleted
+final readonly class JourDeleted
 {
     public function __construct(
-        private readonly int $jourId
+        private int $jourId
     ) {
     }
 

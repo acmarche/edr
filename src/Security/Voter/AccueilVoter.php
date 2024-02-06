@@ -38,7 +38,7 @@ final class AccueilVoter extends Voter
     private Enfant $enfant;
 
     public function __construct(
-        private readonly Security $security,
+        private readonly \Symfony\Bundle\SecurityBundle\Security $security,
         private readonly RelationRepository $relationRepository,
         private readonly TuteurUtils $tuteurUtils
     ) {

@@ -10,16 +10,16 @@ use AcMarche\Edr\Animateur\Message\AnimateurUpdated;
 use AcMarche\Edr\Animateur\Repository\AnimateurRepository;
 use AcMarche\Edr\Entity\Animateur;
 use AcMarche\Edr\Search\SearchHelper;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/animateur')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class AnimateurController extends AbstractController
 {
     public function __construct(
@@ -46,7 +46,7 @@ final class AnimateurController extends AbstractController
             '@AcMarcheEdrAdmin/animateur/index.html.twig',
             [
                 'animateurs' => $animateurs,
-                'form' => $form->createView(),
+                'form' => $form,
                 'search' => $form->isSubmitted()
             ]
         );
@@ -73,7 +73,7 @@ final class AnimateurController extends AbstractController
             '@AcMarcheEdrAdmin/animateur/new.html.twig',
             [
                 'animateur' => $animateur,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -108,7 +108,7 @@ final class AnimateurController extends AbstractController
             '@AcMarcheEdrAdmin/animateur/edit.html.twig',
             [
                 'animateur' => $animateur,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

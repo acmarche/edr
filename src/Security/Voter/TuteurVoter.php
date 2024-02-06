@@ -33,7 +33,7 @@ final class TuteurVoter extends Voter
     private ?Tuteur $tuteurToCheck = null;
 
     public function __construct(
-        private readonly Security $security,
+        private readonly \Symfony\Bundle\SecurityBundle\Security $security,
         private readonly TuteurUtils $tuteurUtils
     ) {
     }

@@ -12,13 +12,13 @@ use AcMarche\Edr\Sante\Repository\SanteReponseRepository;
 use AcMarche\Edr\Sante\Utils\SanteBinder;
 use Doctrine\Common\Collections\Collection;
 
-final class SanteHandler
+final readonly class SanteHandler
 {
     public function __construct(
-        private readonly SanteFicheRepository $santeFicheRepository,
-        private readonly SanteReponseRepository $santeReponseRepository,
-        private readonly SanteFactory $santeFactory,
-        private readonly SanteBinder $santeBinder
+        private SanteFicheRepository $santeFicheRepository,
+        private SanteReponseRepository $santeReponseRepository,
+        private SanteFactory $santeFactory,
+        private SanteBinder $santeBinder
     ) {
     }
 

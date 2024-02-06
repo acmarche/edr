@@ -6,13 +6,13 @@ use AcMarche\Edr\Enfant\Repository\EnfantRepository;
 use AcMarche\Edr\Entity\Jour;
 use AcMarche\Edr\Jour\Repository\JourRepository;
 use AcMarche\Edr\Presence\Repository\PresenceRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/presence')]
-#[IsGranted(data: 'ROLE_MERCREDI_ANIMATEUR')]
+#[IsGranted('ROLE_MERCREDI_ANIMATEUR')]
 final class PresenceController extends AbstractController
 {
     use GetAnimateurTrait;

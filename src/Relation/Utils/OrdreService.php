@@ -11,11 +11,11 @@ use AcMarche\Edr\Presence\Repository\PresenceRepository;
 use AcMarche\Edr\Relation\Repository\RelationRepository;
 use AcMarche\Edr\Utils\SortUtils;
 
-final class OrdreService
+final readonly class OrdreService
 {
     public function __construct(
-        private readonly RelationRepository $relationRepository,
-        private readonly PresenceRepository $presenceRepository
+        private RelationRepository $relationRepository,
+        private PresenceRepository $presenceRepository
     ) {
     }
 

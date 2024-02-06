@@ -9,13 +9,13 @@ use AcMarche\Edr\Relation\Form\TuteurEnfantQuickType;
 use AcMarche\Edr\Relation\Repository\RelationRepository;
 use AcMarche\Edr\Tuteur\Repository\TuteurRepository;
 use AcMarche\Edr\User\Handler\AssociationTuteurHandler;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/parent_enfant')]
 final class QuickController extends AbstractController
 {
@@ -68,7 +68,7 @@ final class QuickController extends AbstractController
         return $this->render(
             '@AcMarcheEdrAdmin/quick/new.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

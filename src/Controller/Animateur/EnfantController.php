@@ -9,11 +9,11 @@ use AcMarche\Edr\Presence\Repository\PresenceRepository;
 use AcMarche\Edr\Relation\Repository\RelationRepository;
 use AcMarche\Edr\Sante\Handler\SanteHandler;
 use AcMarche\Edr\Sante\Utils\SanteChecker;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/enfant')]
 final class EnfantController extends AbstractController
@@ -30,7 +30,7 @@ final class EnfantController extends AbstractController
     }
 
     #[Route(path: '/', name: 'edr_animateur_enfant_index', methods: ['GET', 'POST'])]
-    #[IsGranted(data: 'ROLE_MERCREDI_ANIMATEUR')]
+    #[IsGranted('ROLE_MERCREDI_ANIMATEUR')]
     public function index(Request $request): Response
     {
         if (($hasAnimateur = $this->hasAnimateur()) instanceof Response) {
@@ -57,13 +57,13 @@ final class EnfantController extends AbstractController
             '@AcMarcheEdrAnimateur/enfant/index.html.twig',
             [
                 'enfants' => $enfants,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
 
     #[Route(path: '/{uuid}', name: 'edr_animateur_enfant_show', methods: ['GET'])]
-    #[IsGranted(data: 'enfant_show', subject: 'enfant')]
+    #[IsGranted('enfant_show', subject: 'enfant')]
     public function show(Enfant $enfant): Response
     {
         $santeFiche = $this->santeHandler->init($enfant);

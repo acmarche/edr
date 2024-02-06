@@ -11,10 +11,10 @@ use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 /**
  * bin/console debug:event-dispatcher.
  */
-final class UserLoginSubscriber implements EventSubscriberInterface
+final readonly class UserLoginSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager
     ) {
     }
 

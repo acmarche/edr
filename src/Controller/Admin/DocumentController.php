@@ -10,16 +10,16 @@ use AcMarche\Edr\Document\Repository\DocumentRepository;
 use AcMarche\Edr\Entity\Document;
 use AcMarche\Edr\Entity\Page;
 use AcMarche\Edr\Page\Repository\PageRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/document')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class DocumentController extends AbstractController
 {
     public function __construct(
@@ -64,7 +64,7 @@ final class DocumentController extends AbstractController
         return $this->render(
             '@AcMarcheEdrAdmin/document/new.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -99,7 +99,7 @@ final class DocumentController extends AbstractController
             '@AcMarcheEdrAdmin/document/edit.html.twig',
             [
                 'document' => $document,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

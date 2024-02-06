@@ -25,17 +25,18 @@ use AcMarche\Edr\Relation\Utils\OrdreService;
 use AcMarche\Edr\Search\SearchHelper;
 use AcMarche\Edr\Utils\DateUtils;
 use Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/presence')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class PresenceController extends AbstractController
 {
     public function __construct(
@@ -73,7 +74,7 @@ final class PresenceController extends AbstractController
             '@AcMarcheEdrAdmin/presence/index.html.twig',
             [
                 'datas' => $data,
-                'form' => $form->createView(),
+                'form' => $form,
                 'search' => $form->isSubmitted(),
                 'jour' => $jour,
                 'display_remarques' => $displayRemarque,
@@ -110,8 +111,8 @@ final class PresenceController extends AbstractController
         return $this->render(
             '@AcMarcheEdrAdmin/presence/index_by_month.html.twig',
             [
-                'form' => $form->createView(),
-                'search_form' => $form->createView(),
+                'form' => $form,
+                'search_form' => $form,
                 'search' => $form->isSubmitted(),
                 'month' => $mois,
                 'listingPresences' => $listingPresences,
@@ -120,10 +121,14 @@ final class PresenceController extends AbstractController
     }
 
     #[Route(path: '/new/{tuteur}/{enfant}', name: 'edr_admin_presence_new', methods: ['GET', 'POST'])]
-    #[Entity(data: 'tuteur', expr: 'repository.find(tuteur)')]
-    #[Entity(data: 'enfant', expr: 'repository.find(enfant)')]
-    public function new(Request $request, Tuteur $tuteur, Enfant $enfant): Response
-    {
+    //#[Entity(data: 'tuteur', expr: 'repository.find(tuteur)')]
+    // #[Entity(data: 'enfant', expr: 'repository.find(enfant)')]
+    public function new(
+        Request $request,
+        #[MapEntity(class: Tuteur::class, expr: 'repository.find(tuteur)')]
+        Tuteur $tuteur,
+        #[MapEntity(class: Enfant::class, expr: 'repository.find(enfant)')] $enfant
+    ): Response {
         $presenceSelectDays = new PresenceSelectDays($enfant);
         $form = $this->createForm(PresenceNewType::class, $presenceSelectDays);
         $form->handleRequest($request);
@@ -144,7 +149,7 @@ final class PresenceController extends AbstractController
             [
                 'enfant' => $enfant,
                 'tuteur' => $tuteur,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -195,7 +200,7 @@ final class PresenceController extends AbstractController
             '@AcMarcheEdrAdmin/presence/edit.html.twig',
             [
                 'presence' => $presence,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -204,7 +209,7 @@ final class PresenceController extends AbstractController
     public function delete(Request $request, Presence $presence): RedirectResponse
     {
         $enfant = $presence->getEnfant();
-        if ($this->isCsrfTokenValid('delete' . $presence->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$presence->getId(), $request->request->get('_token'))) {
             if ($this->factureHandler->isBilled($presence->getId(), FactureInterface::OBJECT_PRESENCE)) {
                 $this->addFlash('danger', 'Une présence déjà facturée ne peut être supprimée');
 

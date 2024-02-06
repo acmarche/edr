@@ -16,13 +16,13 @@ use AcMarche\Edr\Security\Role\EdrSecurityRole;
 use AcMarche\Edr\Tuteur\Repository\TuteurRepository;
 use AcMarche\Edr\User\Repository\UserRepository;
 use DateTime;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/checkup')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class CheckupController extends AbstractController
 {
     private $tutru = null;

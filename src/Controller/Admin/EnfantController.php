@@ -16,16 +16,16 @@ use AcMarche\Edr\Presence\Repository\PresenceRepository;
 use AcMarche\Edr\Presence\Utils\PresenceUtils;
 use AcMarche\Edr\Relation\Repository\RelationRepository;
 use AcMarche\Edr\Search\SearchHelper;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/enfant')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class EnfantController extends AbstractController
 {
     public function __construct(
@@ -88,7 +88,7 @@ final class EnfantController extends AbstractController
             '@AcMarcheEdrAdmin/enfant/new.html.twig',
             [
                 'enfant' => $enfant,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -135,7 +135,7 @@ final class EnfantController extends AbstractController
             '@AcMarcheEdrAdmin/enfant/edit.html.twig',
             [
                 'enfant' => $enfant,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

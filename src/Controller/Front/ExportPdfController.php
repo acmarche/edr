@@ -8,10 +8,10 @@ use AcMarche\Edr\Entity\Facture\Facture;
 use AcMarche\Edr\Facture\Factory\FacturePdfFactoryTrait;
 use AcMarche\Edr\Sante\Factory\SantePdfFactoryTrait;
 use AcMarche\Edr\Sante\Handler\SanteHandler;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route(path: '/export/pdf')]
 final class ExportPdfController extends AbstractController
@@ -24,7 +24,7 @@ final class ExportPdfController extends AbstractController
     }
 
     #[Route(path: '/santefiche/{uuid}', name: 'edr_commun_export_sante_fiche_pdf')]
-    #[IsGranted(data: 'enfant_show', subject: 'enfant')]
+    #[IsGranted('enfant_show', subject: 'enfant')]
     public function sante(Enfant $enfant): Response
     {
         $santeFiche = $this->santeHandler->init($enfant);

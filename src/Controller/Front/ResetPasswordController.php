@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
@@ -46,7 +46,7 @@ class ResetPasswordController extends AbstractController
         return $this->render(
             '@AcMarcheEdr/front/reset_password/request.html.twig',
             [
-                'requestForm' => $form->createView(),
+                'requestForm' => $form,
             ]
         );
     }
@@ -129,7 +129,7 @@ class ResetPasswordController extends AbstractController
         return $this->render(
             '@AcMarcheEdr/front/reset_password/reset.html.twig',
             [
-                'resetForm' => $form->createView(),
+                'resetForm' => $form,
             ]
         );
     }

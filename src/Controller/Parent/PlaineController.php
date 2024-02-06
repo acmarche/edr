@@ -18,11 +18,11 @@ use AcMarche\Edr\Relation\Utils\RelationUtils;
 use AcMarche\Edr\Sante\Handler\SanteHandler;
 use AcMarche\Edr\Sante\Utils\SanteChecker;
 use Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/plaine')]
 final class PlaineController extends AbstractController
@@ -45,7 +45,7 @@ final class PlaineController extends AbstractController
     }
 
     #[Route(path: '/open', name: 'edr_parent_plaine_open')]
-    #[IsGranted(data: 'ROLE_MERCREDI_PARENT')]
+    #[IsGranted('ROLE_MERCREDI_PARENT')]
     public function open(): Response
     {
         $plaine = $this->plaineRepository->findPlaineOpen();
@@ -59,7 +59,7 @@ final class PlaineController extends AbstractController
     }
 
     #[Route(path: '/{id}/show', name: 'edr_parent_plaine_show')]
-    #[IsGranted(data: 'ROLE_MERCREDI_PARENT')]
+    #[IsGranted('ROLE_MERCREDI_PARENT')]
     public function show(Plaine $plaine): Response
     {
         if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
@@ -132,7 +132,7 @@ final class PlaineController extends AbstractController
             '@AcMarcheEdrParent/plaine/select_enfant.html.twig',
             [
                 'enfants' => $enfants,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -175,7 +175,7 @@ final class PlaineController extends AbstractController
                 'plaine' => $plaine,
                 'enfantsInscrits' => $enfantsInscrits,
                 'enfants' => $enfants,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

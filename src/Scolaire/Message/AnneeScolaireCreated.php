@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Scolaire\Message;
 
-final class AnneeScolaireCreated
+final readonly class AnneeScolaireCreated
 {
     public function __construct(
-        private readonly int $anneeScolaireId
+        private int $anneeScolaireId
     ) {
     }
 

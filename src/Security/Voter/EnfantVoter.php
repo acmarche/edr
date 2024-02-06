@@ -39,7 +39,7 @@ final class EnfantVoter extends Voter
         private readonly RelationRepository $relationRepository,
         private readonly TuteurUtils $tuteurUtils,
         private readonly EnfantRepository $enfantRepository,
-        private readonly Security $security
+        private readonly \Symfony\Bundle\SecurityBundle\Security $security
     ) {
     }
 

@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Document\Message;
 
-final class DocumentCreated
+final readonly class DocumentCreated
 {
     public function __construct(
-        private readonly int $documentId
+        private int $documentId
     ) {
     }
 

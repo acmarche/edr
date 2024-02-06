@@ -7,12 +7,12 @@ use AcMarche\Edr\Contrat\Facture\FactureRenderInterface;
 use AcMarche\Edr\Entity\Facture\Facture;
 use AcMarche\Edr\Facture\Repository\FacturePresenceRepository;
 use AcMarche\Edr\Facture\Repository\FactureRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-#[IsGranted(data: 'ROLE_MERCREDI_PARENT')]
+#[IsGranted('ROLE_MERCREDI_PARENT')]
 #[Route(path: '/facture')]
 final class FactureController extends AbstractController
 {

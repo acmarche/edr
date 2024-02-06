@@ -6,15 +6,15 @@ use AcMarche\Edr\Animateur\Form\AnimateurType;
 use AcMarche\Edr\Animateur\Message\AnimateurUpdated;
 use AcMarche\Edr\Animateur\Repository\AnimateurRepository;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/animateur')]
-#[IsGranted(data: 'ROLE_MERCREDI_ANIMATEUR')]
+#[IsGranted('ROLE_MERCREDI_ANIMATEUR')]
 final class AnimateurController extends AbstractController
 {
     use GetAnimateurTrait;
@@ -65,7 +65,7 @@ final class AnimateurController extends AbstractController
             '@AcMarcheEdrAnimateur/animateur/edit.html.twig',
             [
                 'animateur' => $this->animateur,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

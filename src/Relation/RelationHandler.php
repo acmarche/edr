@@ -9,11 +9,11 @@ use AcMarche\Edr\Entity\Tuteur;
 use AcMarche\Edr\Relation\Repository\RelationRepository;
 use Exception;
 
-final class RelationHandler
+final readonly class RelationHandler
 {
     public function __construct(
-        private readonly RelationRepository $relationRepository,
-        private readonly EnfantRepository $enfantRepository
+        private RelationRepository $relationRepository,
+        private EnfantRepository $enfantRepository
     ) {
     }
 

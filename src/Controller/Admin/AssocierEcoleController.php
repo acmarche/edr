@@ -7,18 +7,18 @@ use AcMarche\Edr\Entity\Security\User;
 use AcMarche\Edr\User\Dto\AssociateUserEcoleDto;
 use AcMarche\Edr\User\Form\AssociateEcoleType;
 use AcMarche\Edr\User\Handler\AssociationEcoleHandler;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * User controller.
  */
 #[Route(path: '/security/associer/ecole')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class AssocierEcoleController extends AbstractController
 {
     public function __construct(
@@ -53,7 +53,7 @@ final class AssocierEcoleController extends AbstractController
             '@AcMarcheEdrAdmin/user/associer_ecole.html.twig',
             [
                 'user' => $user,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Presence\Message;
 
-final class PresenceDeleted
+final readonly class PresenceDeleted
 {
     public function __construct(
-        private readonly int $presenceId
+        private int $presenceId
     ) {
     }
 

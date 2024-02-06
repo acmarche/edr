@@ -32,6 +32,6 @@ class Document implements TimestampableInterface, UuidableInterface, Stringable
 
     public function __toString(): string
     {
-        return $this->nom;
+        return (string) $this->nom;
     }
 }

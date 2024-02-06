@@ -8,10 +8,10 @@ use Carbon\Carbon;
 use DateTimeInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-final class AccueilCalculator implements AccueilCalculatorInterface
+final readonly class AccueilCalculator implements AccueilCalculatorInterface
 {
     public function __construct(
-        private readonly ParameterBagInterface $parameterBag
+        private ParameterBagInterface $parameterBag
     ) {
     }
 

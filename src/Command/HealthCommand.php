@@ -6,14 +6,16 @@ use AcMarche\Edr\Enfant\Repository\EnfantRepository;
 use AcMarche\Edr\Mailer\Factory\AdminEmailFactory;
 use AcMarche\Edr\Mailer\NotificationMailer;
 use AcMarche\Edr\Tuteur\Repository\TuteurRepository;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'edr:health', description: 'Vérifie l\'intégrité des données'
+)]
 class HealthCommand extends Command
 {
-    protected static $defaultName = 'edr:health';
-
     public function __construct(
         private readonly EnfantRepository $enfantRepository,
         private readonly TuteurRepository $tuteurRepository,
@@ -26,8 +28,7 @@ class HealthCommand extends Command
 
     protected function configure(): void
     {
-        $this
-            ->setDescription('Vérifie l\'intégrité des données');
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

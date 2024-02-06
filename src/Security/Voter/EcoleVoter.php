@@ -40,7 +40,7 @@ final class EcoleVoter extends Voter
     private iterable $ecoles;
 
     public function __construct(
-        private readonly Security $security
+        private readonly \Symfony\Bundle\SecurityBundle\Security $security
     ) {
     }
 

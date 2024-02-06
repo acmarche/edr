@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Page\Message;
 
-final class PageUpdated
+final readonly class PageUpdated
 {
     public function __construct(
-        private readonly int $pageId
+        private int $pageId
     ) {
     }
 

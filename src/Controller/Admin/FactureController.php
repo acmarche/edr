@@ -20,15 +20,15 @@ use AcMarche\Edr\Facture\Message\FactureUpdated;
 use AcMarche\Edr\Facture\Repository\FacturePresenceNonPayeRepository;
 use AcMarche\Edr\Facture\Repository\FactureRepository;
 use Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/facture')]
 final class FactureController extends AbstractController
 {
@@ -61,7 +61,7 @@ final class FactureController extends AbstractController
             [
                 'factures' => $factures,
                 'tuteur' => $tuteur,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -106,8 +106,8 @@ final class FactureController extends AbstractController
             '@AcMarcheEdrAdmin/facture/search.html.twig',
             [
                 'factures' => $factures,
-                'form' => $form->createView(),
-                'formMonth' => $formMonth->createView(),
+                'form' => $form,
+                'formMonth' => $formMonth,
                 'search' => $form->isSubmitted(),
                 'total' => $total,
             ]
@@ -140,7 +140,7 @@ final class FactureController extends AbstractController
                 'tuteur' => $tuteur,
                 'presences' => $presences,
                 'accueils' => $accueils,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -205,7 +205,7 @@ final class FactureController extends AbstractController
         return $this->render(
             '@AcMarcheEdrAdmin/facture/generate.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -245,7 +245,7 @@ final class FactureController extends AbstractController
             '@AcMarcheEdrAdmin/facture/edit.html.twig',
             [
                 'facture' => $facture,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -269,7 +269,7 @@ final class FactureController extends AbstractController
             '@AcMarcheEdrAdmin/facture/payer.html.twig',
             [
                 'facture' => $facture,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

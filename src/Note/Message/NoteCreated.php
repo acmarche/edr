@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Note\Message;
 
-final class NoteCreated
+final readonly class NoteCreated
 {
     public function __construct(
-        private readonly int $noteId
+        private int $noteId
     ) {
     }
 

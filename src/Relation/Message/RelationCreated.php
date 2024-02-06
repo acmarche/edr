@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Relation\Message;
 
-final class RelationCreated
+final readonly class RelationCreated
 {
     public function __construct(
-        private readonly int $relationId
+        private int $relationId
     ) {
     }
 

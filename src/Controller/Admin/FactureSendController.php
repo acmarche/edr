@@ -17,14 +17,14 @@ use AcMarche\Edr\Mailer\NotificationMailer;
 use AcMarche\Edr\Tuteur\Utils\TuteurUtils;
 use DateTime;
 use Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 #[Route(path: '/facture/send')]
 final class FactureSendController extends AbstractController
 {
@@ -63,7 +63,7 @@ final class FactureSendController extends AbstractController
         return $this->render(
             '@AcMarcheEdrAdmin/facture/select_month.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -98,7 +98,7 @@ final class FactureSendController extends AbstractController
             [
                 'facture' => $facture,
                 'tuteur' => $tuteur,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -140,7 +140,7 @@ final class FactureSendController extends AbstractController
         return $this->render(
             '@AcMarcheEdrAdmin/facture/send_all.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
                 'factures' => $factures,
                 'month' => $month,
             ]

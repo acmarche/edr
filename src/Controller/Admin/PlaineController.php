@@ -15,16 +15,16 @@ use AcMarche\Edr\Plaine\Repository\PlainePresenceRepository;
 use AcMarche\Edr\Plaine\Repository\PlaineRepository;
 use AcMarche\Edr\Scolaire\Grouping\GroupingInterface;
 use AcMarche\Edr\Scolaire\Repository\GroupeScolaireRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/plaine')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class PlaineController extends AbstractController
 {
     public function __construct(
@@ -59,7 +59,7 @@ final class PlaineController extends AbstractController
             '@AcMarcheEdrAdmin/plaine/index.html.twig',
             [
                 'plaines' => $plaines,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -89,7 +89,7 @@ final class PlaineController extends AbstractController
         return $this->render(
             '@AcMarcheEdrAdmin/plaine/new.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -137,7 +137,7 @@ final class PlaineController extends AbstractController
             '@AcMarcheEdrAdmin/plaine/edit.html.twig',
             [
                 'plaine' => $plaine,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -168,7 +168,7 @@ final class PlaineController extends AbstractController
             '@AcMarcheEdrAdmin/plaine/open.html.twig',
             [
                 'plaine' => $plaine,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

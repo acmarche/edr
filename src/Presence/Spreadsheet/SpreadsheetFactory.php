@@ -13,7 +13,7 @@ use DateTimeImmutable;
 use IntlDateFormatter;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
-final class SpreadsheetFactory
+final readonly class SpreadsheetFactory
 {
     use SpreadsheetDownloaderTrait;
     /**
@@ -32,7 +32,7 @@ final class SpreadsheetFactory
     private const COLONNE = 1;
 
     public function __construct(
-        private readonly ScolaireUtils $scolaireUtils
+        private ScolaireUtils $scolaireUtils
     ) {
     }
 

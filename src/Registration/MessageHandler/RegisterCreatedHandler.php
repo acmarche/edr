@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Registration\MessageHandler;
 
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use AcMarche\Edr\Mailer\Factory\RegistrationMailerFactory;
 use AcMarche\Edr\Mailer\NotificationMailer;
 use AcMarche\Edr\Parameter\Option;
@@ -11,15 +12,15 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+
 use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
-final class RegisterCreatedHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class RegisterCreatedHandler
 {
     private readonly FlashBagInterface $flashBag;
-
     public function __construct(
         private readonly UserRepository $userRepository,
         RequestStack $requestStack,
@@ -30,7 +31,6 @@ final class RegisterCreatedHandler implements MessageHandlerInterface
     ) {
         $this->flashBag = $requestStack->getSession()->getFlashBag();
     }
-
     public function __invoke(RegisterCreated $registerCreated): void
     {
         $userId = $registerCreated->getUserId();
@@ -60,12 +60,10 @@ final class RegisterCreatedHandler implements MessageHandlerInterface
 
         $this->flashBag->add('success', 'Votre compte a bien été créé, consultez votre boite mail');
     }
-
     public function isOpen(): bool
     {
         return (bool) $this->parameterBag->get(Option::REGISTER);
     }
-
     /**
      * @throws VerifyEmailExceptionInterface
      */

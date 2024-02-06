@@ -1,7 +1,0 @@
-AcMarche\Edr\Entity\Scolaire\Ecole:
-  ecole_{Aye, Waha, Champlon, Hollogne}:
-    nom: '<current()>'
-    email: '<email()>'
-    telephone: '<numberBetween(7,9)>'
-    rue: 'Rue x, <numberBetween(1,50)>'
-    localite: '<current()>'

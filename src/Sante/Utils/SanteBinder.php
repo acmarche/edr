@@ -8,11 +8,11 @@ use AcMarche\Edr\Entity\Sante\SanteReponse;
 use AcMarche\Edr\Sante\Repository\SanteQuestionRepository;
 use AcMarche\Edr\Sante\Repository\SanteReponseRepository;
 
-final class SanteBinder
+final readonly class SanteBinder
 {
     public function __construct(
-        private readonly SanteQuestionRepository $santeQuestionRepository,
-        private readonly SanteReponseRepository $santeReponseRepository
+        private SanteQuestionRepository $santeQuestionRepository,
+        private SanteReponseRepository $santeReponseRepository
     ) {
     }
 

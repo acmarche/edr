@@ -10,12 +10,12 @@ use AcMarche\Edr\Sante\Handler\SanteHandler;
 use AcMarche\Edr\Sante\Repository\SanteQuestionRepository;
 use AcMarche\Edr\Sante\Repository\SanteReponseRepository;
 
-final class SanteChecker
+final readonly class SanteChecker
 {
     public function __construct(
-        private readonly SanteQuestionRepository $santeQuestionRepository,
-        private readonly SanteReponseRepository $santeReponseRepository,
-        private readonly SanteHandler $santeHandler
+        private SanteQuestionRepository $santeQuestionRepository,
+        private SanteReponseRepository $santeReponseRepository,
+        private SanteHandler $santeHandler
     ) {
     }
 

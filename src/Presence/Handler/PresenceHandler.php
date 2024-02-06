@@ -14,13 +14,13 @@ use AcMarche\Edr\Presence\Utils\PresenceUtils;
 use AcMarche\Edr\Scolaire\Grouping\GroupingInterface;
 use Doctrine\ORM\NonUniqueResultException;
 
-final class PresenceHandler implements PresenceHandlerInterface
+final readonly class PresenceHandler implements PresenceHandlerInterface
 {
     public function __construct(
-        private readonly PresenceRepository $presenceRepository,
-        private readonly PresenceUtils $presenceUtils,
-        private readonly PresenceConstraints $presenceConstraints,
-        private readonly GroupingInterface $grouping
+        private PresenceRepository $presenceRepository,
+        private PresenceUtils $presenceUtils,
+        private PresenceConstraints $presenceConstraints,
+        private GroupingInterface $grouping
     ) {
     }
 

@@ -2,10 +2,10 @@
 
 namespace AcMarche\Edr\Plaine\Message;
 
-final class PlaineDeleted
+final readonly class PlaineDeleted
 {
     public function __construct(
-        private readonly int $plaineId
+        private int $plaineId
     ) {
     }
 

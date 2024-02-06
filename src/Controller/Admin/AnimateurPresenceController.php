@@ -5,14 +5,14 @@ namespace AcMarche\Edr\Controller\Admin;
 use AcMarche\Edr\Animateur\Form\AnimateurJourType;
 use AcMarche\Edr\Animateur\Repository\AnimateurRepository;
 use AcMarche\Edr\Entity\Animateur;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/animateur/presences')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class AnimateurPresenceController extends AbstractController
 {
     public function __construct(
@@ -37,7 +37,7 @@ final class AnimateurPresenceController extends AbstractController
             '@AcMarcheEdrAdmin/animateur/presences_edit.html.twig',
             [
                 'animateur' => $animateur,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

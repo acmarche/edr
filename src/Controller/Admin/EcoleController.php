@@ -9,16 +9,16 @@ use AcMarche\Edr\Ecole\Message\EcoleUpdated;
 use AcMarche\Edr\Ecole\Repository\EcoleRepository;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
 use AcMarche\Edr\Entity\Scolaire\Ecole;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/ecole')]
-#[IsGranted(data: 'ROLE_MERCREDI_ADMIN')]
+#[IsGranted('ROLE_MERCREDI_ADMIN')]
 final class EcoleController extends AbstractController
 {
     public function __construct(
@@ -60,7 +60,7 @@ final class EcoleController extends AbstractController
             '@AcMarcheEdrAdmin/ecole/new.html.twig',
             [
                 'ecole' => $ecole,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }
@@ -98,7 +98,7 @@ final class EcoleController extends AbstractController
             '@AcMarcheEdrAdmin/ecole/edit.html.twig',
             [
                 'ecole' => $ecole,
-                'form' => $form->createView(),
+                'form' => $form,
             ]
         );
     }

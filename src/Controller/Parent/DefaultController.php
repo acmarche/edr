@@ -7,10 +7,10 @@ use AcMarche\Edr\Organisation\Traits\OrganisationPropertyInitTrait;
 use AcMarche\Edr\Relation\Utils\RelationUtils;
 use AcMarche\Edr\Sante\Utils\SanteChecker;
 use AcMarche\Edr\Tuteur\Utils\TuteurUtils;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class DefaultController extends AbstractController
 {
@@ -25,7 +25,7 @@ final class DefaultController extends AbstractController
     }
 
     #[Route(path: '/', name: 'edr_parent_home')]
-    #[IsGranted(data: 'ROLE_MERCREDI_PARENT')]
+    #[IsGranted('ROLE_MERCREDI_PARENT')]
     public function default(): Response
     {
         if (($hasTuteur = $this->hasTuteur()) instanceof Response) {
