@@ -16,15 +16,22 @@
 
     <div class="" id="success"></div>
 
-    <ul class="list-group" {{ stimulus_controller('sortable', {'updateUrl': path('edr_admin_ajax_question_sort')})}}
+    <ul class="list-group" {{ stimulus_controller('sortable', {'updateUrl': path('edr_admin_ajax_question_sort')}) }}
+        data-controller="sortable"
         data-sortable-animation-value="150">
         {% for question in questions %}
             <li
-                    id="{{ question.id }}"
-                    data-questionid="{{ question.id }}"
+                    data-id="{{ question.id }}"
                     class="list-group-item"
-                    style="cursor: move;">
-                <i class="ti ti-sort me-2"></i>{{ question }}
+                    style="cursor: pointer;">
+                <i class="ti ti-menu-2"></i>
+                <a href="{{ path('edr_admin_sante_question_show', {'id': question.id}) }}">
+                {{ question.nom }}
+                </a>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                no records found
             </li>
         {% endfor %}
     </ul>
