@@ -2,7 +2,7 @@
 
         <button disabled="disabled" type="button" role="button" title="Aucun tuteur"
                 class="btn btn-primary"><i
-                    class="fas fa-plus"></i> Ajouter un accueil, Aucun tuteur !
+                    class="ti ti-plus"></i> Ajouter un accueil, Aucun tuteur !
         </button>
 
 {% elseif relations | length == 1 %}
@@ -10,7 +10,7 @@
 
         <a href="{{ path('edr_ecole_accueil_new', { 'enfant': enfant.id, 'tuteur': tuteur.id }) }}" role="button"
            class="btn btn-primary"><i
-                    class="fas fa-plus"></i> Ajouter un accueil</a>
+                    class="ti ti-plus"></i> Ajouter un accueil</a>
 
 {% else %}
 
@@ -20,7 +20,7 @@
            role="button" id="dropdownMenuLink"
            data-bs-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-plus"></i> Ajouter un accueil
+            <i class="ti ti-plus"></i> Ajouter un accueil
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             {% for relation in relations %}

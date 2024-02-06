@@ -6,11 +6,11 @@
             {% if jour %} {{ jour.dateJour | format_date('full') }}
                 <a href="{{ path('edr_message_new_jour', {'id': jour.id}) }}"
                    title="Envoyer un message aux parents" id="new_message_from_jour">
-                    <i class="far fa-envelope"></i></a>
+                    <i class="ti ti-envelope"></i></a>
 
                 <a href="{{ path('edr_admin_export_presence_xls') }}"
                    title="Exporter en xls" id="export_xls_presence">
-                    <i class="fas fa-file-excel"></i> </a>
+                    <i class="ti ti-file-excel"></i> </a>
             {% endif %}
         </h3>
         <div class="card-body">
@@ -32,7 +32,7 @@
                                 href="{{ path('edr_message_new_groupescolaire', {'id': groupe.id}) }}"
                                 title="Envoyer un message aux parents" class="d-print-none"
                                 id="new_message_from_groupe_{{ groupe.nom }}">
-                            <i class="far fa-envelope"></i></a>
+                            <i class="ti ti-envelope"></i></a>
                     </h3>
 
                     {% include '@AcMarcheEdrAdmin/presence/_line_by_groupe.html.twig' %}

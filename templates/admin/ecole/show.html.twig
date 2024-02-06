@@ -9,7 +9,7 @@
         <div class="card-body">
 
             {% include '@AcMarcheEdrAdmin/ecole/_actions.html.twig' %}
-            <i class="fas fa-map-marked-alt"></i>
+            <i class="ti ti-map-marked-alt"></i>
             {{ ecole.rue }} <br/>
             {{ ecole.codepostal }} {{ ecole.localite }}
             <br/>
@@ -22,19 +22,19 @@
             <table class='table table-bordered table-hover table-condensed'>
                 <tbody>
                 <tr>
-                    <th><span class="fas fa-phone"></span> Téléphone</th>
+                    <th><span class="ti ti-phone"></span> Téléphone</th>
                     <td>{{ ecole.telephone }}</td>
                 </tr>
                 <tr>
-                    <th><span class="fas fa-mobile-alt"></span> Gsm</th>
+                    <th><span class="ti ti-mobile-alt"></span> Gsm</th>
                     <td>{{ ecole.gsm }}</td>
                 </tr>
                 <tr>
-                    <th><span class="far fa-envelope"></span> Email</th>
+                    <th><span class="ti ti-envelope"></span> Email</th>
                     <td><a href='mailto:{{ ecole.email }}'>{{ ecole.email }}</a></td>
                 </tr>
                 <tr>
-                    <th><span class="far fa-envelope"></span> Abréviation</th>
+                    <th><span class="ti ti-envelope"></span> Abréviation</th>
                     <td>{{ ecole.abreviation }}</td>
                 </tr>
             </table>

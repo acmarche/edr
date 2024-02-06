@@ -1,7 +1,7 @@
 <h5 class="page-header">
     {{ tuteur }} {% include '@AcMarcheEdr/commun/_sexe.html.twig' with {'entity': tuteur } %}
 </h5>
-    <span class="fas fa-map-marker-alt"></span>
+    <span class="ti ti-map-marker-alt"></span>
     {{ tuteur.rue }} <br/>
     {{ tuteur.codepostal }} {{ tuteur.localite }}
 
@@ -10,19 +10,19 @@
         <table class='table table-bordered table-hover'>
             <tbody>
             <tr>
-                <th><span class="fas fa-phone"></span> Téléphone</th>
+                <th><span class="ti ti-phone"></span> Téléphone</th>
                 <td>{{ tuteur.telephone }}</td>
             </tr>
             <tr>
-                <th><span class="fas fa-phone"></span> Téléphone bureau</th>
+                <th><span class="ti ti-phone"></span> Téléphone bureau</th>
                 <td>{{ tuteur.telephonebureau }}</td>
             </tr>
             <tr>
-                <th><span class="fas fa-mobile-alt"></span> Gsm</th>
+                <th><span class="ti ti-mobile-alt"></span> Gsm</th>
                 <td>{{ tuteur.gsm }}</td>
             </tr>
             <tr>
-                <th><span class="far fa-envelope"></span> Email</th>
+                <th><span class="ti ti-envelope"></span> Email</th>
                 <td><a href='mailto:{{ tuteur.email }}'>{{ tuteur.email }}</a></td>
             </tr>
         </table>

@@ -3,12 +3,12 @@
     {% include '@AcMarcheEdr/ecole/enfant/_btn_add_accueil.html.twig' %}
 
     <a href="{{ path('edr_ecole_sante_fiche_show', { 'uuid': enfant.uuid }) }}" role="button"
-       class="btn btn-primary"><i class="fas fa-heartbeat"></i> Fiche santé</a>
+       class="btn btn-primary"><i class="ti ti-heartbeat"></i> Fiche santé</a>
 
     <a href="{{ path('edr_ecole_accueil_retard', { 'uuid': enfant.uuid }) }}" role="button"
-       class="btn btn-primary"><i class="fas fa-hourglass-half"></i> Retard</a>
+       class="btn btn-primary"><i class="ti ti-hourglass-half"></i> Retard</a>
 
     <a href="{{ path('edr_ecole_enfant_index') }}" class="btn btn-primary" role='button'><i
-                class="fas fa-list"></i>
+                class="ti ti-list"></i>
         Retour à la Liste</a>
 </div>

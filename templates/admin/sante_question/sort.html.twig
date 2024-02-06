@@ -5,13 +5,13 @@
     <h3>Tri des questions</h3>
 
     <a href="{{ path('edr_admin_sante_question_index') }}" class="btn btn-primary" role="button"><i
-                class="fas fa-list"></i>
+                class="ti ti-list"></i>
         Retour à la liste</a>
 
     <br/> <br/>
     <div class="alert alert-info">
         Pour changer l'ordre d'appariation des questions, glissez en maintenant la souris sur l'icône <i
-                class="fas fa-sort"></i>
+                class="ti ti-sort"></i>
     </div>
 
     <div class="" id="success"></div>
@@ -24,7 +24,7 @@
                     data-questionid="{{ question.id }}"
                     class="list-group-item"
                     style="cursor: move;">
-                <i class="fas fa-sort me-2"></i>{{ question }}
+                <i class="ti ti-sort me-2"></i>{{ question }}
             </li>
         {% endfor %}
     </ul>

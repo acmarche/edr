@@ -23,14 +23,14 @@
 
             </div>
             {{ form_row(form.texte) }}
-            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-paper-plane"></i>
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="ti ti-paper-plane"></i>
                 Envoyer la facture
             </button>
             {{ form_end(form) }}
         </div>
         <div class="card-footer">
             <a href="{{ path('edr_admin_facture_show',{'id':facture.id}) }}" class="mt-4">
-                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+                <i class="ti ti-long-arrow-alt-left"></i> Annuler
             </a>
         </div>
     </div>

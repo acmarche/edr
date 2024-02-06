@@ -10,7 +10,7 @@
             {% if plaine.inscriptionOpen and resteEnfants == true %}
                 <br/>
                 <a href="{{ path('edr_parent_plaine_select_enfant') }}" role="button" class="btn btn-primary mb-3"><i
-                            class="fas fa-user-plus"></i> Inscrire mes enfants</a>
+                            class="ti ti-user-plus"></i> Inscrire mes enfants</a>
 
             {% endif %}
 
@@ -42,7 +42,7 @@
                 {% if facture %}
                     <a href="{{ path('edr_parent_facture_show', {'uuid': facture.uuid}) }}"
                        class="btn btn-primary my-3">
-                        <i class="fas fa-arrow-up"></i> Consulter la facture
+                        <i class="ti ti-arrow-up"></i> Consulter la facture
                     </a>
                 {% else %}
                     <div class="alert alert-warning" role="alert">
@@ -52,7 +52,7 @@
                         <br/>
                         <a href="{{ path('edr_parent_plaine_presence_confirmation') }}"
                            class="btn btn-primary my-3">
-                            <i class="fas fa-arrow-right"></i> Procéder au paiement
+                            <i class="ti ti-arrow-right"></i> Procéder au paiement
                         </a>
                     </div>
                 {% endif %}

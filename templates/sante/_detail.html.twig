@@ -11,9 +11,9 @@
             <h2 class="text-warning">Fiche médicale individuelle</h2>
             <span class="pull-right">Maj le {{ sante_fiche.updatedAt | date('d-m-Y') }}</span>
             {% if is_complete == false %}
-                <i class="fas fa-ban"></i><span class="text-danger"><strong>Fiche non complète!</strong></span>
+                <i class="ti ti-ban"></i><span class="text-danger"><strong>Fiche non complète!</strong></span>
             {% else %}
-                <i class="far fa-smile"></i><span class="text-success"> Fiche complète</span>
+                <i class="ti ti-smile"></i><span class="text-success"> Fiche complète</span>
             {% endif %}
         </td>
     </tr>

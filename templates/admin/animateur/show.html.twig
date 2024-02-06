@@ -15,7 +15,7 @@
 
             {% include '@AcMarcheEdrAdmin/animateur/_actions.html.twig' %}
 
-            <i class="fas fa-map-marked-alt"></i>
+            <i class="ti ti-map-marked-alt"></i>
             {{ animateur.rue }} <br/>
             {{ animateur.codepostal }} {{ animateur.localite }}
 
@@ -24,19 +24,19 @@
             <table class='table table-bordered table-hover'>
                 <tbody>
                 <tr>
-                    <th><span class="fas fa-phone"></span> Téléphone</th>
+                    <th><span class="ti ti-phone"></span> Téléphone</th>
                     <td>{{ animateur.telephone }}</td>
                 </tr>
                 <tr>
-                    <th><span class="fas fa-phone"></span> Téléphone bureau</th>
+                    <th><span class="ti ti-phone"></span> Téléphone bureau</th>
                     <td>{{ animateur.telephonebureau }}</td>
                 </tr>
                 <tr>
-                    <th><span class="fas fa-mobile-alt"></span> Gsm</th>
+                    <th><span class="ti ti-mobile-alt"></span> Gsm</th>
                     <td>{{ animateur.gsm }}</td>
                 </tr>
                 <tr>
-                    <th><span class="far fa-envelope"></span> Email</th>
+                    <th><span class="ti ti-envelope"></span> Email</th>
                     <td><a href='mailto:{{ animateur.email }}'>{{ animateur.email }}</a></td>
                 </tr>
             </table>

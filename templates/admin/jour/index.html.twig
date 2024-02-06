@@ -6,7 +6,7 @@
         <div class="card-header">
             <h3>Liste des jours d'accueil
                 <a class="btn btn-primary float-end" role="button"
-                   href="{{ path('edr_admin_jour_new') }}"><i class="fas fa-plus"></i> Ajouter une date</a>
+                   href="{{ path('edr_admin_jour_new') }}"><i class="ti ti-plus"></i> Ajouter une date</a>
             </h3>
         </div>
         <div class="card-body">
@@ -35,12 +35,12 @@
                         </td>
                         <td>
                             {% if jour.pedagogique %}
-                                {{ jour.pedagogique ? '<i class="fas fa-check" title="Oui"></i>' }}
+                                {{ jour.pedagogique ? '<i class="ti ti-check" title="Oui"></i>' }}
                                 {{ jour.ecoles | join(', ') }}
                             {% endif %}
                         </td>
                         <td>
-                            {{ jour.archived ? '<i class="fas fa-check" title="Oui"></i>' }}
+                            {{ jour.archived ? '<i class="ti ti-check" title="Oui"></i>' }}
                         </td>
                     </tr>
                 {% endfor %}

@@ -5,7 +5,7 @@
             <a href="{{ path('edr_ecole_accueil_inscriptions',
                 { 'id': ecole.id, 'year': previous.year, 'month': previous.month, 'heure': heure }) }}"
                title="{{ previous.monthName|upper }} {{ previous.year }}">
-                <i class="fas fa-angle-double-left"></i>
+                <i class="ti ti-angle-double-left"></i>
             </a>
         </th>
         <th colspan="5" class="text-center text-success text-capitalize">{{ date.monthName|upper }} {{ date.year }}</th>
@@ -13,7 +13,7 @@
             <a href="{{ path('edr_ecole_accueil_inscriptions',
                 { 'id': ecole.id, 'year': next.year, 'month': next.month, 'heure': heure }) }}"
                title="{{ next.monthName|upper }} {{ next.year }}">
-                <i class="fas fa-angle-double-right"></i>
+                <i class="ti ti-angle-double-right"></i>
             </a>
         </th>
     </tr>

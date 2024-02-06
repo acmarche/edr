@@ -3,7 +3,7 @@
 {% if is_granted('ROLE_MERCREDI_ADMIN') %}
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-plus"></i> Ajouter...</a>
+            <i class="ti ti-plus"></i> Ajouter...</a>
         <ul class="dropdown-menu" aria-labelledby="dropdown01">
             <li><a class="dropdown-item" href="{{ path('edr_admin_parent_enfant_new') }}">Un parent et
                     enfant(s)</a></li>
@@ -53,7 +53,7 @@
 <!--
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-euro-sign"></i> Les factures</a>
+        <i class="ti ti-euro-sign"></i> Les factures</a>
     <ul class="dropdown-menu" aria-labelledby="dropdown03">
         <li><a class="dropdown-item" href="{{ path('edr_admin_facture_index') }}">Rechercher</a></li>
         <li><a class="dropdown-item" href="{{ path('edr_admin_facture_new_month_all') }}">Générer</a></li>
@@ -67,7 +67,7 @@
 {% if is_granted('ROLE_MERCREDI_ADMIN') %}
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-cog"></i> Paramètres...</a>
+            <i class="ti ti-cog"></i> Paramètres...</a>
         <ul class="dropdown-menu" aria-labelledby="dropdown03">
             <li><a class="dropdown-item" href="{{ path('edr_admin_user_index') }}">Les utilisateurs</a></li>
             <li><a class="dropdown-item" href="{{ path('edr_admin_page_index') }}">Les pages</a></li>

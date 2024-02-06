@@ -13,23 +13,23 @@
         </tr>
     {% endif %}
     <tr>
-        <th><span class="fas fa-phone"></span> Téléphone</th>
+        <th><span class="ti ti-phone"></span> Téléphone</th>
         <td>{{ tuteur.telephone }}</td>
     </tr>
     <tr>
-        <th><span class="fas fa-phone"></span> Téléphone bureau</th>
+        <th><span class="ti ti-phone"></span> Téléphone bureau</th>
         <td>{{ tuteur.telephonebureau }}</td>
     </tr>
     <tr>
-        <th><span class="fas fa-mobile-alt"></span> Gsm</th>
+        <th><span class="ti ti-mobile-alt"></span> Gsm</th>
         <td>{{ tuteur.gsm }}</td>
     </tr>
     <tr>
-        <th><span class="far fa-envelope"></span> Email</th>
+        <th><span class="ti ti-envelope"></span> Email</th>
         <td><a href='mailto:{{ tuteur.email }}'>{{ tuteur.email }}</a></td>
     </tr>
     <tr>
-        <th><span class="far fa-envelope"></span> Facture papier</th>
+        <th><span class="ti ti-envelope"></span> Facture papier</th>
         <td>{{ tuteur.facturePapier ? 'oui' : 'non' }}</td>
     </tr>
 </table>

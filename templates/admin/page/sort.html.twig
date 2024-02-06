@@ -5,13 +5,13 @@
     <h3>Ordre d'affichage des pages</h3>
 
     <a href="{{ path('edr_admin_page_index') }}" class="btn btn-primary" role="button"><i
-                class="fas fa-list"></i>
+                class="ti ti-list"></i>
         Retour à la liste</a>
 
     <br/> <br/>
     <div class="alert alert-info">
         Pour changer l'ordre d'appariation des pages, glissez en maintenant la souris sur l'icône <i
-                class="fas fa-sort"></i>
+                class="ti ti-sort"></i>
     </div>
 
     <div class="" id="success"></div>
@@ -23,7 +23,7 @@
             <li id="{{ page.id }}"
                 class="list-group-item"
                 data-sortable-update-url="{{ path('edr_admin_ajax_page_sort', {'id': page.id }) }}">
-                <i class="fas fa-sort me-2"></i>{{ page }}
+                <i class="ti ti-sort me-2"></i>{{ page }}
             </li>
         {% endfor %}
     </ul>

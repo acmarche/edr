@@ -13,7 +13,7 @@
 
             {{ form_row(form.nom, {label_attr: {class: 'sr-only'}, attr:{'class': 'my-1 mr-sm-2'} }) }}
 
-            <button class="btn btn-primary mr-1" type="submit"><i class="fas fa-search"></i> Rechercher</button>
+            <button class="btn btn-primary mr-1" type="submit"><i class="ti ti-search"></i> Rechercher</button>
 
             {{ form_rest(form) }}
             {{ form_end(form) }}
@@ -44,7 +44,7 @@
         </div>
         <div class="card-footer">
             <a href="{{ path('edr_admin_plaine_show',{'id':plaine.id}) }}" class="mt-4">
-                <i class="fas fa-long-arrow-alt-left"></i> Annuler
+                <i class="ti ti-long-arrow-alt-left"></i> Annuler
             </a>
         </div>
     </div>

@@ -1,17 +1,17 @@
 {% include '@AcMarcheEdr/commun/_sexe.html.twig' with {'entity':enfant} %}
-<span class="fas fa-birthday-cake"></span>
+<span class="ti ti-birthday-cake"></span>
 Né le {{ enfant.birthday ? enfant.birthday|format_datetime('full', 'none') }}
 (Âge : {{ enfant.age(null, true) }} ans)
 
 <br/>
-<i class="fas fa-university"></i> Scolarisé à <strong>{{ enfant.ecole }}</strong> en
+<i class="ti ti-university"></i> Scolarisé à <strong>{{ enfant.ecole }}</strong> en
 <strong>{{ enfant.anneescolaire }}</strong>
 {% if enfant.groupeScolaire %}
     <br/>
     Groupe scolaire forcé :<strong>{{ enfant.groupescolaire }}</strong>
 {% endif %}
 <br/>
-<i class="fas fa-camera-retro" title="oui"></i>
+<i class="ti ti-camera-retro" title="oui"></i>
 Autorisation de la diffusion des photos:
 {% if enfant.photoAutorisation %}
     Oui

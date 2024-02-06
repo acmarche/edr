@@ -2,7 +2,7 @@
 
     <div class="col-auto">
         <a href="{{ path('edr_admin_facture_edit', { 'id': facture.id }) }}" role="button"
-           class="btn btn-primary"><i class="far fa-edit"></i> Modifier</a>
+           class="btn btn-primary"><i class="ti ti-edit"></i> Modifier</a>
     </div>
 
     <div class="col-auto">
@@ -11,7 +11,7 @@
                 <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
                         data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    <i class="fas fa-euro-sign"></i> Payer...
+                    <i class="ti ti-euro-sign"></i> Payer...
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                     <li>
@@ -37,7 +37,7 @@
                 <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
                         data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    <i class="fas fa-plus"></i> Attacher...
+                    <i class="ti ti-plus"></i> Attacher...
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                     <li>
@@ -63,7 +63,7 @@
                 <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
                         data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    <i class="fas fa-plus"></i> Ajouter...
+                    <i class="ti ti-plus"></i> Ajouter...
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                     <li>
@@ -85,23 +85,23 @@
 
     <div class="col-auto">
         <a href="{{ path('edr_commun_export_facture_pdf', {'uuid': facture.uuid}) }}" class="btn btn-primary"
-           role='button'> <i class="fas fa-file-pdf"></i> Exporter en pdf</a>
+           role='button'> <i class="ti ti-file-pdf"></i> Exporter en pdf</a>
     </div>
 
     <div class="col-auto">
         <a href="{{ path('edr_admin_facture_send_one', {'id': facture.id}) }}" class="btn btn-primary"
            role='button'>
-            <i class="fas fa-envelope"></i> Envoyer par mail</a>
+            <i class="ti ti-envelope"></i> Envoyer par mail</a>
     </div>
 
     <div class="col-auto">
         <a href="{{ path('edr_admin_facture_index', {'id': tuteur.id}) }}" class="btn btn-primary" role='button'><i
-                    class="fas fa-list"></i> Retour à la Liste</a>
+                    class="ti ti-list"></i> Retour à la Liste</a>
     </div>
 
     <div class="col-auto">
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-            <i class="fas fa-trash"></i> Supprimer
+            <i class="ti ti-trash"></i> Supprimer
         </button>
     </div>
 </div>

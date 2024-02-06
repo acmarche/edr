@@ -38,19 +38,19 @@
                     id="add-another-accompagnateur"
                     class="my-2 add-another-collection-widget btn btn-primary btn-sm"
                     data-list-selector="#email-fields-list">
-                <i class="fas fa-plus"></i> Ajouter un personne
+                <i class="ti ti-plus"></i> Ajouter un personne
             </button>
 
             {{ form_row(form.remarque) }}
 
-            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="far fa-save" aria-hidden="true"></i>
+            <button class="btn btn-primary mr-1 mb-2" type="submit"><i class="ti ti ti-device-floppy" aria-hidden="true"></i>
                 Sauvegarder
             </button>
             {{ form_end(form) }}
         </div>
         <div class="card-footer">
             <a class="float-end" href="{{ path('edr_parent_enfant_show', {'uuid': enfant.uuid}) }}"><i
-                        class="fas fa-arrow-left"></i> Annuler</a>
+                        class="ti ti-arrow-left"></i> Annuler</a>
         </div>
     </div>
 

@@ -1,18 +1,18 @@
 <a href="{{ path('edr_front_user_edit') }}" role="button"
    class="btn btn-primary"><i
-            class="far fa-edit"></i> Modifier</a>
+            class="ti ti-edit"></i> Modifier</a>
 
 <a href="{{ path('edr_front_user_password') }}" role="button"
    class="btn btn-primary"><i
-            class="fas fa-lock"></i> Changer le mot de passe</a>
+            class="ti ti-lock"></i> Changer le mot de passe</a>
 
 <a class="btn btn-warning" href="{{ path('app_logout') }}" title="Déconnexion">
-    <i class="fas fa-sign-out-alt"></i> Me déconnecter
+    <i class="ti ti-sign-out-alt"></i> Me déconnecter
 </a>
 
 {% if is_granted('IS_IMPERSONATOR') %}
     <a class="btn btn-success" href="{{ path('edr_front_user_show', {'_switch_user': '_exit'}) }}" title="Déconnexion">
-        <i class="fas fa-arrow-circle-up"></i> Retour à mon compte original
+        <i class="ti ti-arrow-circle-up"></i> Retour à mon compte original
     </a>
 {% endif %}
 
