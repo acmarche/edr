@@ -2,7 +2,7 @@
 
 namespace AcMarche\Edr\Entity;
 
-use AcMarche\Edr\Entity\Presence\Accueil;
+
 use AcMarche\Edr\Entity\Presence\Presence;
 use AcMarche\Edr\Entity\Sante\Traits\FicheSanteIsCompleteTrait;
 use AcMarche\Edr\Entity\Sante\Traits\SanteFicheTrait;
@@ -10,7 +10,6 @@ use AcMarche\Edr\Entity\Scolaire\AnneeScolaire;
 use AcMarche\Edr\Entity\Scolaire\Ecole;
 use AcMarche\Edr\Entity\Scolaire\GroupeScolaire;
 use AcMarche\Edr\Entity\Security\Traits\UserAddTrait;
-use AcMarche\Edr\Entity\Traits\AccueilsTrait;
 use AcMarche\Edr\Entity\Traits\AnneeScolaireTrait;
 use AcMarche\Edr\Entity\Traits\ArchiveTrait;
 use AcMarche\Edr\Entity\Traits\BirthdayTrait;
@@ -70,7 +69,6 @@ class Enfant implements SluggableInterface, TimestampableInterface, UuidableInte
     use GroupeScolaireTrait;
     use AnneeScolaireTrait;
     use PresencesTrait;
-    use AccueilsTrait;
     use EnfantNotesTrait;
     use IsAccueilEcoleTrait;
     use RegistreNationalTrait;
@@ -103,18 +101,9 @@ class Enfant implements SluggableInterface, TimestampableInterface, UuidableInte
     #[ORM\OneToMany(targetEntity: Presence::class, mappedBy: 'enfant', cascade: ['remove'])]
     private Collection|array $presences = [];
 
-    /**
-     * J'ai mis la definition pour pouvoir mettre le cascade.
-     *
-     * @var Accueil[]
-     */
-    #[ORM\OneToMany(targetEntity: Accueil::class, mappedBy: 'enfant', cascade: ['remove'])]
-    private Collection|array $accueils = [];
-
     public function __construct()
     {
         $this->relations = new ArrayCollection();
-        $this->accueils = new ArrayCollection();
         $this->presences = new ArrayCollection();
         $this->notes = new ArrayCollection();
         $this->ficheSanteIsComplete = false;

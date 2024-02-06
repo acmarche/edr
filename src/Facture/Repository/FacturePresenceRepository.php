@@ -6,7 +6,7 @@ use AcMarche\Edr\Contrat\Presence\PresenceInterface;
 use AcMarche\Edr\Doctrine\OrmCrudTrait;
 use AcMarche\Edr\Entity\Facture\FacturePresence;
 use AcMarche\Edr\Entity\Plaine\Plaine;
-use AcMarche\Edr\Entity\Presence\Accueil;
+
 use AcMarche\Edr\Facture\FactureInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -72,15 +72,5 @@ final class FacturePresenceRepository extends ServiceEntityRepository
     public function findByPresence(PresenceInterface $presence): ?FacturePresence
     {
         return $this->findByIdAndType($presence->getId(), FactureInterface::OBJECT_PRESENCE);
-    }
-
-    public function findByAccueil(Accueil $accueil): ?FacturePresence
-    {
-        return $this->findByIdAndType($accueil->getId(), FactureInterface::OBJECT_ACCUEIL);
-    }
-
-    public function findByPlaine(Plaine $plaine): ?FacturePresence
-    {
-        return $this->findByIdAndType($plaine->getId(), FactureInterface::OBJECT_PLAINE);
     }
 }

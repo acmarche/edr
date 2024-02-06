@@ -2,7 +2,6 @@
 
 namespace AcMarche\Edr\Controller\Ecole;
 
-use AcMarche\Edr\Accueil\Contrat\AccueilInterface;
 use AcMarche\Edr\Ecole\Repository\EcoleRepository;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
 use AcMarche\Edr\Entity\Scolaire\Ecole;
@@ -38,7 +37,6 @@ final class EcoleController extends AbstractController
             [
                 'ecoles' => $this->ecoles,
                 'today' => $today,
-                'heures' => AccueilInterface::HEURES,
             ]
         );
     }
@@ -56,7 +54,6 @@ final class EcoleController extends AbstractController
                 'ecole' => $ecole,
                 'enfants' => $enfants,
                 'today' => $today,
-                'heures' => AccueilInterface::HEURES,
             ]
         );
     }

@@ -2,15 +2,13 @@
 
 namespace AcMarche\Edr\Facture\Handler;
 
-use AcMarche\Edr\Accueil\Calculator\AccueilCalculatorInterface;
-use AcMarche\Edr\Accueil\Repository\AccueilRepository;
 use AcMarche\Edr\Contrat\Facture\FactureHandlerInterface;
 use AcMarche\Edr\Contrat\Presence\PresenceCalculatorInterface;
 use AcMarche\Edr\Contrat\Presence\PresenceInterface;
 use AcMarche\Edr\Entity\Facture\Facture;
 use AcMarche\Edr\Entity\Facture\FactureComplement;
 use AcMarche\Edr\Entity\Facture\FacturePresence;
-use AcMarche\Edr\Entity\Presence\Accueil;
+
 use AcMarche\Edr\Entity\Presence\Presence;
 use AcMarche\Edr\Entity\Scolaire\Ecole;
 use AcMarche\Edr\Entity\Tuteur;
@@ -35,8 +33,6 @@ final readonly class FactureHandler implements FactureHandlerInterface
         private FactureFactory $factureFactory,
         private PresenceCalculatorInterface $presenceCalculator,
         private PresenceRepository $presenceRepository,
-        private AccueilRepository $accueilRepository,
-        private AccueilCalculatorInterface $accueilCalculator,
         private TuteurRepository $tuteurRepository,
         private CommunicationFactoryInterface $communicationFactory,
         private FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository
@@ -58,11 +54,8 @@ final readonly class FactureHandler implements FactureHandlerInterface
         $presences = $this->presenceRepository->findBy([
             'id' => $presencesId,
         ]);
-        $accueils = $this->accueilRepository->findBy([
-            'id' => $accueilsId,
-        ]);
 
-        $this->finish($facture, $presences, $accueils);
+        $this->finish($facture, $presences,[]);
         $this->flush();
         $facture->setCommunication($this->communicationFactory->generateForPresence($facture));
         $this->flush();
@@ -150,25 +143,23 @@ final readonly class FactureHandler implements FactureHandlerInterface
         $facture->setMois($date->format('m-Y'));
 
         $presences = $this->facturePresenceNonPayeRepository->findPresencesNonPayes($tuteur, $date->toDateTime());
-        $accueils = $this->facturePresenceNonPayeRepository->findAccueilsNonPayes($tuteur, $date->toDateTime());
 
-        if ([] === $presences && [] === $accueils) {
+
+        if ([] === $presences) {
             return null;
         }
 
-        $this->finish($facture, $presences, $accueils);
+        $this->finish($facture, $presences, []);
 
         return $facture;
     }
 
     /**
      * @param array|Presence[] $presences
-     * @param array|Accueil[]  $accueils
      */
     private function finish(Facture $facture, array $presences, array $accueils): Facture
     {
         $this->attachPresences($facture, $presences);
-        $this->attachAccueils($facture, $accueils);
         $this->attachRetard($facture, $accueils);
         $this->factureFactory->setEcoles($facture);
 
@@ -188,30 +179,6 @@ final readonly class FactureHandler implements FactureHandlerInterface
             $facturePresence = new FacturePresence($facture, $presence->getId(), FactureInterface::OBJECT_PRESENCE);
             $this->registerDataOnFacturePresence($facture, $presence, $facturePresence);
             $facturePresence->setCoutCalculated($this->presenceCalculator->calculate($presence));
-            $this->facturePresenceRepository->persist($facturePresence);
-            $facture->addFacturePresence($facturePresence);
-        }
-    }
-
-    /**
-     * @param array|Accueil[] $accueils
-     */
-    private function attachAccueils(Facture $facture, array $accueils): void
-    {
-        foreach ($accueils as $accueil) {
-            $facturePresence = new FacturePresence($facture, $accueil->getId(), FactureInterface::OBJECT_ACCUEIL);
-            $facturePresence->setPresenceDate($accueil->getDateJour());
-            $facturePresence->setHeure($accueil->getHeure());
-            $facturePresence->setDuree($accueil->getDuree());
-            $enfant = $accueil->getEnfant();
-            if (($ecole = $enfant->getEcole()) instanceof Ecole) {
-                $facture->ecolesListing[$ecole->getId()] = $ecole;
-            }
-
-            $facturePresence->setNom($enfant->getNom());
-            $facturePresence->setPrenom($enfant->getPrenom());
-            $facturePresence->setCoutBrut($this->accueilCalculator->getPrix($accueil));
-            $facturePresence->setCoutCalculated($this->accueilCalculator->calculate($accueil));
             $this->facturePresenceRepository->persist($facturePresence);
             $facture->addFacturePresence($facturePresence);
         }

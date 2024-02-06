@@ -2,7 +2,7 @@
 
 namespace AcMarche\Edr\Controller\Ecole;
 
-use AcMarche\Edr\Accueil\Repository\AccueilRepository;
+
 use AcMarche\Edr\Enfant\Form\EnfantEditForEcoleType;
 use AcMarche\Edr\Enfant\Message\EnfantUpdated;
 use AcMarche\Edr\Enfant\Repository\EnfantRepository;
@@ -31,7 +31,6 @@ final class EnfantController extends AbstractController
         private readonly SanteHandler $santeHandler,
         private readonly SanteChecker $santeChecker,
         private readonly PresenceRepository $presenceRepository,
-        private readonly AccueilRepository $accueilRepository,
         private readonly RelationRepository $relationRepository,
         private readonly SanteQuestionRepository $santeQuestionRepository,
         private readonly OrganisationRepository $organisationRepository,
@@ -77,7 +76,6 @@ final class EnfantController extends AbstractController
         $santeFiche = $this->santeHandler->init($enfant);
         $ficheSanteComplete = $this->santeChecker->isComplete($santeFiche);
         $presences = $this->presenceRepository->findByEnfant($enfant);
-        $accueils = $this->accueilRepository->findByEnfant($enfant);
         $relations = $this->relationRepository->findByEnfant($enfant);
 
         return $this->render(
@@ -85,7 +83,7 @@ final class EnfantController extends AbstractController
             [
                 'enfant' => $enfant,
                 'presences' => $presences,
-                'accueils' => $accueils,
+                'accueils' => [],
                 'relations' => $relations,
                 'ficheSanteComplete' => $ficheSanteComplete,
             ]

@@ -2,7 +2,7 @@
 
 namespace AcMarche\Edr\Presence\Constraint;
 
-use AcMarche\Edr\Entity\Presence\Accueil;
+
 use AcMarche\Edr\Entity\Presence\Presence;
 use DateTime;
 use DateTimeInterface;

@@ -119,13 +119,11 @@ final class FactureController extends AbstractController
     {
         $facture = $this->factureHandler->newFacture($tuteur);
         $presences = $this->facturePresenceNonPayeRepository->findPresencesNonPayes($tuteur);
-        $accueils = $this->facturePresenceNonPayeRepository->findAccueilsNonPayes($tuteur);
         $form = $this->createForm(FactureManualType::class, $facture);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $presencesF = (array) $request->request->all('presences');
-            $accueilsF = (array) $request->request->all('accueils');
-            $this->factureHandler->handleManually($facture, $presencesF, $accueilsF);
+            $this->factureHandler->handleManually($facture, $presencesF, []);
 
             $this->dispatcher->dispatch(new FactureCreated($facture->getId()));
 
@@ -139,7 +137,7 @@ final class FactureController extends AbstractController
             [
                 'tuteur' => $tuteur,
                 'presences' => $presences,
-                'accueils' => $accueils,
+                'accueils' => [],
                 'form' => $form,
             ]
         );

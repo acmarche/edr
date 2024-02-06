@@ -5,11 +5,10 @@ namespace AcMarche\Edr\Entity;
 use AcMarche\Edr\Entity\Facture\CreancesTrait;
 use AcMarche\Edr\Entity\Facture\Facture;
 use AcMarche\Edr\Entity\Facture\FacturesTrait;
-use AcMarche\Edr\Entity\Presence\Accueil;
+
 use AcMarche\Edr\Entity\Security\Traits\UserAddTrait;
 use AcMarche\Edr\Entity\Security\Traits\UsersTrait;
 use AcMarche\Edr\Entity\Security\User;
-use AcMarche\Edr\Entity\Traits\AccueilsTraits;
 use AcMarche\Edr\Entity\Traits\AdresseTrait;
 use AcMarche\Edr\Entity\Traits\ArchiveTrait;
 use AcMarche\Edr\Entity\Traits\ConjointTrait;
@@ -55,7 +54,6 @@ class Tuteur implements SluggableInterface, TimestampableInterface, Stringable
     use PresencesTuteurTrait;
     use RelationsTrait;
     use FacturesTrait;
-    use AccueilsTraits;
     use PapierTrait;
     use IbanTrait;
     use CreancesTrait;
@@ -66,14 +64,6 @@ class Tuteur implements SluggableInterface, TimestampableInterface, Stringable
      */
     #[ORM\OneToMany(targetEntity: Relation::class, mappedBy: 'tuteur', cascade: ['remove'])]
     private Collection|array $relations = [];
-
-    /**
-     * J'ai mis la definition pour pouvoir mettre le cascade.
-     *
-     * @var Accueil[]|Collection
-     */
-    #[ORM\OneToMany(targetEntity: Accueil::class, mappedBy: 'tuteur', cascade: ['remove'])]
-    private Collection $accueils;
 
     /**
      * @var Facture[]
@@ -92,7 +82,6 @@ class Tuteur implements SluggableInterface, TimestampableInterface, Stringable
         $this->relations = new ArrayCollection();
         $this->presences = new ArrayCollection();
         $this->users = new ArrayCollection();
-        $this->accueils = new ArrayCollection();
     }
 
     public function __toString(): string

@@ -2,7 +2,7 @@
 
 namespace AcMarche\Edr\Controller\Parent;
 
-use AcMarche\Edr\Accueil\Repository\AccueilRepository;
+
 use AcMarche\Edr\Enfant\Form\EnfantEditForParentType;
 use AcMarche\Edr\Enfant\Handler\EnfantHandler;
 use AcMarche\Edr\Enfant\Message\EnfantCreated;
@@ -34,7 +34,6 @@ final class EnfantController extends AbstractController
         private readonly SanteChecker $santeChecker,
         private readonly PresenceRepository $presenceRepository,
         private readonly PlainePresenceRepository $plainePresenceRepository,
-        private readonly AccueilRepository $accueilRepository,
         private readonly EnfantHandler $enfantHandler,
         private readonly AdminEmailFactory $adminEmailFactory,
         private readonly NotificationMailer $notifcationMailer,
@@ -99,7 +98,6 @@ final class EnfantController extends AbstractController
         $ficheSanteComplete = $this->santeChecker->isComplete($santeFiche);
         $presences = $this->presenceRepository->findByEnfant($enfant);
         $plaines = $this->plainePresenceRepository->findPlainesByEnfant($enfant);
-        $accueils = $this->accueilRepository->findByEnfant($enfant);
 
         return $this->render(
             '@AcMarcheEdrParent/enfant/show.html.twig',
@@ -107,7 +105,7 @@ final class EnfantController extends AbstractController
                 'enfant' => $enfant,
                 'presences' => $presences,
                 'plaines' => $plaines,
-                'accueils' => $accueils,
+                'accueils' => [],
                 'ficheSanteComplete' => $ficheSanteComplete,
             ]
         );

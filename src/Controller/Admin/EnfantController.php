@@ -58,7 +58,7 @@ final class EnfantController extends AbstractController
                 $data['archived']
             );
         }
-
+$response = new Response(null, $form->isSubmitted() ? Response::HTTP_ACCEPTED : Response::HTTP_OK);
         return $this->render(
             '@AcMarcheEdrAdmin/enfant/index.html.twig',
             [
@@ -66,7 +66,7 @@ final class EnfantController extends AbstractController
                 'form' => $form->createView(),
                 'search' => $form->isSubmitted(),
             ]
-        );
+        ,$response);
     }
 
     #[Route(path: '/new/{id}', name: 'edr_admin_enfant_new', methods: ['GET', 'POST'])]

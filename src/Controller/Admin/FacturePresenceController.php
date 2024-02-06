@@ -2,7 +2,7 @@
 
 namespace AcMarche\Edr\Controller\Admin;
 
-use AcMarche\Edr\Accueil\Repository\AccueilRepository;
+
 use AcMarche\Edr\Contrat\Facture\FactureHandlerInterface;
 use AcMarche\Edr\Contrat\Presence\PresenceCalculatorInterface;
 use AcMarche\Edr\Entity\Facture\Facture;
@@ -30,7 +30,6 @@ final class FacturePresenceController extends AbstractController
         private readonly FacturePresenceNonPayeRepository $facturePresenceNonPayeRepository,
         public PresenceCalculatorInterface $presenceCalculator,
         private readonly PresenceRepository $presenceRepository,
-        private readonly AccueilRepository $accueilRepository
     ) {
     }
 
@@ -72,10 +71,6 @@ final class FacturePresenceController extends AbstractController
         $type = $facturePresence->getObjectType();
         if (FactureInterface::OBJECT_PRESENCE === $type || FactureInterface::OBJECT_PLAINE === $type) {
             $presence = $this->presenceRepository->find($facturePresence->getPresenceId());
-        }
-
-        if (FactureInterface::OBJECT_ACCUEIL === $type) {
-            $accueil = $this->accueilRepository->find($facturePresence->getPresenceId());
         }
 
         return $this->render(

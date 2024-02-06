@@ -2,7 +2,7 @@
 
 namespace AcMarche\Edr\Presence\Form;
 
-use AcMarche\Edr\Entity\Presence\Accueil;
+
 use AcMarche\Edr\Entity\Presence\Presence;
 use AcMarche\Edr\Entity\Tuteur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
