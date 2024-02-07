@@ -1,13 +1,13 @@
 <a href="{{ path('edr_front_user_edit') }}" role="button"
    class="btn btn-primary"><i
-            class="ti ti-edit"></i> Modifier</a>
+            class="ti ti-pencil"></i> Modifier</a>
 
 <a href="{{ path('edr_front_user_password') }}" role="button"
    class="btn btn-primary"><i
             class="ti ti-lock"></i> Changer le mot de passe</a>
 
 <a class="btn btn-warning" href="{{ path('app_logout') }}" title="Déconnexion">
-    <i class="ti ti-sign-out-alt"></i> Me déconnecter
+    <i class="ti ti-logout-2"></i> Me déconnecter
 </a>
 
 {% if is_granted('IS_IMPERSONATOR') %}
