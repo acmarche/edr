@@ -44,9 +44,13 @@ final class AjaxController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/enfants/link', name: 'edr_admin_ajax_enfants', methods: ['GET'])]
+    #[Route(path: '/enfants/link', name: 'edr_admin_ajax_enfants', methods: ['GET', 'POST'])]
     public function enfants(Request $request): Response
     {
+        if ($this->isCsrfTokenValid('searchquick', $request->request->get('_token'))) {
+            $params = $request->request;
+            $societe = trim($params->get('name'));
+        }
         $keyword = $request->get('q');
         $enfants = [];
         if ($keyword) {
@@ -116,7 +120,7 @@ final class AjaxController extends AbstractController
                 $this->pageRepository->flush();
             }
 
-            return new Response('<div class="alert alert-success">Tri enregistré ' . $position . '</div>');
+            return new Response('<div class="alert alert-success">Tri enregistré '.$position.'</div>');
         }
 
         return new Response('<div class="alert alert-danger">Faill</div>');

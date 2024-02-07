@@ -32,6 +32,7 @@ final class AcMarcheEdrBundle extends AbstractBundle
         $container->import('../config/packages/rate_limiter.php');
         $container->import('../config/packages/security.php');
         $container->import('../config/packages/twig.php');
+        $container->import('../config/packages/twig_component.php');
         $container->import('../config/packages/vich_uploader.php');
     }
 

@@ -9,14 +9,10 @@
         <div class="card-body">
             <div class="alert alert-info">Ecrivez le nom de l'enfant pour un accès rapide</div>
 
-            <div {{ stimulus_controller('autocomplete', {url: path('edr_admin_ajax_enfants')}) }}>
-                {{ form_start(form) }}
-                {{ form_errors(form) }}
-                {{ form_row(form.nom) }}
-                <input type='hidden' name='enfant_id' data-autocomplete-target="hidden">
-                <ul class="list-group" data-autocomplete-target="results"></ul>
-                {{ form_end(form) }}
-            </div>
+            <form method="post" action="{{ path('edr_admin_ajax_enfants') }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('searchquick') }}">
+                {{ component('SearchLiveEnfant',{'t':2}) }}
+            </form>
         </div>
         <div class="card-footer">
             <a href="{{ path('edr_front_home') }}">
