@@ -43,14 +43,16 @@ final class TuteurController extends AbstractController
             $this->searchHelper->saveSearch(SearchHelper::TUTEUR_LIST, $data);
             $tuteurs = $this->tuteurRepository->search($data['nom'], $data['archived']);
         }
+        $response = new Response(null, $form->isSubmitted() ? Response::HTTP_ACCEPTED : Response::HTTP_OK);
 
         return $this->render(
             '@AcMarcheEdrAdmin/tuteur/index.html.twig',
             [
                 'tuteurs' => $tuteurs,
                 'form' => $form,
-                'search' => $form->isSubmitted()
+                'search' => $form->isSubmitted(),
             ]
+            , $response
         );
     }
 
@@ -121,7 +123,7 @@ final class TuteurController extends AbstractController
     #[Route(path: '/{id}/delete', name: 'edr_admin_tuteur_delete', methods: ['POST'])]
     public function delete(Request $request, Tuteur $tuteur): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete' . $tuteur->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$tuteur->getId(), $request->request->get('_token'))) {
             /*      if (count($this->presenceRepository->findByTuteur($tuteur)) > 0) {
                       $this->addFlash('danger', 'Ce tuteur ne peut pas être supprimé car il y a des présences à son nom');
 

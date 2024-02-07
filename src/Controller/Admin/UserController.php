@@ -33,9 +33,6 @@ final class UserController extends AbstractController
     ) {
     }
 
-    /**
-     * Lists all User entities.
-     */
     #[Route(path: '/', name: 'edr_admin_user_index', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
@@ -50,6 +47,8 @@ final class UserController extends AbstractController
             $users = $this->userRepository->findByNameOrRoles($nom, $role);
         }
 
+        $response = new Response(null, $form->isSubmitted() ? Response::HTTP_ACCEPTED : Response::HTTP_OK);
+
         return $this->render(
             '@AcMarcheEdrAdmin/user/index.html.twig',
             [
@@ -57,12 +56,10 @@ final class UserController extends AbstractController
                 'form' => $form,
                 'search' => $form->isSubmitted(),
             ]
+            , $response
         );
     }
 
-    /**
-     * Displays a form to create a new User utilisateur.
-     */
     #[Route(path: '/new', name: 'edr_admin_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
@@ -91,9 +88,6 @@ final class UserController extends AbstractController
         );
     }
 
-    /**
-     * Displays a form to create a new User utilisateur.
-     */
     #[Route(path: '/new/tuteur/{id}', name: 'edr_admin_user_new_from_tuteur', methods: ['GET', 'POST'])]
     public function newFromTuteur(Request $request, Tuteur $tuteur): Response
     {
@@ -125,9 +119,6 @@ final class UserController extends AbstractController
         );
     }
 
-    /**
-     * Finds and displays a User utilisateur.
-     */
     #[Route(path: '/{id}', name: 'edr_admin_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -139,9 +130,6 @@ final class UserController extends AbstractController
         );
     }
 
-    /**
-     * Displays a form to edit an existing User utilisateur.
-     */
     #[Route(path: '/{id}/edit', name: 'edr_admin_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user): Response
     {
@@ -165,9 +153,6 @@ final class UserController extends AbstractController
         );
     }
 
-    /**
-     * Displays a form to edit an existing User utilisateur.
-     */
     #[Route(path: '/{id}/roles', name: 'edr_admin_user_roles', methods: ['GET', 'POST'])]
     public function roles(Request $request, User $user): Response
     {
@@ -191,13 +176,10 @@ final class UserController extends AbstractController
         );
     }
 
-    /**
-     * Deletes a User utilisateur.
-     */
     #[Route(path: '/{id}/delete', name: 'edr_admin_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $id = $user->getId();
             $this->userRepository->remove($user);
             $this->userRepository->flush();
