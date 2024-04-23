@@ -3,27 +3,20 @@
 namespace AcMarche\Edr\Doctrine\EventSubscriber;
 
 use AcMarche\Edr\Utils\PropertyUtil;
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Exception;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final readonly class UserAddSubscriber implements EventSubscriberInterface
+#[AsDoctrineListener(Events::prePersist)]
+final readonly class UserAddSubscriber
 {
     public function __construct(
         private Security $security,
         private PropertyUtil $propertyUtil
     ) {
-    }
-
-    public function getSubscribedEvents(): array
-    {
-        return [
-            Events::prePersist,
-            //   Events::preUpdate,
-        ];
     }
 
     public function prePersist(LifecycleEventArgs $lifecycleEventArgs): void

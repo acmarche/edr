@@ -29,5 +29,4 @@ trait OrmCrudTrait
     {
         return $this->getEntityManager()->getUnitOfWork()->getOriginalEntityData($object);
     }
-
 }
