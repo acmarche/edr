@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Document\Repository;
 
+use AcMarche\Edr\Doctrine\OrmCrudTrait;
 use AcMarche\Edr\Entity\Document;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -15,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class DocumentRepository extends ServiceEntityRepository
 {
+    use OrmCrudTrait;
+
     public function __construct(ManagerRegistry $managerRegistry)
     {
         parent::__construct($managerRegistry, Document::class);
@@ -32,21 +35,6 @@ final class DocumentRepository extends ServiceEntityRepository
             ->setParameter('keyword', '%' . $keyword . '%')
             ->addOrderBy('document.nom', 'ASC')
             ->getQuery()->getResult();
-    }
-
-    public function remove(Document $document): void
-    {
-        $this->_em->remove($document);
-    }
-
-    public function flush(): void
-    {
-        $this->_em->flush();
-    }
-
-    public function persist(Document $document): void
-    {
-        $this->_em->persist($document);
     }
 
     public function getQbForListing(): QueryBuilder

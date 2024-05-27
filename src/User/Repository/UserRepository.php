@@ -67,8 +67,8 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
         }
 
         $user->setPassword($newHashedPassword);
-        $this->_em->persist($user);
-        $this->_em->flush();
+        $this->persist($user);
+        $this->flush();
     }
 
     public function findOneByEmailOrUserName(string $username): ?User

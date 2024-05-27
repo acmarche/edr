@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Scolaire\Repository;
 
+use AcMarche\Edr\Doctrine\OrmCrudTrait;
 use AcMarche\Edr\Entity\Scolaire\AnneeScolaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -15,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class AnneeScolaireRepository extends ServiceEntityRepository
 {
+    use OrmCrudTrait;
+
     public function __construct(ManagerRegistry $managerRegistry)
     {
         parent::__construct($managerRegistry, AnneeScolaire::class);
@@ -33,20 +36,5 @@ final class AnneeScolaireRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('annee_scolaire')
             ->orderBy('annee_scolaire.ordre', 'ASC');
-    }
-
-    public function remove(AnneeScolaire $anneeScolaire): void
-    {
-        $this->_em->remove($anneeScolaire);
-    }
-
-    public function flush(): void
-    {
-        $this->_em->flush();
-    }
-
-    public function persist(AnneeScolaire $anneeScolaire): void
-    {
-        $this->_em->persist($anneeScolaire);
     }
 }

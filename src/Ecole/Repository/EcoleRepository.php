@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Ecole\Repository;
 
+use AcMarche\Edr\Doctrine\OrmCrudTrait;
 use AcMarche\Edr\Entity\Scolaire\Ecole;
 use AcMarche\Edr\Entity\Security\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -16,6 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class EcoleRepository extends ServiceEntityRepository
 {
+    use OrmCrudTrait;
+
     public function __construct(ManagerRegistry $managerRegistry)
     {
         parent::__construct($managerRegistry, Ecole::class);
@@ -48,21 +51,6 @@ final class EcoleRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('ecole')
             ->orderBy('ecole.nom')->getQuery()
             ->getResult();
-    }
-
-    public function remove(Ecole $ecole): void
-    {
-        $this->_em->remove($ecole);
-    }
-
-    public function flush(): void
-    {
-        $this->_em->flush();
-    }
-
-    public function persist(Ecole $ecole): void
-    {
-        $this->_em->persist($ecole);
     }
 
     public function getQbForListing(): QueryBuilder

@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Animateur\Repository;
 
+use AcMarche\Edr\Doctrine\OrmCrudTrait;
 use AcMarche\Edr\Entity\Animateur;
 use AcMarche\Edr\Entity\Security\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -16,6 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class AnimateurRepository extends ServiceEntityRepository
 {
+    use OrmCrudTrait;
+
     public function __construct(ManagerRegistry $managerRegistry)
     {
         parent::__construct($managerRegistry, Animateur::class);
@@ -42,21 +45,6 @@ final class AnimateurRepository extends ServiceEntityRepository
             ->setParameter('keyword', '%' . $keyword . '%')
             ->addOrderBy('animateur.nom', 'ASC')
             ->getQuery()->getResult();
-    }
-
-    public function remove(Animateur $animateur): void
-    {
-        $this->_em->remove($animateur);
-    }
-
-    public function flush(): void
-    {
-        $this->_em->flush();
-    }
-
-    public function persist(Animateur $animateur): void
-    {
-        $this->_em->persist($animateur);
     }
 
     public function getQbForListing(): QueryBuilder

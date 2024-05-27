@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Sante\Repository;
 
+use AcMarche\Edr\Doctrine\OrmCrudTrait;
 use AcMarche\Edr\Entity\Enfant;
 use AcMarche\Edr\Entity\Sante\SanteFiche;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -15,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class SanteFicheRepository extends ServiceEntityRepository
 {
+    use OrmCrudTrait;
+
     public function __construct(ManagerRegistry $managerRegistry)
     {
         parent::__construct($managerRegistry, SanteFiche::class);
@@ -28,21 +31,6 @@ final class SanteFicheRepository extends ServiceEntityRepository
             ->setParameter('enfants', $enfants);
 
         return $queryBuilder->getQuery()->getResult();
-    }
-
-    public function persist(SanteFiche $santeFiche): void
-    {
-        $this->_em->persist($santeFiche);
-    }
-
-    public function remove(SanteFiche $santeFiche): void
-    {
-        $this->_em->remove($santeFiche);
-    }
-
-    public function flush(): void
-    {
-        $this->_em->flush();
     }
 
     public function findByEnfant(Enfant $enfant): ?SanteFiche

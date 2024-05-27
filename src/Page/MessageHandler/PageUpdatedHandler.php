@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 final class PageUpdatedHandler
 {
     private readonly FlashBagInterface $flashBag;
+
     public function __construct(RequestStack $requestStack)
     {
         $this->flashBag = $requestStack->getSession()->getFlashBag();

@@ -2,6 +2,7 @@
 
 namespace AcMarche\Edr\Sante\Repository;
 
+use AcMarche\Edr\Doctrine\OrmCrudTrait;
 use AcMarche\Edr\Entity\Sante\SanteFiche;
 use AcMarche\Edr\Entity\Sante\SanteQuestion;
 use AcMarche\Edr\Entity\Sante\SanteReponse;
@@ -17,6 +18,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 final class SanteReponseRepository extends ServiceEntityRepository
 {
+    use OrmCrudTrait;
+
     public function __construct(ManagerRegistry $managerRegistry)
     {
         parent::__construct($managerRegistry, SanteReponse::class);
@@ -43,20 +46,5 @@ final class SanteReponseRepository extends ServiceEntityRepository
             ->andWhere('reponse.sante_fiche = :fiche')
             ->setParameter('fiche', $santeFiche)
             ->getQuery()->getResult();
-    }
-
-    public function persist(SanteReponse $santeReponse): void
-    {
-        $this->_em->persist($santeReponse);
-    }
-
-    public function remove(SanteReponse $santeReponse): void
-    {
-        $this->_em->remove($santeReponse);
-    }
-
-    public function flush(): void
-    {
-        $this->_em->flush();
     }
 }
