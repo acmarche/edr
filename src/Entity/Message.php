@@ -38,7 +38,7 @@ class Message implements TimestampableInterface
 
     private ?UploadedFile $file = null;
 
-    #[ORM\Column(type: 'array', nullable: false)]
+    #[ORM\Column( nullable: false)]
     private Collection $destinataires;
 
     public function __construct()
