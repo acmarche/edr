@@ -57,7 +57,7 @@ final class DocumentController extends AbstractController
             $this->dispatcher->dispatch(new DocumentCreated($document->getId()));
 
             return $this->redirectToRoute('edr_admin_page_show', [
-                'id' => $page->getId(),
+                'slug' => $page->getSlug(),
             ]);
         }
 

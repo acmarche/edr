@@ -8,6 +8,7 @@ use AcMarche\Edr\Page\Message\PageCreated;
 use AcMarche\Edr\Page\Message\PageDeleted;
 use AcMarche\Edr\Page\Message\PageUpdated;
 use AcMarche\Edr\Page\Repository\PageRepository;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -50,7 +51,7 @@ final class PageController extends AbstractController
             $this->dispatcher->dispatch(new PageCreated($page->getId()));
 
             return $this->redirectToRoute('edr_admin_page_show', [
-                'id' => $page->getId(),
+                'slug' => $page->getSlug(),
             ]);
         }
 
@@ -63,8 +64,9 @@ final class PageController extends AbstractController
         );
     }
 
-    #[Route(path: '/{id}', name: 'edr_admin_page_show', methods: ['GET'])]
-    public function show(Page $page): Response
+    #[Route(path: '/{slug}', name: 'edr_admin_page_show', methods: ['GET'])]
+    public function show(
+        #[MapEntity(expr: 'repository.findOneBySlug(slug)')] Page $page): Response
     {
         return $this->render(
             '@AcMarcheEdrAdmin/page/show.html.twig',
@@ -74,8 +76,9 @@ final class PageController extends AbstractController
         );
     }
 
-    #[Route(path: '/{id}/edit', name: 'edr_admin_page_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Page $page): Response
+    #[Route(path: '/{slug}/edit', name: 'edr_admin_page_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request,
+        #[MapEntity(expr: 'repository.findOneBySlug(slug)')] Page $page): Response
     {
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
@@ -85,7 +88,7 @@ final class PageController extends AbstractController
             $this->dispatcher->dispatch(new PageUpdated($page->getId()));
 
             return $this->redirectToRoute('edr_admin_page_show', [
-                'id' => $page->getId(),
+                'slug' => $page->getSlug(),
             ]);
         }
 
@@ -98,8 +101,9 @@ final class PageController extends AbstractController
         );
     }
 
-    #[Route(path: '/{id}/delete', name: 'edr_admin_page_delete', methods: ['POST'])]
-    public function delete(Request $request, Page $page): RedirectResponse
+    #[Route(path: '/{slug}/delete', name: 'edr_admin_page_delete', methods: ['POST'])]
+    public function delete(Request $request,
+        #[MapEntity(expr: 'repository.findOneBySlug(slug)')] Page $page): RedirectResponse
     {
         if ($this->isCsrfTokenValid('delete' . $page->getId(), $request->request->get('_token'))) {
             $pageId = $page->getId();

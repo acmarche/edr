@@ -13,7 +13,7 @@
                 Supprimer la page {{ page }} ?
             </div>
             <div class="modal-footer">
-                <form method="post" action="{{ path('edr_admin_page_delete', {'id': page.id}) }}">
+                <form method="post" action="{{ path('edr_admin_page_delete', {'slug': page.slug}) }}">
 
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ page.id) }}">
                     <button type="button" class="btn btn-secondary"

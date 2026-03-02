@@ -19,7 +19,7 @@
         {% for page in pages %}
             <tr>
                 <td>
-                    <a href="{{ path('edr_admin_page_show', { 'id': page.id }) }}">
+                    <a href="{{ path('edr_admin_page_show', { 'slug': page.slug }) }}">
                         {{ page }}
                     </a>
                 </td>
