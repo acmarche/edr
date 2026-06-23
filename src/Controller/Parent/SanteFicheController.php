@@ -13,6 +13,7 @@ use AcMarche\Edr\Sante\Message\SanteFicheUpdated;
 use AcMarche\Edr\Sante\Repository\SanteFicheRepository;
 use AcMarche\Edr\Sante\Repository\SanteQuestionRepository;
 use AcMarche\Edr\Sante\Utils\SanteChecker;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,8 +37,9 @@ final class SanteFicheController extends AbstractController
 
     #[Route(path: '/{uuid}', name: 'edr_parent_sante_fiche_show', methods: ['GET'])]
     #[IsGranted('enfant_show', subject: 'enfant')]
-    public function show(Enfant $enfant): Response
-    {
+    public function show(
+        #[MapEntity(expr: 'repository.findOneByUuid(uuid)')] Enfant $enfant
+    ): Response {
         $santeFiche = $this->santeHandler->init($enfant);
         if (!$santeFiche->getId()) {
             $this->addFlash('warning', 'Cette enfant n\'a pas encore de fiche santé');
@@ -65,7 +67,7 @@ final class SanteFicheController extends AbstractController
 
     #[Route(path: '/{uuid}/edit/etape1', name: 'edr_parent_sante_fiche_edit', methods: ['GET', 'POST'])]
     #[IsGranted('enfant_edit', subject: 'enfant')]
-    public function edit(Request $request, Enfant $enfant): Response
+    public function edit(Request $request, #[MapEntity(expr: 'repository.findOneByUuid(uuid)')] Enfant $enfant): Response
     {
         $form = $this->createForm(SanteFicheEtape1Type::class, $enfant);
         $form->handleRequest($request);
@@ -89,7 +91,7 @@ final class SanteFicheController extends AbstractController
 
     #[Route(path: '/{uuid}/edit/etape2', name: 'edr_parent_sante_fiche_edit_etape2', methods: ['GET', 'POST'])]
     #[IsGranted('enfant_edit', subject: 'enfant')]
-    public function editEtape2(Request $request, Enfant $enfant): Response
+    public function editEtape2(Request $request,#[MapEntity(expr: 'repository.findOneByUuid(uuid)')]  Enfant $enfant): Response
     {
         $santeFiche = $this->santeHandler->init($enfant, false);
         if ([] === $santeFiche->getAccompagnateurs()) {
@@ -119,7 +121,7 @@ final class SanteFicheController extends AbstractController
 
     #[Route(path: '/{uuid}/edit/etape3', name: 'edr_parent_sante_fiche_edit_etape3', methods: ['GET', 'POST'])]
     #[IsGranted('enfant_edit', subject: 'enfant')]
-    public function editEtape3(Request $request, Enfant $enfant): Response
+    public function editEtape3(Request $request, #[MapEntity(expr: 'repository.findOneByUuid(uuid)')] Enfant $enfant): Response
     {
         $santeFiche = $this->santeHandler->init($enfant);
         $form = $this->createForm(SanteFicheEtape3Type::class, $santeFiche);
