@@ -1,5 +1,10 @@
 {% extends '@AcMarcheEdr/front/layout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('vendor/ckeditor5/dist/browser/ckeditor5-content.css') }}">
+{% endblock %}
+
 {% block title %}{{ page.nom }}{% endblock %}
 
 {% block body -%}
@@ -9,7 +14,7 @@
             <h3>{{ page.nom }}</h3>
         </div>
         <div class="card-body">
-            {{ page.content|raw }}
+            <div class="ck-content">{{ page.content|raw }}</div>
         </div>
     </div>
 

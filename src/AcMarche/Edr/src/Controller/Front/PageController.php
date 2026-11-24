@@ -6,7 +6,6 @@ use AcMarche\Edr\Contact\Form\ContactType;
 use AcMarche\Edr\Entity\Page;
 use AcMarche\Edr\Mailer\Factory\ContactEmailFactory;
 use AcMarche\Edr\Mailer\NotificationMailer;
-use AcMarche\Edr\Organisation\Repository\OrganisationRepository;
 use AcMarche\Edr\Page\Factory\PageFactory;
 use AcMarche\Edr\Page\Repository\PageRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -18,7 +17,6 @@ use Symfony\Component\Routing\Attribute\Route;
 final class PageController extends AbstractController
 {
     public function __construct(
-        private readonly OrganisationRepository $organisationRepository,
         private readonly PageRepository $pageRepository,
         private readonly PageFactory $pageFactory,
         private readonly ContactEmailFactory $contactEmailFactory,
@@ -28,8 +26,8 @@ final class PageController extends AbstractController
 
     #[Route(path: '/page/{slug}', name: 'edr_front_page_show')]
     public function page(
-        #[MapEntity(expr: 'repository.findOneBySlug(slug)')] Page $page): Response
-    {
+        #[MapEntity(expr: 'repository.findOneBySlug(slug)')] Page $page
+    ): Response {
         if ('home' === $page->getSlugSystem()) {
             return $this->redirectToRoute('edr_front_home');
         }
@@ -73,7 +71,6 @@ final class PageController extends AbstractController
             '@AcMarcheEdr/front/contact.html.twig',
             [
                 'page' => $page,
-                'organisation' => $this->organisationRepository->getOrganisation(),
                 'form' => $form,
             ]
         );
