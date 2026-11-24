@@ -1620,9 +1620,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     throttle_limit?: int|Param, // Another password reset cannot be made faster than this throttle time in seconds. // Default: 3600
  *     enable_garbage_collection?: bool|Param, // Enable/Disable automatic garbage collection. // Default: true
  * }
- * @psalm-type SymfonycastsVerifyEmailConfig = array{
- *     lifetime?: int|Param, // The length of time in seconds that a signed URI is valid for after it is created. // Default: 3600
- * }
  * @psalm-type VichUploaderConfig = array{
  *     default_filename_attribute_suffix?: scalar|Param|null, // Default: "_name"
  *     db_driver?: scalar|Param|null,
@@ -1692,7 +1689,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     knp_snappy?: KnpSnappyConfig,
  *     liip_imagine?: LiipImagineConfig,
  *     symfonycasts_reset_password?: SymfonycastsResetPasswordConfig,
- *     symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
  *     vich_uploader?: VichUploaderConfig,
  *     twig_component?: TwigComponentConfig,
  *     live_component?: LiveComponentConfig,
@@ -1715,7 +1711,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         knp_snappy?: KnpSnappyConfig,
  *         liip_imagine?: LiipImagineConfig,
  *         symfonycasts_reset_password?: SymfonycastsResetPasswordConfig,
- *         symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
  *         vich_uploader?: VichUploaderConfig,
  *         twig_component?: TwigComponentConfig,
  *         live_component?: LiveComponentConfig,
@@ -1736,7 +1731,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         knp_snappy?: KnpSnappyConfig,
  *         liip_imagine?: LiipImagineConfig,
  *         symfonycasts_reset_password?: SymfonycastsResetPasswordConfig,
- *         symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
  *         vich_uploader?: VichUploaderConfig,
  *         twig_component?: TwigComponentConfig,
  *         live_component?: LiveComponentConfig,
@@ -1758,7 +1752,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         knp_snappy?: KnpSnappyConfig,
  *         liip_imagine?: LiipImagineConfig,
  *         symfonycasts_reset_password?: SymfonycastsResetPasswordConfig,
- *         symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
  *         vich_uploader?: VichUploaderConfig,
  *         twig_component?: TwigComponentConfig,
  *         live_component?: LiveComponentConfig,

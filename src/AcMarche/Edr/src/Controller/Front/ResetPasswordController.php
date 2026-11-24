@@ -3,7 +3,7 @@
 namespace AcMarche\Edr\Controller\Front;
 
 use AcMarche\Edr\Entity\Security\User;
-use AcMarche\Edr\Mailer\Factory\RegistrationMailerFactory;
+use AcMarche\Edr\Mailer\Factory\ResetPasswordEmailFactory;
 use AcMarche\Edr\Mailer\NotificationMailer;
 use AcMarche\Edr\ResetPassword\Form\ChangePasswordFormType;
 use AcMarche\Edr\ResetPassword\Form\ResetPasswordRequestFormType;
@@ -26,7 +26,7 @@ class ResetPasswordController extends AbstractController
 
     public function __construct(
         private readonly ResetPasswordHelperInterface $resetPasswordHelper,
-        private readonly RegistrationMailerFactory $registrationMailerFactory,
+        private readonly ResetPasswordEmailFactory $resetPasswordEmailFactory,
         private readonly NotificationMailer $notificationMailer,
         private readonly ManagerRegistry $managerRegistry
     ) {
@@ -167,7 +167,7 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('edr_front_forgot_password_request');
         }
 
-        $message = $this->registrationMailerFactory->messageSendLinkLostPassword($user, $resetToken);
+        $message = $this->resetPasswordEmailFactory->messageSendLinkLostPassword($user, $resetToken);
         $this->notificationMailer->sendAsEmailNotification($message, $user->getEmail());
 
         // Store the token object in session for retrieval in check-email route.

@@ -12,7 +12,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         'globals' => [
             'bootcdn' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css',
-            'edr_register' => '%env(EDR_REGISTER)%',
         ],
     ]);
 };
