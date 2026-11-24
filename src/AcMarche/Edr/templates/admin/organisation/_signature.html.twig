@@ -1,0 +1,21 @@
+{% if organisation %}
+    <p>
+        <small>
+            {{ organisation }}<br/>
+            {{ organisation.rue }}<br/>
+            {{ organisation.codePostal }} {{ organisation.localite }}
+            {% if organisation.email %}
+                <br/> {{ organisation.email }}
+            {% endif %}
+            {% if organisation.siteWeb %}
+                <br/> {{ organisation.siteWeb }}
+            {% endif %}
+            {% if organisation.gsm %}
+                <br/> {{ organisation.gsm }}
+            {% endif %}
+            {% if organisation.telephone or organisation.telephoneBureau %}
+                <br/> {{ organisation.telephone }} {{ organisation.telephoneBureau }}
+            {% endif %}
+        </small>
+    </p>
+{% endif %}

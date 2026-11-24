@@ -1,0 +1,12 @@
+<ul class="list-group">
+    {% if is_granted('ROLE_MERCREDI_ADMIN') %}
+        <li class="list-group-item">
+            <a href="{{ path('edr_admin_home') }}">Accès en tant que administrateur</a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_MERCREDI_PARENT') %}
+        <li class="list-group-item">
+            <a href="{{ path('edr_parent_home') }}">Accéder en tant que parent</a>
+        </li>
+    {% endif %}
+</ul>

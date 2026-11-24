@@ -1,0 +1,34 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Etats des comptes</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Problème</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in users %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('edr_admin_user_show', { 'id': data.user.id }) }}">
+                                {{ data.user.username }}
+                            </a>
+                        </td>
+                        <td>{{ data.error }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+

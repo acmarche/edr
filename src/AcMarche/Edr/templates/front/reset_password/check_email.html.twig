@@ -1,0 +1,26 @@
+{% extends '@AcMarcheEdr/front/layout.html.twig' %}
+
+{% block title %}Demande de changement de mot de passe{% endblock %}
+
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>Confirmation</h3>
+        </div>
+
+        <div class="card-body">
+
+            <p>
+                Un email vous a été envoyé, il contient un lien qui vous permettra de changer votre mot de passe.
+                <br />
+                Ce lien est valable pendant {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+            </p>
+            <p>
+                Si vous ne recevez pas l'email, merci de vérifier votre dossier de spam ou <a
+                        href="{{ path('edr_front_contact') }}">contactez nous</a>.
+            </p>
+
+        </div>
+    </div>
+
+{% endblock %}

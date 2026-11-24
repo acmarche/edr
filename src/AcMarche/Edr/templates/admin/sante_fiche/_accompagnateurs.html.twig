@@ -1,0 +1,5 @@
+{% if sante_fiche.accompagnateurs %}
+    <p class="text-muted" title="Personnes autorisées à venir chercher l'enfant">
+        <strong>Accompagnateurs: </strong> {{ sante_fiche.accompagnateurs | join(', ') }}
+    </p>
+{% endif %}

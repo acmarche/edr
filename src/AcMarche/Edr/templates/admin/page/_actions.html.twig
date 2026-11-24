@@ -1,0 +1,16 @@
+<a href="{{ path('edr_admin_page_edit', { 'slug': page.slug }) }}" role="button"
+   class="btn btn-primary"><i
+            class="ti ti-edit"></i> Modifier</a>
+
+<a href="{{ path('edr_front_page_show', { 'slug': page.slug }) }}" role="button"
+   class="btn btn-primary"><i
+            class="ti ti-eye"></i> Voir sur le site</a>
+
+<a href="{{ path('edr_admin_page_index') }}" class="btn btn-primary" role='button'><i class="ti ti-list"></i>
+    Retour à la Liste</a>
+
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+    <i class="ti ti-trash"></i> Supprimer
+</button>
+
+<br /><br />

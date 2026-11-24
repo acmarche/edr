@@ -1,0 +1,12 @@
+{% if enfant.photoName %}
+    <img class="img-thumbnail"
+         src="{{ vich_uploader_asset(enfant, 'photo') | imagine_filter('edr_thumb') }}"
+         alt="photo enfant"/>
+{% else %}
+    <svg class="bd-placeholder-img" width="250" height="190" xmlns="http://www.w3.org/2000/svg"
+         preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>
+            Photo de l'enfant</title>
+        <rect width="100%" height="100%" fill="#868e96"></rect>
+        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
+    </svg>
+{% endif %}

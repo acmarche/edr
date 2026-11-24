@@ -1,0 +1,20 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ organisation }} {% if organisation.initiale %}({{ organisation.initiale }})  {% endif %}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/organisation/_actions.html.twig' %}
+
+            <br/>
+            {{ include('@AcMarcheEdrAdmin/organisation/_identite.html.twig') }}
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/organisation/_delete_form.html.twig' %}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% if organisation is not null %}
+
+    <div class="row">
+        <div class="col-4">
+            <i class="ti ti-map-marked-alt"></i>
+            {{ organisation.rue }} <br/>
+            {{ organisation.codePostal }}
+            {{ organisation.localite }}<br/>
+        </div>
+        <div class="col-4">
+            {% if organisation.email %}
+                <i class="ti ti-envelope"></i> {{ organisation.email }}<br/>
+            {% endif %}
+
+            {% if organisation.siteWeb %}
+                <i class="ti ti-globe-europe"></i> <a href="{{ organisation.siteWeb }}">
+                {{ organisation.siteWeb }}</a>
+                <br/>
+            {% endif %}
+
+            {% if organisation.gsm %}
+                <i class="ti ti-mobile-alt"></i> {{ organisation.gsm }}<br/>
+            {% endif %}
+
+            {% if organisation.telephone or organisation.telephoneBureau %}
+                <i class="ti ti-phone-alt"></i> {{ organisation.telephone }} {{ organisation.telephoneBureau }}
+                <br/>
+            {% endif %}
+
+        </div>
+    </div>
+{% endif %}

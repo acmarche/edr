@@ -1,0 +1,27 @@
+Cher(s) parent(s),
+
+Un compte vient d'être ouvert à votre nom sur le site internet {{ absolute_url(path('edr_front_home')) }}.
+
+Afin de pouvoir valider l'inscription de votre enfant, vous devez impérativement remplir la fiche de santé de votre/vos enfant(s)
+ainsi que vos coordonnées et ce, avant la première venue de votre enfant à l'accueil extra-scolaire.
+
+Le site vous permettra ensuite de gérer les présences de votre/vos enfant(s) pour les accueils de l'Espaces Parents Enfants
+lors des edr après-midi, des journées pédagogiques et des plaines d'Automne, Hiver, Détente et Printemps.
+
+Vous aurez également accès à l'état des lieux de vos payements et davantage d'informations concernant les modalités pratiques,
+ notre Règlement d'Ordre Intérieur etc....
+
+Nous vous remercions pour votre confiance et restons à votre disposition pour toutes questions.
+
+Voici les informations nécessaires pour vous connecter sur le site :
+
+Nom d'utilisateur: {{ user.email }}
+{% if password %}
+Votre mot de passe: {{ password }}
+{% else %}
+Le mot de passe que vous avez choisi lors de votre inscription
+{% endif %}
+
+
+----------------------------
+{% include '@AcMarcheEdrAdmin/organisation/_identite.txt.twig' %}

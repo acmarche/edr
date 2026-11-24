@@ -1,0 +1,13 @@
+mercredi_front:
+  resource: ../src/AcMarche/Edr/src/Controller/Front
+  type: attribute
+
+mercredi_admin:
+  resource: ../src/AcMarche/Edr/src/Controller/Admin
+  type: attribute
+  prefix: admin/
+
+mercredi_parent:
+  resource: ../src/AcMarche/Edr/src/Controller/Parent
+  type: attribute
+  prefix: parent/

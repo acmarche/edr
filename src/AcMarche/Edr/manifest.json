@@ -1,0 +1,8 @@
+{
+  "bundles": {
+    "AcMarche\\Edr\\AcMarcheEdrBundle::class": ["all"]
+  },
+  "copy-from-recipe": {
+    "config/routes": "%CONFIG_DIR%/routes"
+  }
+}

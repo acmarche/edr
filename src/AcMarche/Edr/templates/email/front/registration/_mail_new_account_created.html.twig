@@ -1,0 +1,27 @@
+{% extends '@email/default/notification/body.html.twig' %}
+{% block lead %}
+    <p class="lead">
+        {{ email.subject }}
+    </p>
+{% endblock %}
+
+{% block content %}
+    Le nouveau compte a été crée : <strong>{{ user.username }}</strong>
+    <br/><br/>
+    Nom: {{ user.nom }}<br/>
+    Prénom: {{ user.prenom }}<br/>
+    Téléphone: {{ user.telephone }}<br/>
+    <br/><br/>
+    Allez dans la gestion des utilisateurs pour donner les droits "parent" et associer le compte à
+    une fiche "parent"
+{% endblock %}
+
+{% block action %}
+    <spacer size="16"></spacer>
+    <button href="{{ absolute_url(path('edr_admin_user_show', {'id': user.id})) }}">Gestion de l'utilisateur
+    </button>
+{% endblock %}
+
+{% block footer_content %}
+    {% include '@AcMarcheEdrAdmin/organisation/_signature.html.twig' %}
+{% endblock %}

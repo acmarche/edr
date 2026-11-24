@@ -1,0 +1,9 @@
+{% set action = app.request.attributes.get("_route") %}
+<li class="nav-item{% if action == 'edr_parent_enfant_index' %} active {% endif %}">
+    <a class="nav-link"
+       href="{{ path('edr_parent_enfant_index') }}"><i class="ti ti-list"></i> Mes enfants</a>
+</li>
+<li class="nav-item{% if action == 'edr_parent_tuteur_show' %} active {% endif %}">
+    <a class="nav-link"
+       href="{{ path('edr_parent_tuteur_show') }}"><i class="ti ti-list-alt"></i> Mes coordonnées</a>
+</li>

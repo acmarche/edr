@@ -1,0 +1,39 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <h3>Tri des questions</h3>
+
+    <a href="{{ path('edr_admin_sante_question_index') }}" class="btn btn-primary" role="button"><i
+                class="ti ti-list"></i>
+        Retour à la liste</a>
+
+    <br/> <br/>
+    <div class="alert alert-info">
+        Pour changer l'ordre d'appariation des questions, glissez en maintenant la souris sur l'icône <i
+                class="ti ti-sort"></i>
+    </div>
+
+    <div class="" id="success"></div>
+
+    <ul class="list-group" {{ stimulus_controller('sortable', {'updateUrl': path('edr_admin_ajax_question_sort')}) }}
+        data-controller="sortable"
+        data-sortable-animation-value="150">
+        {% for question in questions %}
+            <li
+                    data-id="{{ question.id }}"
+                    class="list-group-item"
+                    style="cursor: pointer;">
+                <i class="ti ti-menu-2"></i>
+                <a href="{{ path('edr_admin_sante_question_show', {'id': question.id}) }}">
+                {{ question.nom }}
+                </a>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                no records found
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

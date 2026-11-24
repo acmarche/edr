@@ -1,0 +1,78 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ user }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/user/_actions.html.twig' %}
+
+            <br/>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Email</th>
+                    <td>
+                        <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Téléphone</th>
+                    <td>
+                        {{ user.telephone }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Rôles</th>
+                    <td>
+                        {{ user.niceRoles|join(', ') }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Parent(s) associé(s)</th>
+                    <td>
+                        <table class="table table-hover">
+
+                            {% for tuteur in user.tuteurs %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('edr_admin_tuteur_show', {'id': tuteur.id}) }}">{{ tuteur }}</a>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning btn-sm mb-2" data-bs-toggle="modal"
+                                                data-id="{{ tuteur.id }}" data-bs-target="#dissocierModalTuteur">
+                                            <i class="ti ti-unlink"></i> Dissocier
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <span class="text-muted">{{ user.roles|join(', ') }}</span>
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/user/_delete.html.twig' %}
+    {% include '@AcMarcheEdrAdmin/user/_dissocier_tuteur.html.twig' %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        document.querySelector('#dissocierModalTuteur').addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const tuteurId = button.dataset.id;
+            let modal = document.querySelector('#dissocierModalTuteur');
+            modal.querySelector('#modal-tuteur').value = tuteurId;
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,32 @@
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        var btn = document.querySelector('#add-another-accompagnateur');
+        btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-list-selector');//#email-fields-list
+            const list = document.querySelector(id);
+            // Try to find the counter of the list or use the length of the list
+            let counter = list.dataset.widgetCounter || list.children.length;
+            // grab the prototype template
+            let newWidget = list.getAttribute('data-prototype');
+            // replace the "__name__" used in the id and name of the prototype
+            // with a number that's unique to your emails
+            // end name attribute looks like name="contact[emails][2]"
+            newWidget = newWidget.replace(/__name__/g, counter);
+            // Increase the counter
+            counter++;
+            // And store it, the length cannot be used if deleting widgets is allowed
+            list.dataset.widgetCounter = counter;
+            // create a new list element and add it to the list
+            const liElement = createElementFromHTML(list.dataset.widgettags);//<li></li>
+            const inputText = liElement.html = newWidget;//=>input
+            liElement.insertAdjacentHTML('beforeend', inputText);
+            list.appendChild(liElement);//ajoute le li
+        });
+    });
+
+    function createElementFromHTML(htmlString) {
+        const div = document.createElement('div');
+        div.innerHTML = htmlString.trim();
+        return div.firstElementChild;
+    }
+</script>

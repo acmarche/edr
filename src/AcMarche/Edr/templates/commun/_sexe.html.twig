@@ -1,0 +1,7 @@
+{% if entity.sexe %}
+    {% if entity.sexe == 'Féminin' %}
+        <i class="ti ti-female" title="{{entity.sexe}}"></i>
+    {% elseif entity.sexe == 'Masculin' %}
+        <i class="ti ti-male" title="{{entity.sexe}}"></i>
+    {% endif %}
+{% endif %}

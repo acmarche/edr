@@ -1,0 +1,35 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>{{ sante_question }}</h3>
+        </div>
+        <div class="card-body">
+
+            {% include '@AcMarcheEdrAdmin/sante_question/_actions.html.twig' %}
+
+            <br/>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Complément d'information nécessaire ?</th>
+                    <td>
+                        {% if sante_question.complement %}
+                            Oui
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Texte d'aide au complément</th>
+                    <td>{{ sante_question.complementLabel }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    {% include '@AcMarcheEdrAdmin/sante_question/_delete_form.html.twig' %}
+
+{% endblock %}

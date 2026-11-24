@@ -1,0 +1,13 @@
+
+.rouge {
+    color: #a94442;
+}
+
+.page-breaker {
+    display: block;
+    page-break-after: always; 
+}
+
+.gras {
+    font-weight: bold;
+}

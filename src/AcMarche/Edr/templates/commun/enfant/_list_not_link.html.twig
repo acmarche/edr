@@ -1,0 +1,5 @@
+{% for enfant in enfants %}
+    <li class="list-group-item" role="option" data-autocomplete-value="{{ enfant.id }}" style="cursor: pointer;">
+        {{ enfant.prenom }} {{ enfant.nom }} <span class="text-muted">({{ enfant.birthday | date('m-Y') }})</span>
+    </li>
+{% endfor %}

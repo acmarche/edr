@@ -1,0 +1,39 @@
+<div class="modal fade" id="addEnfantModal" tabindex="-1" role="dialog" aria-labelledby="addEnfantModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEnfantModalLabel">Ajouter un enfant</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6 class="text-success" id="myModalLabel">Un enfant existant:</h6>
+
+                <form method="post" action="{{ path('edr_admin_relation_attach_enfant', {'id': tuteur.id}) }}">
+                    <div {{ stimulus_controller('autocomplete', {url: path('edr_admin_ajax_enfants_no_link')}) }}>
+                        <div class="form-group2">
+                            <label for="search"> </label>
+                            <input type="search" id="search" name="search" placeholder="Rechercher"
+                                   class="form-control" autocomplete="off" data-autocomplete-target="input">
+                        </div>
+                        <input type='hidden' name='enfantId' data-autocomplete-target="hidden">
+                        <input type="hidden" name="_method" value="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token('attachEnfant' ~ tuteur.id) }}">
+                        <button type="submit" class="btn btn-primary mt-2">Définir comme enfant</button>
+                        <ul class="list-group" data-autocomplete-target="results"></ul>
+                    </div>
+                </form>
+                <br/>
+                ou <a href="{{ path('edr_admin_enfant_new', { 'id' : tuteur.id }) }}">ajouter un nouvel enfant</a>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

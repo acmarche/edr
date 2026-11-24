@@ -1,0 +1,17 @@
+<a class="btn btn-primary" role="button" href="#"
+   data-bs-toggle="modal"
+   data-bs-target="#addEnfantModal">
+    <i class="ti ti-plus"></i> Ajouter un enfant
+</a>
+
+<a href="{{ path('edr_admin_tuteur_edit', { 'id': tuteur.id }) }}" role="button"
+   class="btn btn-primary"><i
+            class="ti ti-edit"></i> Modifier</a>
+<a href="{{ path('edr_admin_tuteur_index') }}" class="btn btn-primary" role='button'><i class="ti ti-list"></i>
+    Retour à la Liste</a>
+
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+    <i class="ti ti-trash"></i> Supprimer
+</button>
+
+<br/><br/>

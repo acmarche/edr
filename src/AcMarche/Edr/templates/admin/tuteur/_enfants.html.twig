@@ -1,0 +1,26 @@
+<h4 class="text-success">Enfant(s)</h4>
+<table class="table table-bordered table-hover">
+
+    <tbody>
+    {% for relation in relations %}
+        {% set enfant = relation.enfant %}
+        <tr>
+            <td>
+                <a href="{{ path('edr_admin_enfant_show', { 'id': enfant.id }) }}">
+                    {{ enfant }}
+                </a>
+            </td>
+            <td>
+                <button type="button" class="btn btn-outline-dark btn-sm unlinktuteur"
+                        data-id="{{ relation.id }}"
+                        data-token="{{ csrf_token('delete' ~ relation.id) }}"
+                        data-bs-toggle="modal"
+                        data-bs-target="#unlinkModal">
+                    <i class="ti ti-unlink"></i> Détacher du parent
+                </button>
+            </td>
+        </tr>
+
+    {% endfor %}
+    </tbody>
+</table>

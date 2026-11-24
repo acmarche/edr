@@ -1,0 +1,12 @@
+{% for page in pages %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('edr_front_page_show', {'slug': page.slug}) }}">{{ page.nom }}</a>
+    </li>
+{% endfor %}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') != true and edr_register == 'true' %}
+    <li class="nav-item">
+        <a class="nav-link"
+           href="{{ path('edr_front_register') }}">M'enregistrer</a>
+    </li>
+{% endif %}

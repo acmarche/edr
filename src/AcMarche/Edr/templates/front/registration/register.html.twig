@@ -1,0 +1,26 @@
+{% extends '@AcMarcheEdr/front/layout.html.twig' %}
+
+{% block title %}M'enregistrer{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>M'enregistrer en tant que parent</h3>
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-info">
+                Enregistrez vous, un email vous sera envoyé expliquant toutes les démarches à suivre.
+            </div>
+
+            {% include '@AcMarcheEdr/front/registration/_form.html.twig' %}
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+<div{{ attributes }}>
+
+    <input type="text"
+           id="fiche_new_societe"
+           name="name"
+           required="required"
+           data-model="query"
+           autocomplete="off"
+           placeholder="Indiquez le nom"
+           class="form-control">
+
+    {% if computed.enfants|length > 0 %}
+        <div data-loading="addClass(opacity-50)" class="mt-3 row">
+            <ul class="list-group">
+                {% for enfant in computed.enfants %}
+                    <li class="list-group-item">
+                        <a href="{{ path('edr_admin_enfant_show', {'id': enfant.id}) }}">
+                            {{ enfant.nom }} {{ enfant.prenom }} {% if enfant.birthday %} {{ enfant.birthday|date('d-m-Y') }} {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>

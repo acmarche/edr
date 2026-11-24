@@ -1,0 +1,10 @@
+{% block trix_editor_widget %}
+    <div {{ stimulus_controller('trix') }}>
+        <input type="hidden" id="{{ id }}" name="{{ full_name }}" value="{{ value }}">
+        <trix-editor input="{{ id }}"
+                     class="trix-content form-control{{ valid ? '' : ' is-invalid' }}"
+                     style="min-height: 20rem; height: auto;"
+                     {% if required %}aria-required="true"{% endif %}
+                     {% if disabled %}contenteditable="false"{% endif %}></trix-editor>
+    </div>
+{% endblock %}

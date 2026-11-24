@@ -1,0 +1,43 @@
+{% extends '@AcMarcheEdrAdmin/layout.html.twig' %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Liste des parents
+                {% if search %}
+                    <span class="badge bg-info">{{ tuteurs|length }}</span>
+                {% endif %}
+            </h3>
+        </div>
+        <div class="card-body">
+            {% include '@AcMarcheEdrAdmin/tuteur/_search.html.twig' %}
+            {% if search and tuteurs | length > 0 %}
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Localité</th>
+                        <th>Enfant(s)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for tuteur in tuteurs %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('edr_admin_tuteur_show', { 'id': tuteur.id }) }}">
+                                    {{ tuteur.nom }}
+                                </a>
+                            </td>
+                            <td>{{ tuteur.prenom }}</td>
+                            <td>{{ tuteur.localite }}</td>
+                            <td>{{ tuteur.relations | length }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
