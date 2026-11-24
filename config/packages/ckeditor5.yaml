@@ -1,5 +1,5 @@
 # Rich text editor (mati365/ckeditor5-symfony), self-hosted under the GPL license.
-# No image/media upload: files are not handled server side.
+# Images are uploaded to PageController::uploadImage (public/files/pages).
 ckeditor5:
     presets:
         edr:
@@ -21,6 +21,7 @@ ckeditor5:
                         - alignment
                         - '|'
                         - link
+                        - insertImage
                         - blockQuote
                         - insertTable
                         - '|'
@@ -48,7 +49,29 @@ ckeditor5:
                     - Autoformat
                     - PasteFromOffice
                     - TextTransformation
+                    - Image
+                    - ImageCaption
+                    - ImageInsert
+                    - ImageResize
+                    - ImageStyle
+                    - ImageTextAlternative
+                    - ImageToolbar
+                    - ImageUpload
+                    - LinkImage
+                    - SimpleUploadAdapter
                 link:
                     defaultProtocol: 'https://'
+                image:
+                    toolbar:
+                        - 'imageStyle:inline'
+                        - 'imageStyle:alignLeft'
+                        - 'imageStyle:alignCenter'
+                        - 'imageStyle:alignRight'
+                        - '|'
+                        - imageTextAlternative
+                        - toggleImageCaption
+                        - linkImage
+                simpleUpload:
+                    uploadUrl: '/admin/page/upload-image'
                 table:
                     contentToolbar: [tableColumn, tableRow, mergeTableCells]
