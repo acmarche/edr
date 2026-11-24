@@ -3,7 +3,7 @@
 namespace AcMarche\Edr\Page\Form;
 
 use AcMarche\Edr\Entity\Page;
-use AcMarche\Edr\Form\Type\TrixEditorType;
+use Mati365\CKEditor5Symfony\Form\Type\CKEditor5Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -39,10 +39,12 @@ final class PageType extends AbstractType
             )
             ->add(
                 'content',
-                TrixEditorType::class,
+                CKEditor5Type::class,
                 [
                     'required' => true,
                     'label' => 'Contenu',
+                    'preset' => 'edr',
+                    'language' => 'fr',
                 ]
             );
     }

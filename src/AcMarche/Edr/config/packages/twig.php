@@ -4,7 +4,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->extension('twig', [
-        'form_themes' => ['bootstrap_5_layout.html.twig', '@AcMarcheEdr/commun/form/trix_editor.html.twig'],
+        'form_themes' => ['bootstrap_5_layout.html.twig', '@AcMarcheEdr/commun/form/ckeditor5.html.twig'],
         'paths' => [
             '%kernel.project_dir%/src/AcMarche/Edr/templates/admin' => 'AcMarcheEdrAdmin',
             '%kernel.project_dir%/src/AcMarche/Edr/templates/parent' => 'AcMarcheEdrParent',

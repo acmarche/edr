@@ -1,0 +1,8 @@
+{# Wraps the CKEditor5Type widget so the editor (JS + CSS) is only loaded on pages that contain one #}
+{% use '@CKEditor5/cke5_form_type.html.twig' with ckeditor5_widget as base_ckeditor5_widget %}
+
+{% block ckeditor5_widget %}
+    <div {{ stimulus_controller('ckeditor5') }}>
+        {{ block('base_ckeditor5_widget') }}
+    </div>
+{% endblock %}

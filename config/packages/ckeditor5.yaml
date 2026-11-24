@@ -1,0 +1,54 @@
+# Rich text editor (mati365/ckeditor5-symfony), self-hosted under the GPL license.
+# No image/media upload: files are not handled server side.
+ckeditor5:
+    presets:
+        edr:
+            editorType: classic
+            config:
+                toolbar:
+                    items:
+                        - undo
+                        - redo
+                        - '|'
+                        - heading
+                        - '|'
+                        - bold
+                        - italic
+                        - underline
+                        - strikethrough
+                        - '|'
+                        - fontColor
+                        - alignment
+                        - '|'
+                        - link
+                        - blockQuote
+                        - insertTable
+                        - '|'
+                        - bulletedList
+                        - numberedList
+                        - outdent
+                        - indent
+                plugins:
+                    - Essentials
+                    - Paragraph
+                    - Heading
+                    - Bold
+                    - Italic
+                    - Underline
+                    - Strikethrough
+                    - FontColor
+                    - Alignment
+                    - Link
+                    - AutoLink
+                    - BlockQuote
+                    - Table
+                    - TableToolbar
+                    - List
+                    - Indent
+                    - Autoformat
+                    - PasteFromOffice
+                    - TextTransformation
+                link:
+                    defaultProtocol: 'https://'
+                table:
+                    contentToolbar: [tableColumn, tableRow, mergeTableCells]

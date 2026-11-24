@@ -21,4 +21,5 @@ return [
     AcMarche\Edr\AcMarcheEdrBundle::class => ['all' => true],
     Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
     Symfony\UX\LiveComponent\LiveComponentBundle::class => ['all' => true],
+    Mati365\CKEditor5Symfony\CKEditorBundle::class => ['all' => true],
 ];

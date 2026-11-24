@@ -13,6 +13,7 @@
         "knplabs/doctrine-behaviors": "^3.0",
         "knplabs/knp-snappy-bundle": "^v1.10.0",
         "liip/imagine-bundle": "^2.12.1",
+        "mati365/ckeditor5-symfony": "^1.11",
         "nesbot/carbon": "^3.0.1",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.25",
@@ -92,7 +93,8 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "importmap:install": "symfony-cmd"
+            "importmap:install": "symfony-cmd",
+            "ckeditor5:assets-mapper:install --distribution=npm --editor-version=49.0.0 --translations=fr --skip-all-updates": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

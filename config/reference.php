@@ -1673,6 +1673,19 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     secret?: scalar|Param|null, // The secret used to compute fingerprints and checksums // Default: "%kernel.secret%"
  *     fetch_credentials?: "same-origin"|"include"|"omit"|Param, // The default fetch credentials mode for all Live Components ('same-origin', 'include', 'omit') // Default: "same-origin"
  * }
+ * @psalm-type Ckeditor5Config = array{
+ *     presets?: array<string, array{ // Default: []
+ *         editorType?: scalar|Param|null,
+ *         config?: mixed, // Default: []
+ *         licenseKey?: scalar|Param|null, // Default: null
+ *         cloud?: mixed, // Default: null
+ *         customTranslations?: mixed, // Default: null
+ *     }>,
+ *     contexts?: array<string, array{ // Default: []
+ *         config?: mixed, // Default: []
+ *         customTranslations?: mixed, // Default: null
+ *     }>,
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1692,6 +1705,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     vich_uploader?: VichUploaderConfig,
  *     twig_component?: TwigComponentConfig,
  *     live_component?: LiveComponentConfig,
+ *     ckeditor5?: Ckeditor5Config,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1714,6 +1728,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         vich_uploader?: VichUploaderConfig,
  *         twig_component?: TwigComponentConfig,
  *         live_component?: LiveComponentConfig,
+ *         ckeditor5?: Ckeditor5Config,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1734,6 +1749,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         vich_uploader?: VichUploaderConfig,
  *         twig_component?: TwigComponentConfig,
  *         live_component?: LiveComponentConfig,
+ *         ckeditor5?: Ckeditor5Config,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1755,6 +1771,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         vich_uploader?: VichUploaderConfig,
  *         twig_component?: TwigComponentConfig,
  *         live_component?: LiveComponentConfig,
+ *         ckeditor5?: Ckeditor5Config,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,
